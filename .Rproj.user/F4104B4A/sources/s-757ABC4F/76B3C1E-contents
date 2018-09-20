@@ -5,3 +5,4 @@ language:
     chapter_name: "Chapter "
   label:
     cnj: "Remark "
+output_dir: "docs"
