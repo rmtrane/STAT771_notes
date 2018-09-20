@@ -1,8 +1,6 @@
 # Lecture Notes
 
-## Quick walk through of the syllabus
-
-## Lecture 1: 9/6
+## Lecture 1: 9/6 {-}
 
 Goals for the first few lectures:
 
@@ -15,7 +13,7 @@ i. David Goldberg (1991)
 ii. John D. Cook (2009)
 iii. Hingham (2002)
 
-### Positional numeral system
+## Positional numeral system
 
 We assume we have a decimal representation of numbers. I.e. that it exists. It is not within the scope of this class to prove this. 
 
@@ -29,7 +27,7 @@ iii. An exponent: $e \in \mathbb{Z}$.
 
 The representation $d_0.d_1d_2... \times \beta^e$ means $\left(d_0 + d_1\cdot \beta^{-1} + ... + d_{p-1}\beta^{-(p-1)}\right)\cdot \beta^e$.
 
-### Floating Point Format
+## Floating Point Format
 
 ```{definition}
 A fp is one that can be represented in a base $\beta$ with a fixed digit $p$ (precision), and whose exponent is between $e_{min}$ and $e_{max}$. 
@@ -70,13 +68,13 @@ So, in total, there are $(\beta-1)\cdot \beta^{p-1}\cdot (e_{max} - e_{min} + 1)
 ```
 
 
-### IEEE Standards
+## IEEE Standards
 
 IEEE have standards for how to deal with approximations and errors.
 
 For our purposes, a bit is a single unit of storage on a computer, which can either be 0 or 1. Hence, we'll be focusing on fp formats where $\beta = 2$. 
 
-#### The 16 bit standard (half precision standard).
+### The 16 bit standard (half precision standard).
 
 The 16 bits of storage are used in the following way, when following the 16 bit standard:
 
@@ -115,11 +113,9 @@ $$
 
 
 
-# (PART\*) Lecture 2: 9/11
+## Lecture 2: 9/11 {-}
 
-### IEEE Standards (cont.)
-
-#### The 32 bit standard (single precision)
+### The 32 bit standard (single precision)
 
 The 32 bits of storage are used in the following way, when following the 32 bit standard:
 
@@ -158,7 +154,7 @@ $$
 
 
 
-#### The 64 bit standard (double precision)
+### The 64 bit standard (double precision)
 
 The 64 bits of storage are used in the following way, when following the 64 bit standard:
 
@@ -174,11 +170,11 @@ The 64 bits of storage are used in the following way, when following the 64 bit 
 * 53 bit for the significand. 
     * 52 are actually stored -- we always work with normalized FP numbers, i.e. $\beta_0 = 1$. 
 
-### Errors
+## Errors
 
-#### Units in the Last Place (ULP)
+### Units in the Last Place (ULP)
 
-#### Absolute and Relative Error
+### Absolute and Relative Error
 
 Let $fl: \mathbb{R}_{\geq 0} \rightarrow \mathcal{S}$ be a function that takes a real value and return a FP number. Then we define the absolute and relative error as follows:
 
@@ -277,7 +273,7 @@ $$
 $$
 ```
 
-## Lecture 3: 9/13
+## Lecture 3: 9/13 {-}
 
 To prove the lemma above, we will need another lemma...
 
@@ -310,6 +306,8 @@ Since $1+u \leq e^{u}$ for all $u \in \R$, we have that
 
 which is exactly what we wanted.
 ```
+
+
 
 With this in hand, we will prove the previously stated lemma.
 
@@ -346,7 +344,7 @@ We now use \@ref(lem:lemForProof) to get:
 
 ```
 
-### Square Linear Systems
+## Square Linear Systems
 
 In the following, let $A \in \R^{n \times m}$ be an invertible matrix, and assume $Ax = b$ for a $b \neq 0$. This implies that $x = A^{-1}b$.
 
@@ -511,7 +509,7 @@ Note: for an orthogonal matrix $Q \in \R^{n\times m}$, it holds that $\norm{Q_{i
 A matrix $R$ is an *upper triangular matrix* if $R_{ij} = 0$ for all $i>j$. 
 ```
 
-## Lecture 4: 9/18
+## Lecture 4: 9/18 {-}
 
 ### QR Decomposition
 
@@ -705,7 +703,7 @@ It is fairly easy to find $q_2$. We want to find it such that $a_2 = R_{12}q_1 +
 Note that this is a circular argument, and hence not a formal way of doing this.
 ```
 
-## Lecture 5: 9/20
+## Lecture 5: 9/20 {-}
 
 (Finished up proof of The Gram-Schmidt Process (\@ref(lem:gsp)))
 

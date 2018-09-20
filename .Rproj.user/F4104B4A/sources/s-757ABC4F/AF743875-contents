@@ -2,8 +2,6 @@
 
 ## Homework 1
 
-### Theoretical Problems
-
 ```{exercise, q101} 
 Can all nonnegative real numbers be represented in such a manner (i.e. as a fp number) for an arbitrary base $\beta \in \{2,3,...\}$? 
 ```
@@ -73,8 +71,6 @@ $$
 Hence, normalized FP numbers are unique.
 ```
 
-### Implementation problems
-
 ```{exercise, q104}
 Write a function that takes a decimal number, base, and precision, and returns the closest normalized FP representation. I.e. a vector of digits and the exponent.
 ```
@@ -133,8 +129,6 @@ end
 
 
 ## Homework 2
-
-### Theoretical problems
 
 ```{exercise, q201}
 Lookup the 64 bit standard to find allowed exponents.
@@ -287,8 +281,6 @@ $$\left|\left| fl(A)-A \right|\right|_p \leq u \left|\left|A\right|\right|_p$$
 
 ## Homework 3
 
-### Theoretical problems 
-
 ```{exercise, q301}
 Prove lemma \@ref(lem:proofHW). 
 ```
@@ -350,7 +342,7 @@ Let $Q$ be an orthogonal matrix. Show that $\norm{Qx}_2 = \norm{x}_2$.
 ```
 
 ```{exercise, q403}
-Let f be a vector-valued function over $\R^d$. When is $$\min_x \norm{f(x)}_2 = \min_x \norm{f(x)}_2^2$$. 
+Let f be a vector-valued function over $\R^d$. When is $$\min_x \norm{f(x)}_2 = \min_x \norm{f(x)}_2^2.$$
 ```
 
 
@@ -393,6 +385,7 @@ Create examples to show that the function works (well enough).
 ```{exercise, q502}
 Find examples where Gram-Schmidt fails, i.e. where either $Q R \neq A$ or $Q^TQ \neq I$. 
 ```
+
 ```{exercise, q503}
 Look up the modified Gram-Schmidt Procedure and implement it (again assuming $A$ has full column rank). 
 ```

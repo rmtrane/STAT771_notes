@@ -1,3 +1,25 @@
+--- 
+title: "STAT 771: My notes"
+author: "Ralph Møller Trane"
+date: "Fall 2018 (compiled `r Sys.Date()`)"
+site: bookdown::bookdown_site
+documentclass: book
+link-citations: yes
+description: "This is my collection of notes for the STAT 771 class taught at UW-Madison."
+---
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\norm}[1]{\left \vert \left \vert #1 \right \vert \right \vert}
+
+\newcommand{\argmin}{\text{argmin}}
+\newcommand{\argmax}{\text{argmax}}
+
+# Intro {-}
+
+<!--chapter:end:index.Rmd-->
+
 # Lecture Notes
 
 ## Lecture 1: 9/6 {-}
@@ -813,4 +835,431 @@ iv) $g_{ij} = 0$ for all other pairs of $i,j$.
 In words: $G^{(i,j)}$ is the identity matrix with the $i$th and $j$th diagonal elements made $\lambda$, and the entries at $(i,j)$ and $(j,i)$ are $\sigma$. 
 
 ```
+
+
+<!--chapter:end:01-lecture_notes.Rmd-->
+
+# Homework Assignments
+
+## Homework 1
+
+```{exercise, q101} 
+Can all nonnegative real numbers be represented in such a manner (i.e. as a fp number) for an arbitrary base $\beta \in \{2,3,...\}$? 
+```
+
+```{solution}
+No. For any given $\beta$ and a largest exponent $e_{max}$, any decimal larger than $\beta\cdot\beta^{e_{max}}$ is larger than the largest number possibly representated. 
+```
+
+
+```{exercise, q102}
+Suppose $e = -1$, what are the range of numbers that can be represented for an arbitrary base $\beta \in \{2,3,...\}$?
+```
+
+```{solution}
+The smallest number that can be represented for an arbitrary base must be $(0+0\cdot \beta^{-1} + ... + 0\cdot\beta^{-(p-1)})\cdot\beta^{-1}$. 
+
+Since $0 \leq d_i < \beta, \forall i$, the largest value must be attained when $d_i = \beta - 1$ for all $i$. I.e. the largest value must be
+
+\begin{align*}
+  MAX &= (\beta-1 + (\beta-1)\beta^{-1} + ... + (\beta-1)\beta^{-(p-1)})\cdot\beta^{-1}\\
+      &= (1+\beta^{-1}+...+\beta^{-(p-1)})(\beta-1)\cdot\beta^{-1} \\
+      &= (1+\beta^{-1}+...+\beta^{-(p-1)})\cdot(1-\beta^{-1}) \\
+      &= (1+\beta^{-1}+...+\beta^{-(p-1)})\cdot(1-\beta^{-1})
+\end{align*}
+```
+
+```{exercise, q103}
+Characterize the numbers that have a unique representation in a base $\beta \in \{2,3,...\}$.
+```
+
+```{solution}
+Let 
+
+$$f = \left(d_1\cdot\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-(p-1)}\right)\cdot\beta^{e},$$ 
+
+i.e. $f$ is not normarlized. Then, 
+
+$$
+f = \left(d_1+d_2\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-p} + 0\cdot \beta^{-(p-1)}\right)\cdot\beta^{e-1}.
+$$
+
+So, non-normalized fp numbers are NOT unique. 
+
+Now, let $f$ be a normalized fp number. I.e.
+
+$$
+f = \left(d_0 + d_1\cdot\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-(p-1)} \right)\cdot\beta^e,
+$$
+where $d_0 \neq 0$. If we let $e_n < e$, then 
+
+$$
+f > \left(d_0 + d_1\cdot\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-(p-1)} \right)\cdot\beta^{e_n},
+$$
+
+and if $e_n > e$, then
+
+$$
+f < \left(d_0 + d_1\cdot\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-(p-1)} \right)\cdot\beta^{e_n}
+$$
+
+If we let $$d_i^\prime \neq d_i$$ for some number of $i$'s, then
+
+$$
+f \neq \left(d_0^\prime + d_1\prime\cdot\beta^{-1} + \ldots + d_{p-1}\prime\cdot\beta^{-(p-1)} \right)\cdot\beta^e.
+$$
+
+Hence, normalized FP numbers are unique.
+```
+
+```{exercise, q104}
+Write a function that takes a decimal number, base, and precision, and returns the closest normalized FP representation. I.e. a vector of digits and the exponent.
+```
+
+```{solution}
+The function provided in class is actually the solution (?). This is guarenteed to give a normalized FP representation. Using this algorithm gives $d_0 = \lfloor \frac{N}{\beta^{\lfloor log_{\beta}\left(N\right) \rfloor}}\rfloor$. It holds that $\lfloor log_{\beta}\left(N\right) \rfloor \le log_\beta\left(N\right)$, which implies that $\beta^{\lfloor log_{\beta}\left(N\right) \rfloor} \le \beta^{log_\beta\left(N\right)} = N$ (remember, $\beta \geq 2$). Hence, $d_0 > 0$.
+```
+
+```{julia}
+get_normalized_FP = function(number::Float64, base::Int64, prec::Int64)
+    #number = 4; base = float(10); prec = 2
+    si=sign(number)
+    base = float(base)
+    e = floor(Int64,log(base,abs(number)))
+    d = zeros(Int64,prec)
+    num = abs(number)/(base^e)
+    
+    for j = 1:prec
+        d[j] = floor(Int64,num)
+        num = (num - d[j])*base
+    end
+
+    return "The sign is $si, the exponent is $e, and the vector with d is $d"
+end
+```
+
+```{exercise, q105}
+List all normalized fp numbers that can be representated given base, precision, $e_{min}$, and $e_{max}$. 
+```
+
+```{julia}
+all_normalized_fp = function(base::Int64, prec::Int64, emin::Int64, emax::Int64)
+    ## Number of possible values for each e:
+    N = (base-1)*base^(prec-1)#*(emax-emin+1)
+
+    out=zeros(Int64, N, prec, emax-emin+1)
+
+    es = emin:emax
+
+
+    for e=1:length(es)
+        for b0=1:(base-1)
+            for i=1:(base^(prec-1))
+                out[(b0-1)*(base^(prec-1))+i,1,e] = b0
+                for j=1:(prec-1)
+                    out[(b0-1)*(base^(prec-1))+i,prec-j+1,e] = floor((i-1)/base^(j-1))%base
+                end
+            end
+        end
+    end
+
+    return(out)
+end
+
+```
+
+
+## Homework 2
+
+```{exercise, q201}
+Lookup the 64 bit standard to find allowed exponents.
+```
+
+```{solution, s201}
+According to [Wikipedia](https://en.wikipedia.org/wiki/Double-precision_floating-point_format), the allowed exponents for the 64 bit standard are $-1022,\ldots, 1023$. 
+```
+
+```{exercise, q202}
+What is the smallest non-normalized positive value for the 64 bit standard?
+```
+
+```{solution, s202}
+The smallest non-normalized positive value is 
+
+$$
+  \left(0 + 0\cdot 2^{-1} + \ldots + 0\cdot 2^{-51} + 1\cdot 2^{-52} \right )\cdot 2^{-1022} = 2^{-1074} \approx 4.94\cdot 10^{324}
+$$
+```
+
+```{exercise, q203}
+What is the smallest normalized positive value?
+```
+
+```{solution, s203}
+The smallest normalized positive value is 
+
+$$
+  \left(1 + 0\cdot 2^{-1} + \ldots + 0\cdot 2^{-52} \right )\cdot 2^{-1022} = 2^{-1022} \approx 2.23 \cdot 10^{308}
+$$
+```
+
+```{exercise, q204}
+What is the largest normalized positive value?
+```
+
+```{solution, s204}
+The largest normalized finite value is
+
+$$
+  \left(1 + 1\cdot 2^{-1} + \ldots + 1\cdot 2^{-52} \right )\cdot 2^{-1022} \approx 1.80\cdot 10^{308}.
+$$
+```
+
+```{exercise, q205}
+Is there a general formula for determining the largest positive value for a given base $\beta$, precision $p$, and largest exponent $e_{max}$? 
+```
+
+```{solution, s205}
+The largest positive, finite value is 
+
+$$
+  \left(\sum_{i=0}^{p-1} (\beta-1)\beta^{-i}\right)\cdot \beta^{e_{max}}.
+$$
+```
+
+```{exercise, q206}
+Verify the smallest non-normalized, positive number that can be represented.
+```
+
+```{julia}
+nextfloat(Float64(0)) == 2^(-1074)
+```
+
+```{exercise, q207}
+Verify the smallest normalized, positive number that can be represented.
+```
+
+```{exercise, q208}
+Verify the largest, finite number that can be represented.
+```
+
+```{julia}
+prevfloat(Float64(Inf))
+```
+
+```{exercise, q209}
+Proof lemma (bound of relative error). 
+```
+
+```{exercise, q210}
+What happens with lemmas (bounds of absolute and relative error) if we consider negative numbers?
+```
+
+```{solution, s209}
+They still hold. Let $z^\prime = -z$. Then $fl(z^\prime) = -fl(z)$. Hence,
+
+$$
+  \left| fl(z^\prime) - z^\prime \right | = \left | -fl(z) + z \right | = \left | fl(z) - z \right |,
+$$
+
+hence the bounds still hold. 
+```
+
+```{exercise, q211}
+Show that $\left|\left| A \right|\right|_1 =$ max of the $l^1$ norms of the columns of $A$.
+```
+
+\begin{solution} \label{s211}
+By definition, $\norm{A}_1 = \max_{x\neq 0}\frac{\norm{Ax}_1}{\norm{x}_1}$. Let $A \in \R^{m\times n}$ and $x \in \R^n$ s.t. $\norm{x}_1 = 1$. 
+
+Recall that 
+
+$$Ax = \sum_{j=1}^n x_j A_{*,j},$$
+
+where $A_{*,j}$ is the $j^\prime$th column of $A$. So
+
+\begin{align*}
+  \norm{Ax}_1 = \sum_{i=1}^m \sum_{j=1}^n | x_j A_{i,j} | \\
+              &\leq \sum_{i=1}^m \sum_{j=1}^n | x_j | \cdot | A_{i,j} | \\
+              &= \sum_{j=1}^n | x_j | \left\{\sum_{i=1}^m | A_{i,j} | \right \} \\
+              &= \sum_{j=1}^n | x_j | \norm{A_{*,j}} \\
+              &\leq \sum_{j=1}^n | x_j | \max_{j \in \{1,\ldots, n\}} \norm{A_{*,j}} \\
+              &= \max_{j \in \{1,\ldots, n\}} \norm{A_{*,j}}
+\end{align*}
+
+Since $\max_{j \in \{1, \ldots, n\}}\norm{A_{*,j}} = \norm{A\cdot \mathbf{1}_i}$ for $i = \argmax \norm{A_{*,j}}_1$. Here, we let $1_i = (x_j)_{j=1}^n$ be defined as 
+
+$$x_j = \left\{ \begin{array}{rl} 1, & \text{ if } j = i \\ 0, & \text{ otherwise}\end{array} \right .$$
+\end{solution}
+
+
+```{exercise, q212}
+Show that $\left|\left| A \right|\right|_\infty =$ max of the $l^1$ norms of the rows of $A$.
+```
+
+```{exercise, q213}
+Assume the Fundamental Axiom. Show the following:
+  
+$$\left|\left| fl(A)-A \right|\right|_p \leq u \left|\left|A\right|\right|_p$$
+```
+
+```{solution, s213}
+\begin{align*}
+  \left | \left | fl(A) - A \right | \right |_p &= \left|\left| \left [ fl(a_{ij}) - a_{ij} \right ] \right|\right|_p \\
+    &\leq \left|\left| \left[u\cdot a_{ij}\right]\right|\right|_p \\
+    &= \left|\left| u\cdot A\right|\right|_p = u\left|\left|A\right|\right|
+\end{align*}
+```
+
+\begin{solution}
+\begin{align*}
+  \left | \left | fl(A) - A \right | \right |_p &= \left|\left| \left [ fl(a_{ij}) - a_{ij} \right ] \right|\right|_p \\
+                                                &\leq \left|\left| \left[u\cdot a_{ij}\right]\right|\right|_p \\
+                                                &= \norm{u\cdot A}_p = u\left|\left|A\right|\right|
+\end{align*}
+\end{solution}
+
+
+## Homework 3
+
+```{exercise, q301}
+Prove lemma \@ref(lem:proofHW). 
+```
+
+```{proof}
+Recall that a matrix $A$ is invertible if and only if $Ax = 0$ implies that $x = 0$. So to check that $I-F$ is invertible, we check this:
+  
+$$
+  (I-F)x = x-Fx \Rightarrow x = Fx \Rightarrow \norm{x}_p \leq \norm{F}_p \norm{x}_p.
+$$
+  
+Since $\norm{F}_p < 1$ by assumption, the only solution to the inequality above is $x = 0$. So, $I-F$ is invertible. 
+
+
+  
+```
+
+```{exercise, q302}
+Consider Theorem and Lemmas under "Square Linear Systems". What happens if we use $l^{1}$-norm instead?
+```
+
+```{exercise, q303}
+Generate examples that show the bound in ??? is too conservative.
+```
+
+```{exercise, q304}
+Generate examples that show the bound is nearly achieved
+```
+
+
+```{exercise, q305}
+For motivating problems 1-5, when is $x$ unique?
+```
+
+```{exercise, q306}
+For motivating problem 5, what happens if $p\geq m$? Explore the case where $m >> n$.
+```
+
+```{exercise, q307}
+Suppose $R \in \R^{m\times m}$ is an upper triangular matrix with $R_{ii} \neq 0$ for all $i = 1,\ldots, n$. Is $R$ invertible?
+```
+
+```{solution}
+Since $R$ is an upper triangular matrix, $\det(R) = \prod_{i=1}^{m} R_{ii} > 0$. Hence, $R$ is invertible. 
+```
+
+```{exercise, q308}
+Assume $R$ is an invertible upper triangular matrix. Implement a solution to invert $R$. 
+```
+
+## Homework 4
+
+```{exercise, q401}
+In the solution to \@ref(exm:linear-system), why do $0$ rows on the left-hand side of \@ref(eq:sol-linear-system) correspond to $0$ entries of the $c$ vector on the right-hand side. 
+```
+
+```{exercise, q402}
+Let $Q$ be an orthogonal matrix. Show that $\norm{Qx}_2 = \norm{x}_2$. 
+```
+
+```{exercise, q403}
+Let f be a vector-valued function over $\R^d$. When is $$\min_x \norm{f(x)}_2 = \min_x \norm{f(x)}_2^2.$$
+```
+
+
+```{exercise, q404}
+Prove that $P^T P + I$ from solution to example \@ref(exm:und-linear-system) is invertible. 
+```
+
+
+```{exercise, q405}
+Write out the solution to example \@ref(exm:constrained-least-squares). Also consider the case where $p \ge m$.
+```
+
+```{exercise, q406}
+For all motivating problems, implement solutions. 
+```
+
+For the following, assume $A \in \R^{n\times m}$ with $\text{rank}(A) = m$, and $b \in \R^n$. Let $C = \begin{bmatrix} A b \end{bmatrix}$. 
+
+
+```{exercise, q407}
+What does the last column of $R$ (from the QR decomposition of $C$) represent?
+```
+
+```{exercise, q408}
+What does the last entry of last column of $R$ (from the QR decomposition of $C$) represent?
+```
+
+```{exercise, q409}
+How can this be used in computation?
+```
+
+## Homework 5
+
+```{exercise, q501}
+Implement the Gram-Schmidt procedure for matrices $A \in \R^{n \times m}$ assuming $A$ has full column rank.
+
+Create examples to show that the function works (well enough).
+```
+
+```{exercise, q502}
+Find examples where Gram-Schmidt fails, i.e. where either $Q R \neq A$ or $Q^TQ \neq I$. 
+```
+
+```{exercise, q503}
+Look up the modified Gram-Schmidt Procedure and implement it (again assuming $A$ has full column rank). 
+```
+
+
+```{exercise, q504, name = "Pivoting (*OPTIONAL*)"}
+References:
+  
+  1. Businger, Galub: Linear Least Squares by Householder Transformation (1965)
+  2. Engler: The Behavior of QR-factorization algorithm with column pivoting (1997)
+  
+Implement modified Gram-Schmidt with column pivoting. 
+
+Find example where the modified Gram-Schmidt fails, but the modified Gram-Schmidt with column pivoting does not.
+  
+```
+
+
+```{exercise, q505}
+Show that Householder reflections are orthogonal matrices.
+```
+
+```{solution}
+Show that $H^\prime H = I$. 
+```
+
+```{exercise, q506}
+Show that $\begin{bmatrix} H_r \cdots h_1 \end{bmatrix}$ is orthogonal.
+```
+
+```{exercise, q507}
+Show that a Givens rotation is an orthonormal matrix when $\sigma^2 + \lambda^2 = 1$. 
+```
+
+<!--chapter:end:02-homework_assignments.Rmd-->
 
