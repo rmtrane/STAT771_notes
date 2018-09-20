@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>STAT 771: My notes</title>
+  <meta name="description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="STAT 771: My notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="STAT 771: My notes" />
+  
+  <meta name="twitter:description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison." />
+  
+
+<meta name="author" content="Ralph Møller Trane">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="lecture-notes.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Intro</a></li>
+<li class="chapter" data-level="2" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>2</b> Lecture Notes</a><ul>
+<li class="chapter" data-level="2.1" data-path="lecture-notes.html"><a href="lecture-notes.html#quick-walk-through-of-the-syllabus"><i class="fa fa-check"></i><b>2.1</b> Quick walk through of the syllabus</a></li>
+<li class="chapter" data-level="2.2" data-path="lecture-notes.html"><a href="lecture-notes.html#lecture-1-96"><i class="fa fa-check"></i><b>2.2</b> Lecture 1: 9/6</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="lecture-notes.html"><a href="lecture-notes.html#positional-numeral-system"><i class="fa fa-check"></i><b>2.2.1</b> Positional numeral system</a></li>
+<li class="chapter" data-level="2.2.2" data-path="lecture-notes.html"><a href="lecture-notes.html#floating-point-format"><i class="fa fa-check"></i><b>2.2.2</b> Floating Point Format</a></li>
+<li class="chapter" data-level="2.2.3" data-path="lecture-notes.html"><a href="lecture-notes.html#ieee-standards"><i class="fa fa-check"></i><b>2.2.3</b> IEEE Standards</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="lecture-notes.html"><a href="lecture-notes.html#part-lecture-2-911"><i class="fa fa-check"></i><b>2.3</b> (PART*) Lecture 2: 9/11</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="lecture-notes.html"><a href="lecture-notes.html#ieee-standards-cont."><i class="fa fa-check"></i><b>2.3.1</b> IEEE Standards (cont.)</a></li>
+<li class="chapter" data-level="2.3.2" data-path="lecture-notes.html"><a href="lecture-notes.html#errors"><i class="fa fa-check"></i><b>2.3.2</b> Errors</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="lecture-notes.html"><a href="lecture-notes.html#lecture-3-913"><i class="fa fa-check"></i><b>2.4</b> Lecture 3: 9/13</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="lecture-notes.html"><a href="lecture-notes.html#square-linear-systems"><i class="fa fa-check"></i><b>2.4.1</b> Square Linear Systems</a></li>
+<li class="chapter" data-level="2.4.2" data-path="lecture-notes.html"><a href="lecture-notes.html#orthogonalization"><i class="fa fa-check"></i><b>2.4.2</b> Orthogonalization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-4-918.html"><a href="lecture-4-918.html"><i class="fa fa-check"></i>Lecture 4: 9/18</a><ul>
+<li class="chapter" data-level="2.4.3" data-path="lecture-4-918.html"><a href="lecture-4-918.html#implementation-problems"><i class="fa fa-check"></i><b>2.4.3</b> Implementation problems</a></li>
+<li class="chapter" data-level="2.5" data-path="lecture-4-918.html"><a href="lecture-4-918.html#homework-2"><i class="fa fa-check"></i><b>2.5</b> Homework 2</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="lecture-4-918.html"><a href="lecture-4-918.html#theoretical-problems-1"><i class="fa fa-check"></i><b>2.5.1</b> Theoretical problems</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="lecture-4-918.html"><a href="lecture-4-918.html#homework-3"><i class="fa fa-check"></i><b>2.6</b> Homework 3</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="lecture-4-918.html"><a href="lecture-4-918.html#theoretical-problems-2"><i class="fa fa-check"></i><b>2.6.1</b> Theoretical problems</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="lecture-4-918.html"><a href="lecture-4-918.html#homework-4"><i class="fa fa-check"></i><b>2.7</b> Homework 4</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">STAT 771: My notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lecture-4-918" class="section level1 unnumbered">
+<h1>Lecture 4: 9/18</h1>
+<div id="qr-decomposition" class="section level4">
+<h4><span class="header-section-number">2.4.2.2</span> QR Decomposition</h4>
+<p>In order to actually solve the problems listed above, we need the QR Decomposition:</p>
+
+<div class="theorem">
+<p><span id="thm:qr-decomposition" class="theorem"><strong>Theorem 2.2  (Existence of QR Decomposition)  </strong></span>Let <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span> and let <span class="math inline">\(r = rank(A)\)</span>. Then there exists:</p>
+<ol style="list-style-type: decimal">
+<li>an <span class="math inline">\(m\times m\)</span> permutation matrix <span class="math inline">\(\Pi\)</span>,</li>
+<li>an <span class="math inline">\(n \times n\)</span> orthogonal matrix <span class="math inline">\(Q\)</span>,</li>
+<li>an <span class="math inline">\(r \times r\)</span> upper triangular matrix <span class="math inline">\(R\)</span>, with non-zero diagonal elements (i.e. invertible)</li>
+<li>an <span class="math inline">\(r \times (m-r)\)</span> matrix S (if <span class="math inline">\(m &gt; r\)</span>),</li>
+</ol>
+<p>such that</p>
+<span class="math display">\[
+  A = Q \begin{bmatrix} R &amp; S \\ 0 &amp; 0 \end{bmatrix} \Pi^T.
+\]</span><br />
+
+</div>
+
+<p>With this in hand, we can solve the motivating problems stated above.</p>
+
+<div class="solution">
+<p> <span class="solution"><em>Solution</em> (Example <a href="lecture-notes.html#exm:linear-system">2.2</a>). </span>  We want to find <span class="math inline">\(x\)</span> such that <span class="math inline">\(Ax = b\)</span>.</p>
+<p>We use theorem <a href="lecture-4-918.html#thm:qr-decomposition">2.2</a> to rewrite this as <span class="math inline">\(Q \begin{bmatrix} R \\ 0 \end{bmatrix} \Pi^T x = b\)</span>. Note that since <span class="math inline">\(rank(A) = m\)</span>, there is no <span class="math inline">\(S\)</span> matrix.</p>
+<p>Now, since <span class="math inline">\(Q\)</span> is an orthogonal matrix, we know that <span class="math inline">\(Q^{-1} = Q^T\)</span>, so</p>
+<span class="math display" id="eq:sol-linear-system">\[\begin{equation}
+  \begin{bmatrix} R \\ 0 \end{bmatrix} \Pi^T x = Q^T b = c = \begin{bmatrix} c_1 \\ 0 \end{bmatrix}. \tag{2.1}
+\end{equation}\]</span>
+<p>So now the equation we are trying to solve becomes</p>
+<p><span class="math display">\[
+  R \Pi^T x = c_1.
+\]</span></p>
+<p>Since <span class="math inline">\(R\)</span> is an upper triangular matrix with non-zero diagonal elements, it is invertible. Since <span class="math inline">\(\Pi\)</span> is a permutation matrix, <span class="math inline">\(\Pi^{-1} = \Pi^T\)</span>. Using this we can find the solution:</p>
+<p><span class="math display">\[
+  x = \Pi R^{-1} c_1.
+\]</span></p>
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution</em> (Example @(exm:). </span>  <!--chapter:end:01-lecture_notes.Rmd--></p>
+<h1 id="homework-assignments"><span class="header-section-number">2.4.2.2</span> Homework Assignments</h1>
+<h2 id="homework-1"><span class="header-section-number">2.4.2.2</span> Homework 1</h2>
+<h3 id="theoretical-problems"><span class="header-section-number">2.4.2.2</span> Theoretical Problems</h3>
+</div>
+ 
+<div class="exercise">
+<span id="exr:q101" class="exercise"><strong>Exercise 2.2  </strong></span>Can all nonnegative real numbers be represented in such a manner (i.e. as a fp number) for an arbitrary base <span class="math inline">\(\beta \in \{2,3,...\}\)</span>?
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> No. For any given <span class="math inline">\(\beta\)</span> and a largest exponent <span class="math inline">\(e_{max}\)</span>, any decimal larger than <span class="math inline">\(\beta\cdot\beta^{e_{max}}\)</span> is larger than the largest number possibly representated.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q102" class="exercise"><strong>Exercise 2.3  </strong></span>Suppose <span class="math inline">\(e = -1\)</span>, what are the range of numbers that can be represented for an arbitrary base <span class="math inline">\(\beta \in \{2,3,...\}\)</span>?
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> The smallest number that can be represented for an arbitrary base must be <span class="math inline">\((0+0\cdot \beta^{-1} + ... + 0\cdot\beta^{-(p-1)})\cdot\beta^{-1}\)</span>.</p>
+<p>Since <span class="math inline">\(0 \leq d_i &lt; \beta, \forall i\)</span>, the largest value must be attained when <span class="math inline">\(d_i = \beta - 1\)</span> for all <span class="math inline">\(i\)</span>. I.e. the largest value must be</p>
+<span class="math display">\[\begin{align*}
+  MAX &amp;= (\beta-1 + (\beta-1)\beta^{-1} + ... + (\beta-1)\beta^{-(p-1)})\cdot\beta^{-1}\\
+      &amp;= (1+\beta^{-1}+...+\beta^{-(p-1)})(\beta-1)\cdot\beta^{-1} \\
+      &amp;= (1+\beta^{-1}+...+\beta^{-(p-1)})\cdot(1-\beta^{-1}) \\
+      &amp;= (1+\beta^{-1}+...+\beta^{-(p-1)})\cdot(1-\beta^{-1})
+\end{align*}\]</span>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q103" class="exercise"><strong>Exercise 2.4  </strong></span>Characterize the numbers that have a unique representation in a base <span class="math inline">\(\beta \in \{2,3,...\}\)</span>.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> Let</p>
+<p><span class="math display">\[f = \left(d_1\cdot\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-(p-1)}\right)\cdot\beta^{e},\]</span></p>
+<p>i.e. <span class="math inline">\(f\)</span> is not normarlized. Then,</p>
+<p><span class="math display">\[
+f = \left(d_1+d_2\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-p} + 0\cdot \beta^{-(p-1)}\right)\cdot\beta^{e-1}.
+\]</span></p>
+<p>So, non-normalized fp numbers are NOT unique.</p>
+<p>Now, let <span class="math inline">\(f\)</span> be a normalized fp number. I.e.</p>
+<p><span class="math display">\[
+f = \left(d_0 + d_1\cdot\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-(p-1)} \right)\cdot\beta^e,
+\]</span> where <span class="math inline">\(d_0 \neq 0\)</span>. If we let <span class="math inline">\(e_n &lt; e\)</span>, then</p>
+<p><span class="math display">\[
+f &gt; \left(d_0 + d_1\cdot\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-(p-1)} \right)\cdot\beta^{e_n},
+\]</span></p>
+<p>and if <span class="math inline">\(e_n &gt; e\)</span>, then</p>
+<p><span class="math display">\[
+f &lt; \left(d_0 + d_1\cdot\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-(p-1)} \right)\cdot\beta^{e_n}
+\]</span></p>
+<p>If we let <span class="math display">\[d_i^\prime \neq d_i\]</span> for some number of <span class="math inline">\(i\)</span>’s, then</p>
+<p><span class="math display">\[
+f \neq \left(d_0^\prime + d_1\prime\cdot\beta^{-1} + \ldots + d_{p-1}\prime\cdot\beta^{-(p-1)} \right)\cdot\beta^e.
+\]</span></p>
+Hence, normalized FP numbers are unique.
+</div>
+
+</div>
+<div id="implementation-problems" class="section level3">
+<h3><span class="header-section-number">2.4.3</span> Implementation problems</h3>
+
+<div class="exercise">
+<span id="exr:q104" class="exercise"><strong>Exercise 2.5  </strong></span>Write a function that takes a decimal number, base, and precision, and returns the closest normalized FP representation. I.e. a vector of digits and the exponent.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> The function provided in class is actually the solution (?). This is guarenteed to give a normalized FP representation. Using this algorithm gives <span class="math inline">\(d_0 = \lfloor \frac{N}{\beta^{\lfloor log_{\beta}\left(N\right) \rfloor}}\rfloor\)</span>. It holds that <span class="math inline">\(\lfloor log_{\beta}\left(N\right) \rfloor \le log_\beta\left(N\right)\)</span>, which implies that <span class="math inline">\(\beta^{\lfloor log_{\beta}\left(N\right) \rfloor} \le \beta^{log_\beta\left(N\right)} = N\)</span> (remember, <span class="math inline">\(\beta \geq 2\)</span>). Hence, <span class="math inline">\(d_0 &gt; 0\)</span>.
+</div>
+
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">get_normalized_FP = <span class="kw">function</span>(number::<span class="dt">Float64</span>, base::<span class="dt">Int64</span>, prec::<span class="dt">Int64</span>)
+    <span class="co">#number = 4; base = float(10); prec = 2</span>
+    si=sign(number)
+    base = float(base)
+    e = floor(<span class="dt">Int64</span>,log(base,abs(number)))
+    d = zeros(<span class="dt">Int64</span>,prec)
+    num = abs(number)/(base^e)
+    
+    <span class="kw">for</span> j = <span class="fl">1</span>:prec
+        d[j] = floor(<span class="dt">Int64</span>,num)
+        num = (num - d[j])*base
+    <span class="kw">end</span>
+
+    <span class="kw">return</span> <span class="st">&quot;The sign is $si, the exponent is $e, and the vector with d is $d&quot;</span>
+<span class="kw">end</span></code></pre></div>
+<pre><code>## #5 (generic function with 1 method)</code></pre>
+
+<div class="exercise">
+<span id="exr:q105" class="exercise"><strong>Exercise 2.6  </strong></span>List all normalized fp numbers that can be representated given base, precision, <span class="math inline">\(e_{min}\)</span>, and <span class="math inline">\(e_{max}\)</span>.
+</div>
+
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">all_normalized_fp = <span class="kw">function</span>(base::<span class="dt">Int64</span>, prec::<span class="dt">Int64</span>, emin::<span class="dt">Int64</span>, emax::<span class="dt">Int64</span>)
+    <span class="co">## Number of possible values for each e:</span>
+    N = (base-<span class="fl">1</span>)*base^(prec-<span class="fl">1</span>)<span class="co">#*(emax-emin+1)</span>
+
+    out=zeros(<span class="dt">Int64</span>, N, prec, emax-emin+<span class="fl">1</span>)
+
+    es = emin:emax
+
+    <span class="kw">for</span> e=<span class="fl">1</span>:length(es)
+        <span class="kw">for</span> b0=<span class="fl">1</span>:(base-<span class="fl">1</span>)
+            <span class="kw">for</span> i=<span class="fl">1</span>:(base^(prec-<span class="fl">1</span>))
+                out[(b0-<span class="fl">1</span>)*(base^(prec-<span class="fl">1</span>))+i,<span class="fl">1</span>,e] = b<span class="fl">0</span>
+                <span class="kw">for</span> j=<span class="fl">1</span>:(prec-<span class="fl">1</span>)
+                    out[(b0-<span class="fl">1</span>)*(base^(prec-<span class="fl">1</span>))+i,prec-j+<span class="fl">1</span>,e] = floor((i-<span class="fl">1</span>)/base^(j-<span class="fl">1</span>))%base
+                <span class="kw">end</span>
+            <span class="kw">end</span>
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+
+    <span class="kw">return</span>(out)
+<span class="kw">end</span></code></pre></div>
+<pre><code>## #7 (generic function with 1 method)</code></pre>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia"></code></pre></div>
+</div>
+<div id="homework-2" class="section level2">
+<h2><span class="header-section-number">2.5</span> Homework 2</h2>
+<div id="theoretical-problems-1" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> Theoretical problems</h3>
+
+<div class="exercise">
+<span id="exr:q201" class="exercise"><strong>Exercise 2.7  </strong></span>Lookup the 64 bit standard to find allowed exponents.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> According to <a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">Wikipedia</a>, the allowed exponents for the 64 bit standard are <span class="math inline">\(-1022,\ldots, 1023\)</span>.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q202" class="exercise"><strong>Exercise 2.8  </strong></span>What is the smallest non-normalized positive value for the 64 bit standard?
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> The smallest non-normalized positive value is</p>
+<span class="math display">\[
+  \left(0 + 0\cdot 2^{-1} + \ldots + 0\cdot 2^{-51} + 1\cdot 2^{-52} \right )\cdot 2^{-1022} = 2^{-1074} \approx 4.94\cdot 10^{324}
+\]</span>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q203" class="exercise"><strong>Exercise 2.9  </strong></span>What is the smallest normalized positive value?
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> The smallest normalized positive value is</p>
+<span class="math display">\[
+  \left(1 + 0\cdot 2^{-1} + \ldots + 0\cdot 2^{-52} \right )\cdot 2^{-1022} = 2^{-1022} \approx 2.23 \cdot 10^{308}
+\]</span>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q204" class="exercise"><strong>Exercise 2.10  </strong></span>What is the largest normalized positive value?
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> The largest normalized finite value is</p>
+<span class="math display">\[
+  \left(1 + 1\cdot 2^{-1} + \ldots + 1\cdot 2^{-52} \right )\cdot 2^{-1022} \approx 1.80\cdot 10^{308}.
+\]</span>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q205" class="exercise"><strong>Exercise 2.11  </strong></span>Is there a general formula for determining the largest positive value for a given base <span class="math inline">\(\beta\)</span>, precision <span class="math inline">\(p\)</span>, and largest exponent <span class="math inline">\(e_{max}\)</span>?
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> The largest positive, finite value is</p>
+<span class="math display">\[
+  \left(\sum_{i=0}^{p-1} (\beta-1)\beta^{-i}\right)\cdot \beta^{e_{max}}.
+\]</span>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q206" class="exercise"><strong>Exercise 2.12  </strong></span>Verify the smallest non-normalized, positive number that can be represented.
+</div>
+
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">nextfloat(<span class="dt">Float64</span>(<span class="fl">0</span>)) == <span class="fl">2</span>^(-<span class="fl">1074</span>)</code></pre></div>
+<pre><code>## true</code></pre>
+
+<div class="exercise">
+<span id="exr:q207" class="exercise"><strong>Exercise 2.13  </strong></span>Verify the smallest normalized, positive number that can be represented.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q208" class="exercise"><strong>Exercise 2.14  </strong></span>Verify the largest, finite number that can be represented.
+</div>
+
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">prevfloat(<span class="dt">Float64</span>(Inf))</code></pre></div>
+<pre><code>## 1.7976931348623157e308</code></pre>
+
+<div class="exercise">
+<span id="exr:q209" class="exercise"><strong>Exercise 2.15  </strong></span>Proof lemma (bound of relative error).
+</div>
+
+
+<div class="exercise">
+<span id="exr:q210" class="exercise"><strong>Exercise 2.16  </strong></span>What happens with lemmas (bounds of absolute and relative error) if we consider negative numbers?
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> They still hold. Let <span class="math inline">\(z^\prime = -z\)</span>. Then <span class="math inline">\(fl(z^\prime) = -fl(z)\)</span>. Hence,</p>
+<p><span class="math display">\[
+  \left| fl(z^\prime) - z^\prime \right | = \left | -fl(z) + z \right | = \left | fl(z) - z \right |,
+\]</span></p>
+hence the bounds still hold.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q211" class="exercise"><strong>Exercise 2.17  </strong></span>Show that <span class="math inline">\(\left|\left| A \right|\right|_1 =\)</span> max of the <span class="math inline">\(l^1\)</span> norms of the columns of <span class="math inline">\(A\)</span>.
+</div>
+
+
+
+<div class="exercise">
+<span id="exr:q212" class="exercise"><strong>Exercise 2.18  </strong></span>Show that <span class="math inline">\(\left|\left| A \right|\right|_\infty =\)</span> max of the <span class="math inline">\(l^1\)</span> norms of the rows of <span class="math inline">\(A\)</span>.
+</div>
+
+
+<div class="exercise">
+<p><span id="exr:q213" class="exercise"><strong>Exercise 2.19  </strong></span>Assume the Fundamental Axiom. Show the following:</p>
+<span class="math display">\[\left|\left| fl(A)-A \right|\right|_p \leq u \left|\left|A\right|\right|_p\]</span>
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> 
+<span class="math display">\[\begin{align*}
+  \left | \left | fl(A) - A \right | \right |_p &amp;= \left|\left| \left [ fl(a_{ij}) - a_{ij} \right ] \right|\right|_p \\
+    &amp;\leq \left|\left| \left[u\cdot a_{ij}\right]\right|\right|_p \\
+    &amp;= \left|\left| u\cdot A\right|\right|_p = u\left|\left|A\right|\right|
+\end{align*}\]</span>
+</div>
+
+
+</div>
+</div>
+<div id="homework-3" class="section level2">
+<h2><span class="header-section-number">2.6</span> Homework 3</h2>
+<div id="theoretical-problems-2" class="section level3">
+<h3><span class="header-section-number">2.6.1</span> Theoretical problems</h3>
+
+<div class="exercise">
+<span id="exr:q301" class="exercise"><strong>Exercise 2.20  </strong></span>Prove lemma @ref{lem:proofHW}.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q302" class="exercise"><strong>Exercise 2.21  </strong></span>Consider Theorem and Lemmas under “Square Linear Systems”. What happens if we use <span class="math inline">\(l^{1}\)</span>-norm instead?
+</div>
+
+
+<div class="exercise">
+<span id="exr:q303" class="exercise"><strong>Exercise 2.22  </strong></span>Generate examples that show the bound in ??? is too conservative.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q304" class="exercise"><strong>Exercise 2.23  </strong></span>Generate examples that show the bound is nearly achieved
+</div>
+
+
+<div class="exercise">
+<span id="exr:q305" class="exercise"><strong>Exercise 2.24  </strong></span>For motivating problems 1-5, when is <span class="math inline">\(x\)</span> unique?
+</div>
+
+
+<div class="exercise">
+<span id="exr:q306" class="exercise"><strong>Exercise 2.25  </strong></span>For motivating problem 5, what happens if <span class="math inline">\(p\geq m\)</span>? Explore the case where <span class="math inline">\(m &gt;&gt; n\)</span>.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q307" class="exercise"><strong>Exercise 2.26  </strong></span>Suppose <span class="math inline">\(R \in {\mathbb{R}}^{m\times m}\)</span> is an upper triangular matrix with <span class="math inline">\(R_{ii} \neq 0\)</span> for all <span class="math inline">\(i = 1,\ldots, n\)</span>. Is <span class="math inline">\(R\)</span> invertible?
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Since <span class="math inline">\(R\)</span> is an upper triangular matrix, <span class="math inline">\(\det(R) = \prod_{i=1}^{m} R_{ii} &gt; 0\)</span>. Hence, <span class="math inline">\(R\)</span> is invertible.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q308" class="exercise"><strong>Exercise 2.27  </strong></span>Assume <span class="math inline">\(R\)</span> is an invertible upper triangular matrix. Implement a solution to invert <span class="math inline">\(R\)</span>.
+</div>
+
+</div>
+</div>
+<div id="homework-4" class="section level2">
+<h2><span class="header-section-number">2.7</span> Homework 4</h2>
+
+<div class="exercise">
+<span id="exr:q401" class="exercise"><strong>Exercise 2.28  </strong></span>In the solution to <a href="lecture-notes.html#exm:linear-system">2.2</a>, why do <span class="math inline">\(0\)</span> rows on the left-hand side of <a href="lecture-4-918.html#eq:sol-linear-system">(2.1)</a> correspond to <span class="math inline">\(0\)</span> entries of the <span class="math inline">\(c\)</span> vector on the right-hand side.
+</div>
+
+
+</div>
+</div>
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lecture-notes.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["STAT771_notes.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

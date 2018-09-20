@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1537324105366.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "76B3C1E",
+    "lastKnownWriteTime" : 1537371929,
+    "last_content_update" : 1537371929972,
+    "path" : "~/Documents/UW-Madison/STAT771/STAT771_notes/_bookdown.yml",
+    "project_path" : "_bookdown.yml",
+    "properties" : {
+        "cursorPosition" : "6,10",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "yaml"
+}

@@ -1,0 +1,19 @@
+--- 
+title: "STAT 771: My notes"
+author: "Ralph Møller Trane"
+date: "Fall 2018 (compiled `r Sys.Date()`)"
+site: bookdown::bookdown_site
+documentclass: book
+link-citations: yes
+description: "This is my collection of notes for the STAT 771 class taught at UW-Madison."
+---
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\norm}[1]{\left \vert \left \vert #1 \right \vert \right \vert}
+
+\newcommand{\argmin}{\text{argmin}}
+\newcommand{\argmax}{\text{argmax}}
+
+# Intro

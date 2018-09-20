@@ -1,0 +1,40 @@
+--- 
+title: "STAT 709: My notes"
+author: "Ralph Møller Trane"
+date: "Fall 2018 (compiled `r Sys.Date()`)"
+site: bookdown::bookdown_site
+documentclass: book
+#bibliography: [book.bib, packages.bib]
+#biblio-style: apalike
+link-citations: yes
+description: "This is my collection of notes for the STAT 709 class taught at UW-Madison."
+---
+
+\newcommand{\mc}[1]{\mathcal{#1}}
+\renewcommand{\B}{\mathcal{B}}
+\renewcommand{\C}{\mathcal{C}}
+\newcommand{\F}{\mathcal{F}}
+
+\newcommand{\mb}[1]{\mathbb{#1}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+
+
+# Intro
+
+## Textbook 
+
+As of Fall 2018, this class uses the book *Mathematical Statistics* by Jun Shao (2nd. edition). Unless otherwise noted, all definitions, lemmas, proposition, theorems, etc. can be found there. Numbering might not match.
+
+## Conventions re: $\infty$
+
+We will use the following conventions:
+
+* $\infty + x = \infty, x \in \R$
+* $x\cdot \infty = \infty$ if $x > 0$ 
+* $x\cdot \infty = -\infty$ if $x < 0$
+* $0\cdot \infty = 0$ 
+* $\infty + \infty = \infty$
+* $\infty^a = \infty, \forall a > 0$
+* $\infty - \infty$ and $\frac{\infty}{\infty}$ are not defined
+

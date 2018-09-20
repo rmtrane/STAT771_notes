@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1537324462044.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "EB39EEA5",
+    "lastKnownWriteTime" : 1537477371,
+    "last_content_update" : 1537477371950,
+    "path" : "~/Documents/UW-Madison/STAT771/STAT771_notes/01-lecture_notes.Rmd",
+    "project_path" : "01-lecture_notes.Rmd",
+    "properties" : {
+        "cursorPosition" : "117,0",
+        "scrollLine" : "107"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
