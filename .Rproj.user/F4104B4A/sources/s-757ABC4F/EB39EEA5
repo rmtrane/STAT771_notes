@@ -7,13 +7,13 @@
     "folds" : "",
     "hash" : "0",
     "id" : "EB39EEA5",
-    "lastKnownWriteTime" : 1537479582,
-    "last_content_update" : 1537479582526,
+    "lastKnownWriteTime" : 1537480173,
+    "last_content_update" : 1537480173042,
     "path" : "~/Documents/UW-Madison/STAT771/STAT771_notes/01-lecture_notes.Rmd",
     "project_path" : "01-lecture_notes.Rmd",
     "properties" : {
-        "cursorPosition" : "2,1",
-        "scrollLine" : "0"
+        "cursorPosition" : "115,3",
+        "scrollLine" : "106"
     },
     "relative_order" : 4,
     "source_on_save" : false,

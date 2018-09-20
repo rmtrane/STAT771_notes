@@ -1,7 +1,7 @@
 bookdown::gitbook: 
   config:
     toc: 
-      collapse: section
+      collapse: subsection
     toolbar:
       position: fixed
 bookdown::pdf_book:
