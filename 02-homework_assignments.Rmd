@@ -190,6 +190,10 @@ $$
 Verify the smallest non-normalized, positive number that can be represented.
 ```
 
+```{solution}
+See the `Julia` chunk below.
+```
+
 ```{julia}
 nextfloat(Float64(0)) == 2^(-1074)
 ```
@@ -207,7 +211,19 @@ prevfloat(Float64(Inf))
 ```
 
 ```{exercise, q209}
-Proof lemma (bound of relative error). 
+Proof lemma (\@ref(lem:absolute-error-bound)). 
+```
+
+```{solution}
+
+Let $z = (d_0 + d_1 \beta^{-1} + \dots)\beta^e$ be a number. Let $fl(z) = (d_0^\prime + d_1^\prime\beta^{-1} + \dots + d_{p-1}^\prime\beta^{-(p-1)})\beta^e$ be its fp representation with precision $p$. 
+
+We know that $(d_0 + d_1 \beta^{-1} + \dots + d_{p-1}\beta^{-(p-1)})\beta^e \le z \le (d_0 + d_1 \beta^{-1} + \dots + (d_{p-1}+1)\beta^{-(p-1)})\beta^e$. We know that $fl(z)$ is equal to the one of these two bounds that is closest to $z$. Hence, $|fl(z) - z|$ must be at most half the distance between these two. Subtract the upper bound from the lower bound, and you get $\beta^{-(p-1)+e}$, i.e.
+
+$$
+  |fl(z) - z| \le \frac{\beta^{e-p+1}}{2}.
+$$
+
 ```
 
 ```{exercise, q210}
@@ -228,7 +244,7 @@ hence the bounds still hold.
 Show that $\left|\left| A \right|\right|_1 =$ max of the $l^1$ norms of the columns of $A$.
 ```
 
-\begin{solution} \label{s211}
+```{solution, label = 's211'}
 By definition, $\norm{A}_1 = \max_{x\neq 0}\frac{\norm{Ax}_1}{\norm{x}_1}$. Let $A \in \R^{m\times n}$ and $x \in \R^n$ s.t. $\norm{x}_1 = 1$. 
 
 Recall that 
@@ -237,23 +253,53 @@ $$Ax = \sum_{j=1}^n x_j A_{*,j},$$
 
 where $A_{*,j}$ is the $j^\prime$th column of $A$. So
 
-\begin{align*}
-  \norm{Ax}_1 = \sum_{i=1}^m \sum_{j=1}^n | x_j A_{i,j} | \\
+$$
+\begin{aligned}
+  \norm{Ax}_1 &= \sum_{i=1}^m \sum_{j=1}^n | x_j A_{i,j} | \\
               &\leq \sum_{i=1}^m \sum_{j=1}^n | x_j | \cdot | A_{i,j} | \\
               &= \sum_{j=1}^n | x_j | \left\{\sum_{i=1}^m | A_{i,j} | \right \} \\
               &= \sum_{j=1}^n | x_j | \norm{A_{*,j}} \\
               &\leq \sum_{j=1}^n | x_j | \max_{j \in \{1,\ldots, n\}} \norm{A_{*,j}} \\
               &= \max_{j \in \{1,\ldots, n\}} \norm{A_{*,j}}
-\end{align*}
+\end{aligned}
+$$
 
 Since $\max_{j \in \{1, \ldots, n\}}\norm{A_{*,j}} = \norm{A\cdot \mathbf{1}_i}$ for $i = \argmax \norm{A_{*,j}}_1$. Here, we let $1_i = (x_j)_{j=1}^n$ be defined as 
 
 $$x_j = \left\{ \begin{array}{rl} 1, & \text{ if } j = i \\ 0, & \text{ otherwise}\end{array} \right .$$
-\end{solution}
+```
 
 
 ```{exercise, q212}
-Show that $\left|\left| A \right|\right|_\infty =$ max of the $l^1$ norms of the rows of $A$.
+Let $A \in \R^{n \times m}$. Show that $\left|\left| A \right|\right|_\infty =$ max of the $l^1$ norms of the rows of $A$.
+```
+
+```{solution, label = "s212"}
+Let $j \in \{1, \ldots, n\}$ such that $|a_{j1}| + \dots + |a_{jm}| \ge |a_{i1}| + \dots + |a_{im}|$ for all $i \in \{1, \ldots , n\}$, and let $\tilde{x} \in \R^{m}$ such that $\tilde{x}_i = sign(a_{ji})$. Note that for all $x \in \R^{m}$ with $\norm{x}_\infty = 1$ it holds that $|x_i| \le 1$. So,
+
+$$\begin{aligned}
+  |a_{i1}x_1 + \dots + a_{im}x_m| &\le |a_{i1}| + \dots + |a_{im}| \\
+                                  &\le |a_{j1}| + \dots + |a_{jm}| \\
+                                  &= |a_{j1} \tilde{x}_1 + \dots + a_{jm}\tilde{x}_1|,
+\end{aligned}$$
+  
+I.e. for any $x \in \R^m$ with $\norm{x}_\infty = 1$, 
+
+$$\begin{aligned}
+  |a_{j1} \tilde{x}_1 + \dots + a_{jm}\tilde{x}_1| &\ge \max_{1 \le i \le n}\{|a_{i1} x_1 + \dots + a_{im}x_m|\} \\
+                                                   & = \norm{Ax}_\infty. 
+\end{aligned}$$
+  
+Since $\norm{\tilde{x}}_\infty = 1$, we have that 
+
+$$
+  \max_{\norm{x} = 1} \norm{Ax}_\infty &= |a_{j1} \tilde{x}_1 + \dots + a_{jm}\tilde{x}_1| \\
+                                       &= |a_{j1}| + \dots + |a_{jm}| \\
+                                       &= \max_{1\le j \le n} \sum_{i=1}^n |a_{ji}|,
+$$
+  
+which is exactly the maximum over the $\mathcal{l}^1$-norms of the rows in $A$. 
+
 ```
 
 ```{exercise, q213}
@@ -299,12 +345,20 @@ Since $\norm{F}_p < 1$ by assumption, the only solution to the inequality above 
 ```
 
 ```{exercise, q302}
-Consider Theorem and Lemmas under "Square Linear Systems". What happens if we use $l^{1}$-norm instead?
+Consider Theorem and Lemmas under "Square Linear Systems" (\@ref(square-linear-systems)). What happens if we use $l^{1}$-norm instead?
 ```
 
-```{exercise, q303}
-Generate examples that show the bound in ??? is too conservative.
+```{solution}
+Since we never use any properties of the infinity norm to prove these theorems and lemmas, we could replace it with the $\mathcal{l}^1$-norm. 
 ```
+
+
+
+```{exercise, q303}
+Generate examples that show the bound in theorem \@ref(thm:kappa-bound) is too conservative.
+```
+
+
 
 ```{exercise, q304}
 Generate examples that show the bound is nearly achieved
@@ -313,6 +367,13 @@ Generate examples that show the bound is nearly achieved
 
 ```{exercise, q305}
 For motivating problems 1-5, when is $x$ unique?
+```
+
+```{solution}
+
+* Motivating Problem 1: x is unique by definition
+* Motivating Problem 2: 
+
 ```
 
 ```{exercise, q306}
@@ -331,18 +392,120 @@ Since $R$ is an upper triangular matrix, $\det(R) = \prod_{i=1}^{m} R_{ii} > 0$.
 Assume $R$ is an invertible upper triangular matrix. Implement a solution to invert $R$. 
 ```
 
+```{solution, s308}
+First, we will show that the inverse of $R$ is also an upper triangular matrix. So, let $B = R^{-1}$. The $RB = I$. We will show this using induction. Let $i = n - 0, j < i$. Then, since $r_{ij} = 0$ for all $i > j$,
+
+$$\begin{aligned}
+  0 &= \sum_{k=1}^n r_{n,k}b_{k,j} \\
+    &= r_{n,n}b_{n,j}.
+\end{aligned}$$
+    
+Since $R$ is invertible, $r_{n,n} \neq 0$, hence $b_{n,j} = 0$ for all $j < n$. 
+  
+
+Now assume that $b_{i,j} = 0$ for all $i=n-0,n-1, \ldots, n-m, j < i$. We then want to show it holds for $i = n - (m+1) = n-m-1$. Let $j < n-(m+1)$. Then
+
+$$\begin{aligned}
+  0 &= \sum_{k=1}^n r_{n-(m+1), k} b_{k, j} \\
+    &= \sum_{k=n-(m+1)}^{n} r_{n-(m+1), k} b_{k, j} \\
+    &= r_{n-(m+1), n-(m+1)} b_{n-(m+1),j},
+\end{aligned}$$
+    
+where the first equality is due to the fact that $r_{ij} = 0$ for all $i > j$, and the last equality holds since $b_{k,j} = 0$ for all $j < k$ when $k \ge n-m$ (per the induction hypothesis). Since $r_{ii} \neq 0$ for all $i$, $b_{n-(m+1),j} = 0$. 
+  
+So, $b_{ij} = 0$ for all $i > j$. 
+
+Now, lets look at the case where $i=j$, i.e. diagonal elements of the inverse matrix. Then
+
+$$\begin{aligned}
+  1 = \sum_{k=1}^n r_{ik} b_{ki} = \sum_{k=i}^{n} r_{ik} b_{ki} = r_{ii}b_{ii}.
+\end{aligned}$$
+
+The second equality holds since $r_{ik} = 0$ for all $i > k$, the last equality holds because $b_{ki} = 0$ for all $k > i$. We see that $b_{ii} = r_{ii}^{-1}$.
+  
+Finally, consider the case where $i < j$. Then, using that $r_{ik} = 0$ for all $i>k$ and $b_{kj} = 0$ for all $k>j$, we see that 
+
+$$
+  0 = \sum_{k=1}^n r_{ik}b_{kj} = \sum_{k=i}^j r_{ik} b_{kj},
+$$
+  
+which implies
+
+$$
+  b_{ij} = \frac{-\sum_{k=i+1}^j r_{ik} b_{kj}}{a_{ii}}.
+$$
+  
+So, in other words, given $i,j$, we can find $b_{ij}$ if we know $b_{kj}$ for all $k>i$ (i.e. all entries in the same column below the entry we are considering). Since we already know all entries below and on the diagonal, this is true for all columns. Hence, we can construct $B$ this way. 
+
+See the `Julia` chunk below for an implementation of this.
+
+```
+
+```{julia}
+function invertUpperTri(A)
+    ## Get dimensions of A
+    n, m = size(A)
+
+    ## Setup empty array to hold result
+    B = zeros(n,m)
+
+    ## Fill out diagonal with inverse diagonal from A
+    for k = 1:n
+        B[k, k] = 1/A[k,k]
+    end
+
+    ## Starting in the lower right corner, fill out the rest of the matrix.
+    for i = (n-1):-1:1
+        for j = (i+1):n
+            B[i,j] = -sum(A[i,(i+1):j].*B[(i+1):j,j])/A[i,i]
+        end
+    end
+
+    return(B)
+end
+
+## Create an upper triangular matrix to check
+A = rand(4,4);
+A[2:4,1] = [0 0 0];
+A[3:4,2] = [0 0];
+A[4,3] = 0;
+
+## Check function
+B = invertUpperTri(A);
+B - inv(A)  # should be 0 matrix
+A*B         # should be identity
+```
+
 ## Homework 4
 
 ```{exercise, q401}
 In the solution to \@ref(exm:linear-system), why do $0$ rows on the left-hand side of \@ref(eq:sol-linear-system) correspond to $0$ entries of the $c$ vector on the right-hand side. 
 ```
 
+```{solution, s401}
+By definition of matrix multiplication, if the $i$th row is a zero row of $A$, then $c_{ij} = [AB]_{ij} = \sum{j=1}^n a_{ij} b_{ij} = 0$, no matter what $B$ is. 
+```
+
 ```{exercise, q402}
 Let $Q$ be an orthogonal matrix. Show that $\norm{Qx}_2 = \norm{x}_2$. 
 ```
 
+```{solution, s402}
+
+Since $\norm{x}_2^2 = x^\prime x$ and $Q^\prime Q = 1$ ($Q$ is orthogonal), 
+
+$$ 
+  \norm{Qx}^2_2 = (Qx)^\prime Qx = x^\prime Q^\prime Q x = x^\prime x = \norm{x}^2_2.
+$$
+
+```
+
 ```{exercise, q403}
 Let f be a vector-valued function over $\R^d$. When is $$\min_x \norm{f(x)}_2 = \min_x \norm{f(x)}_2^2.$$
+```
+
+```{solution, s403}
+Should this be $\argmin_x \norm{f(x)}_2 = \argmin_x \norm{f(x)}_2^2$ instead? 
 ```
 
 
@@ -350,6 +513,13 @@ Let f be a vector-valued function over $\R^d$. When is $$\min_x \norm{f(x)}_2 = 
 Prove that $P^T P + I$ from solution to example \@ref(exm:und-linear-system) is invertible. 
 ```
 
+```{solution, s404}
+
+$$
+  (P^TP + I)x = P^TPx + x = 0 \Leftrightarrow P^TPx = -x \Leftrightarrow P^TP = -I \lor x = 0.
+$$
+  
+```
 
 ```{exercise, q405}
 Write out the solution to example \@ref(exm:constrained-least-squares). Also consider the case where $p \ge m$.
@@ -358,6 +528,8 @@ Write out the solution to example \@ref(exm:constrained-least-squares). Also con
 ```{exercise, q406}
 For all motivating problems, implement solutions. 
 ```
+
+</br>
 
 For the following, assume $A \in \R^{n\times m}$ with $\text{rank}(A) = m$, and $b \in \R^n$. Let $C = \begin{bmatrix} A b \end{bmatrix}$. 
 
@@ -418,4 +590,49 @@ Show that $\begin{bmatrix} H_r \cdots h_1 \end{bmatrix}$ is orthogonal.
 
 ```{exercise, q507}
 Show that a Givens rotation is an orthonormal matrix when $\sigma^2 + \lambda^2 = 1$. 
+```
+
+## Homework 6
+
+```{exercise, q601}
+Determine the computational complexity of the QR decomposition using 
+
+a) Gram-Schmidt
+b) Modified Gram-Schmidt
+c) Householder
+d) Givens rotations
+
+for any arbitrary, dense $n \times n$ matrix. (dense = don't know how many entries are $0$.)
+
+```
+
+```{exercise, q602}
+Compare the computational complexity of Householder and Givens for a sparse matrix (i.e. a matrix where a substantial number of entries are $0$).
+```
+
+```{exercise, q603}
+Implement QR decomposition using Householder. Write it as a function that takes a matrix $A \in \R^{n\times m}$ with $\text{rank}(A) = m$ as it's input, and gives back $Q$ and $R$.
+```
+
+```{exercise, q604}
+Implement QR decomposition using Givens. (As above.)
+```
+
+```{exercise, q605}
+What happens in theorem \@ref(thm:svd) if $m > n$.
+```
+
+```{exercise, q606}
+If $u,v$ are respectively left and right singular vectors corresponding to the singular value $\sigma$, show that $Av = \sigma u$, and $A'u = \sigma v$. 
+```
+
+
+## Homework 7
+
+```{exercise, q701}
+Show that $\norm{A}_F^2 = \sum_{i=1}^n\sum_{j=1}^n a_{ij}^2$ is orthogonally invariant, i.e. if $Q,P$ are orthogonal matrices, then $\norm{QA}_F^2 = \norm{A}_F^2$ and $\norm{AP}_F^2 = \norm{A}_F^2$. 
+```
+
+```{exercise, q702}
+Proof corollary \@ref(cor:sigma-min-max).
 ```

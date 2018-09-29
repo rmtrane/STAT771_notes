@@ -121,8 +121,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.6.2" data-path="lecture-notes.html"><a href="lecture-notes.html#qr-decomposition"><i class="fa fa-check"></i><b>1.6.2</b> QR Decomposition</a></li>
 <li class="chapter" data-level="1.6.3" data-path="lecture-notes.html"><a href="lecture-notes.html#existence-of-qr-decomposition."><i class="fa fa-check"></i><b>1.6.3</b> Existence of QR-decomposition.</a></li>
 <li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#lecture-5-920"><i class="fa fa-check"></i>Lecture 5: 9/20</a></li>
-<li class="chapter" data-level="1.6.4" data-path="lecture-notes.html"><a href="lecture-notes.html#householder"><i class="fa fa-check"></i><b>1.6.4</b> Householder</a></li>
-<li class="chapter" data-level="1.6.5" data-path="lecture-notes.html"><a href="lecture-notes.html#givens-rotations"><i class="fa fa-check"></i><b>1.6.5</b> Givens Rotations</a></li>
+<li class="chapter" data-level="1.6.4" data-path="lecture-notes.html"><a href="lecture-notes.html#large-data-problem"><i class="fa fa-check"></i><b>1.6.4</b> “Large” Data Problem</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="lecture-notes.html"><a href="lecture-notes.html#singular-value-decomposition-svd"><i class="fa fa-check"></i><b>1.7</b> Singular Value Decomposition (SVD)</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="lecture-notes.html"><a href="lecture-notes.html#motivating-problems-1"><i class="fa fa-check"></i><b>1.7.1</b> Motivating Problems</a></li>
+<li class="chapter" data-level="1.7.2" data-path="lecture-notes.html"><a href="lecture-notes.html#svd"><i class="fa fa-check"></i><b>1.7.2</b> SVD</a></li>
+<li class="chapter" data-level="1.7.3" data-path="lecture-notes.html"><a href="lecture-notes.html#existence-and-properties"><i class="fa fa-check"></i><b>1.7.3</b> Existence and Properties</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -131,6 +135,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3" data-path="homework-assignments.html"><a href="homework-assignments.html#homework-3"><i class="fa fa-check"></i><b>2.3</b> Homework 3</a></li>
 <li class="chapter" data-level="2.4" data-path="homework-assignments.html"><a href="homework-assignments.html#homework-4"><i class="fa fa-check"></i><b>2.4</b> Homework 4</a></li>
 <li class="chapter" data-level="2.5" data-path="homework-assignments.html"><a href="homework-assignments.html#homework-5"><i class="fa fa-check"></i><b>2.5</b> Homework 5</a></li>
+<li class="chapter" data-level="2.6" data-path="homework-assignments.html"><a href="homework-assignments.html#homework-6"><i class="fa fa-check"></i><b>2.6</b> Homework 6</a></li>
+<li class="chapter" data-level="2.7" data-path="homework-assignments.html"><a href="homework-assignments.html#homework-7"><i class="fa fa-check"></i><b>2.7</b> Homework 7</a></li>
 </ul></li>
 </ul>
 
@@ -347,7 +353,7 @@ So, in total, there are <span class="math inline">\((\beta-1)\cdot \beta^{p-1}\c
 
 
 <div class="lemma">
-<span id="lem:lem1" class="lemma"><strong>Lemma 1.1  </strong></span>If <span class="math inline">\(z\)</span> has exponent <span class="math inline">\(e\)</span>, then the maximum absolute error is <span class="math inline">\(\frac{\beta^{e-p+1}}{2}\)</span>.
+<span id="lem:absolute-error-bound" class="lemma"><strong>Lemma 1.1  </strong></span>If <span class="math inline">\(z\)</span> has exponent <span class="math inline">\(e\)</span>, then the maximum absolute error is <span class="math inline">\(\frac{\beta^{e-p+1}}{2}\)</span>.
 </div>
 
 
@@ -362,7 +368,7 @@ So, in total, there are <span class="math inline">\((\beta-1)\cdot \beta^{p-1}\c
 
 
 <div class="proof">
-<p> <span class="proof"><em>Proof. </em></span> If <span class="math inline">\(z\)</span> has exponent <span class="math inline">\(e\)</span>, then <span class="math inline">\(\beta^{e}\leq z\)</span>. Using this with <a href="lecture-notes.html#lem:lem1">1.1</a>, we get that</p>
+<p> <span class="proof"><em>Proof. </em></span> If <span class="math inline">\(z\)</span> has exponent <span class="math inline">\(e\)</span>, then <span class="math inline">\(\beta^{e}\leq z\)</span>. Using this with <a href="lecture-notes.html#lem:absolute-error-bound">1.1</a>, we get that</p>
 <span class="math display">\[
 \left | \frac{fl(z)-z}{z} \right | \leq \frac{\beta^{e-p+1}}{2\beta^e} = \frac{\beta^{1-p}}{2}.
 \]</span>
@@ -473,7 +479,7 @@ s_p = \sum_{i=1}^p x_iy_i (1 + \delta_i)\prod_{j=1}^p (1 + \epsilon_j).
 <p>In the following, let <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span> be an invertible matrix, and assume <span class="math inline">\(Ax = b\)</span> for a <span class="math inline">\(b \neq 0\)</span>. This implies that <span class="math inline">\(x = A^{-1}b\)</span>.</p>
 
 <div class="theorem">
-<p><span id="thm:unnamed-chunk-13" class="theorem"><strong>Theorem 1.1  </strong></span>Let <span class="math inline">\(\kappa_\infty = {\left \vert \left \vert A \right \vert \right \vert}_\infty {\left \vert \left \vert A^{-1} \right \vert \right \vert}_\infty\)</span>. Assume we can store <span class="math inline">\(A\)</span> with precision <span class="math inline">\(E\)</span> (i.e. as <span class="math inline">\(A+E\)</span>), where <span class="math inline">\({\left \vert \left \vert E \right \vert \right \vert}_\infty \leq u {\left \vert \left \vert A \right \vert \right \vert}_\infty\)</span>, and <span class="math inline">\(b\)</span> with precision <span class="math inline">\(e\)</span> (i.e. as <span class="math inline">\(b+e\)</span>), where <span class="math inline">\({\left \vert \left \vert e \right \vert \right \vert}_\infty \leq u {\left \vert \left \vert b \right \vert \right \vert}_\infty\)</span>.</p>
+<p><span id="thm:kappa-bound" class="theorem"><strong>Theorem 1.1  </strong></span>Let <span class="math inline">\(\kappa_\infty = {\left \vert \left \vert A \right \vert \right \vert}_\infty {\left \vert \left \vert A^{-1} \right \vert \right \vert}_\infty\)</span>. Assume we can store <span class="math inline">\(A\)</span> with precision <span class="math inline">\(E\)</span> (i.e. as <span class="math inline">\(A+E\)</span>), where <span class="math inline">\({\left \vert \left \vert E \right \vert \right \vert}_\infty \leq u {\left \vert \left \vert A \right \vert \right \vert}_\infty\)</span>, and <span class="math inline">\(b\)</span> with precision <span class="math inline">\(e\)</span> (i.e. as <span class="math inline">\(b+e\)</span>), where <span class="math inline">\({\left \vert \left \vert e \right \vert \right \vert}_\infty \leq u {\left \vert \left \vert b \right \vert \right \vert}_\infty\)</span>.</p>
 <p>If <span class="math inline">\({\left \vert \left \vert A+E \right \vert \right \vert}\hat{x} = b+e\)</span> and <span class="math inline">\(u\cdot \kappa_\infty &lt; 1\)</span>, then</p>
 <span class="math display">\[
   \frac{{\left \vert \left \vert x-\hat{x} \right \vert \right \vert}_\infty}{{\left \vert \left \vert x \right \vert \right \vert}} \leq \frac{2\cdot u \cdot \kappa_\infty}{1-u\cdot \kappa_\infty}
@@ -495,7 +501,7 @@ s_p = \sum_{i=1}^p x_iy_i (1 + \delta_i)\prod_{j=1}^p (1 + \epsilon_j).
 
 
 <div class="lemma">
-<p><span id="lem:unnamed-chunk-15" class="lemma"><strong>Lemma 1.6  </strong></span>Suppose <span class="math inline">\(\exists \epsilon &gt; 0\)</span> s.t. <span class="math inline">\({\left \vert \left \vert \Delta A \right \vert \right \vert} \leq \epsilon {\left \vert \left \vert A \right \vert \right \vert}\)</span> and <span class="math inline">\({\left \vert \left \vert \Delta b \right \vert \right \vert} \leq \epsilon {\left \vert \left \vert b \right \vert \right \vert}\)</span>, and <span class="math inline">\(y\)</span> s.t. <span class="math inline">\((A+\Delta A)y = b+\Delta b\)</span>.</p>
+<p><span id="lem:unnamed-chunk-14" class="lemma"><strong>Lemma 1.6  </strong></span>Suppose <span class="math inline">\(\exists \epsilon &gt; 0\)</span> s.t. <span class="math inline">\({\left \vert \left \vert \Delta A \right \vert \right \vert} \leq \epsilon {\left \vert \left \vert A \right \vert \right \vert}\)</span> and <span class="math inline">\({\left \vert \left \vert \Delta b \right \vert \right \vert} \leq \epsilon {\left \vert \left \vert b \right \vert \right \vert}\)</span>, and <span class="math inline">\(y\)</span> s.t. <span class="math inline">\((A+\Delta A)y = b+\Delta b\)</span>.</p>
 If <span class="math inline">\(\epsilon {\left \vert \left \vert A \right \vert \right \vert}{\left \vert \left \vert A^{-1} \right \vert \right \vert} = r &lt; 1\)</span>, then <span class="math inline">\(A+\Delta A\)</span> is invertible and <span class="math display">\[\frac{{\left \vert \left \vert y \right \vert \right \vert}}{{\left \vert \left \vert x \right \vert \right \vert}} \leq \frac{1+r}{1-r}.\]</span>
 </div>
 
@@ -529,7 +535,7 @@ If <span class="math inline">\(\epsilon {\left \vert \left \vert A \right \vert 
 
 
 <div class="lemma">
-<span id="lem:unnamed-chunk-17" class="lemma"><strong>Lemma 1.7  </strong></span><span class="math display">\[\frac{{\left \vert \left \vert y - x \right \vert \right \vert}}{{\left \vert \left \vert x \right \vert \right \vert}} \leq \frac{2\epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert}\cdot {\left \vert \left \vert A \right \vert \right \vert}}{1-r}.\]</span>
+<span id="lem:unnamed-chunk-16" class="lemma"><strong>Lemma 1.7  </strong></span><span class="math display">\[\frac{{\left \vert \left \vert y - x \right \vert \right \vert}}{{\left \vert \left \vert x \right \vert \right \vert}} \leq \frac{2\epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert}\cdot {\left \vert \left \vert A \right \vert \right \vert}}{1-r}.\]</span>
 </div>
 
 
@@ -603,7 +609,7 @@ If <span class="math inline">\(\epsilon {\left \vert \left \vert A \right \vert 
 
 
 <div class="example">
-<p><span id="exm:unnamed-chunk-19" class="example"><strong>Example 1.7  </strong></span>The following is a permutation matrix:</p>
+<p><span id="exm:unnamed-chunk-18" class="example"><strong>Example 1.7  </strong></span>The following is a permutation matrix:</p>
 <span class="math display">\[
   \begin{bmatrix}
     0 &amp; 1 \\
@@ -614,13 +620,13 @@ If <span class="math inline">\(\epsilon {\left \vert \left \vert A \right \vert 
 
 
 <div class="definition">
-<span id="def:unnamed-chunk-20" class="definition"><strong>Definition 1.5  (Orthogonal Matrix)  </strong></span>A matrix <span class="math inline">\(Q\)</span> is said to be an <em>orthogonal matrix</em> if <span class="math inline">\(Q^T Q = Q Q^T = I\)</span>.
+<span id="def:unnamed-chunk-19" class="definition"><strong>Definition 1.5  (Orthogonal Matrix)  </strong></span>A matrix <span class="math inline">\(Q\)</span> is said to be an <em>orthogonal matrix</em> if <span class="math inline">\(Q^T Q = Q Q^T = I\)</span>.
 </div>
 
 <p>Note: for an orthogonal matrix <span class="math inline">\(Q \in {\mathbb{R}}^{n\times m}\)</span>, it holds that <span class="math inline">\({\left \vert \left \vert Q_{i*} \right \vert \right \vert}_2 = 1\)</span> for all <span class="math inline">\(i=1,\ldots,n\)</span>, and <span class="math inline">\({\left \vert \left \vert Q_{*j} \right \vert \right \vert}_2 = 1\)</span> for all <span class="math inline">\(j = 1,\ldots, m\)</span>.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
 
 <div class="definition">
-<span id="def:unnamed-chunk-21" class="definition"><strong>Definition 1.6  (Upper Triangular Matrix)  </strong></span>A matrix <span class="math inline">\(R\)</span> is an <em>upper triangular matrix</em> if <span class="math inline">\(R_{ij} = 0\)</span> for all <span class="math inline">\(i&gt;j\)</span>.
+<span id="def:unnamed-chunk-20" class="definition"><strong>Definition 1.6  (Upper Triangular Matrix)  </strong></span>A matrix <span class="math inline">\(R\)</span> is an <em>upper triangular matrix</em> if <span class="math inline">\(R_{ij} = 0\)</span> for all <span class="math inline">\(i&gt;j\)</span>.
 </div>
 
 </div>
@@ -667,7 +673,7 @@ If <span class="math inline">\(\epsilon {\left \vert \left \vert A \right \vert 
 
 
 <div class="solution">
-<p> <span class="solution"><em>Solution</em> (Example @(exm:least-squares). </span> We want to find <span class="math inline">\(x\)</span> such that <span class="math inline">\(x \in {\text{argmin}}_{y \in {\mathbb{R}}^m}{\left \vert \left \vert Ay-b \right \vert \right \vert}_2\)</span>.</p>
+<p> <span class="solution"><em>Solution</em> (Example <a href="lecture-notes.html#exm:least-squares">1.3</a>). </span> We want to find <span class="math inline">\(x\)</span> such that <span class="math inline">\(x \in {\text{argmin}}_{y \in {\mathbb{R}}^m}{\left \vert \left \vert Ay-b \right \vert \right \vert}_2\)</span>.</p>
 <p>Once again, <span class="math inline">\(\text{rank}(A) = m\)</span>, so using theorem <a href="lecture-notes.html#thm:qr-decomposition">1.2</a>, we can rewrite the expression we are trying to minimize as</p>
 <p><span class="math display" id="eq:least-squares-eq1">\[
   \min {\left \vert \left \vert Q \begin{bmatrix} R \\ 0 \end{bmatrix}\Pi^T y - b \right \vert \right \vert}_2. \tag{1.2}
@@ -702,7 +708,7 @@ If <span class="math inline">\(\epsilon {\left \vert \left \vert A \right \vert 
     x &amp;\in {\text{argmin}}_z \left\{{\left \vert \left \vert R^{-1}c - R^{-1} S z_2 \right \vert \right \vert}_2^2 + {\left \vert \left \vert z_2 \right \vert \right \vert}_2^2\right\},
   \end{aligned}
 \]</span></p>
-<p>where the last equality is a consequence of the result proved in homework @ref{exr:q403}. Now, let <span class="math inline">\(d = R^{-1}c\)</span> and <span class="math inline">\(p = R^{-1}Sz_2\)</span>. Then we can find the minimum of the above expression by differentiating and setting equal to zero:</p>
+<p>where the last equality is a consequence of the result proved in homework <a href="homework-assignments.html#exr:q403">2.29</a>. Now, let <span class="math inline">\(d = R^{-1}c\)</span> and <span class="math inline">\(P = R^{-1}Sz_2\)</span>. Then we can find the minimum of the above expression by differentiating and setting equal to zero:</p>
 <span class="math display">\[\begin{align}
   0 &amp;= -P^Td + (P^TP + I)z_2 \rightarrow
   z_2 &amp;= (P^T P + I)^{-1}P^Td.
@@ -788,7 +794,7 @@ Note that this is a circular argument, and hence not a formal way of doing this.
 <p>(Finished up proof of The Gram-Schmidt Process (<a href="lecture-notes.html#lem:gsp">1.8</a>))</p>
 
 <div class="conjecture">
-<p><span id="cnj:unnamed-chunk-28" class="conjecture"><strong>Remark 1.2  (Gram-Schmidt in Matrix Form)  </strong></span>If we write up <span class="math inline">\(a_1, \ldots, a_r\)</span> in a matrix, we see that</p>
+<p><span id="cnj:unnamed-chunk-27" class="conjecture"><strong>Remark 1.2  (Gram-Schmidt in Matrix Form)  </strong></span>If we write up <span class="math inline">\(a_1, \ldots, a_r\)</span> in a matrix, we see that</p>
 <p><span class="math display">\[
   \begin{bmatrix} 
     a_1 &amp; \dots &amp; a_r 
@@ -829,18 +835,15 @@ This is quite similar to the result we are after (the QR-decomposition <a href="
 <span id="lem:mod-gsp" class="lemma"><strong>Lemma 1.9  (The Modified Gram-Schmidt Procedure)  </strong></span><strong>HOMEWORK</strong>
 </div>
 
-</div>
-<div id="householder" class="section level3">
-<h3><span class="header-section-number">1.6.4</span> Householder</h3>
 
 <div class="definition">
-<span id="def:unnamed-chunk-30" class="definition"><strong>Definition 1.7  (Householder Reflections)  </strong></span>A matrix <span class="math inline">\(H = I - 2vv^\prime\)</span>, where <span class="math inline">\({\left \vert \left \vert v \right \vert \right \vert}_2 = 1\)</span>, is called a <em>Householder Reflection</em>.
+<span id="def:unnamed-chunk-29" class="definition"><strong>Definition 1.7  (Householder Reflections)  </strong></span>A matrix <span class="math inline">\(H = I - 2vv^\prime\)</span>, where <span class="math inline">\({\left \vert \left \vert v \right \vert \right \vert}_2 = 1\)</span>, is called a <em>Householder Reflection</em>.
 </div>
 
 <p>A Householder reflection takes any vector and reflects it over <span class="math inline">\(\{tv: t \in {\mathbb{R}}\}\)</span>.</p>
 
 <div class="lemma">
-<span id="lem:unnamed-chunk-31" class="lemma"><strong>Lemma 1.10  </strong></span>Householder reflections are orthogonal matrices.
+<span id="lem:unnamed-chunk-30" class="lemma"><strong>Lemma 1.10  </strong></span>Householder reflections are orthogonal matrices.
 </div>
 
 
@@ -850,7 +853,7 @@ This is quite similar to the result we are after (the QR-decomposition <a href="
 
 
 <div class="lemma">
-<span id="lem:unnamed-chunk-33" class="lemma"><strong>Lemma 1.11  </strong></span>There exists Householder refelctions <span class="math inline">\(H_1, \ldots, H_r\)</span> such that <span class="math inline">\(H_r \dots H_1 A\Pi = R\)</span>.
+<span id="lem:unnamed-chunk-32" class="lemma"><strong>Lemma 1.11  </strong></span>There exists Householder refelctions <span class="math inline">\(H_1, \dots, H_r\)</span> such that <span class="math inline">\(H_r \dots H_1 A\Pi = R\)</span>.
 </div>
 
 
@@ -869,19 +872,270 @@ This is quite similar to the result we are after (the QR-decomposition <a href="
 \]</span>
 </div>
 
-</div>
-<div id="givens-rotations" class="section level3">
-<h3><span class="header-section-number">1.6.5</span> Givens Rotations</h3>
 
 <div class="definition">
 <p><span id="def:givens" class="definition"><strong>Definition 1.8  (Givens Rotations)  </strong></span>A <em>Givens Rotation</em> is a matrix <span class="math inline">\(G^{(i,j)}\)</span> with entries <span class="math inline">\((g_{ij})\)</span> such that</p>
 <ol style="list-style-type: lower-roman">
 <li><span class="math inline">\(g_{ii} = g_{jj} = \lambda\)</span> (the <span class="math inline">\(i\)</span>th and <span class="math inline">\(j\)</span>th elements of the diagonal are <span class="math inline">\(\lambda\)</span>).</li>
 <li><span class="math inline">\(g_{kk} = 1\)</span> for all <span class="math inline">\(k \notin \{i,j\}\)</span>. (all other diagonal elements are <span class="math inline">\(1\)</span>)</li>
-<li><span class="math inline">\(g_{ij} = g_{ji} = \sigma\)</span></li>
+<li><span class="math inline">\(g_{ij} = -g_{ji} = \sigma\)</span></li>
 <li><span class="math inline">\(g_{ij} = 0\)</span> for all other pairs of <span class="math inline">\(i,j\)</span>.</li>
 </ol>
 <p>In words: <span class="math inline">\(G^{(i,j)}\)</span> is the identity matrix with the <span class="math inline">\(i\)</span>th and <span class="math inline">\(j\)</span>th diagonal elements made <span class="math inline">\(\lambda\)</span>, and the entries at <span class="math inline">\((i,j)\)</span> and <span class="math inline">\((j,i)\)</span> are <span class="math inline">\(\sigma\)</span>.</p>
+</div>
+
+
+<div class="example">
+<p><span id="exm:unnamed-chunk-34" class="example"><strong>Example 1.8  (2x2 Givens rotation to create upper triangular matrix.)  </strong></span>The general <span class="math inline">\(G^{(1,2)}\)</span> is <span class="math inline">\(\begin{bmatrix} \lambda &amp; \sigma \\ -\sigma \lambda \end{bmatrix}\)</span>. Let us consider a general <span class="math inline">\(M \in {\mathbb{R}}^{2\times m}\)</span>:</p>
+<p><span class="math display">\[
+  M = \begin{bmatrix} M_{11} &amp; M_{12} &amp; \dots &amp; M_{1m} \\ 
+                      M_{21} &amp; M_{22} &amp; \dots &amp; M_{2m} \end{bmatrix}.
+\]</span></p>
+<p>We want this Givens matrix to be orthogonal. By homework exercise <a href="homework-assignments.html#exr:q507">2.42</a>, we know this is the case when <span class="math inline">\(\lambda^2 + \delta^2 = 1\)</span>. We also want <span class="math inline">\(G^{(1,2)}M\)</span> to be an upper triangular matrix. Since</p>
+<p><span class="math display">\[
+  G^{(i,j)} M = 
+    \begin{bmatrix} 
+      \lambda M_{11} + \sigma M_{12} &amp; \dots &amp; \lambda M_{1m} + \sigma M_{2m} \\ 
+      -\sigma M_{11} + \lambda M_{12} &amp; \dots &amp; -\sigma M_{1m} + \lambda M_{2m} \\ 
+    \end{bmatrix},
+\]</span></p>
+<p>we need <span class="math inline">\(\lambda M_{12} = \sigma M_{11}\)</span>. So, solving these two equations, we find that <span class="math inline">\(\lambda = \frac{M_{11}}{\sqrt{M_{11}^2 + M_{21}^2}}\)</span> and <span class="math inline">\(\sigma = \frac{M_{21}}{\sqrt{M_{11}^2 + M_{21}^2}}\)</span>. Hence, given the matrix <span class="math inline">\(M\)</span>, we can find a Givens rotation which when multiplied by <span class="math inline">\(M\)</span> returns an upper triangular matrix.</p>
+<p>This also means that given a vector <span class="math inline">\(a \in {\mathbb{R}}^n\)</span>, we can find a Givens rotation such that <span class="math inline">\(G^{(i,j)} a\)</span> gives back <span class="math inline">\(a\)</span> except for one entry, which has been changed to <span class="math inline">\(0\)</span>.</p>
+</div>
+
+</div>
+<div id="large-data-problem" class="section level3">
+<h3><span class="header-section-number">1.6.4</span> “Large” Data Problem</h3>
+<p>Finally, we will take a look at how to solve a “large” data problem using QR decomposition. To do so, let <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span> be a matrix with <span class="math inline">\(n\)</span> “big”. By “big”, we mean so large that <span class="math inline">\(A\)</span> won’t fit in memory, but the first <span class="math inline">\(m+1\)</span> rows of <span class="math inline">\(A\)</span> will.</p>
+<p>Gentleman published a few papers in 1973/1974 describing a method for incremental QR decomposition. The key ideas are as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Remember that the solution to the linear model is <span class="math inline">\((A&#39;A)^{-1}A&#39;b = R^{-1}(Q&#39;b)\)</span>.</li>
+<li>The QR decomposition of <span class="math inline">\([A b]\)</span> gives <span class="math inline">\(\begin{bmatrix} R &amp; Q&#39;b \\ 0 &amp; S \end{bmatrix}\)</span> (ex. <a href="homework-assignments.html#exr:q407">2.33</a> and <a href="homework-assignments.html#exr:q408">2.34</a>)</li>
+</ol>
+<p>Now, if we do QR decomposition on the first <span class="math inline">\(m+1\)</span> rows of <span class="math inline">\(A\)</span> we get <span class="math inline">\(\begin{bmatrix} \tilde{R}_{m+1} &amp; \tilde{Q}_{m+1}&#39;b_{m+1} \\ 0 &amp; S_{m+1} \end{bmatrix}\)</span>. Now, add the next row of <span class="math inline">\(A\)</span> to get <span class="math inline">\(\begin{bmatrix} \tilde{R}_{m+1} &amp; \tilde{Q}_{m+1}&#39;b_{m+1} \\ 0 &amp; S_{m+1} \\ a_{m+2} &amp; b_{m+2} \end{bmatrix}\)</span>. Hit this with the right Givens rotation to change entry <span class="math inline">\((m+1, 1)\)</span> to <span class="math inline">\(0\)</span>. This will give us something of the form <span class="math inline">\(\begin{bmatrix} \tilde{R}_{m+2} &amp; \tilde{Q}_{m+2}&#39;b_{m+2} \\ 0 &amp; S_{m+2} \end{bmatrix}\)</span>. Here, <span class="math inline">\(\tilde{R}_{m+2}\)</span> is still an upper triangular matrix with less than <span class="math inline">\(m\)</span> rows. Repeat the procedure until we’ve added all rows of <span class="math inline">\(A\)</span>/elements of <span class="math inline">\(b\)</span>.</p>
+</div>
+</div>
+<div id="singular-value-decomposition-svd" class="section level2">
+<h2><span class="header-section-number">1.7</span> Singular Value Decomposition (SVD)</h2>
+<p>Outline:</p>
+<ol style="list-style-type: upper-roman">
+<li>Motivating problems</li>
+<li>SVD and solutions</li>
+<li>Existence and properties</li>
+<li>Random projections (a modern application of SVD)</li>
+</ol>
+<div id="motivating-problems-1" class="section level3">
+<h3><span class="header-section-number">1.7.1</span> Motivating Problems</h3>
+
+<div class="example">
+<p><span id="exm:svd-problem-1" class="example"><strong>Example 1.9  </strong></span>Let <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span> with <span class="math inline">\(\text{rank}(A) &lt; m \le n\)</span>, and let <span class="math inline">\(B \in \text{range}(A)\)</span>. Find <span class="math inline">\(x\)</span> s.t.</p>
+<p><span class="math display">\[
+  x \in {\text{argmin}}_{y \in {\mathbb{R}}^m} \left\{{\left \vert \left \vert y \right \vert \right \vert}_2 : Ay = b \right \}
+\]</span></p>
+</div>
+
+
+<div class="example">
+<p><span id="exm:svd-problem-2" class="example"><strong>Example 1.10  </strong></span>Let <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span>. Find</p>
+<p><span class="math display">\[
+  {\left \vert \left \vert A \right \vert \right \vert}_2 = \sup_{v \in {\mathbb{R}}^m\setminus\{0\}} \frac{{\left \vert \left \vert Av \right \vert \right \vert}_2}{{\left \vert \left \vert v \right \vert \right \vert}_2}.
+\]</span></p>
+</div>
+
+
+<div class="example">
+<p><span id="exm:svd-problem-3" class="example"><strong>Example 1.11  </strong></span>Let <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span>. Find <span class="math inline">\(x\)</span> s.t.</p>
+<p><span class="math display">\[
+  x = {\text{argmin}}_{rank(Y) \le k}{\left \vert \left \vert A-Y \right \vert \right \vert}_F.
+\]</span></p>
+</div>
+
+<p>Note: <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_F\)</span> is the <em>Frobenius norm</em> and is defined as <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_F = \left(\sum_{i=1}^m \sum_{j=1}^n |a_{ij}|^2 \right)^{1/2}\)</span>. So it is sort of a Euclideaon norm extended to matrices.</p>
+</div>
+<div id="svd" class="section level3">
+<h3><span class="header-section-number">1.7.2</span> SVD</h3>
+<div id="svd-definition" class="section level4">
+<h4><span class="header-section-number">1.7.2.1</span> SVD definition</h4>
+
+<div class="theorem">
+<p><span id="thm:svd" class="theorem"><strong>Theorem 1.3  </strong></span>Suppose <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span> and <span class="math inline">\(n\ge m\)</span>. Then there exists <span class="math inline">\(U \in {\mathbb{R}}^{n \times n}\)</span> and <span class="math inline">\(U \in {\mathbb{R}}^{m\times m}\)</span> that are both orthogonal, and a diagonal matrix <span class="math inline">\(\Sigma \in {\mathbb{R}}^{n \times m}\)</span> with diagonal elements <span class="math inline">\(\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_m \ge 0\)</span> such that</p>
+<p><span class="math display">\[ A = U \Sigma V&#39;\]</span></p>
+</div>
+
+<p>Note:</p>
+<ul>
+<li>The diagonal elements of <span class="math inline">\(\Sigma\)</span> are called the singular values of <span class="math inline">\(A\)</span>.</li>
+<li>The columns of <span class="math inline">\(U\)</span> are called the left singular vectors</li>
+<li>The columns of <span class="math inline">\(V\)</span> are called the right singular vectors</li>
+</ul>
+
+<div class="corollary">
+<span id="cor:cor-svd" class="corollary"><strong>Corollary 1.1  </strong></span><span class="math inline">\(\text{rank}(A)\)</span> is the number of non-zero singular values of <span class="math inline">\(A\)</span>.
+</div>
+
+</div>
+<div id="solutions-to-motivating-problems" class="section level4">
+<h4><span class="header-section-number">1.7.2.2</span> Solutions to motivating problems</h4>
+
+<div class="solution">
+<p> <span class="solution"><em>Solution</em> (Solution to example <a href="lecture-notes.html#exm:svd-problem-1">1.9</a>). </span>  Since <span class="math inline">\(b \in \text{range}(A)\)</span>, there exists a <span class="math inline">\(y\)</span> such that <span class="math inline">\(Ay = b\)</span>. Now, by theorem <a href="lecture-notes.html#thm:svd">1.3</a> there exist <span class="math inline">\(U\)</span>,<span class="math inline">\(V\)</span>, and <span class="math inline">\(\Sigma\)</span> such that <span class="math inline">\(A=U\Sigma V^\prime\)</span>. Since <span class="math inline">\(U\)</span> is orthogonal, <span class="math inline">\(U^{-1} = U^\prime\)</span>. So,</p>
+<p><span class="math display">\[\begin{aligned}
+  U\Sigma V^\prime y &amp;= b \Leftrightarrow \\
+  \Sigma V^\prime y &amp;= U^\prime b.
+\end{aligned}\]</span></p>
+<p>Let <span class="math inline">\(z = V^\prime y\)</span> and <span class="math inline">\(c = U^\prime b\)</span>. By corollary <a href="lecture-notes.html#cor:cor-svd">1.1</a> we now that there are exactly <span class="math inline">\(\text{rank}(A) = r\)</span> non-zero singular values. So</p>
+<p><span class="math display">\[\begin{aligned}
+  \begin{bmatrix}
+  \sigma_1 &amp; &amp; &amp; &amp; &amp; \\
+    &amp; \ddots &amp; &amp; &amp; &amp; \\
+    &amp; &amp; \sigma_r &amp; &amp; &amp; \\
+    &amp; &amp; &amp; 0 &amp; &amp; \\
+    &amp; &amp; &amp; &amp; \ddots &amp; \\
+    &amp; &amp; &amp; &amp; &amp; 0 \\
+  \end{bmatrix} \cdot 
+  \begin{bmatrix} z_1 \\ z_2 \end{bmatrix} = \begin{bmatrix} c_1 \\ 0 \end{bmatrix}.
+\end{aligned}\]</span></p>
+<p>So, <span class="math inline">\(z_1 = \begin{bmatrix} \sigma_1^{-1} &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; \sigma_r^{-1} \end{bmatrix} c_1\)</span>. We want to minimize <span class="math inline">\({\left \vert \left \vert y \right \vert \right \vert}_2 = {\left \vert \left \vert V^\prime z \right \vert \right \vert}_2 = {\left \vert \left \vert z \right \vert \right \vert}_2 = \sqrt{{\left \vert \left \vert z_1 \right \vert \right \vert}_2^2 + {\left \vert \left \vert z_2 \right \vert \right \vert}_2^2}\)</span>. This is done by setting <span class="math inline">\(z_2=0\)</span>, which we can do since <span class="math inline">\(z_2\)</span> does not affect the equation above. (It is multiplied by all the <span class="math inline">\(0\)</span> rows of <span class="math inline">\(\Sigma\)</span>.) So, the minimum norm solution is</p>
+<span class="math display">\[\begin{aligned}
+  x &amp;= V 
+    \begin{bmatrix} 
+      \sigma_1^{-1} &amp; &amp; &amp; \\ 
+      &amp; \ddots &amp; &amp; \huge{c_1} \\
+      &amp; &amp; \sigma_{r}^{-1} &amp; \\
+      &amp; {\huge 0} &amp; &amp;
+    \end{bmatrix} \\
+    &amp;= V \cdot V^\prime y.
+\end{aligned}\]</span>
+</div>
+
+<p>For the solution to example <a href="lecture-notes.html#exm:svd-problem-2">1.10</a>, we’ll need the following result:</p>
+
+<div class="lemma">
+<p><span id="lem:unnamed-chunk-36" class="lemma"><strong>Lemma 1.12  </strong></span> Let <span class="math inline">\(D\)</span> be a non-zero diagonal matrix of size <span class="math inline">\(n \times m\)</span>, <span class="math inline">\(n\ge m\)</span>. Then, <span class="math display">\[{\left \vert \left \vert D \right \vert \right \vert}_2 = \max_i |D_{ii}|\]</span>.</p>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> Note that <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_2 = \max_{{\left \vert \left \vert v \right \vert \right \vert}_2 = 1} {\left \vert \left \vert Av \right \vert \right \vert}_2\)</span>. Also, if we let <span class="math inline">\(D_{ii} = \max_{j} |D_{jj}|\)</span> and <span class="math inline">\(v\)</span> be a vector with norm <span class="math inline">\(1\)</span>,</p>
+<p><span class="math display">\[
+  {\left \vert \left \vert Dv \right \vert \right \vert}_2^2 = \sum_{j=1}^m (D_{jj}^2 v_j)^2 \leq D_{ii}^2 \sum_{j=1}^m v_j^2 = D_{ii}^2 {\left \vert \left \vert v \right \vert \right \vert}_2^2 = D_{ii}^2.
+\]</span></p>
+<p>Now, let <span class="math inline">\(z \in {\mathbb{R}}^m\)</span> such that <span class="math inline">\(z_{ij} = \left\{ \begin{matrix} 0, &amp; j \neq i \\ \frac{D_{ii}}{|D_{ii}|}, &amp; j = i \end{matrix} \right .\)</span>. Then <span class="math inline">\({\left \vert \left \vert z \right \vert \right \vert}_2 = \sqrt{\frac{D_{ii}^2}{|D_{ii}|^2}} = 1\)</span>, and</p>
+<p><span class="math display">\[
+  {\left \vert \left \vert Dz \right \vert \right \vert}_2^2 = \sum_{j=1}^m (D_{jj} z_j)^2 = D_{ii}^2 \frac{D_{ii}^2}{|D_{ii}|^2} = D_{ii}^2.
+\]</span></p>
+<p>Since <span class="math inline">\({\left \vert \left \vert z \right \vert \right \vert}_2 = 1\)</span>,</p>
+<p><span class="math display">\[ D_{ii}^2 {\left \vert \left \vert Dz \right \vert \right \vert}_2^2 \le (\max_{{\left \vert \left \vert v \right \vert \right \vert}_2 = 1} |D_{ii}|)^2 \le D_{ii}^2\]</span>,</p>
+so <span class="math inline">\({\left \vert \left \vert D \right \vert \right \vert}_2 = \max_{{\left \vert \left \vert v \right \vert \right \vert}_2 = 1} |D_{ii}| = |D_{ii}| = max_{j} |D_{jj}|\)</span>.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution</em> (Solution to example <a href="lecture-notes.html#exm:svd-problem-2">1.10</a>). </span> First, use the SVD of <span class="math inline">\(A\)</span> to write <span class="math inline">\(A = U \Sigma V^\prime\)</span>. Now, since the 2-norm is invariant under multiplication of orthogonal matrices, we have that</p>
+<p><span class="math display">\[\begin{aligned}
+  {\left \vert \left \vert A \right \vert \right \vert}_2 &amp;= \max_{{\left \vert \left \vert v \right \vert \right \vert} = 2} {\left \vert \left \vert U\Sigma V^\prime v \right \vert \right \vert}_2 \\
+             &amp;= \max_{{\left \vert \left \vert v \right \vert \right \vert} = 2} {\left \vert \left \vert \Sigma V^\prime v \right \vert \right \vert}_2.
+\end{aligned}\]</span></p>
+<p>If we let <span class="math inline">\(z = V^\prime v\)</span>, we see that <span class="math inline">\({\left \vert \left \vert z \right \vert \right \vert}_2 = {\left \vert \left \vert v \right \vert \right \vert}_2 = 1\)</span>, since <span class="math inline">\(V^\prime\)</span> is an orthogonal matrix. Hence,</p>
+<p><span class="math display">\[
+  {\left \vert \left \vert A \right \vert \right \vert}_2 = \max_{{\left \vert \left \vert z \right \vert \right \vert}_2 = 1} {\left \vert \left \vert \Sigma z \right \vert \right \vert}_2 = {\left \vert \left \vert \Sigma \right \vert \right \vert}_2 = \max_{i} |\sigma_i| =  \sigma_1,
+\]</span></p>
+where we used the lemma above to obtain the second to last equality.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution</em> (Solution to example <a href="lecture-notes.html#exm:svd-problem-3">1.11</a>). </span> Recall, <span class="math inline">\(A = \sum_{i=1}^n \sigma_i u_i v_i^\prime = U \Sigma V^\prime\)</span>. We want to find <span class="math inline">\({\text{argmin}}_{\text{rank}(Y) \le k} {\left \vert \left \vert A-Y \right \vert \right \vert}_F\)</span>.</p>
+<p>Case 1: If <span class="math inline">\(\text{rank}(A) \le k\)</span>, then <span class="math inline">\(Y = A\)</span> is the solution.</p>
+<p>Case 2: <span class="math inline">\(\text{rank}(A) &gt; k\)</span>. Since the Frobenius norm is orthogonally invariant, we can obtain that</p>
+<p><span class="math display">\[\begin{aligned}
+  {\left \vert \left \vert A-Y \right \vert \right \vert}_F^2 &amp;= {\left \vert \left \vert U\Sigma V^\prime - Y \right \vert \right \vert}_F^2 \\
+                 &amp;= {\left \vert \left \vert \Sigma - U^\prime Y V \right \vert \right \vert}_F^2. 
+\end{aligned}\]</span></p>
+<p>If we let <span class="math inline">\(X = U^\prime Y V\)</span>, we get that</p>
+<p><span class="math display">\[\begin{aligned}
+  {\left \vert \left \vert A-Y \right \vert \right \vert}_F^2 &amp;= \sum_{i=1}^n \sum_{j=1}^m (\sigma_{ij} - x_{ij})^2 \\
+                 &amp;= \sum_{i=1}^n \sum_{j=1,i\ne j}^m ( - x_{ij})^2  + \sum_{i=1}^n (\sigma_i - x_{ij})^2,
+\end{aligned}\]</span></p>
+<p>since <span class="math inline">\(\sigma_{ij}=0\)</span> for all <span class="math inline">\(i \ne j\)</span>, and at most <span class="math inline">\(k\)</span> of the <span class="math inline">\(\sigma_{ii}\)</span> are non-zero. To minimize the expression above, we choose <span class="math inline">\(Y\)</span> such that <span class="math inline">\(x_{ij}=0\)</span> for <span class="math inline">\(i\ne j\)</span>, and <span class="math inline">\(x_{ii} = \sigma_i\)</span>. Hence,</p>
+<p><span class="math display">\[
+  X = \begin{bmatrix} \sigma_1 &amp; &amp; &amp; &amp; &amp; \\ 
+                      &amp; \ddots &amp; &amp; &amp; &amp; \\ 
+                      &amp; &amp; \sigma_k &amp; &amp; &amp; \\ 
+                      &amp; &amp; &amp; 0 &amp; &amp; \\ 
+                      &amp; &amp; &amp; &amp; \ddots &amp; \\ 
+                      &amp; &amp; &amp; &amp; &amp; 0 \end{bmatrix}, 
+\]</span></p>
+and <span class="math inline">\(Y = U X V^\prime\)</span>.
+</div>
+
+</div>
+</div>
+<div id="existence-and-properties" class="section level3">
+<h3><span class="header-section-number">1.7.3</span> Existence and Properties</h3>
+
+<div class="proof">
+<p> <span class="proof"><em>Proof</em> (SVD (<a href="lecture-notes.html#thm:svd">1.3</a>)). </span> Recall that <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_2 = \sup_{v \ne 0} \frac{{\left \vert \left \vert Av \right \vert \right \vert}_2}{{\left \vert \left \vert v \right \vert \right \vert}_2} = \max_{{\left \vert \left \vert v \right \vert \right \vert}_2 = 1} {\left \vert \left \vert Av \right \vert \right \vert}_2\)</span>. I.e. there exists a <span class="math inline">\(v_1\)</span> such that <span class="math inline">\({\left \vert \left \vert v_1 \right \vert \right \vert}_2 = 1\)</span> and <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_2 = {\left \vert \left \vert Av_1 \right \vert \right \vert}_2\)</span>.</p>
+<p>Let <span class="math inline">\(u_1\)</span> be a vector such that <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_2 u_1 = Av_1\)</span>. This implies that <span class="math inline">\({\left \vert \left \vert u_1 \right \vert \right \vert}_2 = 1\)</span>, since <span class="math inline">\({\left \vert \left \vert {\left \vert \left \vert A \right \vert \right \vert}_2u_1 \right \vert \right \vert}_2 = {\left \vert \left \vert A \right \vert \right \vert}_2 {\left \vert \left \vert u_1 \right \vert \right \vert}_2 = {\left \vert \left \vert Av_1 \right \vert \right \vert}_2 = {\left \vert \left \vert A \right \vert \right \vert}_2\)</span>.</p>
+<p>Let <span class="math inline">\(\sigma_1 = {\left \vert \left \vert A \right \vert \right \vert}_2\)</span>. So, <span class="math inline">\(\sigma_1 u_1 = A v_1\)</span>. Using the Gram-Schmidt procedure, we can create a matrix <span class="math inline">\(V_1 \in {\mathbb{R}}^{n\times (n-1)}\)</span> and <span class="math inline">\(\tilde{U}_1 = \begin{bmatrix} u_1 V_1 \end{bmatrix} \in {\mathbb{R}}^{n \times n}\)</span> being an orthogonal matrix. Similarly, we can create <span class="math inline">\(\tilde{V}_1 \in {\mathbb{R}}^{m\times m}\)</span> such that <span class="math inline">\(\tilde{V}_1 = \begin{bmatrix} v_1 V_1 \end{bmatrix} \in {\mathbb{R}}^{m \times m}\)</span> is orthogonal.</p>
+<p>Now, <span class="math inline">\(A \tilde{V}_1 = \begin{bmatrix} Av_1 &amp; AV_1 \end{bmatrix} = \begin{bmatrix} \sigma_1 u_1 &amp; AV_1 \end{bmatrix}\)</span>. Hence, <span class="math inline">\(\tilde{U}_1^\prime A \tilde{V}_1 = \begin{bmatrix} u_1 \\ U_1^\prime \end{bmatrix} \begin{bmatrix} \sigma_1 u_1 &amp; A V_1 \end{bmatrix} = \begin{bmatrix} \sigma_1 &amp; w^\prime \\ 0 &amp; \tilde{A} \end{bmatrix}\)</span>, since <span class="math inline">\(u_1\)</span> is orthogonal to all columns of <span class="math inline">\(U_1^\prime\)</span>. We need to show that <span class="math inline">\(w=0\)</span>. Since the 2-norm is orthogonally invariant, it holds for any <span class="math inline">\(z \ne 0\)</span>,</p>
+<p><span class="math display">\[\begin{aligned}
+  \sigma_1^2 &amp;= {\left \vert \left \vert A \right \vert \right \vert}_2^2 \\
+             &amp;= {\left \vert \left \vert \tilde{U}_1^\prime A \tilde{V}_1 \right \vert \right \vert}_2^2 \\
+             &amp;= {\left \vert \left \vert \begin{bmatrix} \sigma_1 &amp; w^\prime \\ 0 &amp; \tilde{A} \end{bmatrix} \right \vert \right \vert}_2^2 \\
+             &amp;\ge \frac{{\left \vert \left \vert \begin{bmatrix} \sigma_1 &amp; w^\prime \\ 0 &amp; \tilde{A} \end{bmatrix} z \right \vert \right \vert}_2^2}{{\left \vert \left \vert z \right \vert \right \vert}_2^2}.
+\end{aligned}\]</span></p>
+<p>Let <span class="math inline">\(z = \begin{bmatrix} \sigma_1 \\ w \end{bmatrix}\)</span>. Then,</p>
+<p><span class="math display">\[
+  \sigma_1^2 \ge \frac{{\left \vert \left \vert \begin{bmatrix} \sigma_1 &amp; w^\prime \\ 0 &amp; \tilde{A} \end{bmatrix} \begin{bmatrix} \sigma_1 \\ w \end{bmatrix} \right \vert \right \vert}_2^2}{{\left \vert \left \vert \begin{bmatrix} \sigma_1 \\ w \end{bmatrix} \right \vert \right \vert}_2^2} = \frac{(\sigma_1^2 + {\left \vert \left \vert w \right \vert \right \vert}_2^2)^2 + {\left \vert \left \vert \tilde{A}w \right \vert \right \vert}_2^2}{\sigma_1^2 + {\left \vert \left \vert w \right \vert \right \vert}_2^2}\ge \sigma_1^2 + {\left \vert \left \vert w \right \vert \right \vert}_2^2 \ge \sigma_1^2,
+\]</span></p>
+<p>i.e. <span class="math inline">\({\left \vert \left \vert w \right \vert \right \vert}_2^2 = 0\)</span>. So,</p>
+<p><span class="math display">\[ 
+  \tilde{U}_1 A V_1 = \begin{bmatrix} \sigma_1 &amp; 0 \\ 0 &amp; \tilde{A} \end{bmatrix}.
+\]</span></p>
+Repeat the same procedure to get <span class="math inline">\(U, V\)</span> such that <span class="math inline">\(A = U^\prime \Sigma V\)</span>.
+</div>
+
+
+<div class="corollary">
+<span id="cor:unnamed-chunk-41" class="corollary"><strong>Corollary 1.2  </strong></span><span class="math inline">\(\text{rank}(A)\)</span> is exactly the number of non-zero singular values of <span class="math inline">\(A\)</span>.
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span>  <span class="math inline">\(\text{rank}(A) = \text{rank}(U \Sigma V^\prime ) = \text{rank}(\Sigma) =\)</span> number of non-zero diagonal elements.</p>
+</div>
+
+
+<div class="corollary">
+<p><span id="cor:sigma-min-max" class="corollary"><strong>Corollary 1.3  </strong></span>Let <span class="math inline">\(A,E \in {\mathbb{R}}^{n\times m}\)</span>, <span class="math inline">\(\sigma_{\text{max}}\)</span> (<span class="math inline">\(\sigma_{\text{min}}\)</span>) denote the largest (smallest) singular value of A. Then</p>
+<p><span class="math display">\[ 
+  \sigma_{\text{max}}(A+E) \le \sigma_{\text{max}}(A) + {\left \vert \left \vert E \right \vert \right \vert}_2
+\]</span></p>
+<p>and</p>
+<span class="math display">\[
+  \sigma_{\text{min}}(A+E) \ge \sigma_{\text{min}}(A) - {\left \vert \left \vert E \right \vert \right \vert}_2.
+\]</span>
+</div>
+
+
+<div class="corollary">
+<p><span id="cor:unnamed-chunk-43" class="corollary"><strong>Corollary 1.4  (Hoffman-Wielandt Inequality)  </strong></span>Let <span class="math inline">\(A,E \in {\mathbb{R}}^{n \times m}\)</span>, <span class="math inline">\(\sigma_k(\dot)\)</span> denote the k’th largest singular value. Let <span class="math inline">\(p =\min(m,n) \le {\left \vert \left \vert E \right \vert \right \vert}_F^2\)</span>. Then</p>
+<p><span class="math display">\[
+  \sum_{k=1}^p (\sigma_k(A+E) - \sigma_k(A))^2 \le {\left \vert \left \vert E \right \vert \right \vert}_F^2.
+\]</span></p>
+</div>
+
+
+<div class="corollary">
+<p><span id="cor:unnamed-chunk-44" class="corollary"><strong>Corollary 1.5  </strong></span> Let <span class="math inline">\(r = \text{rank}(A)\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\text{range}(A) = \text{span}(u_1, \ldots, u_r)\)</span></li>
+<li>row space of A <span class="math inline">\(= \text{span}(v_1, \ldots, v_r)\)</span></li>
+<li><span class="math inline">\(\text{null}(A) = \text{span}(v_{r+1}, \ldots, v_{m})\)</span></li>
+<li><span class="math inline">\(\text{null}(A^\prime) = \text{span}(u_{r+1}, \ldots, v_{m})\)</span></li>
+</ol>
+Moreover,
 </div>
 
 
@@ -933,7 +1187,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["STAT771_notes.pdf"],
+"download": null,
 "toc": {
 "collapse": "none"
 },

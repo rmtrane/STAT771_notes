@@ -194,7 +194,7 @@ $$
 $$
 ```
 
-```{lemma, lem1}
+```{lemma, label = "absolute-error-bound"}
 If $z$ has exponent $e$, then the maximum absolute error is $\frac{\beta^{e-p+1}}{2}$.
 ```
 
@@ -207,7 +207,7 @@ If $z$ has exponent $e$, then the maximum relative error is $\frac{\beta^{1-p}}{
 ```
 
 ```{proof}
-If $z$ has exponent $e$, then $\beta^{e}\leq z$. Using this with \@ref(lem:lem1), we get that 
+If $z$ has exponent $e$, then $\beta^{e}\leq z$. Using this with \@ref(lem:absolute-error-bound), we get that 
 
 
 $$
@@ -344,11 +344,11 @@ We now use \@ref(lem:lemForProof) to get:
 
 ```
 
-## Square Linear Systems
+## Square Linear Systems 
 
 In the following, let $A \in \R^{n \times m}$ be an invertible matrix, and assume $Ax = b$ for a $b \neq 0$. This implies that $x = A^{-1}b$.
 
-```{theorem}
+```{theorem, label = "kappa-bound"}
 Let $\kappa_\infty = \norm{A}_\infty \norm{A^{-1}}_\infty$. Assume we can store $A$ with precision $E$ (i.e. as $A+E$), where $\norm{E}_\infty \leq u \norm{A}_\infty$, and $b$ with precision $e$ (i.e. as $b+e$), where $\norm{e}_\infty \leq u \norm{b}_\infty$. 
 
 If $\norm{A+E}\hat{x} = b+e$ and $u\cdot \kappa_\infty < 1$, then 
@@ -358,7 +358,7 @@ $$
 $$
 ```
 
-```{lemma, proofHW}
+```{lemma, label = "proofHW"}
 Let $I\in \R^{n \times n}$ be the identity matrix, and $F \in \R^{n\times n}$ s.t. $\norm{F}_p < 1$ for some $p \in [1,\infty]$. Then $I-F$ is invertible, and 
 
 $$
@@ -562,8 +562,7 @@ $$
 
 ```
 
-
-```{solution, name = "Example \\ref@(exm:least-squares"}
+```{solution, name = "Example \\@ref(exm:least-squares)"}
 We want to find $x$ such that $x \in \argmin_{y \in \R^m}\norm{Ay-b}_2$. 
 
 Once again, $\text{rank}(A) = m$, so using theorem \@ref(thm:qr-decomposition), we can rewrite the expression we are trying to minimize as
@@ -611,7 +610,7 @@ $$
   \end{aligned}
 $$  
 
-where the last equality is a consequence of the result proved in homework \@ref{exr:q403}. Now, let $d = R^{-1}c$ and $p = R^{-1}Sz_2$. Then we can find the minimum of the above expression by differentiating and setting equal to zero:
+where the last equality is a consequence of the result proved in homework \@ref(exr:q403). Now, let $d = R^{-1}c$ and $P = R^{-1}Sz_2$. Then we can find the minimum of the above expression by differentiating and setting equal to zero:
       
 
 \begin{align}
@@ -759,8 +758,6 @@ Basically, this gives us a way to perform QR decomposition. However, using the G
 **HOMEWORK**
 ```
 
-### Householder
-
 ```{definition, name = 'Householder Reflections'}
 A matrix $H = I - 2vv^\prime$, where $\norm{v}_2 = 1$, is called a *Householder Reflection*. 
 ```
@@ -776,7 +773,7 @@ Householder reflections are orthogonal matrices.
 ```
 
 ```{lemma}
-There exists Householder refelctions $H_1, \ldots, H_r$ such that $H_r \dots H_1 A\Pi = R$. 
+There exists Householder refelctions $H_1, \dots, H_r$ such that $H_r \dots H_1 A\Pi = R$. 
 ```
 
 ```{proof}
@@ -800,17 +797,313 @@ $$
     
 ```
 
-### Givens Rotations
 
 ```{definition, name = "Givens Rotations", label = "givens"}
 A *Givens Rotation* is a matrix $G^{(i,j)}$ with entries $(g_{ij})$ such that 
 
 i) $g_{ii} = g_{jj} = \lambda$ (the $i$th and $j$th elements of the diagonal are $\lambda$). 
 ii) $g_{kk} = 1$ for all $k \notin \{i,j\}$. (all other diagonal elements are $1$)
-iii) $g_{ij} = g_{ji} = \sigma$
+iii) $g_{ij} = -g_{ji} = \sigma$
 iv) $g_{ij} = 0$ for all other pairs of $i,j$. 
 
 In words: $G^{(i,j)}$ is the identity matrix with the $i$th and $j$th diagonal elements made $\lambda$, and the entries at $(i,j)$ and $(j,i)$ are $\sigma$. 
 
 ```
 
+```{example, name = "2x2 Givens rotation to create upper triangular matrix."}
+The general $G^{(1,2)}$ is $\begin{bmatrix} \lambda & \sigma \\ -\sigma \lambda \end{bmatrix}$. Let us consider a general $M \in \R^{2\times m}$: 
+  
+$$
+  M = \begin{bmatrix} M_{11} & M_{12} & \dots & M_{1m} \\ 
+                      M_{21} & M_{22} & \dots & M_{2m} \end{bmatrix}.
+$$
+  
+We want this Givens matrix to be orthogonal. By homework exercise \@ref(exr:q507), we know this is the case when $\lambda^2 + \delta^2 = 1$. We also want $G^{(1,2)}M$ to be an upper triangular matrix. Since 
+
+$$
+  G^{(i,j)} M = 
+    \begin{bmatrix} 
+      \lambda M_{11} + \sigma M_{12} & \dots & \lambda M_{1m} + \sigma M_{2m} \\ 
+      -\sigma M_{11} + \lambda M_{12} & \dots & -\sigma M_{1m} + \lambda M_{2m} \\ 
+    \end{bmatrix},
+$$
+
+we need $\lambda M_{12} = \sigma M_{11}$. So, solving these two equations, we find that $\lambda = \frac{M_{11}}{\sqrt{M_{11}^2 + M_{21}^2}}$ and $\sigma = \frac{M_{21}}{\sqrt{M_{11}^2 + M_{21}^2}}$. Hence, given the matrix $M$, we can find a Givens rotation which when multiplied by $M$ returns an upper triangular matrix. 
+
+This also means that given a vector $a \in \R^n$, we can find a Givens rotation such that $G^{(i,j)} a$ gives back $a$ except for one entry, which has been changed to $0$. 
+
+```
+
+### "Large" Data Problem
+
+Finally, we will take a look at how to solve a "large" data problem using QR decomposition. To do so, let $A \in \R^{n\times m}$ be a matrix with $n$ "big". By "big", we mean so large that $A$ won't fit in memory, but the first $m+1$ rows of $A$ will. 
+
+Gentleman published a few papers in 1973/1974 describing a method for incremental QR decomposition. The key ideas are as follows:
+
+1) Remember that the solution to the linear model is $(A'A)^{-1}A'b = R^{-1}(Q'b)$. 
+2) The QR decomposition of $[A b]$ gives $\begin{bmatrix} R & Q'b \\ 0 & S \end{bmatrix}$ (ex. \@ref(exr:q407) and \@ref(exr:q408))
+
+Now, if we do QR decomposition on the first $m+1$ rows of $A$ we get $\begin{bmatrix} \tilde{R}_{m+1} & \tilde{Q}_{m+1}'b_{m+1} \\ 0 & S_{m+1} \end{bmatrix}$. Now, add the next row of $A$ to get $\begin{bmatrix} \tilde{R}_{m+1} & \tilde{Q}_{m+1}'b_{m+1} \\ 0 & S_{m+1} \\ a_{m+2} & b_{m+2} \end{bmatrix}$. Hit this with the right Givens rotation to change entry $(m+1, 1)$ to $0$. This will give us something of the form $\begin{bmatrix} \tilde{R}_{m+2} & \tilde{Q}_{m+2}'b_{m+2} \\ 0 & S_{m+2} \end{bmatrix}$. Here, $\tilde{R}_{m+2}$ is still an upper triangular matrix with less than $m$ rows. Repeat the procedure until we've added all rows of $A$/elements of $b$. 
+
+## Singular Value Decomposition (SVD)
+
+Outline: 
+
+I) Motivating problems
+II) SVD and solutions
+III) Existence and properties
+IV) Random projections (a modern application of SVD)
+
+### Motivating Problems
+
+```{example, "Minimum Norm Linear System Solution", label = "svd-problem-1"}
+Let $A \in \R^{n \times m}$ with $\text{rank}(A) < m \le n$, and let $B \in \text{range}(A)$. Find $x$ s.t. 
+
+$$
+  x \in \argmin_{y \in \R^m} \left\{\norm{y}_2 : Ay = b \right \}
+$$  
+
+```
+
+```{example, "Matrix 2-norm", label = "svd-problem-2"}
+Let $A \in \R^{n \times m}$. Find 
+
+$$
+  \norm{A}_2 = \sup_{v \in \R^m\setminus\{0\}} \frac{\norm{Av}_2}{\norm{v}_2}.
+$$  
+
+```
+
+```{example, "Low rank matrix approximation (i.e. data compression)", label = "svd-problem-3"}
+Let $A \in \R^{n\times m}$. Find $x$ s.t. 
+
+$$
+  x = \argmin_{rank(Y) \le k}\norm{A-Y}_F.
+$$
+
+```
+
+Note: $\norm{A}_F$ is the *Frobenius norm* and is defined as $\norm{A}_F = \left(\sum_{i=1}^m \sum_{j=1}^n |a_{ij}|^2 \right)^{1/2}$. So it is sort of a Euclideaon norm extended to matrices. 
+
+### SVD
+
+#### SVD definition
+
+```{theorem, "Singular Value Decomposition", label = 'svd'}
+Suppose $A \in \R^{n\times m}$ and $n\ge m$. Then there exists $U \in \R^{n \times n}$ and $U \in \R^{m\times m}$ that are both orthogonal, and a diagonal matrix $\Sigma \in \R^{n \times m}$ with diagonal elements $\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_m \ge 0$ such that
+
+$$ A = U \Sigma V'$$
+
+
+```
+
+Note: 
+
+* The diagonal elements of $\Sigma$ are called the singular values of $A$. 
+* The columns of $U$ are called the left singular vectors
+* The columns of $V$ are called the right singular vectors
+
+```{corollary, cor-svd}
+$\text{rank}(A)$ is the number of non-zero singular values of $A$.
+```
+
+
+#### Solutions to motivating problems
+
+```{solution, name = "Solution to example \\@ref(exm:svd-problem-1)"}
+
+Since $b \in \text{range}(A)$, there exists a $y$ such that $Ay = b$. Now, by theorem \@ref(thm:svd) there exist $U$,$V$, and $\Sigma$ such that $A=U\Sigma V^\prime$. Since $U$ is orthogonal, $U^{-1} = U^\prime$. So,
+
+$$\begin{aligned}
+  U\Sigma V^\prime y &= b \Leftrightarrow \\
+  \Sigma V^\prime y &= U^\prime b.
+\end{aligned}$$
+
+Let $z = V^\prime y$ and $c = U^\prime b$. By corollary \@ref(cor:cor-svd) we now that there are exactly $\text{rank}(A) = r$ non-zero singular values. So
+
+$$\begin{aligned}
+  \begin{bmatrix}
+  \sigma_1 & & & & & \\
+    & \ddots & & & & \\
+    & & \sigma_r & & & \\
+    & & & 0 & & \\
+    & & & & \ddots & \\
+    & & & & & 0 \\
+  \end{bmatrix} \cdot 
+  \begin{bmatrix} z_1 \\ z_2 \end{bmatrix} = \begin{bmatrix} c_1 \\ 0 \end{bmatrix}.
+\end{aligned}$$
+  
+So, $z_1 = \begin{bmatrix} \sigma_1^{-1} & & \\ & \ddots & \\ & & \sigma_r^{-1} \end{bmatrix} c_1$. We want to minimize $\norm{y}_2 = \norm{V^\prime z}_2 = \norm{z}_2 = \sqrt{\norm{z_1}_2^2 + \norm{z_2}_2^2}$. This is done by setting $z_2=0$, which we can do since $z_2$ does not affect the equation above. (It is multiplied by all the $0$ rows of $\Sigma$.) So, the minimum norm solution is 
+  
+$$\begin{aligned}
+  x &= V 
+    \begin{bmatrix} 
+      \sigma_1^{-1} & & & \\ 
+      & \ddots & & \huge{c_1} \\
+      & & \sigma_{r}^{-1} & \\
+      & {\huge 0} & &
+    \end{bmatrix} \\
+    &= V \cdot V^\prime y.
+\end{aligned}$$
+    
+```
+
+For the solution to example \@ref(exm:svd-problem-2), we'll need the following result:
+
+```{lemma}
+
+Let $D$ be a non-zero diagonal matrix of size $n \times m$, $n\ge m$. Then, $$\norm{D}_2 = \max_i |D_{ii}|$$.
+
+```
+
+```{proof}
+Note that $\norm{A}_2 = \max_{\norm{v}_2 = 1} \norm{Av}_2$. Also, if we let $D_{ii} = \max_{j} |D_{jj}|$ and $v$ be a vector with norm $1$,
+
+$$
+  \norm{Dv}_2^2 = \sum_{j=1}^m (D_{jj}^2 v_j)^2 \leq D_{ii}^2 \sum_{j=1}^m v_j^2 = D_{ii}^2 \norm{v}_2^2 = D_{ii}^2.
+$$
+
+Now, let $z \in \R^m$ such that $z_{ij} = \left\{ \begin{matrix} 0, & j \neq i \\ \frac{D_{ii}}{|D_{ii}|}, & j = i \end{matrix} \right .$. Then $\norm{z}_2 = \sqrt{\frac{D_{ii}^2}{|D_{ii}|^2}} = 1$, and 
+
+$$
+  \norm{Dz}_2^2 = \sum_{j=1}^m (D_{jj} z_j)^2 = D_{ii}^2 \frac{D_{ii}^2}{|D_{ii}|^2} = D_{ii}^2.
+$$
+    
+Since $\norm{z}_2 = 1$, 
+
+$$ D_{ii}^2 \norm{Dz}_2^2 \le (\max_{\norm{v}_2 = 1} |D_{ii}|)^2 \le D_{ii}^2$$,
+
+so $\norm{D}_2 = \max_{\norm{v}_2 = 1} |D_{ii}| = |D_{ii}| = max_{j} |D_{jj}|$. 
+  
+```
+
+```{solution, name = "Solution to example \\@ref(exm:svd-problem-2)"}
+First, use the SVD of $A$ to write $A = U \Sigma V^\prime$. Now, since the 2-norm is invariant under multiplication of orthogonal matrices, we have that 
+
+$$\begin{aligned}
+  \norm{A}_2 &= \max_{\norm{v} = 2} \norm{U\Sigma V^\prime v}_2 \\
+             &= \max_{\norm{v} = 2} \norm{\Sigma V^\prime v}_2.
+\end{aligned}$$
+
+If we let $z = V^\prime v$, we see that $\norm{z}_2 = \norm{v}_2 = 1$, since $V^\prime$ is an orthogonal matrix. Hence, 
+
+$$
+  \norm{A}_2 = \max_{\norm{z}_2 = 1} \norm{\Sigma z}_2 = \norm{\Sigma}_2 = \max_{i} |\sigma_i| =  \sigma_1,
+$$
+
+where we used the lemma above to obtain the second to last equality. 
+```
+
+```{solution, name = "Solution to example \\@ref(exm:svd-problem-3)"}
+Recall, $A = \sum_{i=1}^n \sigma_i u_i v_i^\prime = U \Sigma V^\prime$. We want to find $\argmin_{\text{rank}(Y) \le k} \norm{A-Y}_F$. 
+
+Case 1: If $\text{rank}(A) \le k$, then $Y = A$ is the solution. 
+
+Case 2: $\text{rank}(A) > k$. Since the Frobenius norm is orthogonally invariant, we can obtain that 
+
+$$\begin{aligned}
+  \norm{A-Y}_F^2 &= \norm{U\Sigma V^\prime - Y}_F^2 \\
+                 &= \norm{\Sigma - U^\prime Y V}_F^2. 
+\end{aligned}$$
+  
+If we let $X = U^\prime Y V$, we get that
+
+$$\begin{aligned}
+  \norm{A-Y}_F^2 &= \sum_{i=1}^n \sum_{j=1}^m (\sigma_{ij} - x_{ij})^2 \\
+                 &= \sum_{i=1}^n \sum_{j=1,i\ne j}^m ( - x_{ij})^2  + \sum_{i=1}^n (\sigma_i - x_{ij})^2,
+\end{aligned}$$
+
+since $\sigma_{ij}=0$ for all $i \ne j$, and at most $k$ of the $\sigma_{ii}$ are non-zero. To minimize the expression above, we choose $Y$ such that $x_{ij}=0$ for $i\ne j$, and $x_{ii} = \sigma_i$. Hence, 
+
+$$
+  X = \begin{bmatrix} \sigma_1 & & & & & \\ 
+                      & \ddots & & & & \\ 
+                      & & \sigma_k & & & \\ 
+                      & & & 0 & & \\ 
+                      & & & & \ddots & \\ 
+                      & & & & & 0 \end{bmatrix}, 
+$$
+  
+and $Y = U X V^\prime$. 
+  
+```
+
+### Existence and Properties
+
+```{proof, name = "SVD (\\@ref(thm:svd))"}
+Recall that $\norm{A}_2 = \sup_{v \ne 0} \frac{\norm{Av}_2}{\norm{v}_2} = \max_{\norm{v}_2 = 1} \norm{Av}_2$. I.e. there exists a $v_1$ such that $\norm{v_1}_2 = 1$ and $\norm{A}_2 = \norm{Av_1}_2$. 
+
+Let $u_1$ be a vector such that $\norm{A}_2 u_1 = Av_1$. This implies that $\norm{u_1}_2 = 1$, since $\norm{\norm{A}_2u_1}_2 = \norm{A}_2 \norm{u_1}_2 = \norm{Av_1}_2 = \norm{A}_2$. 
+
+Let $\sigma_1 = \norm{A}_2$. So, $\sigma_1 u_1 = A v_1$. Using the Gram-Schmidt procedure, we can create a matrix $V_1 \in \R^{n\times (n-1)}$ and $\tilde{U}_1 = \begin{bmatrix} u_1 V_1 \end{bmatrix} \in \R^{n \times n}$ being an orthogonal matrix. Similarly, we can create $\tilde{V}_1 \in \R^{m\times m}$ such that $\tilde{V}_1 = \begin{bmatrix} v_1 V_1 \end{bmatrix} \in \R^{m \times m}$ is orthogonal. 
+
+Now, $A \tilde{V}_1 = \begin{bmatrix} Av_1 & AV_1 \end{bmatrix} = \begin{bmatrix} \sigma_1 u_1 & AV_1 \end{bmatrix}$. Hence, $\tilde{U}_1^\prime A \tilde{V}_1 = \begin{bmatrix} u_1 \\ U_1^\prime \end{bmatrix} \begin{bmatrix} \sigma_1 u_1 & A V_1 \end{bmatrix} = \begin{bmatrix} \sigma_1 & w^\prime \\ 0 & \tilde{A} \end{bmatrix}$, since $u_1$ is orthogonal to all columns of $U_1^\prime$. We need to show that $w=0$. Since the 2-norm is orthogonally invariant, it holds for any $z \ne 0$,
+
+$$\begin{aligned}
+  \sigma_1^2 &= \norm{A}_2^2 \\
+             &= \norm{\tilde{U}_1^\prime A \tilde{V}_1}_2^2 \\
+             &= \norm{\begin{bmatrix} \sigma_1 & w^\prime \\ 0 & \tilde{A} \end{bmatrix}}_2^2 \\
+             &\ge \frac{\norm{\begin{bmatrix} \sigma_1 & w^\prime \\ 0 & \tilde{A} \end{bmatrix} z}_2^2}{\norm{z}_2^2}.
+\end{aligned}$$
+  
+Let $z = \begin{bmatrix} \sigma_1 \\ w \end{bmatrix}$. Then,
+
+$$
+  \sigma_1^2 \ge \frac{\norm{\begin{bmatrix} \sigma_1 & w^\prime \\ 0 & \tilde{A} \end{bmatrix} \begin{bmatrix} \sigma_1 \\ w \end{bmatrix}}_2^2}{\norm{\begin{bmatrix} \sigma_1 \\ w \end{bmatrix}}_2^2} = \frac{(\sigma_1^2 + \norm{w}_2^2)^2 + \norm{\tilde{A}w}_2^2}{\sigma_1^2 + \norm{w}_2^2}\ge \sigma_1^2 + \norm{w}_2^2 \ge \sigma_1^2,
+$$
+  
+i.e. $\norm{w}_2^2 = 0$. So, 
+
+$$ 
+  \tilde{U}_1 A V_1 = \begin{bmatrix} \sigma_1 & 0 \\ 0 & \tilde{A} \end{bmatrix}.
+$$
+  
+Repeat the same procedure to get $U, V$ such that $A = U^\prime \Sigma V$. 
+```
+
+```{corollary}
+$\text{rank}(A)$ is exactly the number of non-zero singular values of $A$. 
+```
+
+```{proof}
+
+$\text{rank}(A) = \text{rank}(U \Sigma V^\prime ) = \text{rank}(\Sigma) =$ number of non-zero diagonal elements.
+
+```
+
+```{corollary, sigma-min-max}
+Let $A,E \in \R^{n\times m}$, $\sigma_{\text{max}}$ ($\sigma_{\text{min}}$) denote the largest (smallest) singular value of A. Then
+
+$$ 
+  \sigma_{\text{max}}(A+E) \le \sigma_{\text{max}}(A) + \norm{E}_2
+$$
+  
+and
+
+$$
+  \sigma_{\text{min}}(A+E) \ge \sigma_{\text{min}}(A) - \norm{E}_2.
+$$
+  
+```
+
+```{corollary, name = "Hoffman-Wielandt Inequality"}
+Let $A,E \in \R^{n \times m}$, $\sigma_k(\dot)$ denote the k'th largest singular value. Let $p =\min(m,n) \le \norm{E}_F^2$. Then 
+
+$$
+  \sum_{k=1}^p (\sigma_k(A+E) - \sigma_k(A))^2 \le \norm{E}_F^2.
+$$
+
+```
+
+```{corollary}
+
+Let $r = \text{rank}(A)$. 
+
+1) $\text{range}(A) = \text{span}(u_1, \ldots, u_r)$
+2) row space of A $= \text{span}(v_1, \ldots, v_r)$
+3) $\text{null}(A) = \text{span}(v_{r+1}, \ldots, v_{m})$
+4) $\text{null}(A^\prime) = \text{span}(u_{r+1}, \ldots, v_{m})$
+
+Moreover, 
+  
+```
