@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>STAT 771: My notes</title>
+  <meta name="description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="STAT 771: My notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="STAT 771: My notes" />
+  
+  <meta name="twitter:description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison." />
+  
+
+<meta name="author" content="Ralph Møller Trane">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="homework-1.html">
+<link rel="next" href="homework-3.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Intro</a></li>
+<li class="chapter" data-level="1" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>1</b> Lecture Notes</a><ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#lecture-1-96"><i class="fa fa-check"></i>Lecture 1: 9/6</a></li>
+<li class="chapter" data-level="1.1" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html"><i class="fa fa-check"></i><b>1.1</b> Positional numeral system</a></li>
+<li class="chapter" data-level="1.2" data-path="floating-point-format.html"><a href="floating-point-format.html"><i class="fa fa-check"></i><b>1.2</b> Floating Point Format</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="floating-point-format.html"><a href="floating-point-format.html#ieee-standards"><i class="fa fa-check"></i><b>1.2.1</b> IEEE Standards</a></li>
+<li class="chapter" data-level="1.2.2" data-path="floating-point-format.html"><a href="floating-point-format.html#errors"><i class="fa fa-check"></i><b>1.2.2</b> Errors</a></li>
+<li class="chapter" data-level="1.2.3" data-path="floating-point-format.html"><a href="floating-point-format.html#square-linear-systems"><i class="fa fa-check"></i><b>1.2.3</b> Square Linear Systems</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="orthogonalization.html"><a href="orthogonalization.html"><i class="fa fa-check"></i><b>1.3</b> Orthogonalization</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="orthogonalization.html"><a href="orthogonalization.html#motivating-problems"><i class="fa fa-check"></i><b>1.3.1</b> Motivating problems</a></li>
+<li class="chapter" data-level="" data-path="orthogonalization.html"><a href="orthogonalization.html#lecture-4-918"><i class="fa fa-check"></i>Lecture 4: 9/18</a></li>
+<li class="chapter" data-level="1.3.2" data-path="orthogonalization.html"><a href="orthogonalization.html#qr-decomposition"><i class="fa fa-check"></i><b>1.3.2</b> QR Decomposition</a></li>
+<li class="chapter" data-level="1.3.3" data-path="orthogonalization.html"><a href="orthogonalization.html#existence-of-qr-decomposition."><i class="fa fa-check"></i><b>1.3.3</b> Existence of QR-decomposition.</a></li>
+<li class="chapter" data-level="" data-path="orthogonalization.html"><a href="orthogonalization.html#lecture-5-920"><i class="fa fa-check"></i>Lecture 5: 9/20</a></li>
+<li class="chapter" data-level="1.3.4" data-path="orthogonalization.html"><a href="orthogonalization.html#large-data-problem"><i class="fa fa-check"></i><b>1.3.4</b> “Large” Data Problem</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html"><i class="fa fa-check"></i><b>1.4</b> Singular Value Decomposition (SVD)</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#motivating-problems-1"><i class="fa fa-check"></i><b>1.4.1</b> Motivating Problems</a></li>
+<li class="chapter" data-level="1.4.2" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#svd"><i class="fa fa-check"></i><b>1.4.2</b> SVD</a></li>
+<li class="chapter" data-level="1.4.3" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#existence-and-properties"><i class="fa fa-check"></i><b>1.4.3</b> Existence and Properties</a></li>
+<li class="chapter" data-level="1.4.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#random-projections"><i class="fa fa-check"></i><b>1.4.4</b> Random Projections</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
+<li class="chapter" data-level="2.1" data-path="homework-1.html"><a href="homework-1.html"><i class="fa fa-check"></i><b>2.1</b> Homework 1</a></li>
+<li class="chapter" data-level="2.2" data-path="homework-2.html"><a href="homework-2.html"><i class="fa fa-check"></i><b>2.2</b> Homework 2</a></li>
+<li class="chapter" data-level="2.3" data-path="homework-3.html"><a href="homework-3.html"><i class="fa fa-check"></i><b>2.3</b> Homework 3</a></li>
+<li class="chapter" data-level="2.4" data-path="homework-4.html"><a href="homework-4.html"><i class="fa fa-check"></i><b>2.4</b> Homework 4</a></li>
+<li class="chapter" data-level="2.5" data-path="homework-5.html"><a href="homework-5.html"><i class="fa fa-check"></i><b>2.5</b> Homework 5</a></li>
+<li class="chapter" data-level="2.6" data-path="homework-6.html"><a href="homework-6.html"><i class="fa fa-check"></i><b>2.6</b> Homework 6</a></li>
+<li class="chapter" data-level="2.7" data-path="homework-7.html"><a href="homework-7.html"><i class="fa fa-check"></i><b>2.7</b> Homework 7</a></li>
+<li class="chapter" data-level="2.8" data-path="homework-8.html"><a href="homework-8.html"><i class="fa fa-check"></i><b>2.8</b> Homework 8</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">STAT 771: My notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="homework-2" class="section level2">
+<h2><span class="header-section-number">2.2</span> Homework 2</h2>
+
+<div class="exercise">
+<span id="exr:q201" class="exercise"><strong>Exercise 1.7  </strong></span>Lookup the 64 bit standard to find allowed exponents.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> According to <a href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">Wikipedia</a>, the allowed exponents for the 64 bit standard are <span class="math inline">\(-1022,\ldots, 1023\)</span>.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q202" class="exercise"><strong>Exercise 1.8  </strong></span>What is the smallest non-normalized positive value for the 64 bit standard?
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> The smallest non-normalized positive value is</p>
+<span class="math display">\[
+  \left(0 + 0\cdot 2^{-1} + \ldots + 0\cdot 2^{-51} + 1\cdot 2^{-52} \right )\cdot 2^{-1022} = 2^{-1074} \approx 4.94\cdot 10^{-324}
+\]</span>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q203" class="exercise"><strong>Exercise 1.9  </strong></span>What is the smallest normalized positive value?
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> The smallest normalized positive value is</p>
+<span class="math display">\[
+  \left(1 + 0\cdot 2^{-1} + \ldots + 0\cdot 2^{-52} \right )\cdot 2^{-1022} = 2^{-1022} \approx 2.23 \cdot 10^{-308}
+\]</span>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q204" class="exercise"><strong>Exercise 1.10  </strong></span>What is the largest normalized positive value?
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> The largest normalized finite value is</p>
+<span class="math display">\[
+  \left(1 + 1\cdot 2^{-1} + \ldots + 1\cdot 2^{-52} \right )\cdot 2^{1023} \approx 1.80\cdot 10^{308}.
+\]</span>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q205" class="exercise"><strong>Exercise 1.11  </strong></span>Is there a general formula for determining the largest positive value for a given base <span class="math inline">\(\beta\)</span>, precision <span class="math inline">\(p\)</span>, and largest exponent <span class="math inline">\(e_{max}\)</span>?
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> The largest positive, finite value is</p>
+<span class="math display">\[
+  \left(\sum_{i=0}^{p-1} (\beta-1)\beta^{-i}\right)\cdot \beta^{e_{max}}.
+\]</span>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q206" class="exercise"><strong>Exercise 1.12  </strong></span>Verify the smallest non-normalized, positive number that can be represented.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> See the <code>Julia</code> chunk below.
+</div>
+
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">nextfloat(<span class="dt">Float64</span>(<span class="fl">0</span>)) == <span class="fl">2</span>^(-<span class="fl">1074</span>)</code></pre></div>
+<pre><code>## true</code></pre>
+
+<div class="exercise">
+<span id="exr:q207" class="exercise"><strong>Exercise 1.13  </strong></span>Verify the smallest normalized, positive number that can be represented.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q208" class="exercise"><strong>Exercise 1.14  </strong></span>Verify the largest, finite number that can be represented.
+</div>
+
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">prevfloat(<span class="dt">Float64</span>(Inf))</code></pre></div>
+<pre><code>## 1.7976931348623157e308</code></pre>
+
+<div class="exercise">
+<span id="exr:q209" class="exercise"><strong>Exercise 1.15  </strong></span>Proof lemma (<a href="floating-point-format.html#lem:absolute-error-bound">1.1</a>).
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span>  Let <span class="math inline">\(z = (d_0 + d_1 \beta^{-1} + \dots)\beta^e\)</span> be a number. Let <span class="math inline">\(fl(z) = (d_0^\prime + d_1^\prime\beta^{-1} + \dots + d_{p-1}^\prime\beta^{-(p-1)})\beta^e\)</span> be its fp representation with precision <span class="math inline">\(p\)</span>.</p>
+<p>We know that <span class="math inline">\((d_0 + d_1 \beta^{-1} + \dots + d_{p-1}\beta^{-(p-1)})\beta^e \le z \le (d_0 + d_1 \beta^{-1} + \dots + (d_{p-1}+1)\beta^{-(p-1)})\beta^e\)</span>. We know that <span class="math inline">\(fl(z)\)</span> is equal to the one of these two bounds that is closest to <span class="math inline">\(z\)</span>. Hence, <span class="math inline">\(|fl(z) - z|\)</span> must be at most half the distance between these two. Subtract the upper bound from the lower bound, and you get <span class="math inline">\(\beta^{-(p-1)+e}\)</span>, i.e.</p>
+<p><span class="math display">\[
+  |fl(z) - z| \le \frac{\beta^{e-p+1}}{2}.
+\]</span></p>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q210" class="exercise"><strong>Exercise 1.16  </strong></span>What happens with lemmas (bounds of absolute and relative error) if we consider negative numbers?
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> They still hold. Let <span class="math inline">\(z^\prime = -z\)</span>. Then <span class="math inline">\(fl(z^\prime) = -fl(z)\)</span>. Hence,</p>
+<p><span class="math display">\[
+  \left| fl(z^\prime) - z^\prime \right | = \left | -fl(z) + z \right | = \left | fl(z) - z \right |,
+\]</span></p>
+hence the bounds still hold.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q211" class="exercise"><strong>Exercise 1.17  </strong></span>Show that <span class="math inline">\(\left|\left| A \right|\right|_1 =\)</span> max of the <span class="math inline">\(l^1\)</span> norms of the columns of <span class="math inline">\(A\)</span>.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> By definition, <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_1 = \max_{x\neq 0}\frac{{\left \vert \left \vert Ax \right \vert \right \vert}_1}{{\left \vert \left \vert x \right \vert \right \vert}_1}\)</span>. Let <span class="math inline">\(A \in {\mathbb{R}}^{m\times n}\)</span> and <span class="math inline">\(x \in {\mathbb{R}}^n\)</span> s.t. <span class="math inline">\({\left \vert \left \vert x \right \vert \right \vert}_1 = 1\)</span>.</p>
+<p>Recall that</p>
+<p><span class="math display">\[Ax = \sum_{j=1}^n x_j A_{*,j},\]</span></p>
+<p>where <span class="math inline">\(A_{*,j}\)</span> is the <span class="math inline">\(j^\prime\)</span>th column of <span class="math inline">\(A\)</span>. So</p>
+<p><span class="math display">\[
+\begin{aligned}
+  {\left \vert \left \vert Ax \right \vert \right \vert}_1 &amp;= \sum_{i=1}^m \sum_{j=1}^n | x_j A_{i,j} | \\
+              &amp;\leq \sum_{i=1}^m \sum_{j=1}^n | x_j | \cdot | A_{i,j} | \\
+              &amp;= \sum_{j=1}^n | x_j | \left\{\sum_{i=1}^m | A_{i,j} | \right \} \\
+              &amp;= \sum_{j=1}^n | x_j | {\left \vert \left \vert A_{*,j} \right \vert \right \vert} \\
+              &amp;\leq \sum_{j=1}^n | x_j | \max_{j \in \{1,\ldots, n\}} {\left \vert \left \vert A_{*,j} \right \vert \right \vert} \\
+              &amp;= \max_{j \in \{1,\ldots, n\}} {\left \vert \left \vert A_{*,j} \right \vert \right \vert}
+\end{aligned}
+\]</span></p>
+<p>Since <span class="math inline">\(\max_{j \in \{1, \ldots, n\}}{\left \vert \left \vert A_{*,j} \right \vert \right \vert} = {\left \vert \left \vert A\cdot \mathbf{1}_i \right \vert \right \vert}\)</span> for <span class="math inline">\(i = {\text{argmax}}{\left \vert \left \vert A_{*,j} \right \vert \right \vert}_1\)</span>. Here, we let <span class="math inline">\(1_i = (x_j)_{j=1}^n\)</span> be defined as</p>
+<span class="math display">\[x_j = \left\{ \begin{array}{rl} 1, &amp; \text{ if } j = i \\ 0, &amp; \text{ otherwise}\end{array} \right .\]</span>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q212" class="exercise"><strong>Exercise 1.18  </strong></span>Let <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span>. Show that <span class="math inline">\(\left|\left| A \right|\right|_\infty =\)</span> max of the <span class="math inline">\(l^1\)</span> norms of the rows of <span class="math inline">\(A\)</span>.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> Let <span class="math inline">\(j \in \{1, \ldots, n\}\)</span> such that <span class="math inline">\(|a_{j1}| + \dots + |a_{jm}| \ge |a_{i1}| + \dots + |a_{im}|\)</span> for all <span class="math inline">\(i \in \{1, \ldots , n\}\)</span>, and let <span class="math inline">\(\tilde{x} \in {\mathbb{R}}^{m}\)</span> such that <span class="math inline">\(\tilde{x}_i = sign(a_{ji})\)</span>. Note that for all <span class="math inline">\(x \in {\mathbb{R}}^{m}\)</span> with <span class="math inline">\({\left \vert \left \vert x \right \vert \right \vert}_\infty = 1\)</span> it holds that <span class="math inline">\(|x_i| \le 1\)</span>. So,</p>
+<p><span class="math display">\[\begin{aligned}
+  |a_{i1}x_1 + \dots + a_{im}x_m| &amp;\le |a_{i1}| + \dots + |a_{im}| \\
+                                  &amp;\le |a_{j1}| + \dots + |a_{jm}| \\
+                                  &amp;= |a_{j1} \tilde{x}_1 + \dots + a_{jm}\tilde{x}_1|,
+\end{aligned}\]</span></p>
+<p>I.e. for any <span class="math inline">\(x \in {\mathbb{R}}^m\)</span> with <span class="math inline">\({\left \vert \left \vert x \right \vert \right \vert}_\infty = 1\)</span>,</p>
+<p><span class="math display">\[\begin{aligned}
+  |a_{j1} \tilde{x}_1 + \dots + a_{jm}\tilde{x}_1| &amp;\ge \max_{1 \le i \le n}\{|a_{i1} x_1 + \dots + a_{im}x_m|\} \\
+                                                   &amp; = {\left \vert \left \vert Ax \right \vert \right \vert}_\infty. 
+\end{aligned}\]</span></p>
+<p>Since <span class="math inline">\({\left \vert \left \vert \tilde{x} \right \vert \right \vert}_\infty = 1\)</span>, we have that</p>
+<p><span class="math display">\[\begin{aligned}
+  \max_{{\left \vert \left \vert x \right \vert \right \vert} = 1} {\left \vert \left \vert Ax \right \vert \right \vert}_\infty &amp;= |a_{j1} \tilde{x}_1 + \dots + a_{jm}\tilde{x}_1| \\
+                                       &amp;= |a_{j1}| + \dots + |a_{jm}| \\
+                                       &amp;= \max_{1\le j \le n} \sum_{i=1}^n |a_{ji}|,
+\end{aligned}\]</span></p>
+<p>which is exactly the maximum over the <span class="math inline">\(\mathcal{l}^1\)</span>-norms of the rows in <span class="math inline">\(A\)</span>.</p>
+</div>
+
+
+<div class="exercise">
+<p><span id="exr:q213" class="exercise"><strong>Exercise 1.19  </strong></span>Assume the Fundamental Axiom. Show the following:</p>
+<span class="math display">\[\left|\left| fl(A)-A \right|\right|_p \leq u \left|\left|A\right|\right|_p\]</span>
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> 
+<span class="math display">\[\begin{align*}
+  \left | \left | fl(A) - A \right | \right |_p &amp;= \left|\left| \left [ fl(a_{ij}) - a_{ij} \right ] \right|\right|_p \\
+    &amp;\leq \left|\left| \left[u\cdot a_{ij}\right]\right|\right|_p \\
+    &amp;= \left|\left| u\cdot A\right|\right|_p = u\left|\left|A\right|\right|
+\end{align*}\]</span>
+</div>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="homework-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="homework-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

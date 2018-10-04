@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>STAT 771: My notes</title>
+  <meta name="description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="STAT 771: My notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="STAT 771: My notes" />
+  
+  <meta name="twitter:description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison." />
+  
+
+<meta name="author" content="Ralph Møller Trane">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="homework-2.html">
+<link rel="next" href="homework-4.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Intro</a></li>
+<li class="chapter" data-level="1" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>1</b> Lecture Notes</a><ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#lecture-1-96"><i class="fa fa-check"></i>Lecture 1: 9/6</a></li>
+<li class="chapter" data-level="1.1" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html"><i class="fa fa-check"></i><b>1.1</b> Positional numeral system</a></li>
+<li class="chapter" data-level="1.2" data-path="floating-point-format.html"><a href="floating-point-format.html"><i class="fa fa-check"></i><b>1.2</b> Floating Point Format</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="floating-point-format.html"><a href="floating-point-format.html#ieee-standards"><i class="fa fa-check"></i><b>1.2.1</b> IEEE Standards</a></li>
+<li class="chapter" data-level="1.2.2" data-path="floating-point-format.html"><a href="floating-point-format.html#errors"><i class="fa fa-check"></i><b>1.2.2</b> Errors</a></li>
+<li class="chapter" data-level="1.2.3" data-path="floating-point-format.html"><a href="floating-point-format.html#square-linear-systems"><i class="fa fa-check"></i><b>1.2.3</b> Square Linear Systems</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="orthogonalization.html"><a href="orthogonalization.html"><i class="fa fa-check"></i><b>1.3</b> Orthogonalization</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="orthogonalization.html"><a href="orthogonalization.html#motivating-problems"><i class="fa fa-check"></i><b>1.3.1</b> Motivating problems</a></li>
+<li class="chapter" data-level="" data-path="orthogonalization.html"><a href="orthogonalization.html#lecture-4-918"><i class="fa fa-check"></i>Lecture 4: 9/18</a></li>
+<li class="chapter" data-level="1.3.2" data-path="orthogonalization.html"><a href="orthogonalization.html#qr-decomposition"><i class="fa fa-check"></i><b>1.3.2</b> QR Decomposition</a></li>
+<li class="chapter" data-level="1.3.3" data-path="orthogonalization.html"><a href="orthogonalization.html#existence-of-qr-decomposition."><i class="fa fa-check"></i><b>1.3.3</b> Existence of QR-decomposition.</a></li>
+<li class="chapter" data-level="" data-path="orthogonalization.html"><a href="orthogonalization.html#lecture-5-920"><i class="fa fa-check"></i>Lecture 5: 9/20</a></li>
+<li class="chapter" data-level="1.3.4" data-path="orthogonalization.html"><a href="orthogonalization.html#large-data-problem"><i class="fa fa-check"></i><b>1.3.4</b> “Large” Data Problem</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html"><i class="fa fa-check"></i><b>1.4</b> Singular Value Decomposition (SVD)</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#motivating-problems-1"><i class="fa fa-check"></i><b>1.4.1</b> Motivating Problems</a></li>
+<li class="chapter" data-level="1.4.2" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#svd"><i class="fa fa-check"></i><b>1.4.2</b> SVD</a></li>
+<li class="chapter" data-level="1.4.3" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#existence-and-properties"><i class="fa fa-check"></i><b>1.4.3</b> Existence and Properties</a></li>
+<li class="chapter" data-level="1.4.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#random-projections"><i class="fa fa-check"></i><b>1.4.4</b> Random Projections</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
+<li class="chapter" data-level="2.1" data-path="homework-1.html"><a href="homework-1.html"><i class="fa fa-check"></i><b>2.1</b> Homework 1</a></li>
+<li class="chapter" data-level="2.2" data-path="homework-2.html"><a href="homework-2.html"><i class="fa fa-check"></i><b>2.2</b> Homework 2</a></li>
+<li class="chapter" data-level="2.3" data-path="homework-3.html"><a href="homework-3.html"><i class="fa fa-check"></i><b>2.3</b> Homework 3</a></li>
+<li class="chapter" data-level="2.4" data-path="homework-4.html"><a href="homework-4.html"><i class="fa fa-check"></i><b>2.4</b> Homework 4</a></li>
+<li class="chapter" data-level="2.5" data-path="homework-5.html"><a href="homework-5.html"><i class="fa fa-check"></i><b>2.5</b> Homework 5</a></li>
+<li class="chapter" data-level="2.6" data-path="homework-6.html"><a href="homework-6.html"><i class="fa fa-check"></i><b>2.6</b> Homework 6</a></li>
+<li class="chapter" data-level="2.7" data-path="homework-7.html"><a href="homework-7.html"><i class="fa fa-check"></i><b>2.7</b> Homework 7</a></li>
+<li class="chapter" data-level="2.8" data-path="homework-8.html"><a href="homework-8.html"><i class="fa fa-check"></i><b>2.8</b> Homework 8</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">STAT 771: My notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="homework-3" class="section level2">
+<h2><span class="header-section-number">2.3</span> Homework 3</h2>
+
+<div class="exercise">
+<span id="exr:q301" class="exercise"><strong>Exercise 1.20  </strong></span>Prove lemma <a href="floating-point-format.html#lem:proofHW">1.5</a>.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> Recall that a matrix <span class="math inline">\(A\)</span> is invertible if and only if <span class="math inline">\(Ax = 0\)</span> implies that <span class="math inline">\(x = 0\)</span>. So to check that <span class="math inline">\(I-F\)</span> is invertible, we check this:</p>
+<p><span class="math display">\[
+  (I-F)x = x-Fx = 0 \Rightarrow x = Fx \Rightarrow {\left \vert \left \vert x \right \vert \right \vert}_p \leq {\left \vert \left \vert F \right \vert \right \vert}_p {\left \vert \left \vert x \right \vert \right \vert}_p.
+\]</span></p>
+<p>Since <span class="math inline">\({\left \vert \left \vert F \right \vert \right \vert}_p &lt; 1\)</span> by assumption, the only solution to the inequality above is <span class="math inline">\(x = 0\)</span>. So, <span class="math inline">\(I-F\)</span> is invertible.</p>
+<p>Note that <span class="math inline">\(\sum_{k=0}^N F^k (I - F) = I - F^{N+1}\)</span>. Since <span class="math inline">\({\left \vert \left \vert F^k \right \vert \right \vert}_p &lt; {\left \vert \left \vert F \right \vert \right \vert}_p^k &lt; 1\)</span>, we know that <span class="math inline">\(F^N \rightarrow 0\)</span> as <span class="math inline">\(N \rightarrow \infty\)</span>. So, <span class="math inline">\(\sum_{k=0}^\infty F^k (I-F) = I\)</span>, and using that <span class="math inline">\(I-F\)</span> is invertible, we get <span class="math inline">\((I-F)^{-1} = \sum_{k=0}^\infty F^k\)</span>. Finally,</p>
+<p><span class="math display">\[{\left \vert \left \vert (I-F)^{-1} \right \vert \right \vert}_p \leq \sum{k=1}^\infty {\left \vert \left \vert F \right \vert \right \vert}_p^k = \frac{1}{1- {\left \vert \left \vert F \right \vert \right \vert}_p}\]</span>.</p>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q302" class="exercise"><strong>Exercise 1.21  </strong></span>Consider Theorem and Lemmas under “Square Linear Systems” (<a href="floating-point-format.html#square-linear-systems">1.2.3</a>). What happens if we use <span class="math inline">\(l^{1}\)</span>-norm instead?
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Since we never use any properties of the infinity norm to prove these theorems and lemmas, we could replace it with the <span class="math inline">\(\mathcal{l}^1\)</span>-norm.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q303" class="exercise"><strong>Exercise 1.22  </strong></span>Generate examples that show the bound in theorem <a href="floating-point-format.html#thm:kappa-bound">1.1</a> is too conservative.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q304" class="exercise"><strong>Exercise 1.23  </strong></span>Generate examples that show the bound is nearly achieved
+</div>
+
+
+<div class="exercise">
+<span id="exr:q305" class="exercise"><strong>Exercise 1.24  </strong></span>For motivating problems 1-5, when is <span class="math inline">\(x\)</span> unique?
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> \newline</p>
+<ul>
+<li><p>Motivating Problem 1: x is unique by definition</p></li>
+<li>Motivating Problem 2:</li>
+</ul>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q306" class="exercise"><strong>Exercise 1.25  </strong></span>For motivating problem 5, what happens if <span class="math inline">\(p\geq m\)</span>? Explore the case where <span class="math inline">\(m &gt;&gt; n\)</span>.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q307" class="exercise"><strong>Exercise 1.26  </strong></span>Suppose <span class="math inline">\(R \in {\mathbb{R}}^{m\times m}\)</span> is an upper triangular matrix with <span class="math inline">\(R_{ii} \neq 0\)</span> for all <span class="math inline">\(i = 1,\ldots, n\)</span>. Is <span class="math inline">\(R\)</span> invertible?
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Since <span class="math inline">\(R\)</span> is an upper triangular matrix, <span class="math inline">\(\det(R) = \prod_{i=1}^{m} R_{ii} &gt; 0\)</span>. Hence, <span class="math inline">\(R\)</span> is invertible.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q308" class="exercise"><strong>Exercise 1.27  </strong></span>Assume <span class="math inline">\(R\)</span> is an invertible upper triangular matrix. Implement a solution to invert <span class="math inline">\(R\)</span>.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> First, we will show that the inverse of <span class="math inline">\(R\)</span> is also an upper triangular matrix. So, let <span class="math inline">\(B = R^{-1}\)</span>. The <span class="math inline">\(RB = I\)</span>. We will show this using induction. Let <span class="math inline">\(i = n - 0, j &lt; i\)</span>. Then, since <span class="math inline">\(r_{ij} = 0\)</span> for all <span class="math inline">\(i &gt; j\)</span>,</p>
+<p><span class="math display">\[\begin{aligned}
+  0 &amp;= \sum_{k=1}^n r_{n,k}b_{k,j} \\
+    &amp;= r_{n,n}b_{n,j}.
+\end{aligned}\]</span></p>
+<p>Since <span class="math inline">\(R\)</span> is invertible, <span class="math inline">\(r_{n,n} \neq 0\)</span>, hence <span class="math inline">\(b_{n,j} = 0\)</span> for all <span class="math inline">\(j &lt; n\)</span>.</p>
+<p>Now assume that <span class="math inline">\(b_{i,j} = 0\)</span> for all <span class="math inline">\(i=n-0,n-1, \ldots, n-m, j &lt; i\)</span>. We then want to show it holds for <span class="math inline">\(i = n - (m+1) = n-m-1\)</span>. Let <span class="math inline">\(j &lt; n-(m+1)\)</span>. Then</p>
+<p><span class="math display">\[\begin{aligned}
+  0 &amp;= \sum_{k=1}^n r_{n-(m+1), k} b_{k, j} \\
+    &amp;= \sum_{k=n-(m+1)}^{n} r_{n-(m+1), k} b_{k, j} \\
+    &amp;= r_{n-(m+1), n-(m+1)} b_{n-(m+1),j},
+\end{aligned}\]</span></p>
+<p>where the first equality is due to the fact that <span class="math inline">\(r_{ij} = 0\)</span> for all <span class="math inline">\(i &gt; j\)</span>, and the last equality holds since <span class="math inline">\(b_{k,j} = 0\)</span> for all <span class="math inline">\(j &lt; k\)</span> when <span class="math inline">\(k \ge n-m\)</span> (per the induction hypothesis). Since <span class="math inline">\(r_{ii} \neq 0\)</span> for all <span class="math inline">\(i\)</span>, <span class="math inline">\(b_{n-(m+1),j} = 0\)</span>.</p>
+<p>So, <span class="math inline">\(b_{ij} = 0\)</span> for all <span class="math inline">\(i &gt; j\)</span>.</p>
+<p>Now, lets look at the case where <span class="math inline">\(i=j\)</span>, i.e. diagonal elements of the inverse matrix. Then</p>
+<p><span class="math display">\[\begin{aligned}
+  1 = \sum_{k=1}^n r_{ik} b_{ki} = \sum_{k=i}^{n} r_{ik} b_{ki} = r_{ii}b_{ii}.
+\end{aligned}\]</span></p>
+<p>The second equality holds since <span class="math inline">\(r_{ik} = 0\)</span> for all <span class="math inline">\(i &gt; k\)</span>, the last equality holds because <span class="math inline">\(b_{ki} = 0\)</span> for all <span class="math inline">\(k &gt; i\)</span>. We see that <span class="math inline">\(b_{ii} = r_{ii}^{-1}\)</span>.</p>
+<p>Finally, consider the case where <span class="math inline">\(i &lt; j\)</span>. Then, using that <span class="math inline">\(r_{ik} = 0\)</span> for all <span class="math inline">\(i&gt;k\)</span> and <span class="math inline">\(b_{kj} = 0\)</span> for all <span class="math inline">\(k&gt;j\)</span>, we see that</p>
+<p><span class="math display">\[
+  0 = \sum_{k=1}^n r_{ik}b_{kj} = \sum_{k=i}^j r_{ik} b_{kj},
+\]</span></p>
+<p>which implies</p>
+<p><span class="math display">\[
+  b_{ij} = \frac{-\sum_{k=i+1}^j r_{ik} b_{kj}}{a_{ii}}.
+\]</span></p>
+<p>So, in other words, given <span class="math inline">\(i,j\)</span>, we can find <span class="math inline">\(b_{ij}\)</span> if we know <span class="math inline">\(b_{kj}\)</span> for all <span class="math inline">\(k&gt;i\)</span> (i.e. all entries in the same column below the entry we are considering). Since we already know all entries below and on the diagonal, this is true for all columns. Hence, we can construct <span class="math inline">\(B\)</span> this way.</p>
+<p>See the <code>Julia</code> chunk below for an implementation of this.</p>
+</div>
+
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia"><span class="kw">function</span> invertUpperTri(A)
+    <span class="co">## Get dimensions of A</span>
+    n, m = size(A)
+
+    <span class="co">## Setup empty array to hold result</span>
+    B = zeros(n,m)
+
+    <span class="co">## Fill out diagonal with inverse diagonal from A</span>
+    <span class="kw">for</span> k = <span class="fl">1</span>:n
+        B[k, k] = <span class="fl">1</span>/A[k,k]
+    <span class="kw">end</span>
+
+    <span class="co">## Starting in the lower right corner, fill out the rest of the matrix.</span>
+    <span class="kw">for</span> i = (n-<span class="fl">1</span>):-<span class="fl">1</span>:<span class="fl">1</span>
+        <span class="kw">for</span> j = (i+<span class="fl">1</span>):n
+            B[i,j] = -sum(A[i,(i+<span class="fl">1</span>):j].*B[(i+<span class="fl">1</span>):j,j])/A[i,i]
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+
+    <span class="kw">return</span>(B)
+<span class="kw">end</span></code></pre></div>
+<pre><code>## invertUpperTri (generic function with 1 method)</code></pre>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">
+<span class="co">## Create an upper triangular matrix to check</span>
+A = rand(<span class="fl">4</span>,<span class="fl">4</span>);
+A[<span class="fl">2</span>:<span class="fl">4</span>,<span class="fl">1</span>] = [<span class="fl">0</span> <span class="fl">0</span> <span class="fl">0</span>];
+A[<span class="fl">3</span>:<span class="fl">4</span>,<span class="fl">2</span>] = [<span class="fl">0</span> <span class="fl">0</span>];
+A[<span class="fl">4</span>,<span class="fl">3</span>] = <span class="fl">0</span>;
+
+<span class="co">## Check function</span>
+B = invertUpperTri(A);
+B - inv(A)  <span class="co"># should be 0 matrix</span></code></pre></div>
+<pre><code>## 4×4 Array{Float64,2}:
+##  0.0  0.0  0.0   1.11022e-16
+##  0.0  0.0  0.0   4.44089e-16
+##  0.0  0.0  0.0  -4.44089e-16
+##  0.0  0.0  0.0   0.0</code></pre>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">A*B         <span class="co"># should be identity</span></code></pre></div>
+<pre><code>## 4×4 Array{Float64,2}:
+##  1.0  2.30955e-17  -9.13728e-17  -1.04324e-16
+##  0.0  1.0           8.76102e-17  -7.8499e-17 
+##  0.0  0.0           1.0           1.09725e-16
+##  0.0  0.0           0.0           1.0</code></pre>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="homework-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="homework-4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

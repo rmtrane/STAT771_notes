@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="lecture-notes.html">
+<link rel="prev" href="homework-4.html">
+<link rel="next" href="homework-6.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -149,13 +149,132 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">STAT 771: My notes</h1>
-<p class="author"><em>Ralph Møller Trane</em></p>
-<p class="date"><em>Fall 2018 (compiled 2018-10-04)</em></p>
+<div id="homework-5" class="section level2">
+<h2><span class="header-section-number">2.5</span> Homework 5</h2>
+
+<div class="exercise">
+<p><span id="exr:q501" class="exercise"><strong>Exercise 1.37  </strong></span>Implement the Gram-Schmidt procedure for matrices <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span> assuming <span class="math inline">\(A\)</span> has full column rank.</p>
+Create examples to show that the function works (well enough).
 </div>
-<div id="intro" class="section level1 unnumbered">
-<h1>Intro</h1>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> See <a href="Homework/gram_schmidt.jl">here</a>.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q502" class="exercise"><strong>Exercise 1.38  </strong></span>Find examples where Gram-Schmidt fails, i.e. where either <span class="math inline">\(Q R \neq A\)</span> or <span class="math inline">\(Q^TQ \neq I\)</span>.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q503" class="exercise"><strong>Exercise 1.39  </strong></span>Look up the modified Gram-Schmidt Procedure and implement it (again assuming <span class="math inline">\(A\)</span> has full column rank).
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> See <a href="Homework/modified_gs.jl">here</a>.
+</div>
+
+
+<div class="exercise">
+<p><span id="exr:q504" class="exercise"><strong>Exercise 1.40  (Pivoting (<em>OPTIONAL</em>))  </strong></span>References:</p>
+<ol style="list-style-type: decimal">
+<li>Businger, Galub: Linear Least Squares by Householder Transformation (1965)</li>
+<li>Engler: The Behavior of QR-factorization algorithm with column pivoting (1997)</li>
+</ol>
+<p>Implement modified Gram-Schmidt with column pivoting.</p>
+Find example where the modified Gram-Schmidt fails, but the modified Gram-Schmidt with column pivoting does not.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q505" class="exercise"><strong>Exercise 1.41  </strong></span>Show that Householder reflections are orthogonal matrices.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> Show that <span class="math inline">\(H^\prime H = I\)</span>. By definition of a Householder matrix (<a href="orthogonalization.html#def:householder">1.7</a>), <span class="math inline">\(H = I - 2vv^\prime\)</span> for a <span class="math inline">\(v\)</span> with <span class="math inline">\({\left \vert \left \vert v \right \vert \right \vert}_2 = 1\)</span>. Note that <span class="math inline">\({\left \vert \left \vert v \right \vert \right \vert}_2 = \sqrt{v^\prime \cdot v}\)</span>.</p>
+<p>So,</p>
+<p><span class="math display">\[\begin{aligned}
+  H^\prime H &amp;= (I - 2vv^\prime)^\prime (I - 2vv^\prime) \\
+             &amp;= (I^\prime - 2(vv^\prime)^\prime)(I - 2 vv^\prime)\\
+             &amp;= (I - 2vv^\prime)(I - 2 vv^\prime) \\
+             &amp;= I - 2vv^\prime - 2vv^\prime + 4 vv^\prime v v^\prime \\
+             &amp;= I - 2vv^\prime - 2vv^\prime + 4 v I v^\prime \\
+             &amp;= I.
+\end{aligned}\]</span></p>
+So by definition (<a href="orthogonalization.html#def:orthogonal">1.5</a>), <span class="math inline">\(H\)</span> is an orthogonal matrix.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q506" class="exercise"><strong>Exercise 1.42  </strong></span>Show that if <span class="math inline">\(H_1, \dots, H_r\)</span> are Householder reflections, then <span class="math inline">\(H_r \cdots H_1\)</span> (i.e. the product) is orthogonal.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span>  <span class="math display">\[(H_r \cdots H_1)^\prime (H_r \cdots H_1) &amp;= H_1^\prime \cdots \H_r^\prime H_r \cdots H_1 = I,\]</span></p>
+since all <span class="math inline">\(H_i\)</span> are Householder reflections, which implies they are orthogonal, which implies <span class="math inline">\(H_i^\prime H_i = I\)</span>.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q507" class="exercise"><strong>Exercise 1.43  </strong></span>Show that a Givens rotation is an orthonormal matrix when <span class="math inline">\(\sigma^2 + \lambda^2 = 1\)</span>.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span>  Let <span class="math inline">\(G^{(a,b)}\)</span> be a Givens rotation. I.e. the elements <span class="math inline">\(g_{i,j}\)</span> are</p>
+<p><span class="math display">\[
+  g_{i,j} = 
+  \left\{ 
+    \begin{array}{rl} 
+      1, &amp; i = j \notin \{a,b\} \\
+      \lambda, &amp; i = j \in \{a,b\} \\
+      \sigma, &amp; i = a, j = b \\
+      -\sigma, &amp; i = b, j = a \\
+      0, &amp; \text{ otherwise}
+    \end{array} 
+  \right.
+\]</span></p>
+<p>Transposing this matrix gives us a new matrix <span class="math inline">\(K\)</span> where</p>
+<p><span class="math display">\[
+  k_{i,j} = 
+  \left\{ 
+    \begin{array}{rl} 
+      1, &amp; i = j \notin \{a,b\} \\
+      \lambda, &amp; i = j \in \{a,b\} \\
+      -\sigma, &amp; i = a, j = b \\
+      \sigma, &amp; i = b, j = a \\
+      0, &amp; \text{ otherwise}
+    \end{array} 
+  \right.
+\]</span></p>
+<p>Now, let <span class="math inline">\(L = K \cdot G\)</span>. Then the elements of <span class="math inline">\(L\)</span> are <span class="math inline">\(l_{i,j} = \sum_{s=1}^n k_{i,s} g_{s,j}\)</span>.</p>
+<p>If <span class="math inline">\(i \neq a,\ j \neq b\)</span>, and <span class="math inline">\(i \neq j\)</span>, then <span class="math inline">\(l_{i,j} = k_{i,i} g_{i,j} = 0\)</span> (since <span class="math inline">\(g_{i,j} = 0\)</span>).</p>
+<p>If <span class="math inline">\(i \notin \{a, b\}\)</span>, then <span class="math inline">\(l_{i,i} = k_{i,i} g_{i,i} = 1\)</span> (since <span class="math inline">\(i \notin \{a,b\}\)</span>).</p>
+<p>If <span class="math inline">\(j \notin \{a,b\}\)</span>, then <span class="math inline">\(l_{a,j} = k_{a,b}g_{b,j} + k_{a,a}g_{a,j} = 0\)</span> (since <span class="math inline">\(j \notin \{a,b\}\)</span> implies <span class="math inline">\(g_{b,j} = 0\)</span> and <span class="math inline">\(g_{a,j} = 0\)</span>).</p>
+<p>Furthermore,</p>
+<ul>
+<li><span class="math inline">\(l_{a,b} = k_{a,b}g_{b,b} + k_{a,a}g_{a,b} = -\sigma \lambda + \lambda \sigma = 0\)</span>,</li>
+<li><span class="math inline">\(l_{a,a} = k_{a,b} g_{b,a} + k_{a,a} g_{a,a} = (-\sigma)(-\sigma) + \lambda \lambda = \sigma^2 + \lambda^2\)</span>,</li>
+<li><span class="math inline">\(l_{b,b} = k_{a,b} g_{b,a} + k_{a,a} g_{a,a} = (-\sigma)(-\sigma) + \lambda \lambda = \sigma^2 + \lambda^2\)</span>.</li>
+</ul>
+<p>So,</p>
+<p><span class="math display">\[
+  l_{i,j} = 
+  \left\{ 
+    \begin{array}{rl} 
+      1, &amp; i = j \notin \{a,b\} \\
+      \sigma^2 + \lambda^2, &amp; i = j \in \{a,b\} \\
+      0, &amp; \text{ otherwise}
+    \end{array} 
+  \right.
+\]</span></p>
+<p>Similar calculations can be performed for <span class="math inline">\(G \cdot K\)</span>. So <span class="math inline">\(G^{(a,b)}\)</span> is orthogonal if and only if <span class="math inline">\(\sigma^2 + \lambda^2 = 1\)</span>.</p>
+</div>
 
 </div>
             </section>
@@ -163,8 +282,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-
-<a href="lecture-notes.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="homework-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="homework-6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

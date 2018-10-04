@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="lecture-notes.html">
+<link rel="prev" href="lecture-notes.html">
+<link rel="next" href="floating-point-format.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -149,22 +149,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">STAT 771: My notes</h1>
-<p class="author"><em>Ralph Møller Trane</em></p>
-<p class="date"><em>Fall 2018 (compiled 2018-10-04)</em></p>
-</div>
-<div id="intro" class="section level1 unnumbered">
-<h1>Intro</h1>
-
+<div id="positional-numeral-system" class="section level2">
+<h2><span class="header-section-number">1.1</span> Positional numeral system</h2>
+<p>We assume we have a decimal representation of numbers. I.e. that it exists. It is not within the scope of this class to prove this.</p>
+<p>Now, this is NOT the optimal way for a computer to represent numbers. For various reasons, there are more desirable ways to store numbers. So we need a different way of representing the numbers.</p>
+<p>Ingredients for different representation:</p>
+<ol style="list-style-type: lower-roman">
+<li>A base, refered to as <span class="math inline">\(\beta\)</span>. It holds that <span class="math inline">\(\beta \in {2,3,4,...}\)</span></li>
+<li>A significand: a sequence of digits: <span class="math inline">\(d_0.d_1d_2d_3d_4...\)</span>, where <span class="math inline">\(d_j \in \{0, 1,...,\beta-1\}\)</span></li>
+<li>An exponent: <span class="math inline">\(e \in \mathbb{Z}\)</span>.</li>
+</ol>
+<p>The representation <span class="math inline">\(d_0.d_1d_2... \times \beta^e\)</span> means <span class="math inline">\(\left(d_0 + d_1\cdot \beta^{-1} + ... + d_{p-1}\beta^{-(p-1)}\right)\cdot \beta^e\)</span>.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="lecture-notes.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lecture-notes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="floating-point-format.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

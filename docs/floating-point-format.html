@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>STAT 771: My notes</title>
+  <meta name="description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="STAT 771: My notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="STAT 771: My notes" />
+  
+  <meta name="twitter:description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison." />
+  
+
+<meta name="author" content="Ralph Møller Trane">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="positional-numeral-system.html">
+<link rel="next" href="orthogonalization.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Intro</a></li>
+<li class="chapter" data-level="1" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>1</b> Lecture Notes</a><ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#lecture-1-96"><i class="fa fa-check"></i>Lecture 1: 9/6</a></li>
+<li class="chapter" data-level="1.1" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html"><i class="fa fa-check"></i><b>1.1</b> Positional numeral system</a></li>
+<li class="chapter" data-level="1.2" data-path="floating-point-format.html"><a href="floating-point-format.html"><i class="fa fa-check"></i><b>1.2</b> Floating Point Format</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="floating-point-format.html"><a href="floating-point-format.html#ieee-standards"><i class="fa fa-check"></i><b>1.2.1</b> IEEE Standards</a></li>
+<li class="chapter" data-level="1.2.2" data-path="floating-point-format.html"><a href="floating-point-format.html#errors"><i class="fa fa-check"></i><b>1.2.2</b> Errors</a></li>
+<li class="chapter" data-level="1.2.3" data-path="floating-point-format.html"><a href="floating-point-format.html#square-linear-systems"><i class="fa fa-check"></i><b>1.2.3</b> Square Linear Systems</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="orthogonalization.html"><a href="orthogonalization.html"><i class="fa fa-check"></i><b>1.3</b> Orthogonalization</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="orthogonalization.html"><a href="orthogonalization.html#motivating-problems"><i class="fa fa-check"></i><b>1.3.1</b> Motivating problems</a></li>
+<li class="chapter" data-level="" data-path="orthogonalization.html"><a href="orthogonalization.html#lecture-4-918"><i class="fa fa-check"></i>Lecture 4: 9/18</a></li>
+<li class="chapter" data-level="1.3.2" data-path="orthogonalization.html"><a href="orthogonalization.html#qr-decomposition"><i class="fa fa-check"></i><b>1.3.2</b> QR Decomposition</a></li>
+<li class="chapter" data-level="1.3.3" data-path="orthogonalization.html"><a href="orthogonalization.html#existence-of-qr-decomposition."><i class="fa fa-check"></i><b>1.3.3</b> Existence of QR-decomposition.</a></li>
+<li class="chapter" data-level="" data-path="orthogonalization.html"><a href="orthogonalization.html#lecture-5-920"><i class="fa fa-check"></i>Lecture 5: 9/20</a></li>
+<li class="chapter" data-level="1.3.4" data-path="orthogonalization.html"><a href="orthogonalization.html#large-data-problem"><i class="fa fa-check"></i><b>1.3.4</b> “Large” Data Problem</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html"><i class="fa fa-check"></i><b>1.4</b> Singular Value Decomposition (SVD)</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#motivating-problems-1"><i class="fa fa-check"></i><b>1.4.1</b> Motivating Problems</a></li>
+<li class="chapter" data-level="1.4.2" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#svd"><i class="fa fa-check"></i><b>1.4.2</b> SVD</a></li>
+<li class="chapter" data-level="1.4.3" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#existence-and-properties"><i class="fa fa-check"></i><b>1.4.3</b> Existence and Properties</a></li>
+<li class="chapter" data-level="1.4.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#random-projections"><i class="fa fa-check"></i><b>1.4.4</b> Random Projections</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
+<li class="chapter" data-level="2.1" data-path="homework-1.html"><a href="homework-1.html"><i class="fa fa-check"></i><b>2.1</b> Homework 1</a></li>
+<li class="chapter" data-level="2.2" data-path="homework-2.html"><a href="homework-2.html"><i class="fa fa-check"></i><b>2.2</b> Homework 2</a></li>
+<li class="chapter" data-level="2.3" data-path="homework-3.html"><a href="homework-3.html"><i class="fa fa-check"></i><b>2.3</b> Homework 3</a></li>
+<li class="chapter" data-level="2.4" data-path="homework-4.html"><a href="homework-4.html"><i class="fa fa-check"></i><b>2.4</b> Homework 4</a></li>
+<li class="chapter" data-level="2.5" data-path="homework-5.html"><a href="homework-5.html"><i class="fa fa-check"></i><b>2.5</b> Homework 5</a></li>
+<li class="chapter" data-level="2.6" data-path="homework-6.html"><a href="homework-6.html"><i class="fa fa-check"></i><b>2.6</b> Homework 6</a></li>
+<li class="chapter" data-level="2.7" data-path="homework-7.html"><a href="homework-7.html"><i class="fa fa-check"></i><b>2.7</b> Homework 7</a></li>
+<li class="chapter" data-level="2.8" data-path="homework-8.html"><a href="homework-8.html"><i class="fa fa-check"></i><b>2.8</b> Homework 8</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">STAT 771: My notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="floating-point-format" class="section level2">
+<h2><span class="header-section-number">1.2</span> Floating Point Format</h2>
+
+<div class="definition">
+<span id="def:unnamed-chunk-1" class="definition"><strong>Definition 1.1  </strong></span>A fp is one that can be represented in a base <span class="math inline">\(\beta\)</span> with a fixed digit <span class="math inline">\(p\)</span> (precision), and whose exponent is between <span class="math inline">\(e_{min}\)</span> and <span class="math inline">\(e_{max}\)</span>.
+</div>
+
+
+<div class="example">
+<p><span id="exm:unnamed-chunk-2" class="example"><strong>Example 1.1  </strong></span>Let <span class="math inline">\(\beta = 10, p = 3, e_{min} = -1, e_{max} = 1\)</span>. Want to represent <span class="math inline">\(0.1\)</span>. Several options:</p>
+<ol style="list-style-type: lower-roman">
+<li>Let d_0=0, d_1 = 0, d_2 = 1, e = 1.</li>
+<li>Let d_0=0, d_1 = 1, d_2 = 0, e = 0.</li>
+<li>d_0 = 1, d_1 = 0, d_2 = 0, e = -1.</li>
+</ol>
+<p>If we fill into the equation above, we get 0.1:</p>
+<span class="math display">\[\begin{align*}
+  i:  &amp; \left(0 + 0\cdot 10^{-1} + 1\cdot 10^{-2}\right)\cdot 10^{1} \\
+  ii: &amp; \left(0 + 1\cdot 10^{-1} + 1\cdot 10^{-2}\right)\cdot 10^{0} \\
+  iii:&amp; \left(1 + 0\cdot 10^{-1} + 1\cdot 10^{-2}\right)\cdot 10^{-1}
+\end{align*}\]</span>
+</div>
+
+
+<div class="definition">
+<span id="def:unnamed-chunk-3" class="definition"><strong>Definition 1.2  </strong></span>A fp number is said to be <em>normalized</em> if <span class="math inline">\(d_0 \neq 0\)</span>.
+</div>
+
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-4" class="exercise"><strong>Exercise 1.1  </strong></span>What is the total number of values that can be represented in the normalized fp format with base <span class="math inline">\(\beta, p, e_{min}, e_{max}\)</span>?</p>
+<p>We count the different values each of the elements of a <em>fp</em> can take:</p>
+<ul>
+<li><span class="math inline">\(d_0\)</span> can be from 1 to <span class="math inline">\(\beta-1\)</span>, so <span class="math inline">\(\beta-1\)</span> different values.</li>
+<li><span class="math inline">\(d_1,...,d_{p-1}\)</span> each takes a value in <span class="math inline">\(\{0,1,...,\beta-1\}\)</span>. Hence, we can choose the digits <span class="math inline">\(d_1,...,d_{p-1}\)</span> in <span class="math inline">\(\beta^{p-1}\)</span> different ways.</li>
+<li><span class="math inline">\(e\)</span> can take <span class="math inline">\(e_{max} - e_{min} + 1\)</span> different values (all integers from <span class="math inline">\(e_{min}\)</span> to <span class="math inline">\(e_{max}\)</span>, both included, hence the <span class="math inline">\(+1\)</span>).</li>
+</ul>
+So, in total, there are <span class="math inline">\((\beta-1)\cdot \beta^{p-1}\cdot (e_{max} - e_{min} + 1)\)</span> different values that can be represented in the normalized fp format with base <span class="math inline">\(\beta\)</span>, precision <span class="math inline">\(p\)</span>, and <span class="math inline">\(e_{min}, e_{max}\)</span> given.
+</div>
+
+<div id="ieee-standards" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> IEEE Standards</h3>
+<p>IEEE have standards for how to deal with approximations and errors.</p>
+<p>For our purposes, a bit is a single unit of storage on a computer, which can either be 0 or 1. Hence, we’ll be focusing on fp formats where <span class="math inline">\(\beta = 2\)</span>.</p>
+<div id="the-16-bit-standard-half-precision-standard." class="section level4">
+<h4><span class="header-section-number">1.2.1.1</span> The 16 bit standard (half precision standard).</h4>
+<p>The 16 bits of storage are used in the following way, when following the 16 bit standard:</p>
+<ul>
+<li>1 bit for the sign
+<ul>
+<li>0 = positive</li>
+<li>1 = negative</li>
+</ul></li>
+<li>5 bits for the exponent
+<ul>
+<li>00000 is reserved for 0</li>
+<li>11111 is reserved for <span class="math inline">\(\infty\)</span></li>
+<li>30 exponents left: <span class="math inline">\(2^5 - 2 = 30\)</span></li>
+<li>the 16 bit standard dictates that the used exponents are <span class="math inline">\(-14,...,15\)</span>.
+<ul>
+<li><strong>Note</strong>: <span class="math inline">\(0\)</span> is also included in this list of 30 exponents. This is because the <span class="math inline">\(00000\)</span> representation is reserved for integers, while <span class="math inline">\(01111\)</span> is used with non-integers.</li>
+</ul></li>
+</ul></li>
+<li>11 bit for the significand.
+<ul>
+<li>10 are actually stored – we always work with normalized FP numbers, i.e. <span class="math inline">\(\beta_0 = 1\)</span>.</li>
+</ul></li>
+</ul>
+<p><strong>Question:</strong> What are smallest and largest positive numbers that can be represented?</p>
+<p><strong>Answer:</strong> Smallest non-normalized number would be the one with the smallest possible exponent, and all digits of the significand are 0 except the very last one. So, the smallest non-normalized FP number in the 16 bit standard would be</p>
+<p><span class="math display">\[
+\left(0 + 0\cdot 2^{-1} + ... + 0\cdot 2^{-9} + 1\cdot 2^{-10}\right)\cdot 2^{-14} = 2^{-24} \approx 5.96\cdot 10^{-8}
+\]</span></p>
+<p>The smallest normalized number is the one with all digits <span class="math inline">\(0\)</span> (except for the leading digit, of course, which has to be <span class="math inline">\(1\)</span> for it to be normalized), and <span class="math inline">\(e = -14\)</span>. So the smallest normalized FP number:</p>
+<p><span class="math display">\[
+\left(1 + 0\cdot 2^{-1} + ... + 0\cdot 2^{-10}\right)\cdot 2^{-14} = 2^{-14} \approx 6.10\cdot 10^{-5}
+\]</span> Finally, the largest (finite) FP number in the 16 bit standard is the one where the exponent is as large as possible (<span class="math inline">\(e = 15\)</span>), and all digits are <span class="math inline">\(1\)</span>. So</p>
+<p><span class="math display">\[
+\left(1 + 1\cdot 2^{-1} + ... + 1\cdot 2^{-10}\right)\cdot 2^{15} = 65504
+\]</span></p>
+</div>
+<div id="lecture-2-911" class="section level4 unnumbered">
+<h4>Lecture 2: 9/11</h4>
+</div>
+<div id="the-32-bit-standard-single-precision" class="section level4">
+<h4><span class="header-section-number">1.2.1.2</span> The 32 bit standard (single precision)</h4>
+<p>The 32 bits of storage are used in the following way, when following the 32 bit standard:</p>
+<ul>
+<li>1 bit for the sign
+<ul>
+<li>0 = positive</li>
+<li>1 = negative</li>
+</ul></li>
+<li>8 bits for the exponent
+<ul>
+<li>00000000 is reserved for 0</li>
+<li>11111111 is reserved for <span class="math inline">\(\infty\)</span></li>
+<li>exponents left: <span class="math inline">\(2^8 - 2 = 254\)</span></li>
+<li>the 32 bit standard dictates that the used exponents are <span class="math inline">\(-126,...,127\)</span>.
+<ul>
+<li><strong>Note</strong>: <span class="math inline">\(0\)</span> is also included in this list of the 254 exponents. This is because the <span class="math inline">\(00000000\)</span> representation is reserved for integers, while <span class="math inline">\(01111111\)</span> (I think this is the representation for <span class="math inline">\(0\)</span> here…) is used with non-integers.</li>
+</ul></li>
+</ul></li>
+<li>24 bit for the significand.
+<ul>
+<li>23 are actually stored – we always work with normalized FP numbers, i.e. <span class="math inline">\(\beta_0 = 1\)</span>.</li>
+</ul></li>
+</ul>
+<p><strong>Question:</strong> What are smallest and largest positive numbers that can be represented in the 32 bit standard?</p>
+<p><strong>Answer:</strong> Smallest non-normalized number would be the one with the smallest possible exponent, and all digits of the significand are 0 except the very last one. So, the smallest non-normalized FP number in the 32 bit standard would be</p>
+<p><span class="math display">\[
+\left(0 + 0\cdot 2^{-1} + ... + 0\cdot 2^{-22} + 1\cdot 2^{-23}\right)\cdot 2^{-126} = 2^{-149} \approx 1.40\cdot 10^{-45}
+\]</span></p>
+<p>The smallest normalized number is the one with all digits <span class="math inline">\(0\)</span> (except for the leading digit, of course, which has to be <span class="math inline">\(1\)</span> for it to be normalized), and <span class="math inline">\(e = -126\)</span>. So the smallest normalized FP number:</p>
+<p><span class="math display">\[
+\left(1 + 0\cdot 2^{-1} + ... + 0\cdot 2^{-23}\right)\cdot 2^{-126} = 2^{-126} \approx 1.18\cdot 10^{-38}
+\]</span> Finally, the largest (finite) FP number in the 32 bit standard is the one where the exponent is as large as possible (<span class="math inline">\(e = 127\)</span>), and all digits are <span class="math inline">\(1\)</span>. So</p>
+<p><span class="math display">\[
+\left(1 + 1\cdot 2^{-1} + ... + 1\cdot 2^{-126}\right)\cdot 2^{127} = 3.40\cdot 10^{38}
+\]</span></p>
+</div>
+<div id="the-64-bit-standard-double-precision" class="section level4">
+<h4><span class="header-section-number">1.2.1.3</span> The 64 bit standard (double precision)</h4>
+<p>The 64 bits of storage are used in the following way, when following the 64 bit standard:</p>
+<ul>
+<li>1 bit for the sign
+<ul>
+<li>0 = positive</li>
+<li>1 = negative</li>
+</ul></li>
+<li>11 bits for the exponent
+<ul>
+<li>00000000 is reserved for 0</li>
+<li>11111111 is reserved for <span class="math inline">\(\infty\)</span></li>
+<li>exponents left: <span class="math inline">\(2^11 - 2 = 2046\)</span></li>
+<li>the 64 bit standard dictates that the used exponents are <span class="math inline">\(-1024,...,1023\)</span>.
+<ul>
+<li><strong>Note</strong>: <span class="math inline">\(0\)</span> is also included in this list of the 254 exponents. This is because the <span class="math inline">\(00000000\)</span> representation is reserved for integers, while <span class="math inline">\(01111111\)</span> (I think this is the representation for <span class="math inline">\(0\)</span> here…) is used with non-integers.</li>
+</ul></li>
+</ul></li>
+<li>53 bit for the significand.
+<ul>
+<li>52 are actually stored – we always work with normalized FP numbers, i.e. <span class="math inline">\(\beta_0 = 1\)</span>.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="errors" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Errors</h3>
+<div id="units-in-the-last-place-ulp" class="section level4">
+<h4><span class="header-section-number">1.2.2.1</span> Units in the Last Place (ULP)</h4>
+</div>
+<div id="absolute-and-relative-error" class="section level4">
+<h4><span class="header-section-number">1.2.2.2</span> Absolute and Relative Error</h4>
+<p>Let <span class="math inline">\(fl: \mathbb{R}_{\geq 0} \rightarrow \mathcal{S}\)</span> be a function that takes a real value and return a FP number. Then we define the absolute and relative error as follows:</p>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-5" class="definition"><strong>Definition 1.3  </strong></span>Let <span class="math inline">\(z \in \mathbb{R}_{\geq 0}\)</span>. The <em>absolute error</em> is defined as</p>
+<p><span class="math display">\[
+\left | fl(z) - z \right | .
+\]</span></p>
+<p>The <em>relative error</em> is defined as</p>
+<span class="math display">\[
+\left | \frac{fl(z)-z}{z} \right |
+\]</span>
+</div>
+
+
+<div class="lemma">
+<span id="lem:absolute-error-bound" class="lemma"><strong>Lemma 1.1  </strong></span>If <span class="math inline">\(z\)</span> has exponent <span class="math inline">\(e\)</span>, then the maximum absolute error is <span class="math inline">\(\frac{\beta^{e-p+1}}{2}\)</span>.
+</div>
+
+
+<div class="proof">
+ <span class="proof"><em>Proof. </em></span> 
+</div>
+
+
+<div class="lemma">
+<span id="lem:unnamed-chunk-7" class="lemma"><strong>Lemma 1.2  </strong></span>If <span class="math inline">\(z\)</span> has exponent <span class="math inline">\(e\)</span>, then the maximum relative error is <span class="math inline">\(\frac{\beta^{1-p}}{2}\)</span>.
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> If <span class="math inline">\(z\)</span> has exponent <span class="math inline">\(e\)</span>, then <span class="math inline">\(\beta^{e}\leq z\)</span>. Using this with <a href="floating-point-format.html#lem:absolute-error-bound">1.1</a>, we get that</p>
+<span class="math display">\[
+\left | \frac{fl(z)-z}{z} \right | \leq \frac{\beta^{e-p+1}}{2\beta^e} = \frac{\beta^{1-p}}{2}.
+\]</span>
+</div>
+
+<p><strong>Note:</strong> the upper bound of the relative error is called the <em>machine epsilon</em>. This can be obtained in Julia using the function <code>eps</code>.</p>
+</div>
+<div id="the-fundamental-axiom" class="section level4">
+<h4><span class="header-section-number">1.2.2.3</span> The Fundamental Axiom</h4>
+<p>… is that for any of the four arithmetic operations (<span class="math inline">\(+, -, \cdot, /\)</span>), we have the following error bound:</p>
+<p><span class="math display">\[
+fl(x \text{op} y) = (x \text{op} y)(1+\delta),
+\]</span></p>
+<p>with <span class="math inline">\(|\delta| \leq u\)</span>, where <span class="math inline">\(u\)</span> is commonly <span class="math inline">\(2\cdot \epsilon\)</span>. (<strong>NOTE: NEED TO CLARIFY IF THE ABOVE IS CORRECT!</strong>)</p>
+<p>**Example:* Matrix storage. Let <span class="math inline">\(A \in \mathbb{R}^{m\times n}\)</span>. Then:</p>
+<p><span class="math display">\[
+\left| fl(A) - A \right | \leq u \left | A \right |
+\]</span></p>
+<p><strong>Example:</strong> Dot product. Let <span class="math inline">\(x,y \in \mathbb{R}^{n}\)</span>. Recall that the dot product of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> is definted as <span class="math inline">\(x&#39;y = \sum_{i=1}^{n} x_i \cdot y_i\)</span>. This can be calculated in the following way:</p>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">fl = <span class="kw">function</span>(x,y)
+  <span class="co"># Get length of x</span>
+  n = length(x)
+  <span class="co"># Check that length of y is equal to length of x. If not, throw error.</span>
+  <span class="kw">if</span>(length(y) != n)
+    <span class="kw">return</span> <span class="st">&quot;ERROR: y does not have same dimension as x&quot;</span>
+  <span class="kw">end</span>
+
+  <span class="co"># s will be the result of the dot product calculation</span>
+  s = <span class="fl">0</span>
+
+  <span class="kw">for</span> i = <span class="fl">1</span>:n
+    s += x[i]*y[i]
+  <span class="kw">end</span>
+
+  <span class="kw">return</span>(s)
+
+<span class="kw">end</span></code></pre></div>
+<p>Next we want to prove the following lemma:</p>
+
+<div class="lemma">
+<p><span id="lem:unnamed-chunk-10" class="lemma"><strong>Lemma 1.3  </strong></span>Let <span class="math inline">\(x,y \in \mathbb{R}^n\)</span>, and <span class="math inline">\(n\cdot u \leq 0.01\)</span>. Then</p>
+<span class="math display">\[
+\left | fl(x&#39;y) - x&#39;y \right | \leq 1.01 \cdot n\cdot u \cdot \left|x\right|&#39;\left|y\right|
+\]</span>
+</div>
+
+</div>
+<div id="lecture-3-913" class="section level4 unnumbered">
+<h4>Lecture 3: 9/13</h4>
+<p>To prove the lemma above, we will need another lemma…</p>
+
+<div class="lemma">
+<p><span id="lem:lemForProof" class="lemma"><strong>Lemma 1.4  </strong></span>If <span class="math inline">\(|\delta_i| \leq u, \forall i=1,\ldots,n\)</span> s.t. <span class="math inline">\(n\cdot u &lt; 2\)</span>. Let <span class="math inline">\(1 + \eta = \prod_{i=1}^{n}(1 + \delta_i)\)</span>. Then</p>
+<span class="math display">\[
+|\eta | \leq \frac{n\cdot u}{1-\tfrac{n\cdot u}{2}}
+\]</span>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> Using the definition of <span class="math inline">\(\nu\)</span>, we can rewrite it to get</p>
+<p><span class="math display">\[
+| \eta | = \left | \prod_{i=1}^n (1 + \delta_i) - 1 \right |.
+\]</span></p>
+<p>By induction, we will show that the expression above is less than or equal to <span class="math inline">\((1 + u)^n - 1\)</span>. [TO BE COMPLETED!]</p>
+<p>Since <span class="math inline">\(1+u \leq e^{u}\)</span> for all <span class="math inline">\(u \in {\mathbb{R}}\)</span>, we have that</p>
+<span class="math display">\[\begin{align*}
+  | \eta | &amp;\leq e^{n\cdot u} - 1 \\
+          &amp;\leq n\cdot u + \frac{(n\cdot u)^2}{2!} + \frac{(n\cdot u)^3}{3!} + \ldots \text{(used the Taylor expansion)}\\
+          &amp;\leq n\cdot u + \frac{(n\cdot u)^2}{2^1} + \frac{(n\cdot u)^3}{2^2} + \frac{(n\cdot u)^4}{2^3} + \ldots (\text{used that } x! &gt; 2^{x-1} \text{ for } x &gt; 1) \\
+          &amp;= \sum_{k=0}^{\infty} n\cdot u \left(\frac{n\cdot u}{2}\right)^k \text{\small (identify this as a geometric series with } r = \tfrac{n\cdot u}{2} \text{, \small which is less than 1 by assumption)} \\
+          &amp;= \frac{n\cdot u}{1-\tfrac{n\cdot u}{2}},
+\end{align*}\]</span>
+which is exactly what we wanted.
+</div>
+
+<p>With this in hand, we will prove the previously stated lemma.</p>
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> Let <span class="math inline">\(s_p\)</span> denote the value of <span class="math inline">\(s\)</span> after the <span class="math inline">\(p\)</span>’th iteration of the algorithm described above. Then, since we’re assuming the Fundamental Axiom, we have that <span class="math inline">\(s_1 = fl(x_1y_y) = x_1 y_1 (1 + \delta_1)\)</span>, where <span class="math inline">\(|\delta_1| \leq u\)</span>. We can similarly find <span class="math inline">\(s_p\)</span> as</p>
+<span class="math display">\[\begin{align*}
+s_p &amp;= fl(s_{p-1} + fl(x_p y_p)) \\
+    &amp;= (s_{p-1} + fl(x_p y_p))(1 + \epsilon_p) (\text{where } |\epsilon_p| \leq u) \\
+    &amp;= (s_{p-1} + x_py_p(1 + \delta_p))(1 + \epsilon_p) (\text{where } |\delta_p| \leq u).
+\end{align*}\]</span>
+<p>Let <span class="math inline">\(\epsilon_1 = 0\)</span>. <span class="math inline">\(s_p\)</span> is a recursive formula, and can be rewritten as follows:</p>
+<p><span class="math display">\[
+s_p = \sum_{i=1}^p x_iy_i (1 + \delta_i)\prod_{j=1}^p (1 + \epsilon_j).
+\]</span></p>
+<p>So,</p>
+<span class="math display">\[\begin{align*}
+  | s_n - x^\prime y |  &amp;= \left | \sum_{i=1}^n (x_i y_i)(1 + \delta_i)\prod_{j=1}^p (1 + \epsilon_j) - \sum_{i=1}^{n}x_iy_i\right | \\
+                        &amp;= \left | \sum_{i=1}^n (x_i y_i)\left((1 + \delta_i)\prod_{j=1}^p (1 + \epsilon_j) - 1 \right) \right | \\
+                        &amp;\leq \sum_{i=1}^n \left |x_i y_i \right |\left | (1 + \delta_i)\prod_{j=1}^p (1 + \epsilon_j) - 1 \right| .
+\end{align*}\]</span>
+<p>We now use <a href="floating-point-format.html#lem:lemForProof">1.4</a> to get:</p>
+<span class="math display">\[\begin{align*}
+\sum_{i=1}^n \left |x_i y_i \right |\left | (1 + \delta_i)\prod_{j=1}^p (1 + \epsilon_j) - 1 \right| &amp;\leq  \frac{nu}{1-\tfrac{nu}{2}} \sum_{i=1}^n \left |x_i y_i \right | \\
+&amp;\leq \frac{nu}{0.995} \sum_{i=1}^n |x_i| |y_i | \\
+&amp;\leq 1.01 \cdot nu \cdot |x|^\prime |y|
+\end{align*}\]</span>
+</div>
+
+</div>
+</div>
+<div id="square-linear-systems" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> Square Linear Systems</h3>
+<p>In the following, let <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span> be an invertible matrix, and assume <span class="math inline">\(Ax = b\)</span> for a <span class="math inline">\(b \neq 0\)</span>. This implies that <span class="math inline">\(x = A^{-1}b\)</span>.</p>
+
+<div class="theorem">
+<p><span id="thm:kappa-bound" class="theorem"><strong>Theorem 1.1  </strong></span>Let <span class="math inline">\(\kappa_\infty = {\left \vert \left \vert A \right \vert \right \vert}_\infty {\left \vert \left \vert A^{-1} \right \vert \right \vert}_\infty\)</span>. Assume we can store <span class="math inline">\(A\)</span> with precision <span class="math inline">\(E\)</span> (i.e. as <span class="math inline">\(A+E\)</span>), where <span class="math inline">\({\left \vert \left \vert E \right \vert \right \vert}_\infty \leq u {\left \vert \left \vert A \right \vert \right \vert}_\infty\)</span>, and <span class="math inline">\(b\)</span> with precision <span class="math inline">\(e\)</span> (i.e. as <span class="math inline">\(b+e\)</span>), where <span class="math inline">\({\left \vert \left \vert e \right \vert \right \vert}_\infty \leq u {\left \vert \left \vert b \right \vert \right \vert}_\infty\)</span>.</p>
+<p>If <span class="math inline">\({\left \vert \left \vert A+E \right \vert \right \vert}\hat{x} = b+e\)</span> and <span class="math inline">\(u\cdot \kappa_\infty &lt; 1\)</span>, then</p>
+<span class="math display">\[
+  \frac{{\left \vert \left \vert x-\hat{x} \right \vert \right \vert}_\infty}{{\left \vert \left \vert x \right \vert \right \vert}} \leq \frac{2\cdot u \cdot \kappa_\infty}{1-u\cdot \kappa_\infty}
+\]</span>
+</div>
+
+
+<div class="lemma">
+<p><span id="lem:proofHW" class="lemma"><strong>Lemma 1.5  </strong></span>Let <span class="math inline">\(I\in {\mathbb{R}}^{n \times n}\)</span> be the identity matrix, and <span class="math inline">\(F \in {\mathbb{R}}^{n\times n}\)</span> s.t. <span class="math inline">\({\left \vert \left \vert F \right \vert \right \vert}_p &lt; 1\)</span> for some <span class="math inline">\(p \in [1,\infty]\)</span>. Then <span class="math inline">\(I-F\)</span> is invertible, and</p>
+<span class="math display">\[
+  {\left \vert \left \vert (I-F)^{-1} \right \vert \right \vert}_p \leq \frac{1}{1-{\left \vert \left \vert F \right \vert \right \vert}_p}
+\]</span>
+</div>
+
+
+<div class="proof">
+ <span class="proof"><em>Proof. </em></span> <strong>HOMEWORK</strong>
+</div>
+
+
+<div class="lemma">
+<p><span id="lem:unnamed-chunk-14" class="lemma"><strong>Lemma 1.6  </strong></span>Suppose <span class="math inline">\(\exists \epsilon &gt; 0\)</span> s.t. <span class="math inline">\({\left \vert \left \vert \Delta A \right \vert \right \vert} \leq \epsilon {\left \vert \left \vert A \right \vert \right \vert}\)</span> and <span class="math inline">\({\left \vert \left \vert \Delta b \right \vert \right \vert} \leq \epsilon {\left \vert \left \vert b \right \vert \right \vert}\)</span>, and <span class="math inline">\(y\)</span> s.t. <span class="math inline">\((A+\Delta A)y = b+\Delta b\)</span>.</p>
+If <span class="math inline">\(\epsilon {\left \vert \left \vert A \right \vert \right \vert}{\left \vert \left \vert A^{-1} \right \vert \right \vert} = r &lt; 1\)</span>, then <span class="math inline">\(A+\Delta A\)</span> is invertible and <span class="math display">\[\frac{{\left \vert \left \vert y \right \vert \right \vert}}{{\left \vert \left \vert x \right \vert \right \vert}} \leq \frac{1+r}{1-r}.\]</span>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> Note that <span class="math inline">\(A+\Delta A = A\left (I + A^{-1}\Delta A\right ) = A\left (I - \left(- A^{-1}\Delta A\right)\right)\)</span>. Since <span class="math inline">\({\left \vert \left \vert -A^{-1}\Delta A \right \vert \right \vert} = {\left \vert \left \vert A^{-1}\Delta A \right \vert \right \vert} \leq \epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert}\cdot {\left \vert \left \vert A \right \vert \right \vert} &lt; 1\)</span> (by assumptions), Lemma <a href="floating-point-format.html#lem:proofHW">1.5</a> gives us that <span class="math inline">\(I + A^{-1}\Delta A\)</span> is invertible. Since <span class="math inline">\(A\)</span> is also invertible (again, by assumption), <span class="math inline">\(A+\Delta A\)</span> is invertible (product of two invertible matrices is invertible).</p>
+<p>Performing some linear algebra:</p>
+<span class="math display">\[\begin{align*}
+  (A + \Delta A) &amp;=  b + \Delta b \Leftrightarrow \\
+  A(I + A^{-1} \Delta A) y &amp;= b + \Delta b \Leftrightarrow \\
+  (I + A^{-1} \Delta A) y &amp;= A^{-1}b + A^{-1}\Delta b \Leftrightarrow \\
+  y &amp;= (I + A^{-1} \Delta A)^{-1} A^{-1}b + A^{-1}\Delta b.
+\end{align*}\]</span>
+<p>Remember that <span class="math inline">\(A^{-1}b = x\)</span>. From the definition of <span class="math inline">\(r\)</span> we have that <span class="math inline">\({\left \vert \left \vert A^{-1} \right \vert \right \vert} = \frac{r}{{\left \vert \left \vert A \right \vert \right \vert}}\)</span>. These two identities with the assumption that <span class="math inline">\({\left \vert \left \vert \Delta b \right \vert \right \vert} \leq \epsilon b\)</span> gives us</p>
+<p><span class="math display">\[
+\begin{aligned}
+  {\left \vert \left \vert y \right \vert \right \vert} &amp;\leq {\left \vert \left \vert (I + A^{-1}\Delta A)^{-1} \right \vert \right \vert} \left( {\left \vert \left \vert x \right \vert \right \vert} + {\left \vert \left \vert A^{-1}\Delta b \right \vert \right \vert}\right) \\
+  &amp;\leq \frac{1}{1-{\left \vert \left \vert A^{-1}\Delta A \right \vert \right \vert}} \left( {\left \vert \left \vert x \right \vert \right \vert} + \frac{r}{\epsilon {\left \vert \left \vert A \right \vert \right \vert}} \cdot {\left \vert \left \vert \Delta b \right \vert \right \vert} \right) \\
+  &amp;\leq \frac{1}{1-r} \left( {\left \vert \left \vert x \right \vert \right \vert} + \frac{r}{\epsilon {\left \vert \left \vert A \right \vert \right \vert}} \cdot \epsilon {\left \vert \left \vert b \right \vert \right \vert} \right) \\
+  &amp;= \frac{1}{1-r} \left( {\left \vert \left \vert x \right \vert \right \vert} + \frac{r \cdot {\left \vert \left \vert b \right \vert \right \vert}}{{\left \vert \left \vert A \right \vert \right \vert}} \right).
+\end{aligned}
+\]</span></p>
+<p>Finally, recall that <span class="math inline">\(Ax=b\)</span>, hence <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}\cdot{\left \vert \left \vert x \right \vert \right \vert} \geq {\left \vert \left \vert b \right \vert \right \vert}\)</span>, so <span class="math inline">\({\left \vert \left \vert x \right \vert \right \vert} \geq \frac{{\left \vert \left \vert b \right \vert \right \vert}}{{\left \vert \left \vert A \right \vert \right \vert}}\)</span>. So,</p>
+<p><span class="math display">\[
+\begin{aligned}
+  {\left \vert \left \vert y \right \vert \right \vert} \leq \frac{1}{1-r}  \left( {\left \vert \left \vert x \right \vert \right \vert} + r \cdot {\left \vert \left \vert x \right \vert \right \vert} \right) \Leftrightarrow \\
+  \frac{{\left \vert \left \vert y \right \vert \right \vert}}{{\left \vert \left \vert x \right \vert \right \vert}} \leq \frac{1+r}{1-r}.
+\end{aligned}
+\]</span></p>
+</div>
+
+
+<div class="lemma">
+<span id="lem:unnamed-chunk-16" class="lemma"><strong>Lemma 1.7  </strong></span><span class="math display">\[\frac{{\left \vert \left \vert y - x \right \vert \right \vert}}{{\left \vert \left \vert x \right \vert \right \vert}} \leq \frac{2\epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert}\cdot {\left \vert \left \vert A \right \vert \right \vert}}{1-r}.\]</span>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span>  <span class="math display">\[
+\begin{aligned}
+  \left(A+\Delta A\right)y &amp;= b + \Delta b \Leftrightarrow \\
+  Ay - b &amp;= \Delta b - \Delta Ay \Leftrightarrow \\
+  y - A^{-1}b &amp;= A^{-1} \Delta b - A^{-1}\Delta A y \Leftrightarrow \\
+  y - x &amp;= A^{-1} \Delta b - A^{-1}\Delta A y \Leftrightarrow \\
+  {\left \vert \left \vert y - x \right \vert \right \vert} &amp;\leq {\left \vert \left \vert A^{-1} \right \vert \right \vert} {\left \vert \left \vert \Delta b \right \vert \right \vert} + {\left \vert \left \vert A^{-1} \right \vert \right \vert} {\left \vert \left \vert \Delta A \right \vert \right \vert}{\left \vert \left \vert y \right \vert \right \vert} \\   &amp;\leq {\left \vert \left \vert A^{-1} \right \vert \right \vert} \epsilon {\left \vert \left \vert b \right \vert \right \vert} + {\left \vert \left \vert A^{-1} \right \vert \right \vert} \epsilon{\left \vert \left \vert A \right \vert \right \vert}{\left \vert \left \vert y \right \vert \right \vert} \\   &amp;\leq \epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert} {\left \vert \left \vert A \right \vert \right \vert}{\left \vert \left \vert x \right \vert \right \vert} + \epsilon{\left \vert \left \vert A^{-1} \right \vert \right \vert}{\left \vert \left \vert A \right \vert \right \vert}{\left \vert \left \vert y \right \vert \right \vert} \\   &amp;\leq \epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert} {\left \vert \left \vert A \right \vert \right \vert}\left({\left \vert \left \vert x \right \vert \right \vert} + {\left \vert \left \vert y \right \vert \right \vert}\right) \\
+  &amp;= \epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert} {\left \vert \left \vert A \right \vert \right \vert}\left({\left \vert \left \vert x \right \vert \right \vert} + \frac{1+r}{1-r}{\left \vert \left \vert x \right \vert \right \vert}\right) \Leftrightarrow \\
+\frac{{\left \vert \left \vert y-x \right \vert \right \vert}}{{\left \vert \left \vert x \right \vert \right \vert}} &amp;\leq \epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert} {\left \vert \left \vert A \right \vert \right \vert} \left(\frac{1-r}{1-r} + \frac{1+r}{1-r}\right) \\
+  &amp;= 2\epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert} {\left \vert \left \vert A \right \vert \right \vert} \frac{1}{1-r}
+\end{aligned}
+\]</span></p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="positional-numeral-system.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="orthogonalization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

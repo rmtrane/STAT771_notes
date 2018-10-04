@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>STAT 771: My notes</title>
+  <meta name="description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="STAT 771: My notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="STAT 771: My notes" />
+  
+  <meta name="twitter:description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison." />
+  
+
+<meta name="author" content="Ralph Møller Trane">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="floating-point-format.html">
+<link rel="next" href="singular-value-decomposition-svd.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Intro</a></li>
+<li class="chapter" data-level="1" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>1</b> Lecture Notes</a><ul>
+<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#lecture-1-96"><i class="fa fa-check"></i>Lecture 1: 9/6</a></li>
+<li class="chapter" data-level="1.1" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html"><i class="fa fa-check"></i><b>1.1</b> Positional numeral system</a></li>
+<li class="chapter" data-level="1.2" data-path="floating-point-format.html"><a href="floating-point-format.html"><i class="fa fa-check"></i><b>1.2</b> Floating Point Format</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="floating-point-format.html"><a href="floating-point-format.html#ieee-standards"><i class="fa fa-check"></i><b>1.2.1</b> IEEE Standards</a></li>
+<li class="chapter" data-level="1.2.2" data-path="floating-point-format.html"><a href="floating-point-format.html#errors"><i class="fa fa-check"></i><b>1.2.2</b> Errors</a></li>
+<li class="chapter" data-level="1.2.3" data-path="floating-point-format.html"><a href="floating-point-format.html#square-linear-systems"><i class="fa fa-check"></i><b>1.2.3</b> Square Linear Systems</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="orthogonalization.html"><a href="orthogonalization.html"><i class="fa fa-check"></i><b>1.3</b> Orthogonalization</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="orthogonalization.html"><a href="orthogonalization.html#motivating-problems"><i class="fa fa-check"></i><b>1.3.1</b> Motivating problems</a></li>
+<li class="chapter" data-level="" data-path="orthogonalization.html"><a href="orthogonalization.html#lecture-4-918"><i class="fa fa-check"></i>Lecture 4: 9/18</a></li>
+<li class="chapter" data-level="1.3.2" data-path="orthogonalization.html"><a href="orthogonalization.html#qr-decomposition"><i class="fa fa-check"></i><b>1.3.2</b> QR Decomposition</a></li>
+<li class="chapter" data-level="1.3.3" data-path="orthogonalization.html"><a href="orthogonalization.html#existence-of-qr-decomposition."><i class="fa fa-check"></i><b>1.3.3</b> Existence of QR-decomposition.</a></li>
+<li class="chapter" data-level="" data-path="orthogonalization.html"><a href="orthogonalization.html#lecture-5-920"><i class="fa fa-check"></i>Lecture 5: 9/20</a></li>
+<li class="chapter" data-level="1.3.4" data-path="orthogonalization.html"><a href="orthogonalization.html#large-data-problem"><i class="fa fa-check"></i><b>1.3.4</b> “Large” Data Problem</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html"><i class="fa fa-check"></i><b>1.4</b> Singular Value Decomposition (SVD)</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#motivating-problems-1"><i class="fa fa-check"></i><b>1.4.1</b> Motivating Problems</a></li>
+<li class="chapter" data-level="1.4.2" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#svd"><i class="fa fa-check"></i><b>1.4.2</b> SVD</a></li>
+<li class="chapter" data-level="1.4.3" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#existence-and-properties"><i class="fa fa-check"></i><b>1.4.3</b> Existence and Properties</a></li>
+<li class="chapter" data-level="1.4.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#random-projections"><i class="fa fa-check"></i><b>1.4.4</b> Random Projections</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
+<li class="chapter" data-level="2.1" data-path="homework-1.html"><a href="homework-1.html"><i class="fa fa-check"></i><b>2.1</b> Homework 1</a></li>
+<li class="chapter" data-level="2.2" data-path="homework-2.html"><a href="homework-2.html"><i class="fa fa-check"></i><b>2.2</b> Homework 2</a></li>
+<li class="chapter" data-level="2.3" data-path="homework-3.html"><a href="homework-3.html"><i class="fa fa-check"></i><b>2.3</b> Homework 3</a></li>
+<li class="chapter" data-level="2.4" data-path="homework-4.html"><a href="homework-4.html"><i class="fa fa-check"></i><b>2.4</b> Homework 4</a></li>
+<li class="chapter" data-level="2.5" data-path="homework-5.html"><a href="homework-5.html"><i class="fa fa-check"></i><b>2.5</b> Homework 5</a></li>
+<li class="chapter" data-level="2.6" data-path="homework-6.html"><a href="homework-6.html"><i class="fa fa-check"></i><b>2.6</b> Homework 6</a></li>
+<li class="chapter" data-level="2.7" data-path="homework-7.html"><a href="homework-7.html"><i class="fa fa-check"></i><b>2.7</b> Homework 7</a></li>
+<li class="chapter" data-level="2.8" data-path="homework-8.html"><a href="homework-8.html"><i class="fa fa-check"></i><b>2.8</b> Homework 8</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">STAT 771: My notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="orthogonalization" class="section level2">
+<h2><span class="header-section-number">1.3</span> Orthogonalization</h2>
+<p>Goals</p>
+<ol style="list-style-type: decimal">
+<li>Introduce and prove the existence of QR decomposition</li>
+<li>Overview of the algorithm to perfor QR decomposition</li>
+<li>Solve least squares problems</li>
+<li>“Large” data problems</li>
+</ol>
+<p>Outline</p>
+<ol style="list-style-type: decimal">
+<li>Motivating problems and solutions with QR</li>
+<li>Gram-Schmidt procedure, existence of QR</li>
+<li>Householder, Givens</li>
+<li>“Large” least squares problems datadown</li>
+</ol>
+<div id="motivating-problems" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Motivating problems</h3>
+
+<div class="example">
+<span id="exm:linear-system" class="example"><strong>Example 1.2  (Motivating Problem 1 (Consistent Linear System))  </strong></span>Assume <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}, n \geq m, \text{rank}(A) = m\)</span>, and <span class="math inline">\(b \in \text{range}(A) \subset R^m\)</span>. Find <span class="math inline">\(x \in {\mathbb{R}}^m\)</span> s.t. <span class="math inline">\(Ax = b\)</span>.
+</div>
+
+
+<div class="example">
+<span id="exm:least-squares" class="example"><strong>Example 1.3  (Motivating Problem 2 (Least Squares Regression))  </strong></span>Assume <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}, n \geq m, \text{rank}(A) = m\)</span>, and <span class="math inline">\(b \in R^n\)</span>. Find <span class="math inline">\(x \in {\mathbb{R}}^m\)</span> s.t. <span class="math display">\[x \in {\text{argmin}}_{y \in {\mathbb{R}}^m} {\left \vert \left \vert Ay-b \right \vert \right \vert}_2.\]</span>
+</div>
+
+
+<div class="example">
+<p><span id="exm:und-linear-system" class="example"><strong>Example 1.4  (Motivating Problem 3 (Underdetermined Linear System)  </strong></span>Assume <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}, n \geq m, \text{rank}(A) &lt; m\)</span>, and <span class="math inline">\(b \in \text{range}(A)\)</span>. Find <span class="math inline">\(x \in {\mathbb{R}}^m\)</span> s.t.</p>
+<span class="math display">\[x \in {\text{argmin}}_{y \in {\mathbb{R}}^m} \left\{ {\left \vert \left \vert y \right \vert \right \vert}_2 \left | Ay = b \right\} \right . .\]</span>
+</div>
+
+
+<div class="example">
+<p><span id="exm:und-least-squares" class="example"><strong>Example 1.5  (Motivating Problem 4 (Underdetermined Least Squares Regression))  </strong></span>Assume <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}, n \geq m, \text{rank}(A) &lt; m\)</span>, and <span class="math inline">\(b \in {\mathbb{R}}^n\)</span>. Find <span class="math inline">\(x \in {\mathbb{R}}^m\)</span> s.t.</p>
+<span class="math display">\[x \in {\text{argmin}}_{z \in {\mathbb{R}}^m} \left\{ {\left \vert \left \vert z \right \vert \right \vert}_2 \left | {\left \vert \left \vert Ay - b \right \vert \right \vert}_2 = \min_{y \in {\mathbb{R}}^m} {\left \vert \left \vert Ay-b \right \vert \right \vert}_2 \right\} \right . .\]</span>
+</div>
+
+
+<div class="example">
+<p><span id="exm:constrained-least-squares" class="example"><strong>Example 1.6  (Motivating Problem 5 (Constrained Least Squares Regression))  </strong></span>Assume <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}, n \geq m, \text{rank}(A) &lt; m\)</span>, and <span class="math inline">\(b \in {\mathbb{R}}^n\)</span>. Let <span class="math inline">\(C \in {\mathbb{R}}^{p\times m}, \text{C} = p\)</span>, and <span class="math inline">\(d \in {\mathbb{R}}^{p}\)</span>. Find <span class="math inline">\(x \in {\mathbb{R}}^m\)</span> s.t.</p>
+<span class="math display">\[x = {\text{argmin}}_{y \in {\mathbb{R}}^m} {\left \vert \left \vert Ay - b \right \vert \right \vert}_2\quad \text{s.t.} \quad Cy = d.\]</span>
+</div>
+
+<p>Before we take a crack at solving these problems, we will need to get some definitions down.</p>
+
+<div class="definition">
+<span id="def:perm-matrix" class="definition"><strong>Definition 1.4  (Permutation Matrix)  </strong></span>A permutation matrix is a square matrix such that each column has exactly one element that is <span class="math inline">\(1\)</span>, the rest are <span class="math inline">\(0\)</span>.
+</div>
+
+
+<div class="example">
+<p><span id="exm:unnamed-chunk-18" class="example"><strong>Example 1.7  </strong></span>The following is a permutation matrix:</p>
+<p><span class="math display">\[
+  \begin{bmatrix}
+    0 &amp; 1 \\
+    1 &amp; 0
+  \end{bmatrix}
+\]</span></p>
+</div>
+
+
+<div class="definition">
+<span id="def:orthogonal" class="definition"><strong>Definition 1.5  (Orthogonal Matrix)  </strong></span>A matrix <span class="math inline">\(Q\)</span> is said to be an <em>orthogonal matrix</em> if <span class="math inline">\(Q^T Q = Q Q^T = I\)</span>.
+</div>
+
+<p>Note: for an orthogonal matrix <span class="math inline">\(Q \in {\mathbb{R}}^{n\times m}\)</span>, it holds that <span class="math inline">\({\left \vert \left \vert Q_{i*} \right \vert \right \vert}_2 = 1\)</span> for all <span class="math inline">\(i=1,\ldots,n\)</span>, and <span class="math inline">\({\left \vert \left \vert Q_{*j} \right \vert \right \vert}_2 = 1\)</span> for all <span class="math inline">\(j = 1,\ldots, m\)</span>.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+
+<div class="definition">
+<span id="def:unnamed-chunk-19" class="definition"><strong>Definition 1.6  (Upper Triangular Matrix)  </strong></span>A matrix <span class="math inline">\(R\)</span> is an <em>upper triangular matrix</em> if <span class="math inline">\(R_{ij} = 0\)</span> for all <span class="math inline">\(i&gt;j\)</span>.
+</div>
+
+</div>
+<div id="lecture-4-918" class="section level3 unnumbered">
+<h3>Lecture 4: 9/18</h3>
+</div>
+<div id="qr-decomposition" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> QR Decomposition</h3>
+<p>In order to actually solve the problems listed above, we need the QR Decomposition:</p>
+
+<div class="theorem">
+<p><span id="thm:qr-decomposition" class="theorem"><strong>Theorem 1.2  (Existence of QR Decomposition)  </strong></span>Let <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span> and let <span class="math inline">\(r = rank(A)\)</span>. Then there exists:</p>
+<ol style="list-style-type: decimal">
+<li>an <span class="math inline">\(m\times m\)</span> permutation matrix <span class="math inline">\(\Pi\)</span>,</li>
+<li>an <span class="math inline">\(n \times n\)</span> orthogonal matrix <span class="math inline">\(Q\)</span>,</li>
+<li>an <span class="math inline">\(r \times r\)</span> upper triangular matrix <span class="math inline">\(R\)</span>, with non-zero diagonal elements (i.e. invertible)</li>
+<li>an <span class="math inline">\(r \times (m-r)\)</span> matrix S (if <span class="math inline">\(m &gt; r\)</span>),</li>
+</ol>
+<p>such that</p>
+<p><span class="math display">\[
+  A = Q \begin{bmatrix} R &amp; S \\ 0 &amp; 0 \end{bmatrix} \Pi^T.
+\]</span></p>
+</div>
+
+<p>With this in hand, we can solve the motivating problems stated above.</p>
+
+<div class="solution">
+<p> <span class="solution"><em>Solution</em> (Example <a href="orthogonalization.html#exm:linear-system">1.2</a>). </span>  We want to find <span class="math inline">\(x\)</span> such that <span class="math inline">\(Ax = b\)</span>.</p>
+<p>We use theorem <a href="orthogonalization.html#thm:qr-decomposition">1.2</a> to rewrite this as <span class="math inline">\(Q \begin{bmatrix} R \\ 0 \end{bmatrix} \Pi^T x = b\)</span>. Note that since <span class="math inline">\(\text{rank}(A) = m\)</span>, there is no <span class="math inline">\(S\)</span> matrix.</p>
+<p>Now, since <span class="math inline">\(Q\)</span> is an orthogonal matrix, we know that <span class="math inline">\(Q^{-1} = Q^T\)</span>, so</p>
+<span class="math display" id="eq:sol-linear-system">\[\begin{equation}
+  \begin{bmatrix} R \\ 0 \end{bmatrix} \Pi^T x = Q^T b = c = \begin{bmatrix} c_1 \\ 0 \end{bmatrix}. \tag{1.1}
+\end{equation}\]</span>
+<p>So now the equation we are trying to solve becomes</p>
+<p><span class="math display">\[
+  R \Pi^T x = c_1.
+\]</span></p>
+<p>Since <span class="math inline">\(R\)</span> is an upper triangular matrix with non-zero diagonal elements, it is invertible. Since <span class="math inline">\(\Pi\)</span> is a permutation matrix, <span class="math inline">\(\Pi^{-1} = \Pi^T\)</span>. Using this we can find the solution:</p>
+<p><span class="math display">\[
+  x = \Pi R^{-1} c_1.
+\]</span></p>
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution</em> (Example <a href="orthogonalization.html#exm:least-squares">1.3</a>). </span> We want to find <span class="math inline">\(x\)</span> such that <span class="math inline">\(x \in {\text{argmin}}_{y \in {\mathbb{R}}^m}{\left \vert \left \vert Ay-b \right \vert \right \vert}_2\)</span>.</p>
+<p>Once again, <span class="math inline">\(\text{rank}(A) = m\)</span>, so using theorem <a href="orthogonalization.html#thm:qr-decomposition">1.2</a>, we can rewrite the expression we are trying to minimize as</p>
+<p><span class="math display" id="eq:least-squares-eq1">\[
+  \min {\left \vert \left \vert Q \begin{bmatrix} R \\ 0 \end{bmatrix}\Pi^T y - b \right \vert \right \vert}_2. \tag{1.2}
+\]</span></p>
+<p>Since <span class="math inline">\(Q^T = Q^{-1}\)</span> is orthogonal, <span class="math inline">\({\left \vert \left \vert Q^T x \right \vert \right \vert}_2 = {\left \vert \left \vert x \right \vert \right \vert}_2\)</span> for all <span class="math inline">\(x\)</span> (homework exercise <a href="homework-4.html#exr:q402">1.29</a>). So, we get that <a href="orthogonalization.html#eq:least-squares-eq1">(1.2)</a> is the same as</p>
+<p><span class="math display">\[
+  \min{\left \vert \left \vert \begin{bmatrix} R \\ 0 \end{bmatrix} \Pi^T y - Q^T b \right \vert \right \vert}_2.
+\]</span></p>
+<p>Now let <span class="math inline">\(c = Q^T b\)</span>. Then, <span class="math inline">\(c\)</span> is of the form <span class="math inline">\(\begin{bmatrix} c_1 \\ c_2 \end{bmatrix}\)</span>, where <span class="math inline">\(c_2\)</span> is the last <span class="math inline">\(n-r\)</span> rows (i.e. corresponding to the <span class="math inline">\(0\)</span> rows of <span class="math inline">\(\begin{bmatrix} R \\ 0 \end{bmatrix}\)</span>). Then</p>
+<p><span class="math display">\[
+  \min{\left \vert \left \vert \begin{bmatrix} R \Pi^T y - c_1 \\ -c_2 \end{bmatrix} \right \vert \right \vert}_2 = \min \sqrt{{\left \vert \left \vert R \Pi^T y - c_1 \right \vert \right \vert}_2^2 + {\left \vert \left \vert c_2 \right \vert \right \vert}_2^2}.
+\]</span></p>
+<p>Now this is minimized by <span class="math inline">\({\text{argmin}}_y {\left \vert \left \vert R \Pi^T y - c_1 \right \vert \right \vert}_2^2\)</span>. As before, <span class="math inline">\(R^{-1}\)</span> exists since <span class="math inline">\(R\)</span> is upper triangular with non-zero diagonal elements, <span class="math inline">\(\Pi^T = \Pi^{-1}\)</span> since <span class="math inline">\(\Pi\)</span> is a permutation matrix, so</p>
+<p><span class="math display">\[
+  \begin{aligned}
+    x &amp;= {\text{argmin}}_y {\left \vert \left \vert R \Pi^T y - c_1 \right \vert \right \vert}_2^2 \Leftrightarrow \\
+    R \Pi^T x &amp;= c_1 \Leftrightarrow \\
+    x &amp;= \Pi R^{-1} c_1.
+  \end{aligned}
+\]</span></p>
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution</em> (Example <a href="orthogonalization.html#exm:und-linear-system">1.4</a>). </span>  In this scenario, <span class="math inline">\(\text{rank}(A) = r &lt; m\)</span>. We are looking for <span class="math inline">\(x \in {\text{argmin}}_{y}\left\{{\left \vert \left \vert y \right \vert \right \vert}_2 \left | Ay = b\right\}\right .\)</span>. Using theorem <a href="orthogonalization.html#thm:qr-decomposition">1.2</a>, we can rewrite this as <span class="math inline">\({\text{argmin}}_y\left\{{\left \vert \left \vert y \right \vert \right \vert}_2 | Q\begin{bmatrix} R &amp; S \\ 0 &amp; 0 \end{bmatrix} y = b \right\}\)</span>, and multiplying by <span class="math inline">\(Q^T\)</span>, <span class="math inline">\({\text{argmin}}_y\left\{{\left \vert \left \vert y \right \vert \right \vert}_2 \left | \begin{bmatrix} R &amp; S \\ 0 &amp; 0 \end{bmatrix} y = Q^T b \right\} \right .\)</span>. We introduce the vector <span class="math inline">\(c\)</span> such that <span class="math inline">\(Q^T b = \begin{bmatrix} c &amp; 0 \end{bmatrix}^T\)</span> (<span class="math inline">\(0\)</span> entries correspond to <span class="math inline">\(0\)</span> rows in <span class="math inline">\(\begin{bmatrix} R &amp; S \\ 0 &amp; 0 \end{bmatrix}\)</span>). If we furthermore write <span class="math inline">\(\Pi^T y\)</span> as <span class="math inline">\(\begin{bmatrix} z_1 &amp; z_2 \end{bmatrix}^T\)</span>.</p>
+<p>Then, since <span class="math inline">\({\left \vert \left \vert y \right \vert \right \vert}_2 = {\left \vert \left \vert z \right \vert \right \vert}_2\)</span>, our problem becomes</p>
+<p><span class="math display">\[
+  \begin{aligned}
+    x &amp;\in {\text{argmin}}_z \left\{{\left \vert \left \vert z \right \vert \right \vert}_2 \left | R z_1 + S z_2 = c \right\}\right. \\
+    x &amp;\in {\text{argmin}}_z \left\{{\left \vert \left \vert z \right \vert \right \vert}_2 \left | z_1 = R^{-1} c - R^{-1} S z_2 \right\}\right. \\
+    x &amp;\in {\text{argmin}}_z \sqrt{{\left \vert \left \vert R^{-1}c - R^{-1} S z_2 \right \vert \right \vert}_2^2 + {\left \vert \left \vert z_2 \right \vert \right \vert}_2^2} \\
+    x &amp;\in {\text{argmin}}_z \left\{{\left \vert \left \vert R^{-1}c - R^{-1} S z_2 \right \vert \right \vert}_2^2 + {\left \vert \left \vert z_2 \right \vert \right \vert}_2^2\right\},
+  \end{aligned}
+\]</span></p>
+<p>where the last equality is a consequence of the result proved in homework <a href="homework-4.html#exr:q403">1.30</a>. Now, let <span class="math inline">\(d = R^{-1}c\)</span> and <span class="math inline">\(P = R^{-1}S\)</span>. Then we can find the minimum of the above expression by differentiating and setting equal to zero:</p>
+<span class="math display">\[\begin{align}
+  0 &amp;= -P^Td + (P^TP + I)z_2 \rightarrow \\
+  z_2 &amp;= (P^T P + I)^{-1}P^Td.
+\end{align}\]</span>
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution</em> (Example <a href="orthogonalization.html#exm:und-least-squares">1.5</a>). </span>  We want to find <span class="math inline">\(\min_z \left\{ {\left \vert \left \vert z \right \vert \right \vert}_2 \left \vert z \in {\text{argmin}}_y {\left \vert \left \vert Ay - b \right \vert \right \vert}_2\right\} \right .\)</span> Use theorem <a href="orthogonalization.html#thm:qr-decomposition">1.2</a>:</p>
+<p><span class="math display">\[\begin{aligned}
+  \min_z \left\{ {\left \vert \left \vert z \right \vert \right \vert}_2 \left \vert z \in {\text{argmin}}_y {\left \vert \left \vert Ay - b \right \vert \right \vert}_2\right\} \right . &amp;= \left\{ {\left \vert \left \vert z \right \vert \right \vert}_2 \left \vert z \in {\text{argmin}}_y {\left \vert \left \vert \begin{bmatrix} R &amp; S \\ 0 &amp; 0 \end{bmatrix} \Pi^T y - Q^T b \right \vert \right \vert}_2\right\} \right . \\
+  &amp;= \left\{ {\left \vert \left \vert w \right \vert \right \vert}_2 \left \vert w \in {\text{argmin}}_y {\left \vert \left \vert \begin{bmatrix} R &amp; S \\ 0 &amp; 0 \end{bmatrix}  y - Q^T b \right \vert \right \vert}_2\right\} \right .,
+\end{aligned}\]</span></p>
+<p>since <span class="math inline">\({\left \vert \left \vert y \right \vert \right \vert}_2 = {\left \vert \left \vert \Pi^T y \right \vert \right \vert}_2\)</span>. This is exactly the problem solved in example <a href="orthogonalization.html#exm:und-linear-system">1.4</a>. In conclusion,</p>
+<p><span class="math display">\[
+  w = \begin{bmatrix} R^{-1}(c_1 - Sy_y) \\ y_2 \end{bmatrix}.
+\]</span></p>
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution</em> (Example <a href="orthogonalization.html#exm:constrained-least-squares">1.6</a>). </span> 
+</div>
+
+</div>
+<div id="existence-of-qr-decomposition." class="section level3">
+<h3><span class="header-section-number">1.3.3</span> Existence of QR-decomposition.</h3>
+<p>To prove the existence of the QR-decomposition, we need the Gram-Schmidt process.</p>
+
+<div class="lemma">
+<p><span id="lem:gsp" class="lemma"><strong>Lemma 1.8  (The Gram-Schmidt Process)  </strong></span>Let <span class="math inline">\(r \in {\mathbb{N}}\)</span>. Given a set of linearly independent vectors <span class="math inline">\(\{a_1, \ldots, a_r\}\)</span>, there exists a set of orthonormal vectors <span class="math inline">\(\{q_1, \ldots, q_r\}\)</span> such that <span class="math inline">\(\text{span} \{q_1, \ldots, q_r\} = \text{span}\{a_1, \ldots, a_r\}\)</span>.</p>
+<p>The <span class="math inline">\(q_i\)</span>’s are given by…</p>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> We will prove this by induction. For <span class="math inline">\(i=1\)</span>: let <span class="math inline">\(R_{11} = {\left \vert \left \vert a_1 \right \vert \right \vert}_2\)</span>, <span class="math inline">\(q_1 = \frac{1}{R_11}a_1\)</span>. Notice that <span class="math inline">\({\left \vert \left \vert q_1 \right \vert \right \vert} = 1\)</span>.</p>
+<p>(At this point, it might be beneficial to check out the intuitive side note (<a href="orthogonalization.html#cnj:gram-schmidt-remark">1.1</a>))</p>
+<p>Define <span class="math inline">\(q^r\)</span> in the following way: let <span class="math inline">\(R_{ir} = q_i^\prime a_r\)</span>, <span class="math inline">\(\tilde{q}_r = a_r - \sum_{i=1}^{r-1} R_{ir}q_i\)</span>, and <span class="math inline">\(R_{rr} = {\left \vert \left \vert \tilde{q}_r \right \vert \right \vert}_2\)</span>. Then <span class="math inline">\(q_r = \frac{\tilde{q}_r}{R_{rr}}\)</span>. (Note: <span class="math inline">\(\tilde{q}_r \neq 0\)</span> since the <span class="math inline">\(a_i\)</span>s are linearly independent, and <span class="math inline">\(q_i\)</span> is given as a linear combination of <span class="math inline">\(a_1, \ldots, a_i\)</span>.)</p>
+<p>Assume the result holds for <span class="math inline">\(i \le r-1\)</span>. I.e. we have vectors <span class="math inline">\(q_1, \ldots, q_{r-1}\)</span> given as above, and that</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(\text{span}\{q_1, \ldots, q_{r-1}\} = \text{span}\{a_1, \ldots, a_{r-1}\}\)</span>,</li>
+<li><span class="math inline">\(q_i \cdot q_j\)</span> for all <span class="math inline">\(i,j = 1, \ldots, r-1\)</span> with <span class="math inline">\(i \neq j\)</span>,</li>
+<li><span class="math inline">\(q_i^\prime \cdot q_i = 1\)</span> for all <span class="math inline">\(i = 1, \ldots, r-1\)</span>.</li>
+</ol>
+<p>Now, we want to show that we can construct a <span class="math inline">\(q_r\)</span> such that</p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(\text{span}\{q_1, \ldots, q_r\} = \text{span}\{a_1, \ldots, a_r\}\)</span>,</li>
+<li><span class="math inline">\(q_r \cdot q_j = 0\)</span> for all <span class="math inline">\(j = 1, \ldots, r-1\)</span>,</li>
+<li><span class="math inline">\(q_r^\prime \cdot q_r = 1\)</span>.</li>
+</ol>
+<p>We start from below.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>By definition of <span class="math inline">\(q_r\)</span>: <span class="math inline">\(q_r^\prime q_r = \frac{\tilde{q}_r^\prime \tilde{q}_r}{R_{rr}^2} = \frac{{\left \vert \left \vert \tilde{q}_r \right \vert \right \vert}^2}{R_{rr}^2} = 1\)</span>.</li>
+<li>Let <span class="math inline">\(i &lt; r\)</span>. Then</li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+  q_i^{\prime} \tilde{q}_r &amp;= q_i^\prime a_r - \sum_{j=1}^{r-1} R_{jr} q_i^\prime q_j \\
+                           &amp;= q_i^\prime a_r - R_{ir} q_i^\prime q_i \\
+                           &amp;= q_i^\prime a_r - R_{ir} = 0 \text{ (by definition of } R_{ir}\text{)}.
+\end{aligned}\]</span></p>
+<ol style="list-style-type: lower-alpha">
+<li>We need to show that <span class="math inline">\(a_r\)</span> can be written as a linear combination of <span class="math inline">\(q_i\)</span>s.</li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+  \sum_{i=1}^r R_{ir} q_i &amp;= \sum_{i=1}^{r-1} R_{ir} q_i + R_{rr} q_r \\
+                          &amp;= \sum_{i=1}^{r-1} R_{ir} q_i + R_{rr} \frac{1}{R_{rr}} \tilde{q}_r \\
+                          &amp;= \sum_{i=1}^{r-1} R_{ir} q_i + R_{rr} \frac{1}{R_{rr}} \left(a_r - \sum_{i=1}^{r-1} R_{ir}q_i \right) \\
+                          &amp;= \sum_{i=1}^{r-1} R_{ir} q_i + a_r - \sum_{i=1}^{r-1} R_{ir}q_i \\
+                          &amp;= a_r.
+\end{aligned}\]</span></p>
+</div>
+
+
+<div class="conjecture">
+<p><span id="cnj:gram-schmidt-remark" class="conjecture"><strong>Remark 1.1  (Intuitive side note)  </strong></span>It is fairly easy to find <span class="math inline">\(q_2\)</span>. We want to find it such that <span class="math inline">\(a_2 = R_{12}q_1 + R_{22} q_2\)</span>, and <span class="math inline">\({\left \vert \left \vert q_2 \right \vert \right \vert}_2 = 1\)</span> and <span class="math inline">\(q_1 \perp q_2\)</span>, i.e. <span class="math inline">\(q_1 \cdot q_2 = 0\)</span>. So, if we multiply the equation by <span class="math inline">\(q_1\)</span>, we get that <span class="math inline">\(q_1 a_2 = R_{12}\)</span>. Substituting this into the first equation, <span class="math inline">\(q_2 = \frac{a_2 - R_{12} q_1}{R_{22}}\)</span>.</p>
+Note that this is a circular argument, and hence not a formal way of doing this.
+</div>
+
+</div>
+<div id="lecture-5-920" class="section level3 unnumbered">
+<h3>Lecture 5: 9/20</h3>
+<p>(Finished up proof of The Gram-Schmidt Process (<a href="orthogonalization.html#lem:gsp">1.8</a>))</p>
+
+<div class="conjecture">
+<p><span id="cnj:unnamed-chunk-26" class="conjecture"><strong>Remark 1.2  (Gram-Schmidt in Matrix Form)  </strong></span>If we write up <span class="math inline">\(a_1, \ldots, a_r\)</span> in a matrix, we see that</p>
+<p><span class="math display">\[
+  \begin{bmatrix}
+    a_1 &amp; \dots &amp; a_r
+  \end{bmatrix} =
+      \begin{bmatrix}
+        q_1 &amp; \dots &amp; q_r
+      \end{bmatrix}
+        \begin{bmatrix}
+          R_{11} &amp; R_{12} &amp; \dots &amp; R_{1r} \\
+          0      &amp; R_{22} &amp; \dots &amp; R_{2r} \\
+          \vdots &amp; \ddots &amp; \ddots &amp;  \vdots \\
+          0 &amp; \ldots &amp; 0 &amp; R_{rr}
+        \end{bmatrix}
+\]</span></p>
+This is quite similar to the result we are after (the QR-decomposition <a href="orthogonalization.html#thm:qr-decomposition">1.2</a>).
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof</em> (Proof of theorem <a href="orthogonalization.html#thm:qr-decomposition">1.2</a>). </span> Since <span class="math inline">\(\text{rank}(A) = r\)</span>, <span class="math inline">\(A\)</span> has <span class="math inline">\(r\)</span> linearly independent columns. Hence, there exists a permutation matrix <span class="math inline">\(\Pi\)</span> such that</p>
+<p><span class="math display">\[
+  A \Pi = \begin{bmatrix} a_1 &amp; \dots &amp; a_r &amp; a_{r+1} \dots a_m \end{bmatrix},
+\]</span></p>
+<p>where <span class="math inline">\(a_1, \ldots, a_r\)</span> are linearly independent, and <span class="math inline">\(a_{r+1}, \ldots, a_m\)</span> are linearly dependent on the first <span class="math inline">\(r\)</span> columns.</p>
+<p>Using Gram-Schmidt (lemma <a href="orthogonalization.html#lem:gsp">1.8</a>), we know that there exists <span class="math inline">\(\tilde{Q} \in {\mathbb{R}}^{n \times r}, R \in {\mathbb{R}}^{r \times r}\)</span> such that <span class="math inline">\(A\Pi = \tilde{Q} R\)</span>. Since <span class="math inline">\(\text{span}\{\tilde{q}_1, \ldots, \tilde{q}_r\}\)</span> (columns of <span class="math inline">\(\tilde{Q}\)</span>) is equal to <span class="math inline">\(\text{span}\{a_1, \ldots, a_r\}\)</span>, there exists an <span class="math inline">\(s_{k(j-r+2)}\)</span> for any <span class="math inline">\(j \in \{r+1, \ldots, m\}\)</span> and <span class="math inline">\(k \in \{1, \ldots, r\}\)</span> such that <span class="math inline">\(a_j = \sum_{k=1}^r s_{k(j-r+2)}q_k\)</span>. So,</p>
+<p><span class="math display">\[
+  A\Pi = \tilde{Q} \begin{bmatrix} R &amp; S \end{bmatrix}.
+\]</span></p>
+<p>This is almost the form we want, BUT <span class="math inline">\(\tilde{Q}\)</span> is not orthonormal (it is not square). However, we know that we can pick <span class="math inline">\(n-r\)</span> vectors from <span class="math inline">\({\mathbb{R}}^n\)</span> such that adding these as columns to <span class="math inline">\(\tilde{Q}\)</span> we get a set of <span class="math inline">\(n\)</span> linearly independent columns. Now, use Gram-Schmidt to normalize. Since the first <span class="math inline">\(r\)</span> columns are already normalized, these will stay the same. The result is a matrix <span class="math inline">\(Q\)</span>, where the columns are all length <span class="math inline">\(1\)</span>, and they are all linearly independent. I.e. <span class="math inline">\(Q^TQ = I\)</span>. So, <span class="math inline">\(A\Pi = Q \begin{bmatrix} R &amp; S \\ 0 &amp; 0 \end{bmatrix}\)</span>, hence</p>
+<p><span class="math display">\[
+  A = Q \begin{bmatrix} R &amp; S \\ 0 &amp; 0 \end{bmatrix} \Pi^T.
+\]</span></p>
+</div>
+
+<p>Basically, this gives us a way to perform QR decomposition. However, using the Gram-Schmidt procedure is NOT numerical stable. I.e. we might end up with matrices <span class="math inline">\(Q, R\)</span>, and <span class="math inline">\(S\)</span> from which we CANNOT recover <span class="math inline">\(A\)</span>. To overcome this, there is a different method called the <em>Modified Gram-Schmidt Procedure</em>.</p>
+
+<div class="lemma">
+<span id="lem:mod-gsp" class="lemma"><strong>Lemma 1.9  (The Modified Gram-Schmidt Procedure)  </strong></span><strong>HOMEWORK</strong>
+</div>
+
+
+<div class="definition">
+<span id="def:householder" class="definition"><strong>Definition 1.7  (Householder Reflections)  </strong></span>A matrix <span class="math inline">\(H = I - 2vv^\prime\)</span>, where <span class="math inline">\({\left \vert \left \vert v \right \vert \right \vert}_2 = 1\)</span>, is called a <em>Householder Reflection</em>.
+</div>
+
+<p>A Householder reflection takes any vector and reflects it over <span class="math inline">\(\{tv: t \in {\mathbb{R}}\}\)</span>.</p>
+
+<div class="lemma">
+<span id="lem:unnamed-chunk-28" class="lemma"><strong>Lemma 1.10  </strong></span>Householder reflections are orthogonal matrices.
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> By definition of a Householder matrix (<a href="orthogonalization.html#def:householder">1.7</a>), <span class="math inline">\(H = I - 2vv^\prime\)</span> for a <span class="math inline">\(v\)</span> with <span class="math inline">\({\left \vert \left \vert v \right \vert \right \vert}_2 = 1\)</span>.</p>
+<p>So,</p>
+<p><span class="math display">\[\begin{aligned}
+  H^\prime H &amp;= (I - 2vv^\prime)^\prime (I - 2vv^\prime) \\
+             &amp;= (I^\prime - 2(vv^\prime)^\prime)(I - 2 vv^\prime)\\
+             &amp;= (I - 2vv^\prime)(I - 2 vv^\prime) \\
+             &amp;= I - 2vv^\prime - 2vv^\prime + 4 vv^\prime v v^\prime \quad\left(\text{ recall: } v^\prime v = {\left \vert \left \vert v \right \vert \right \vert}_2 = 1\right)\\
+             &amp;= I - 2vv^\prime - 2vv^\prime + 4 vv^\prime \\
+             &amp;= I.
+\end{aligned}\]</span></p>
+So by definition (<a href="orthogonalization.html#def:orthogonal">1.5</a>), <span class="math inline">\(H\)</span> is an orthogonal matrix.
+</div>
+
+
+<div class="lemma">
+<span id="lem:unnamed-chunk-30" class="lemma"><strong>Lemma 1.11  </strong></span>There exists Householder refelctions <span class="math inline">\(H_1, \cdots, H_r\)</span> such that <span class="math inline">\(H_r \cdots H_1 \cdot A\cdot\Pi = R\)</span>.
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> Let <span class="math inline">\(A\Pi = \begin{bmatrix} a_1 \dots a_r \end{bmatrix}\)</span>. Choose <span class="math inline">\(H_1\)</span> s.t. <span class="math inline">\(H_1 a_1 = R_{11} e_1 = a_1 - 2v_1v_1^\prime a_1\)</span> (last equality due to definition of Householder reflections). This is equivalent to <span class="math inline">\(v_1(2v_1^\prime a_1) = a_1 - R_{11}e_1\)</span>.</p>
+<p>Now, let <span class="math inline">\(v_1 = \frac{a_1 - R_{11}e_1}{{\left \vert \left \vert a_1 - R_{11}e_2 \right \vert \right \vert}_2}\)</span>. Plug this into the equation for <span class="math inline">\(R_{11}e_1\)</span> above to get</p>
+<p><span class="math display">\[
+  R_{11}e_1 = a_1 - \frac{(a_1 - R_{11}e_1)}{{\left \vert \left \vert a_1 - R_{11}e_1 \right \vert \right \vert}_2}\frac{a_1^\prime a_1 - R_{11} a_1^\prime e_1}{{\left \vert \left \vert a_1 - R_{11}e_1 \right \vert \right \vert}_2}.
+\]</span></p>
+<p>If we multiply this by <span class="math inline">\(e_1^\prime\)</span> from the right, we get</p>
+<p><span class="math display">\[
+  R_{11} = \pm {\left \vert \left \vert a_1 \right \vert \right \vert}_2, v_1 = \frac{a_1 - {\left \vert \left \vert a_1 \right \vert \right \vert}e_1}{{\left \vert \left \vert a_1 - {\left \vert \left \vert a_1 \right \vert \right \vert}_2 e_1 \right \vert \right \vert}_2}.
+\]</span></p>
+<p><span class="math display">\[
+  H_1 = I - \frac{a_1 - {\left \vert \left \vert a_1 \right \vert \right \vert}_2e_1)(a_1 - {\left \vert \left \vert a_1 \right \vert \right \vert}_2 e_1)}{{\left \vert \left \vert a_1 - {\left \vert \left \vert a_1 \right \vert \right \vert}_2 e_1 \right \vert \right \vert}_2^2}
+\]</span></p>
+</div>
+
+
+<div class="definition">
+<p><span id="def:givens" class="definition"><strong>Definition 1.8  (Givens Rotations)  </strong></span>A <em>Givens Rotation</em> is a matrix <span class="math inline">\(G^{(i,j)}\)</span> with entries <span class="math inline">\((g_{ij})\)</span> such that</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(g_{ii} = g_{jj} = \lambda\)</span> (the <span class="math inline">\(i\)</span>th and <span class="math inline">\(j\)</span>th elements of the diagonal are <span class="math inline">\(\lambda\)</span>).</li>
+<li><span class="math inline">\(g_{kk} = 1\)</span> for all <span class="math inline">\(k \notin \{i,j\}\)</span>. (all other diagonal elements are <span class="math inline">\(1\)</span>)</li>
+<li><span class="math inline">\(g_{ij} = -g_{ji} = \sigma\)</span></li>
+<li><span class="math inline">\(g_{ij} = 0\)</span> for all other pairs of <span class="math inline">\(i,j\)</span>.</li>
+</ol>
+<p>In words: <span class="math inline">\(G^{(i,j)}\)</span> is the identity matrix with the <span class="math inline">\(i\)</span>th and <span class="math inline">\(j\)</span>th diagonal elements made <span class="math inline">\(\lambda\)</span>, and the entries at <span class="math inline">\((i,j)\)</span> and <span class="math inline">\((j,i)\)</span> are <span class="math inline">\(\sigma\)</span>.</p>
+</div>
+
+
+<div class="example">
+<p><span id="exm:unnamed-chunk-32" class="example"><strong>Example 1.8  (2x2 Givens rotation to create upper triangular matrix.)  </strong></span>The general <span class="math inline">\(G^{(1,2)}\)</span> is <span class="math inline">\(\begin{bmatrix} \lambda &amp; \sigma \\ -\sigma &amp; \lambda \end{bmatrix}\)</span>. Let us consider a general <span class="math inline">\(M \in {\mathbb{R}}^{2\times m}\)</span>:</p>
+<p><span class="math display">\[
+  M = \begin{bmatrix} M_{11} &amp; M_{12} &amp; \dots &amp; M_{1m} \\
+                      M_{21} &amp; M_{22} &amp; \dots &amp; M_{2m} \end{bmatrix}.
+\]</span></p>
+<p>We want this Givens matrix to be orthogonal. By homework exercise <a href="homework-5.html#exr:q507">1.43</a>, we know this is the case when <span class="math inline">\(\lambda^2 + \delta^2 = 1\)</span>. We also want <span class="math inline">\(G^{(1,2)}M\)</span> to be an upper triangular matrix. Since</p>
+<p><span class="math display">\[
+  G^{(i,j)} M =
+    \begin{bmatrix}
+      \lambda M_{11} + \sigma M_{12} &amp; \dots &amp; \lambda M_{1m} + \sigma M_{2m} \\
+      -\sigma M_{11} + \lambda M_{12} &amp; \dots &amp; -\sigma M_{1m} + \lambda M_{2m} \\
+    \end{bmatrix},
+\]</span></p>
+<p>we need <span class="math inline">\(\lambda M_{12} = \sigma M_{11}\)</span>. So, solving these two equations, we find that <span class="math inline">\(\lambda = \frac{M_{11}}{\sqrt{M_{11}^2 + M_{21}^2}}\)</span> and <span class="math inline">\(\sigma = \frac{M_{21}}{\sqrt{M_{11}^2 + M_{21}^2}}\)</span>. Hence, given the matrix <span class="math inline">\(M\)</span>, we can find a Givens rotation which when multiplied by <span class="math inline">\(M\)</span> returns an upper triangular matrix.</p>
+<p>This also means that given a vector <span class="math inline">\(a \in {\mathbb{R}}^n\)</span>, we can find a Givens rotation such that <span class="math inline">\(G^{(i,j)} a\)</span> gives back <span class="math inline">\(a\)</span> except for one entry, which has been changed to <span class="math inline">\(0\)</span>.</p>
+</div>
+
+</div>
+<div id="large-data-problem" class="section level3">
+<h3><span class="header-section-number">1.3.4</span> “Large” Data Problem</h3>
+<p>Finally, we will take a look at how to solve a “large” data problem using QR decomposition. To do so, let <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span> be a matrix with <span class="math inline">\(n\)</span> “big”. By “big”, we mean so large that <span class="math inline">\(A\)</span> won’t fit in memory, but the first <span class="math inline">\(m+1\)</span> rows of <span class="math inline">\(A\)</span> will.</p>
+<p>Gentleman published a few papers in 1973/1974 describing a method for incremental QR decomposition. The key ideas are as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Remember that the solution to the linear model is <span class="math inline">\((A&#39;A)^{-1}A&#39;b = R^{-1}(Q&#39;b)\)</span>.</li>
+<li>The QR decomposition of <span class="math inline">\(\begin{bmatrix}A &amp; b\end{bmatrix}\)</span> gives <span class="math inline">\(\begin{bmatrix} R &amp; Q&#39;b \\ 0 &amp; S \end{bmatrix}\)</span> (ex. <a href="homework-4.html#exr:q407">1.34</a> and <a href="homework-4.html#exr:q408">1.35</a>)</li>
+</ol>
+<p>Now, if we do QR decomposition on the first <span class="math inline">\(m+1\)</span> rows of <span class="math inline">\(A\)</span> we get <span class="math inline">\(\begin{bmatrix} \tilde{R}_{m+1} &amp; \tilde{Q}_{m+1}&#39;b_{m+1} \\ 0 &amp; S_{m+1} \end{bmatrix}\)</span>. Now, add the next row of <span class="math inline">\(A\)</span> to get <span class="math inline">\(\begin{bmatrix} \tilde{R}_{m+1} &amp; \tilde{Q}_{m+1}&#39;b_{m+1} \\ 0 &amp; S_{m+1} \\ a_{m+2} &amp; b_{m+2} \end{bmatrix}\)</span>. Hit this with the right Givens rotation to change entry <span class="math inline">\((m+1, 1)\)</span> to <span class="math inline">\(0\)</span>. This will give us something of the form <span class="math inline">\(\begin{bmatrix} \tilde{R}_{m+2} &amp; \tilde{Q}_{m+2}&#39;b_{m+2} \\ 0 &amp; S_{m+2} \end{bmatrix}\)</span>. Here, <span class="math inline">\(\tilde{R}_{m+2}\)</span> is still an upper triangular matrix with less than <span class="math inline">\(m\)</span> rows. Repeat the procedure until we’ve added all rows of <span class="math inline">\(A\)</span>/elements of <span class="math inline">\(b\)</span>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Here we use the notion <span class="math inline">\(Q_{i*}\)</span> to mean the <span class="math inline">\(i\)</span>’th row, and <span class="math inline">\(Q_{*j}\)</span> to mean the <span class="math inline">\(j\)</span>’th column of <span class="math inline">\(Q\)</span>.<a href="orthogonalization.html#fnref1">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="floating-point-format.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="singular-value-decomposition-svd.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
