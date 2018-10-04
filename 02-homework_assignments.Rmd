@@ -79,7 +79,7 @@ Write a function that takes a decimal number, base, and precision, and returns t
 The function provided in class is actually the solution (?). This is guarenteed to give a normalized FP representation. Using this algorithm gives $d_0 = \lfloor \frac{N}{\beta^{\lfloor log_{\beta}\left(N\right) \rfloor}}\rfloor$. It holds that $\lfloor log_{\beta}\left(N\right) \rfloor \le log_\beta\left(N\right)$, which implies that $\beta^{\lfloor log_{\beta}\left(N\right) \rfloor} \le \beta^{log_\beta\left(N\right)} = N$ (remember, $\beta \geq 2$). Hence, $d_0 > 0$.
 ```
 
-```{julia}
+```{julia, eval = FALSE}
 get_normalized_FP = function(number::Float64, base::Int64, prec::Int64)
     #number = 4; base = float(10); prec = 2
     si=sign(number)
@@ -101,7 +101,7 @@ end
 List all normalized fp numbers that can be representated given base, precision, $e_{min}$, and $e_{max}$. 
 ```
 
-```{julia}
+```{julia, eval FALSE}
 all_normalized_fp = function(base::Int64, prec::Int64, emin::Int64, emax::Int64)
     ## Number of possible values for each e:
     N = (base-1)*base^(prec-1)#*(emax-emin+1)
@@ -146,7 +146,7 @@ What is the smallest non-normalized positive value for the 64 bit standard?
 The smallest non-normalized positive value is 
 
 $$
-  \left(0 + 0\cdot 2^{-1} + \ldots + 0\cdot 2^{-51} + 1\cdot 2^{-52} \right )\cdot 2^{-1022} = 2^{-1074} \approx 4.94\cdot 10^{324}
+  \left(0 + 0\cdot 2^{-1} + \ldots + 0\cdot 2^{-51} + 1\cdot 2^{-52} \right )\cdot 2^{-1022} = 2^{-1074} \approx 4.94\cdot 10^{-324}
 $$
 ```
 
@@ -158,7 +158,7 @@ What is the smallest normalized positive value?
 The smallest normalized positive value is 
 
 $$
-  \left(1 + 0\cdot 2^{-1} + \ldots + 0\cdot 2^{-52} \right )\cdot 2^{-1022} = 2^{-1022} \approx 2.23 \cdot 10^{308}
+  \left(1 + 0\cdot 2^{-1} + \ldots + 0\cdot 2^{-52} \right )\cdot 2^{-1022} = 2^{-1022} \approx 2.23 \cdot 10^{-308}
 $$
 ```
 
@@ -170,7 +170,7 @@ What is the largest normalized positive value?
 The largest normalized finite value is
 
 $$
-  \left(1 + 1\cdot 2^{-1} + \ldots + 1\cdot 2^{-52} \right )\cdot 2^{-1022} \approx 1.80\cdot 10^{308}.
+  \left(1 + 1\cdot 2^{-1} + \ldots + 1\cdot 2^{-52} \right )\cdot 2^{1023} \approx 1.80\cdot 10^{308}.
 $$
 ```
 
@@ -292,11 +292,11 @@ $$\begin{aligned}
   
 Since $\norm{\tilde{x}}_\infty = 1$, we have that 
 
-$$
+$$\begin{aligned}
   \max_{\norm{x} = 1} \norm{Ax}_\infty &= |a_{j1} \tilde{x}_1 + \dots + a_{jm}\tilde{x}_1| \\
                                        &= |a_{j1}| + \dots + |a_{jm}| \\
                                        &= \max_{1\le j \le n} \sum_{i=1}^n |a_{ji}|,
-$$
+\end{aligned}$$
   
 which is exactly the maximum over the $\mathcal{l}^1$-norms of the rows in $A$. 
 
@@ -316,32 +316,26 @@ $$\left|\left| fl(A)-A \right|\right|_p \leq u \left|\left|A\right|\right|_p$$
 \end{align*}
 ```
 
-\begin{solution}
-\begin{align*}
-  \left | \left | fl(A) - A \right | \right |_p &= \left|\left| \left [ fl(a_{ij}) - a_{ij} \right ] \right|\right|_p \\
-                                                &\leq \left|\left| \left[u\cdot a_{ij}\right]\right|\right|_p \\
-                                                &= \norm{u\cdot A}_p = u\left|\left|A\right|\right|
-\end{align*}
-\end{solution}
-
-
 ## Homework 3
 
 ```{exercise, q301}
 Prove lemma \@ref(lem:proofHW). 
 ```
 
-```{proof}
+```{solution}
 Recall that a matrix $A$ is invertible if and only if $Ax = 0$ implies that $x = 0$. So to check that $I-F$ is invertible, we check this:
   
 $$
-  (I-F)x = x-Fx \Rightarrow x = Fx \Rightarrow \norm{x}_p \leq \norm{F}_p \norm{x}_p.
+  (I-F)x = x-Fx = 0 \Rightarrow x = Fx \Rightarrow \norm{x}_p \leq \norm{F}_p \norm{x}_p.
 $$
   
 Since $\norm{F}_p < 1$ by assumption, the only solution to the inequality above is $x = 0$. So, $I-F$ is invertible. 
 
 
-  
+Note that $\sum_{k=0}^N F^k (I - F) = I - F^{N+1}$. Since $\norm{F^k}_p < \norm{F}_p^k < 1$, we know that $F^N \rightarrow 0$ as $N \rightarrow \infty$. So, $\sum_{k=0}^\infty F^k (I-F) = I$, and using that $I-F$ is invertible, we get $(I-F)^{-1} = \sum_{k=0}^\infty F^k$. Finally,
+
+$$\norm{(I-F)^{-1}}_p \leq \sum{k=1}^\infty \norm{F}_p^k = \frac{1}{1- \norm{F}_p}$$. 
+
 ```
 
 ```{exercise, q302}
@@ -359,7 +353,6 @@ Generate examples that show the bound in theorem \@ref(thm:kappa-bound) is too c
 ```
 
 
-
 ```{exercise, q304}
 Generate examples that show the bound is nearly achieved
 ```
@@ -370,9 +363,11 @@ For motivating problems 1-5, when is $x$ unique?
 ```
 
 ```{solution}
+\\newline 
 
-* Motivating Problem 1: x is unique by definition
-* Motivating Problem 2: 
+- Motivating Problem 1: x is unique by definition
+
+- Motivating Problem 2: 
 
 ```
 
@@ -501,11 +496,11 @@ $$
 ```
 
 ```{exercise, q403}
-Let f be a vector-valued function over $\R^d$. When is $$\min_x \norm{f(x)}_2 = \min_x \norm{f(x)}_2^2.$$
+Let f be a vector-valued function over $\R^d$. When is $$\argmin_x \norm{f(x)}_2 = \argmin_x \norm{f(x)}_2^2.$$
 ```
 
 ```{solution, s403}
-Should this be $\argmin_x \norm{f(x)}_2 = \argmin_x \norm{f(x)}_2^2$ instead? 
+Most of the time...?
 ```
 
 
@@ -531,11 +526,15 @@ For all motivating problems, implement solutions.
 
 </br>
 
-For the following, assume $A \in \R^{n\times m}$ with $\text{rank}(A) = m$, and $b \in \R^n$. Let $C = \begin{bmatrix} A b \end{bmatrix}$. 
+For the following, assume $A \in \R^{n\times m}$ with $\text{rank}(A) = m$, and $b \in \R^n$. Let $C = \begin{bmatrix} A & b \end{bmatrix}$. 
 
 
 ```{exercise, q407}
 What does the last column of $R$ (from the QR decomposition of $C$) represent?
+```
+
+```{solution, s407}
+?? 
 ```
 
 ```{exercise, q408}
@@ -550,16 +549,26 @@ How can this be used in computation?
 
 ```{exercise, q501}
 Implement the Gram-Schmidt procedure for matrices $A \in \R^{n \times m}$ assuming $A$ has full column rank.
-
+  
 Create examples to show that the function works (well enough).
+```
+
+```{solution, s501}
+See [here](Homework/gram_schmidt.jl).
 ```
 
 ```{exercise, q502}
 Find examples where Gram-Schmidt fails, i.e. where either $Q R \neq A$ or $Q^TQ \neq I$. 
 ```
 
+
+
 ```{exercise, q503}
 Look up the modified Gram-Schmidt Procedure and implement it (again assuming $A$ has full column rank). 
+```
+
+```{solution, s503}
+See [here](Homework/modified_gs.jl).
 ```
 
 
@@ -581,15 +590,100 @@ Show that Householder reflections are orthogonal matrices.
 ```
 
 ```{solution}
-Show that $H^\prime H = I$. 
+Show that $H^\prime H = I$. By definition of a Householder matrix (\@ref(def:householder)), $H = I - 2vv^\prime$ for a $v$ with $\norm{v}_2 = 1$. Note that $\norm{v}_2 = \sqrt{v^\prime \cdot v}$. 
+
+So,
+
+$$\begin{aligned}
+  H^\prime H &= (I - 2vv^\prime)^\prime (I - 2vv^\prime) \\
+             &= (I^\prime - 2(vv^\prime)^\prime)(I - 2 vv^\prime)\\
+             &= (I - 2vv^\prime)(I - 2 vv^\prime) \\
+             &= I - 2vv^\prime - 2vv^\prime + 4 vv^\prime v v^\prime \\
+             &= I - 2vv^\prime - 2vv^\prime + 4 v I v^\prime \\
+             &= I.
+\end{aligned}$$  
+    
+So by definition (\@ref(def:orthogonal)), $H$ is an orthogonal matrix.
 ```
 
 ```{exercise, q506}
-Show that $\begin{bmatrix} H_r \cdots h_1 \end{bmatrix}$ is orthogonal.
+Show that if $H_1, \dots, H_r$ are Householder reflections, then $H_r \cdots H_1$ (i.e. the product) is orthogonal.
 ```
+
+```{solution, s506}
+
+$$(H_r \cdots H_1)^\prime (H_r \cdots H_1) &= H_1^\prime \cdots \H_r^\prime H_r \cdots H_1 = I,$$
+  
+since all $H_i$ are Householder reflections, which implies they are orthogonal, which implies $H_i^\prime H_i = I$. 
+```
+
+
 
 ```{exercise, q507}
 Show that a Givens rotation is an orthonormal matrix when $\sigma^2 + \lambda^2 = 1$. 
+```
+
+```{solution, s507}
+
+Let $G^{(a,b)}$ be a Givens rotation. I.e. the elements $g_{i,j}$ are 
+
+$$
+  g_{i,j} = 
+  \left\{ 
+    \begin{array}{rl} 
+      1, & i = j \notin \{a,b\} \\
+      \lambda, & i = j \in \{a,b\} \\
+      \sigma, & i = a, j = b \\
+      -\sigma, & i = b, j = a \\
+      0, & \text{ otherwise}
+    \end{array} 
+  \right.
+$$
+        
+Transposing this matrix gives us a new matrix $K$ where
+      
+$$
+  k_{i,j} = 
+  \left\{ 
+    \begin{array}{rl} 
+      1, & i = j \notin \{a,b\} \\
+      \lambda, & i = j \in \{a,b\} \\
+      -\sigma, & i = a, j = b \\
+      \sigma, & i = b, j = a \\
+      0, & \text{ otherwise}
+    \end{array} 
+  \right.
+$$
+
+Now, let $L = K \cdot G$. Then the elements of $L$ are $l_{i,j} = \sum_{s=1}^n k_{i,s} g_{s,j}$. 
+      
+If $i \neq a,\ j \neq b$, and $i \neq j$, then $l_{i,j} = k_{i,i} g_{i,j} = 0$ (since $g_{i,j} = 0$). 
+
+If $i \notin \{a, b\}$, then $l_{i,i} = k_{i,i} g_{i,i} = 1$ (since $i \notin \{a,b\}$).
+
+If $j \notin \{a,b\}$, then $l_{a,j} = k_{a,b}g_{b,j} + k_{a,a}g_{a,j} = 0$ (since $j \notin \{a,b\}$ implies $g_{b,j} = 0$ and $g_{a,j} = 0$).
+
+Furthermore, 
+
+* $l_{a,b} = k_{a,b}g_{b,b} + k_{a,a}g_{a,b} = -\sigma \lambda + \lambda \sigma = 0$,
+* $l_{a,a} = k_{a,b} g_{b,a} + k_{a,a} g_{a,a} = (-\sigma)(-\sigma) + \lambda \lambda = \sigma^2 + \lambda^2$,
+* $l_{b,b} = k_{a,b} g_{b,a} + k_{a,a} g_{a,a} = (-\sigma)(-\sigma) + \lambda \lambda = \sigma^2 + \lambda^2$.
+
+So,
+      
+$$
+  l_{i,j} = 
+  \left\{ 
+    \begin{array}{rl} 
+      1, & i = j \notin \{a,b\} \\
+      \sigma^2 + \lambda^2, & i = j \in \{a,b\} \\
+      0, & \text{ otherwise}
+    \end{array} 
+  \right.
+$$
+        
+Similar calculations can be performed for $G \cdot K$. So $G^{(a,b)}$ is orthogonal if and only if $\sigma^2 + \lambda^2 = 1$. 
+
 ```
 
 ## Homework 6
@@ -603,6 +697,15 @@ c) Householder
 d) Givens rotations
 
 for any arbitrary, dense $n \times n$ matrix. (dense = don't know how many entries are $0$.)
+
+```
+
+```{solution, s601}
+
+a) Gram-Schmidt requires $2nm^2$ computations. 
+b) Same as Gram-Schmidt. 
+c)
+d)
 
 ```
 
@@ -626,6 +729,19 @@ What happens in theorem \@ref(thm:svd) if $m > n$.
 If $u,v$ are respectively left and right singular vectors corresponding to the singular value $\sigma$, show that $Av = \sigma u$, and $A'u = \sigma v$. 
 ```
 
+```{solution, s606}
+Using the SVD of $A$, we see that $AV = U\Sigma$, which implies 
+
+$$
+  A \begin{bmatrix} v_1 & \cdots & v_m \end{bmatrix} = \begin{bmatrix} \sigma_1 u_1 & \cdots & \sigma_m u_m \end{bmatrix}.
+$$
+
+So, $Av_i = \sigma_i u_i$ for all $i$. 
+
+Similarly, $A^\prime = V \Sigma U^\prime$ implies $A^\prime U = V \Sigma$. As above, this gives us $A^\prime u_i = \sigma_i v_i$.
+  
+```
+
 
 ## Homework 7
 
@@ -635,4 +751,10 @@ Show that $\norm{A}_F^2 = \sum_{i=1}^n\sum_{j=1}^n a_{ij}^2$ is orthogonally inv
 
 ```{exercise, q702}
 Proof corollary \@ref(cor:sigma-min-max).
+```
+
+## Homework 8
+
+```{exercise, q801}
+What is the solution to $\min_{x} \norm{Ax-b}_2^2 in terms of the Moore-Penrose inverse? (pseudo-inverse)
 ```

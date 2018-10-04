@@ -15,9 +15,9 @@ iii. Hingham (2002)
 
 ## Positional numeral system
 
-We assume we have a decimal representation of numbers. I.e. that it exists. It is not within the scope of this class to prove this. 
+We assume we have a decimal representation of numbers. I.e. that it exists. It is not within the scope of this class to prove this.
 
-Now, this is NOT the optimal way for a computer to represent numbers. For various reasons, there are more desirable ways to store numbers. So we need a different way of representing the numbers. 
+Now, this is NOT the optimal way for a computer to represent numbers. For various reasons, there are more desirable ways to store numbers. So we need a different way of representing the numbers.
 
 Ingredients for different representation:
 
@@ -30,16 +30,16 @@ The representation $d_0.d_1d_2... \times \beta^e$ means $\left(d_0 + d_1\cdot \b
 ## Floating Point Format
 
 ```{definition}
-A fp is one that can be represented in a base $\beta$ with a fixed digit $p$ (precision), and whose exponent is between $e_{min}$ and $e_{max}$. 
+A fp is one that can be represented in a base $\beta$ with a fixed digit $p$ (precision), and whose exponent is between $e_{min}$ and $e_{max}$.
 ```
 
 
-```{example} 
+```{example}
 Let $\beta = 10, p = 3, e_{min} = -1, e_{max} = 1$. Want to represent $0.1$. Several options:
 
 i. Let d_0=0, d_1 = 0, d_2 = 1, e = 1.
 ii. Let d_0=0, d_1 = 1, d_2 = 0, e = 0.
-iii. d_0 = 1, d_1 = 0, d_2 = 0, e = -1. 
+iii. d_0 = 1, d_1 = 0, d_2 = 0, e = -1.
 
 If we fill into the equation above, we get 0.1:
 
@@ -52,7 +52,7 @@ If we fill into the equation above, we get 0.1:
 
 
 ```{definition}
-A fp number is said to be *normalized* if $d_0 \neq 0$. 
+A fp number is said to be *normalized* if $d_0 \neq 0$.
 ```
 
 ```{exercise}
@@ -61,38 +61,38 @@ What is the total number of values that can be represented in the normalized fp 
 We count the different values each of the elements of a *fp* can take:
 
 * $d_0$ can be from 1 to $\beta-1$, so $\beta-1$ different values.
-* $d_1,...,d_{p-1}$ each takes a value in $\{0,1,...,\beta-1\}$. Hence, we can choose the digits $d_1,...,d_{p-1}$ in $\beta^{p-1}$ different ways. 
+* $d_1,...,d_{p-1}$ each takes a value in $\{0,1,...,\beta-1\}$. Hence, we can choose the digits $d_1,...,d_{p-1}$ in $\beta^{p-1}$ different ways.
 * $e$ can take $e_{max} - e_{min} + 1$ different values (all integers from $e_{min}$ to $e_{max}$, both included, hence the $+1$).
 
-So, in total, there are $(\beta-1)\cdot \beta^{p-1}\cdot (e_{max} - e_{min} + 1)$ different values that can be represented in the normalized fp format with base $\beta$, precision $p$, and $e_{min}, e_{max}$ given. 
+So, in total, there are $(\beta-1)\cdot \beta^{p-1}\cdot (e_{max} - e_{min} + 1)$ different values that can be represented in the normalized fp format with base $\beta$, precision $p$, and $e_{min}, e_{max}$ given.
 ```
 
 
-## IEEE Standards
+### IEEE Standards
 
 IEEE have standards for how to deal with approximations and errors.
 
-For our purposes, a bit is a single unit of storage on a computer, which can either be 0 or 1. Hence, we'll be focusing on fp formats where $\beta = 2$. 
+For our purposes, a bit is a single unit of storage on a computer, which can either be 0 or 1. Hence, we'll be focusing on fp formats where $\beta = 2$.
 
-### The 16 bit standard (half precision standard).
+#### The 16 bit standard (half precision standard).
 
 The 16 bits of storage are used in the following way, when following the 16 bit standard:
 
 * 1 bit for the sign
     * 0 = positive
     * 1 = negative
-* 5 bits for the exponent 
-    * 00000 is reserved for 0 
+* 5 bits for the exponent
+    * 00000 is reserved for 0
     * 11111 is reserved for $\infty$
     * 30 exponents left: $2^5 - 2 = 30$
-    * the 16 bit standard dictates that the used exponents are $-14,...,15$. 
-        * **Note**: $0$ is also included in this list of 30 exponents. This is because the $00000$ representation is reserved for integers, while $01111$ is used with non-integers. 
-* 11 bit for the significand. 
-    * 10 are actually stored -- we always work with normalized FP numbers, i.e. $\beta_0 = 1$. 
+    * the 16 bit standard dictates that the used exponents are $-14,...,15$.
+        * **Note**: $0$ is also included in this list of 30 exponents. This is because the $00000$ representation is reserved for integers, while $01111$ is used with non-integers.
+* 11 bit for the significand.
+    * 10 are actually stored -- we always work with normalized FP numbers, i.e. $\beta_0 = 1$.
 
 
 
-**Question:** What are smallest and largest positive numbers that can be represented? 
+**Question:** What are smallest and largest positive numbers that can be represented?
 
 **Answer:** Smallest non-normalized number would be the one with the smallest possible exponent, and all digits of the significand are 0 except the very last one. So, the smallest non-normalized FP number in the 16 bit standard would be
 
@@ -100,7 +100,7 @@ $$
 \left(0 + 0\cdot 2^{-1} + ... + 0\cdot 2^{-9} + 1\cdot 2^{-10}\right)\cdot 2^{-14} = 2^{-24} \approx 5.96\cdot 10^{-8}
 $$
 
-The smallest normalized number is the one with all digits $0$ (except for the leading digit, of course, which has to be $1$ for it to be normalized), and $e = -14$. So the smallest normalized FP number: 
+The smallest normalized number is the one with all digits $0$ (except for the leading digit, of course, which has to be $1$ for it to be normalized), and $e = -14$. So the smallest normalized FP number:
 
 $$
 \left(1 + 0\cdot 2^{-1} + ... + 0\cdot 2^{-10}\right)\cdot 2^{-14} = 2^{-14} \approx 6.10\cdot 10^{-5}
@@ -113,27 +113,27 @@ $$
 
 
 
-### Lecture 2: 9/11 {-}
+#### Lecture 2: 9/11 {-}
 
-### The 32 bit standard (single precision)
+#### The 32 bit standard (single precision)
 
 The 32 bits of storage are used in the following way, when following the 32 bit standard:
 
 * 1 bit for the sign
     * 0 = positive
     * 1 = negative
-* 8 bits for the exponent 
-    * 00000000 is reserved for 0 
+* 8 bits for the exponent
+    * 00000000 is reserved for 0
     * 11111111 is reserved for $\infty$
     * exponents left: $2^8 - 2 = 254$
-    * the 32 bit standard dictates that the used exponents are $-126,...,127$. 
-        * **Note**: $0$ is also included in this list of the 254 exponents. This is because the $00000000$ representation is reserved for integers, while $01111111$ (I think this is the representation for $0$ here...) is used with non-integers. 
-* 24 bit for the significand. 
-    * 23 are actually stored -- we always work with normalized FP numbers, i.e. $\beta_0 = 1$. 
+    * the 32 bit standard dictates that the used exponents are $-126,...,127$.
+        * **Note**: $0$ is also included in this list of the 254 exponents. This is because the $00000000$ representation is reserved for integers, while $01111111$ (I think this is the representation for $0$ here...) is used with non-integers.
+* 24 bit for the significand.
+    * 23 are actually stored -- we always work with normalized FP numbers, i.e. $\beta_0 = 1$.
 
 
 
-**Question:** What are smallest and largest positive numbers that can be represented in the 32 bit standard? 
+**Question:** What are smallest and largest positive numbers that can be represented in the 32 bit standard?
 
 **Answer:** Smallest non-normalized number would be the one with the smallest possible exponent, and all digits of the significand are 0 except the very last one. So, the smallest non-normalized FP number in the 32 bit standard would be
 
@@ -141,7 +141,7 @@ $$
 \left(0 + 0\cdot 2^{-1} + ... + 0\cdot 2^{-22} + 1\cdot 2^{-23}\right)\cdot 2^{-126} = 2^{-149} \approx 1.40\cdot 10^{-45}
 $$
 
-The smallest normalized number is the one with all digits $0$ (except for the leading digit, of course, which has to be $1$ for it to be normalized), and $e = -126$. So the smallest normalized FP number: 
+The smallest normalized number is the one with all digits $0$ (except for the leading digit, of course, which has to be $1$ for it to be normalized), and $e = -126$. So the smallest normalized FP number:
 
 $$
 \left(1 + 0\cdot 2^{-1} + ... + 0\cdot 2^{-23}\right)\cdot 2^{-126} = 2^{-126} \approx 1.18\cdot 10^{-38}
@@ -154,40 +154,40 @@ $$
 
 
 
-### The 64 bit standard (double precision)
+#### The 64 bit standard (double precision)
 
 The 64 bits of storage are used in the following way, when following the 64 bit standard:
 
 * 1 bit for the sign
     * 0 = positive
     * 1 = negative
-* 11 bits for the exponent 
-    * 00000000 is reserved for 0 
+* 11 bits for the exponent
+    * 00000000 is reserved for 0
     * 11111111 is reserved for $\infty$
     * exponents left: $2^11 - 2 = 2046$
-    * the 64 bit standard dictates that the used exponents are $-1024,...,1023$. 
-        * **Note**: $0$ is also included in this list of the 254 exponents. This is because the $00000000$ representation is reserved for integers, while $01111111$ (I think this is the representation for $0$ here...) is used with non-integers. 
-* 53 bit for the significand. 
-    * 52 are actually stored -- we always work with normalized FP numbers, i.e. $\beta_0 = 1$. 
+    * the 64 bit standard dictates that the used exponents are $-1024,...,1023$.
+        * **Note**: $0$ is also included in this list of the 254 exponents. This is because the $00000000$ representation is reserved for integers, while $01111111$ (I think this is the representation for $0$ here...) is used with non-integers.
+* 53 bit for the significand.
+    * 52 are actually stored -- we always work with normalized FP numbers, i.e. $\beta_0 = 1$.
 
-## Errors
+### Errors
 
-### Units in the Last Place (ULP)
+#### Units in the Last Place (ULP)
 
-### Absolute and Relative Error
+#### Absolute and Relative Error
 
 Let $fl: \mathbb{R}_{\geq 0} \rightarrow \mathcal{S}$ be a function that takes a real value and return a FP number. Then we define the absolute and relative error as follows:
 
 
 
-```{definition} 
+```{definition}
 Let $z \in \mathbb{R}_{\geq 0}$. The *absolute error* is defined as
 
 $$
 \left | fl(z) - z \right | .
 $$
 
-The *relative error* is defined as 
+The *relative error* is defined as
 
 $$
 \left | \frac{fl(z)-z}{z} \right |
@@ -207,7 +207,7 @@ If $z$ has exponent $e$, then the maximum relative error is $\frac{\beta^{1-p}}{
 ```
 
 ```{proof}
-If $z$ has exponent $e$, then $\beta^{e}\leq z$. Using this with \@ref(lem:absolute-error-bound), we get that 
+If $z$ has exponent $e$, then $\beta^{e}\leq z$. Using this with \@ref(lem:absolute-error-bound), we get that
 
 
 $$
@@ -216,7 +216,7 @@ $$
 ```
 
 
-**Note:** the upper bound of the relative error is called the *machine epsilon*. This can be obtained in Julia using the function `eps`. 
+**Note:** the upper bound of the relative error is called the *machine epsilon*. This can be obtained in Julia using the function `eps`.
 
 #### The Fundamental Axiom
 
@@ -248,16 +248,16 @@ fl = function(x,y)
   if(length(y) != n)
     return "ERROR: y does not have same dimension as x"
   end
-  
+
   # s will be the result of the dot product calculation
   s = 0
-  
+
   for i = 1:n
     s += x[i]*y[i]
   end
-  
+
   return(s)
-  
+
 end
 ```
 
@@ -266,35 +266,35 @@ end
 Next we want to prove the following lemma:
 
 ```{lemma}
-Let $x,y \in \mathbb{R}^n$, and $n\cdot u \leq 0.01$. Then 
+Let $x,y \in \mathbb{R}^n$, and $n\cdot u \leq 0.01$. Then
 
 $$
 \left | fl(x'y) - x'y \right | \leq 1.01 \cdot n\cdot u \cdot \left|x\right|'\left|y\right|
 $$
 ```
 
-### Lecture 3: 9/13 {-}
+#### Lecture 3: 9/13 {-}
 
 To prove the lemma above, we will need another lemma...
 
 ```{lemma, lemForProof}
 If $|\delta_i| \leq u, \forall i=1,\ldots,n$ s.t. $n\cdot u < 2$. Let $1 + \eta = \prod_{i=1}^{n}(1 + \delta_i)$. Then
 
-$$ 
+$$
 |\eta | \leq \frac{n\cdot u}{1-\tfrac{n\cdot u}{2}}
 $$
 ```
 
-```{proof} 
-Using the definition of $\nu$, we can rewrite it to get 
+```{proof}
+Using the definition of $\nu$, we can rewrite it to get
 
 $$
-| \eta | = \left | \prod_{i=1}^n (1 + \delta_i) - 1 \right |. 
+| \eta | = \left | \prod_{i=1}^n (1 + \delta_i) - 1 \right |.
 $$
 
 By induction, we will show that the expression above is less than or equal to $(1 + u)^n - 1$. [TO BE COMPLETED!]
 
-Since $1+u \leq e^{u}$ for all $u \in \R$, we have that 
+Since $1+u \leq e^{u}$ for all $u \in \R$, we have that
 
 \begin{align*}
   | \eta | &\leq e^{n\cdot u} - 1 \\
@@ -311,8 +311,8 @@ which is exactly what we wanted.
 
 With this in hand, we will prove the previously stated lemma.
 
-```{proof} 
-Let $s_p$ denote the value of $s$ after the $p$'th iteration of the algorithm described above. Then, since we're assuming the Fundamental Axiom, we have that $s_1 = fl(x_1y_y) = x_1 y_1 (1 + \delta_1)$, where $|\delta_1| \leq u$. We can similarly find $s_p$ as 
+```{proof}
+Let $s_p$ denote the value of $s$ after the $p$'th iteration of the algorithm described above. Then, since we're assuming the Fundamental Axiom, we have that $s_1 = fl(x_1y_y) = x_1 y_1 (1 + \delta_1)$, where $|\delta_1| \leq u$. We can similarly find $s_p$ as
 
 \begin{align*}
 s_p &= fl(s_{p-1} + fl(x_p y_p)) \\
@@ -344,14 +344,14 @@ We now use \@ref(lem:lemForProof) to get:
 
 ```
 
-## Square Linear Systems 
+### Square Linear Systems
 
 In the following, let $A \in \R^{n \times m}$ be an invertible matrix, and assume $Ax = b$ for a $b \neq 0$. This implies that $x = A^{-1}b$.
 
 ```{theorem, label = "kappa-bound"}
-Let $\kappa_\infty = \norm{A}_\infty \norm{A^{-1}}_\infty$. Assume we can store $A$ with precision $E$ (i.e. as $A+E$), where $\norm{E}_\infty \leq u \norm{A}_\infty$, and $b$ with precision $e$ (i.e. as $b+e$), where $\norm{e}_\infty \leq u \norm{b}_\infty$. 
+Let $\kappa_\infty = \norm{A}_\infty \norm{A^{-1}}_\infty$. Assume we can store $A$ with precision $E$ (i.e. as $A+E$), where $\norm{E}_\infty \leq u \norm{A}_\infty$, and $b$ with precision $e$ (i.e. as $b+e$), where $\norm{e}_\infty \leq u \norm{b}_\infty$.
 
-If $\norm{A+E}\hat{x} = b+e$ and $u\cdot \kappa_\infty < 1$, then 
+If $\norm{A+E}\hat{x} = b+e$ and $u\cdot \kappa_\infty < 1$, then
 
 $$
   \frac{\norm{x-\hat{x}}_\infty}{\norm{x}} \leq \frac{2\cdot u \cdot \kappa_\infty}{1-u\cdot \kappa_\infty}
@@ -359,7 +359,7 @@ $$
 ```
 
 ```{lemma, label = "proofHW"}
-Let $I\in \R^{n \times n}$ be the identity matrix, and $F \in \R^{n\times n}$ s.t. $\norm{F}_p < 1$ for some $p \in [1,\infty]$. Then $I-F$ is invertible, and 
+Let $I\in \R^{n \times n}$ be the identity matrix, and $F \in \R^{n\times n}$ s.t. $\norm{F}_p < 1$ for some $p \in [1,\infty]$. Then $I-F$ is invertible, and
 
 $$
   \norm{(I-F)^{-1}}_p \leq \frac{1}{1-\norm{F}_p}
@@ -372,13 +372,13 @@ $$
 
 
 ```{lemma}
-Suppose $\exists \epsilon > 0$ s.t. $\norm{\Delta A} \leq \epsilon \norm{A}$ and $\norm{\Delta b} \leq \epsilon \norm{b}$, and $y$ s.t. $(A+\Delta A)y = b+\Delta b$. 
+Suppose $\exists \epsilon > 0$ s.t. $\norm{\Delta A} \leq \epsilon \norm{A}$ and $\norm{\Delta b} \leq \epsilon \norm{b}$, and $y$ s.t. $(A+\Delta A)y = b+\Delta b$.
 
 If $\epsilon \norm{A}\norm{A^{-1}} = r < 1$, then $A+\Delta A$ is invertible and $$\frac{\norm{y}}{\norm{x}} \leq \frac{1+r}{1-r}.$$
 ```
 
 ```{proof}
-Note that $A+\Delta A = A\left (I + A^{-1}\Delta A\right ) = A\left (I - \left(- A^{-1}\Delta A\right)\right)$. Since $\norm{-A^{-1}\Delta A} = \norm{A^{-1}\Delta A} \leq \epsilon \norm{A^{-1}}\cdot \norm{A} < 1$ (by assumptions), Lemma \@ref(lem:proofHW) gives us that $I + A^{-1}\Delta A$ is invertible. Since $A$ is also invertible (again, by assumption), $A+\Delta A$ is invertible (product of two invertible matrices is invertible). 
+Note that $A+\Delta A = A\left (I + A^{-1}\Delta A\right ) = A\left (I - \left(- A^{-1}\Delta A\right)\right)$. Since $\norm{-A^{-1}\Delta A} = \norm{A^{-1}\Delta A} \leq \epsilon \norm{A^{-1}}\cdot \norm{A} < 1$ (by assumptions), Lemma \@ref(lem:proofHW) gives us that $I + A^{-1}\Delta A$ is invertible. Since $A$ is also invertible (again, by assumption), $A+\Delta A$ is invertible (product of two invertible matrices is invertible).
 
 Performing some linear algebra:
 
@@ -388,8 +388,8 @@ Performing some linear algebra:
   (I + A^{-1} \Delta A) y &= A^{-1}b + A^{-1}\Delta b \Leftrightarrow \\
   y &= (I + A^{-1} \Delta A)^{-1} A^{-1}b + A^{-1}\Delta b.
 \end{align*}
-  
-Remember that $A^{-1}b = x$. From the definition of $r$ we have that $\norm{A^{-1}} = \frac{r}{\norm{A}}$. These two identities with the assumption that $\norm{\Delta b} \leq \epsilon b$ gives us 
+
+Remember that $A^{-1}b = x$. From the definition of $r$ we have that $\norm{A^{-1}} = \frac{r}{\norm{A}}$. These two identities with the assumption that $\norm{\Delta b} \leq \epsilon b$ gives us
 
 $$
 \begin{aligned}
@@ -399,9 +399,9 @@ $$
   &= \frac{1}{1-r} \left( \norm{x} + \frac{r \cdot \norm{b}}{\norm{A}} \right).
 \end{aligned}
 $$
-  
+
 Finally, recall that $Ax=b$, hence $\norm{A}\cdot\norm{x} \geq \norm{b}$, so $\norm{x} \geq \frac{\norm{b}}{\norm{A}}$. So,
-  
+
 $$
 \begin{aligned}
   \norm{y} \leq \frac{1}{1-r}  \left( \norm{x} + r \cdot \norm{x} \right) \Leftrightarrow \\
@@ -453,7 +453,7 @@ Outline
 
 ### Motivating problems
 
-```{example, name = 'Motivating Problem 1 (Consistent Linear System)', label = "linear-system"} 
+```{example, name = 'Motivating Problem 1 (Consistent Linear System)', label = "linear-system"}
 Assume $A \in \R^{n\times m}, n \geq m, \text{rank}(A) = m$, and $b \in \text{range}(A) \subset R^m$. Find $x \in \R^m$ s.t. $Ax = b$.
 ```
 
@@ -464,19 +464,19 @@ Assume $A \in \R^{n\times m}, n \geq m, \text{rank}(A) = m$, and $b \in R^n$. Fi
 
 
 ```{example, name = 'Motivating Problem 3 (Underdetermined Linear System', label = "und-linear-system"}
-Assume $A \in \R^{n\times m}, n \geq m, \text{rank}(A) < m$, and $b \in \text{range}(A)$. Find $x \in \R^m$ s.t. 
+Assume $A \in \R^{n\times m}, n \geq m, \text{rank}(A) < m$, and $b \in \text{range}(A)$. Find $x \in \R^m$ s.t.
 
 $$x \in \argmin_{y \in \R^m} \left\{ \norm{y}_2 \left | Ay = b \right\} \right . .$$
 ```
 
 ```{example, name = 'Motivating Problem 4 (Underdetermined Least Squares Regression)', label = "und-least-squares"}
-Assume $A \in \R^{n\times m}, n \geq m, \text{rank}(A) < m$, and $b \in \R^n$. Find $x \in \R^m$ s.t. 
+Assume $A \in \R^{n\times m}, n \geq m, \text{rank}(A) < m$, and $b \in \R^n$. Find $x \in \R^m$ s.t.
 
 $$x \in \argmin_{z \in \R^m} \left\{ \norm{z}_2 \left | \norm{Ay - b}_2 = \min_{y \in \R^m} \norm{Ay-b}_2 \right\} \right . .$$
 ```
 
 ```{example, name = 'Motivating Problem 5 (Constrained Least Squares Regression)', label = "constrained-least-squares"}
-Assume $A \in \R^{n\times m}, n \geq m, \text{rank}(A) < m$, and $b \in \R^n$. Let $C \in \R^{p\times m}, \text{C} = p$, and $d \in \R^{p}$. Find $x \in \R^m$ s.t. 
+Assume $A \in \R^{n\times m}, n \geq m, \text{rank}(A) < m$, and $b \in \R^n$. Let $C \in \R^{p\times m}, \text{C} = p$, and $d \in \R^{p}$. Find $x \in \R^m$ s.t.
 
 $$x = \argmin_{y \in \R^m} \norm{Ay - b}_2\quad \text{s.t.} \quad Cy = d.$$
 ```
@@ -484,29 +484,29 @@ $$x = \argmin_{y \in \R^m} \norm{Ay - b}_2\quad \text{s.t.} \quad Cy = d.$$
 Before we take a crack at solving these problems, we will need to get some definitions down.
 
 ```{definition, name = "Permutation Matrix", label = "perm-matrix"}
-A permutation matrix is a square matrix such that each column has exactly one element that is $1$, the rest are $0$. 
+A permutation matrix is a square matrix such that each column has exactly one element that is $1$, the rest are $0$.
 ```
 
 ```{example}
 The following is a permutation matrix:
-  
+
 $$
   \begin{bmatrix}
     0 & 1 \\
     1 & 0
   \end{bmatrix}
 $$
-      
+
 ```
 
-```{definition, name = "Orthogonal Matrix"}
+```{definition, name = "Orthogonal Matrix", label = "orthogonal"}
 A matrix $Q$ is said to be an *orthogonal matrix* if $Q^T Q = Q Q^T = I$.
 ```
 
 Note: for an orthogonal matrix $Q \in \R^{n\times m}$, it holds that $\norm{Q_{i*}}_2 = 1$ for all $i=1,\ldots,n$, and $\norm{Q_{*j}}_2 = 1$ for all $j = 1,\ldots, m$.^[Here we use the notion $Q_{i*}$ to mean the $i$'th row, and $Q_{*j}$ to mean the $j$'th column of $Q$.]
 
 ```{definition, name = "Upper Triangular Matrix"}
-A matrix $R$ is an *upper triangular matrix* if $R_{ij} = 0$ for all $i>j$. 
+A matrix $R$ is an *upper triangular matrix* if $R_{ij} = 0$ for all $i>j$.
 ```
 
 ### Lecture 4: 9/18 {-}
@@ -517,18 +517,18 @@ In order to actually solve the problems listed above, we need the QR Decompositi
 
 ```{theorem, name = "Existence of QR Decomposition", label = qr-decomposition}
 Let $A \in \R^{n \times m}$ and let $r = rank(A)$. Then there exists:
-  
+
 1) an $m\times m$ permutation matrix $\Pi$,
 2) an $n \times n$ orthogonal matrix $Q$,
 3) an $r \times r$ upper triangular matrix $R$, with non-zero diagonal elements (i.e. invertible)
 4) an $r \times (m-r)$ matrix S (if $m > r$),
 
-such that 
+such that
 
 $$
   A = Q \begin{bmatrix} R & S \\ 0 & 0 \end{bmatrix} \Pi^T.
-$$  
-    
+$$
+
 ```
 
 
@@ -538,24 +538,24 @@ With this in hand, we can solve the motivating problems stated above.
 
 ```{solution, name = "Example \\@ref(exm:linear-system)"}
 
-We want to find $x$ such that $Ax = b$. 
+We want to find $x$ such that $Ax = b$.
 
-We use theorem \@ref(thm:qr-decomposition) to rewrite this as $Q \begin{bmatrix} R \\ 0 \end{bmatrix} \Pi^T x = b$. Note that since $\text{rank}(A) = m$, there is no $S$ matrix. 
+We use theorem \@ref(thm:qr-decomposition) to rewrite this as $Q \begin{bmatrix} R \\ 0 \end{bmatrix} \Pi^T x = b$. Note that since $\text{rank}(A) = m$, there is no $S$ matrix.
 
-Now, since $Q$ is an orthogonal matrix, we know that $Q^{-1} = Q^T$, so 
+Now, since $Q$ is an orthogonal matrix, we know that $Q^{-1} = Q^T$, so
 
 \begin{equation}
   \begin{bmatrix} R \\ 0 \end{bmatrix} \Pi^T x = Q^T b = c = \begin{bmatrix} c_1 \\ 0 \end{bmatrix}. (\#eq:sol-linear-system)
 \end{equation}
 
-So now the equation we are trying to solve becomes 
+So now the equation we are trying to solve becomes
 
 $$
   R \Pi^T x = c_1.
 $$
-  
+
 Since $R$ is an upper triangular matrix with non-zero diagonal elements, it is invertible. Since $\Pi$ is a permutation matrix, $\Pi^{-1} = \Pi^T$. Using this we can find the solution:
-  
+
 $$
   x = \Pi R^{-1} c_1.
 $$
@@ -563,27 +563,27 @@ $$
 ```
 
 ```{solution, name = "Example \\@ref(exm:least-squares)"}
-We want to find $x$ such that $x \in \argmin_{y \in \R^m}\norm{Ay-b}_2$. 
+We want to find $x$ such that $x \in \argmin_{y \in \R^m}\norm{Ay-b}_2$.
 
 Once again, $\text{rank}(A) = m$, so using theorem \@ref(thm:qr-decomposition), we can rewrite the expression we are trying to minimize as
 
 $$
   \min \norm{Q \begin{bmatrix} R \\ 0 \end{bmatrix}\Pi^T y - b}_2. (\#eq:least-squares-eq1)
 $$
-  
-Since $Q^T = Q^{-1}$ is orthogonal, $\norm{Q^T x}_2 = \norm{x}_2$ for all $x$ (homework exercise \@ref(exr:q402)). So, we get that \@ref(eq:least-squares-eq1) is the same as 
+
+Since $Q^T = Q^{-1}$ is orthogonal, $\norm{Q^T x}_2 = \norm{x}_2$ for all $x$ (homework exercise \@ref(exr:q402)). So, we get that \@ref(eq:least-squares-eq1) is the same as
 
 $$
   \min\norm{\begin{bmatrix} R \\ 0 \end{bmatrix} \Pi^T y - Q^T b}_2.
 $$
-  
+
 Now let $c = Q^T b$. Then, $c$ is of the form $\begin{bmatrix} c_1 \\ c_2 \end{bmatrix}$, where $c_2$ is the last $n-r$ rows (i.e. corresponding to the $0$ rows of $\begin{bmatrix} R \\ 0 \end{bmatrix}$). Then
 
 $$
   \min\norm{\begin{bmatrix} R \Pi^T y - c_1 \\ -c_2 \end{bmatrix}}_2 = \min \sqrt{\norm{R \Pi^T y - c_1}_2^2 + \norm{c_2}_2^2}.
 $$
-  
-Now this is minimized by $\argmin_y \norm{R \Pi^T y - c_1}_2^2$. As before, $R^{-1}$ exists since $R$ is upper triangular with non-zero diagonal elements, $\Pi^T = \Pi^{-1}$ since $\Pi$ is a permutation matrix, so 
+
+Now this is minimized by $\argmin_y \norm{R \Pi^T y - c_1}_2^2$. As before, $R^{-1}$ exists since $R$ is upper triangular with non-zero diagonal elements, $\Pi^T = \Pi^{-1}$ since $\Pi$ is a permutation matrix, so
 
 $$
   \begin{aligned}
@@ -592,14 +592,14 @@ $$
     x &= \Pi R^{-1} c_1.
   \end{aligned}
 $$
-  
+
 ```
 
 ```{solution, name = "Example \\@ref(exm:und-linear-system)"}
 
-In this scenario, $\text{rank}(A) = r < m$. We are looking for $x \in \argmin_{y}\left\{\norm{y}_2 \left | Ay = b\right\}\right .$. Using theorem \@ref(thm:qr-decomposition), we can rewrite this as $\argmin_y\left\{\norm{y}_2 | Q\begin{bmatrix} R & S \\ 0 & 0 \end{bmatrix} y = b \right\}$, and multiplying by $Q^T$, $\argmin_y\left\{\norm{y}_2 \left | \begin{bmatrix} R & S \\ 0 & 0 \end{bmatrix} y = Q^T b \right\} \right .$. We introduce the vector $c$ such that $Q^T b = \begin{bmatrix} c & 0 \end{bmatrix}^T$ ($0$ entries correspond to $0$ rows in $\begin{bmatrix} R & S \\ 0 & 0 \end{bmatrix}$). If we furthermore write $\Pi^T y$ as $\begin{bmatrix} z_1 & z_2 \end{bmatrix}^T$. 
+In this scenario, $\text{rank}(A) = r < m$. We are looking for $x \in \argmin_{y}\left\{\norm{y}_2 \left | Ay = b\right\}\right .$. Using theorem \@ref(thm:qr-decomposition), we can rewrite this as $\argmin_y\left\{\norm{y}_2 | Q\begin{bmatrix} R & S \\ 0 & 0 \end{bmatrix} y = b \right\}$, and multiplying by $Q^T$, $\argmin_y\left\{\norm{y}_2 \left | \begin{bmatrix} R & S \\ 0 & 0 \end{bmatrix} y = Q^T b \right\} \right .$. We introduce the vector $c$ such that $Q^T b = \begin{bmatrix} c & 0 \end{bmatrix}^T$ ($0$ entries correspond to $0$ rows in $\begin{bmatrix} R & S \\ 0 & 0 \end{bmatrix}$). If we furthermore write $\Pi^T y$ as $\begin{bmatrix} z_1 & z_2 \end{bmatrix}^T$.
 
-Then, since $\norm{y}_2 = \norm{z}_2$, our problem becomes 
+Then, since $\norm{y}_2 = \norm{z}_2$, our problem becomes
 
 $$
   \begin{aligned}
@@ -608,13 +608,13 @@ $$
     x &\in \argmin_z \sqrt{\norm{R^{-1}c - R^{-1} S z_2}_2^2 + \norm{z_2}_2^2} \\
     x &\in \argmin_z \left\{\norm{R^{-1}c - R^{-1} S z_2}_2^2 + \norm{z_2}_2^2\right\},
   \end{aligned}
-$$  
+$$
 
-where the last equality is a consequence of the result proved in homework \@ref(exr:q403). Now, let $d = R^{-1}c$ and $P = R^{-1}Sz_2$. Then we can find the minimum of the above expression by differentiating and setting equal to zero:
-      
+where the last equality is a consequence of the result proved in homework \@ref(exr:q403). Now, let $d = R^{-1}c$ and $P = R^{-1}S$. Then we can find the minimum of the above expression by differentiating and setting equal to zero:
+
 
 \begin{align}
-  0 &= -P^Td + (P^TP + I)z_2 \rightarrow
+  0 &= -P^Td + (P^TP + I)z_2 \rightarrow \\
   z_2 &= (P^T P + I)^{-1}P^Td.
 \end{align}
 
@@ -623,12 +623,12 @@ where the last equality is a consequence of the result proved in homework \@ref(
 ```{solution, name = "Example \\@ref(exm:und-least-squares)"}
 
 We want to find $\min_z \left\{ \norm{z}_2 \left \vert z \in \argmin_y \norm{Ay - b}_2\right\} \right .$ Use theorem \@ref(thm:qr-decomposition):
-  
+
 $$\begin{aligned}
   \min_z \left\{ \norm{z}_2 \left \vert z \in \argmin_y \norm{Ay - b}_2\right\} \right . &= \left\{ \norm{z}_2 \left \vert z \in \argmin_y \norm{\begin{bmatrix} R & S \\ 0 & 0 \end{bmatrix} \Pi^T y - Q^T b}_2\right\} \right . \\
   &= \left\{ \norm{w}_2 \left \vert w \in \argmin_y \norm{\begin{bmatrix} R & S \\ 0 & 0 \end{bmatrix}  y - Q^T b}_2\right\} \right .,
 \end{aligned}$$
-  
+
 since $\norm{y}_2 = \norm{\Pi^T y}_2$. This is exactly the problem solved in example \@ref(exm:und-linear-system). In conclusion,
 
 $$
@@ -638,7 +638,7 @@ $$
 ```
 
 
-```{solution, name = "Example \\@ref(exm:constrained-least-squares"}
+```{solution, name = "Example \\@ref(exm:constrained-least-squares)"}
 
 ```
 
@@ -648,24 +648,24 @@ $$
 To prove the existence of the QR-decomposition, we need the Gram-Schmidt process.
 
 ```{lemma, name = "The Gram-Schmidt Process", label = "gsp"}
-Let $r \in \N$. Given a set of linearly independent vectors $\{a_1, \ldots, a_r\}$, there exists a set of orthonormal vectors $\{q_1, \ldots, q_r\}$ such that $\text{span} \{q_1, \ldots, q_r\} = \text{span}\{a_1, \ldots, a_r\}$. 
+Let $r \in \N$. Given a set of linearly independent vectors $\{a_1, \ldots, a_r\}$, there exists a set of orthonormal vectors $\{q_1, \ldots, q_r\}$ such that $\text{span} \{q_1, \ldots, q_r\} = \text{span}\{a_1, \ldots, a_r\}$.
 
 The $q_i$'s are given by...
 
 ```
 
 ```{proof}
-We will prove this by induction. For $i=1$: let $R_{11} = \norm{a_1}_2$, $q_1 = \frac{1}{R_11}a_1$. Notice that $\norm{q_1} = 1$. 
+We will prove this by induction. For $i=1$: let $R_{11} = \norm{a_1}_2$, $q_1 = \frac{1}{R_11}a_1$. Notice that $\norm{q_1} = 1$.
 
 (At this point, it might be beneficial to check out the intuitive side note (\@ref(cnj:gram-schmidt-remark)))
 
-Define $q^r$ in the following way: let $R_{ir} = q_i^\prime a_r$, $\tilde{q}_r = a_r - \sum_{i=1}^{r-1} R_{ir}q_i$, and $R_rr = \norm{\tilde{q}_r}_2$. Then $q_r = \frac{\tilde{q}_r}{R_{rr}}$. (Note: $\tilde{q}_r \neq 0$ since the $a_i$s are linearly independent, and $q_i$ is given as a linear combination of $a_1, \ldots, a_i$.)
+Define $q^r$ in the following way: let $R_{ir} = q_i^\prime a_r$, $\tilde{q}_r = a_r - \sum_{i=1}^{r-1} R_{ir}q_i$, and $R_{rr} = \norm{\tilde{q}_r}_2$. Then $q_r = \frac{\tilde{q}_r}{R_{rr}}$. (Note: $\tilde{q}_r \neq 0$ since the $a_i$s are linearly independent, and $q_i$ is given as a linear combination of $a_1, \ldots, a_i$.)
 
 Assume the result holds for $i \le r-1$. I.e. we have vectors $q_1, \ldots, q_{r-1}$ given as above, and that
 
 i) $\text{span}\{q_1, \ldots, q_{r-1}\} = \text{span}\{a_1, \ldots, a_{r-1}\}$,
 ii) $q_i \cdot q_j$ for all $i,j = 1, \ldots, r-1$ with $i \neq j$,
-iii) $q_i^\prime \cdot q_i = 1$ for all $i = 1, \ldots, r-1$. 
+iii) $q_i^\prime \cdot q_i = 1$ for all $i = 1, \ldots, r-1$.
 
 Now, we want to show that we can construct a $q_r$ such that
 
@@ -675,8 +675,8 @@ c) $q_r^\prime \cdot q_r = 1$.
 
 We start from below.
 
-c) By definition of $q_r$: $q_r^\prime q_r = \frac{\tilde{q}_r^\prime \tilde{q}_r}{R_{rr}^2} = \frac{\norm{\tilde{q}_r}^2}{R_{rr}^2} = 1$. 
-b) Let $i < r$. Then 
+c) By definition of $q_r$: $q_r^\prime q_r = \frac{\tilde{q}_r^\prime \tilde{q}_r}{R_{rr}^2} = \frac{\norm{\tilde{q}_r}^2}{R_{rr}^2} = 1$.
+b) Let $i < r$. Then
 
 $$\begin{aligned}
   q_i^{\prime} \tilde{q}_r &= q_i^\prime a_r - \sum_{j=1}^{r-1} R_{jr} q_i^\prime q_j \\
@@ -684,7 +684,7 @@ $$\begin{aligned}
                            &= q_i^\prime a_r - R_{ir} = 0 \text{ (by definition of } R_{ir}\text{)}.
 \end{aligned}$$
 
-a) We need to show that $a_r$ can be written as a linear combination of $q_i$s. 
+a) We need to show that $a_r$ can be written as a linear combination of $q_i$s.
 
 $$\begin{aligned}
   \sum_{i=1}^r R_{ir} q_i &= \sum_{i=1}^{r-1} R_{ir} q_i + R_{rr} q_r \\
@@ -693,11 +693,11 @@ $$\begin{aligned}
                           &= \sum_{i=1}^{r-1} R_{ir} q_i + a_r - \sum_{i=1}^{r-1} R_{ir}q_i \\
                           &= a_r.
 \end{aligned}$$
-                            
+
 ```
 
 ```{conjecture, name = "Intuitive side note", label = "gram-schmidt-remark"}
-It is fairly easy to find $q_2$. We want to find it such that $a_2 = R_{12}q_1 + R_{22} q_2$, and $\norm{q_2}_2 = 1$ and $q_1 \perp q_2$, i.e. $q_1 \cdot q_2 = 0$. So, if we multiply the equation by $q_1$, we get that $q_1 a_2 = R_{12}$. Substituting this into the first equation, $q_2 = \frac{a_2 - R_{12} q_1}{R_{22}}$. 
+It is fairly easy to find $q_2$. We want to find it such that $a_2 = R_{12}q_1 + R_{22} q_2$, and $\norm{q_2}_2 = 1$ and $q_1 \perp q_2$, i.e. $q_1 \cdot q_2 = 0$. So, if we multiply the equation by $q_1$, we get that $q_1 a_2 = R_{12}$. Substituting this into the first equation, $q_2 = \frac{a_2 - R_{12} q_1}{R_{22}}$.
 
 Note that this is a circular argument, and hence not a formal way of doing this.
 ```
@@ -708,15 +708,15 @@ Note that this is a circular argument, and hence not a formal way of doing this.
 
 
 ```{conjecture, name = "Gram-Schmidt in Matrix Form"}
-If we write up $a_1, \ldots, a_r$ in a matrix, we see that 
+If we write up $a_1, \ldots, a_r$ in a matrix, we see that
 
 $$
-  \begin{bmatrix} 
-    a_1 & \dots & a_r 
-  \end{bmatrix} = 
+  \begin{bmatrix}
+    a_1 & \dots & a_r
+  \end{bmatrix} =
       \begin{bmatrix}
         q_1 & \dots & q_r
-      \end{bmatrix} 
+      \end{bmatrix}
         \begin{bmatrix}
           R_{11} & R_{12} & \dots & R_{1r} \\
           0      & R_{22} & \dots & R_{2r} \\
@@ -724,25 +724,25 @@ $$
           0 & \ldots & 0 & R_{rr}
         \end{bmatrix}
 $$
-            
-This is quite similar to the result we are after (the QR-decomposition \@ref(thm:qr-decomposition)). 
+
+This is quite similar to the result we are after (the QR-decomposition \@ref(thm:qr-decomposition)).
 ```
 
 ```{proof, name = "Proof of theorem \\@ref(thm:qr-decomposition)"}
-Since $\text{rank}(A) = r$, $A$ has $r$ linearly independent columns. Hence, there exists a permutation matrix $\Pi$ such that 
+Since $\text{rank}(A) = r$, $A$ has $r$ linearly independent columns. Hence, there exists a permutation matrix $\Pi$ such that
 
 $$
   A \Pi = \begin{bmatrix} a_1 & \dots & a_r & a_{r+1} \dots a_m \end{bmatrix},
 $$
-  
-where $a_1, \ldots, a_r$ are linearly independent, and $a_{r+1}, \ldots, a_m$ are linearly dependent on the first $r$ columns. 
 
-Using Gram-Schmidt (lemma \@ref(lem:gsp)), we know that there exists $\tilde{Q} \in \R^{n \times r}, R \in \R^{r \times r}$ such that $A\Pi = \tilde{Q} R$. Since $\text{span}\{\tilde{q}_1, \ldots, \tilde{q}_r\}$ (columns of $\tilde{Q}$) is equal to $\text{span}\{a_1, \ldots, a_r\}$, there exists an $s_{k(j-r+2)}$ for any $j \in \{r+1, \ldots, m\}$ and $k \in \{1, \ldots, r\}$ such that $a_j = \sum_{k=1}^r s_{k(j-r+2)}q_k$. So, 
+where $a_1, \ldots, a_r$ are linearly independent, and $a_{r+1}, \ldots, a_m$ are linearly dependent on the first $r$ columns.
+
+Using Gram-Schmidt (lemma \@ref(lem:gsp)), we know that there exists $\tilde{Q} \in \R^{n \times r}, R \in \R^{r \times r}$ such that $A\Pi = \tilde{Q} R$. Since $\text{span}\{\tilde{q}_1, \ldots, \tilde{q}_r\}$ (columns of $\tilde{Q}$) is equal to $\text{span}\{a_1, \ldots, a_r\}$, there exists an $s_{k(j-r+2)}$ for any $j \in \{r+1, \ldots, m\}$ and $k \in \{1, \ldots, r\}$ such that $a_j = \sum_{k=1}^r s_{k(j-r+2)}q_k$. So,
 
 $$
   A\Pi = \tilde{Q} \begin{bmatrix} R & S \end{bmatrix}.
 $$
-  
+
 This is almost the form we want, BUT $\tilde{Q}$ is not orthonormal (it is not square). However, we know that we can pick $n-r$ vectors from $\R^n$ such that adding these as columns to $\tilde{Q}$ we get a set of $n$ linearly independent columns. Now, use Gram-Schmidt to normalize. Since the first $r$ columns are already normalized, these will stay the same. The result is a matrix $Q$, where the columns are all length $1$, and they are all linearly independent. I.e. $Q^TQ = I$. So, $A\Pi = Q \begin{bmatrix} R & S \\ 0 & 0 \end{bmatrix}$, hence
 
 $$
@@ -752,102 +752,115 @@ $$
 ```
 
 
-Basically, this gives us a way to perform QR decomposition. However, using the Gram-Schmidt procedure is NOT numerical stable. I.e. we might end up with matrices $Q, R$, and $S$ from which we CANNOT recover $A$. To overcome this, there is a different method called the *Modified Gram-Schmidt Procedure*. 
+Basically, this gives us a way to perform QR decomposition. However, using the Gram-Schmidt procedure is NOT numerical stable. I.e. we might end up with matrices $Q, R$, and $S$ from which we CANNOT recover $A$. To overcome this, there is a different method called the *Modified Gram-Schmidt Procedure*.
 
 ```{lemma, name = "The Modified Gram-Schmidt Procedure", label = 'mod-gsp'}
 **HOMEWORK**
 ```
 
-```{definition, name = 'Householder Reflections'}
-A matrix $H = I - 2vv^\prime$, where $\norm{v}_2 = 1$, is called a *Householder Reflection*. 
+```{definition, name = 'Householder Reflections', label = 'householder'}
+A matrix $H = I - 2vv^\prime$, where $\norm{v}_2 = 1$, is called a *Householder Reflection*.
 ```
 
-A Householder reflection takes any vector and reflects it over $\{tv: t \in \R\}$. 
+A Householder reflection takes any vector and reflects it over $\{tv: t \in \R\}$.
 
 ```{lemma}
 Householder reflections are orthogonal matrices.
 ```
 
 ```{proof}
-*HOMEWORK*
+By definition of a Householder matrix (\@ref(def:householder)), $H = I - 2vv^\prime$ for a $v$ with $\norm{v}_2 = 1$.
+
+So,
+
+$$\begin{aligned}
+  H^\prime H &= (I - 2vv^\prime)^\prime (I - 2vv^\prime) \\
+             &= (I^\prime - 2(vv^\prime)^\prime)(I - 2 vv^\prime)\\
+             &= (I - 2vv^\prime)(I - 2 vv^\prime) \\
+             &= I - 2vv^\prime - 2vv^\prime + 4 vv^\prime v v^\prime \quad\left(\text{ recall: } v^\prime v = \norm{v}_2 = 1\right)\\
+             &= I - 2vv^\prime - 2vv^\prime + 4 vv^\prime \\
+             &= I.
+\end{aligned}$$  
+    
+So by definition (\@ref(def:orthogonal)), $H$ is an orthogonal matrix.
 ```
 
 ```{lemma}
-There exists Householder refelctions $H_1, \dots, H_r$ such that $H_r \dots H_1 A\Pi = R$. 
+There exists Householder refelctions $H_1, \cdots, H_r$ such that $H_r \cdots H_1 \cdot A\cdot\Pi = R$.
 ```
 
 ```{proof}
-Let $A\Pi = \begin{bmatrix} a_1 \dots a_r \end{bmatrix}$. Choose $H_1$ s.t. $H_1 a_1 = R_{11} e_1 = a_1 - 2v_1v_1^\prime a_1$ (last equality due to definition of Householder reflections). This is equivalent to $v_1(2v_1^\prime a_1) = a_1 - R_{11}e_1$. 
+Let $A\Pi = \begin{bmatrix} a_1 \dots a_r \end{bmatrix}$. Choose $H_1$ s.t. $H_1 a_1 = R_{11} e_1 = a_1 - 2v_1v_1^\prime a_1$ (last equality due to definition of Householder reflections). This is equivalent to $v_1(2v_1^\prime a_1) = a_1 - R_{11}e_1$.
 
-Now, let $v_1 = \frac{a_1 - R_{11}e_1}{\norm{a_1 - R_{11}e_2}_2}$. Plug this into the equation for $R_{11}e_1$ above to get 
+Now, let $v_1 = \frac{a_1 - R_{11}e_1}{\norm{a_1 - R_{11}e_2}_2}$. Plug this into the equation for $R_{11}e_1$ above to get
 
 $$
   R_{11}e_1 = a_1 - \frac{(a_1 - R_{11}e_1)}{\norm{a_1 - R_{11}e_1}_2}\frac{a_1^\prime a_1 - R_{11} a_1^\prime e_1}{\norm{a_1 - R_{11}e_1}_2}.
 $$
-  
+
 If we multiply this by $e_1^\prime$ from the right, we get
 
 $$
   R_{11} = \pm \norm{a_1}_2, v_1 = \frac{a_1 - \norm{a_1}e_1}{\norm{a_1 - \norm{a_1}_2 e_1}_2}.
 $$
-  
-$$ 
+
+$$
   H_1 = I - \frac{a_1 - \norm{a_1}_2e_1)(a_1 - \norm{a_1}_2 e_1)}{\norm{a_1 - \norm{a_1}_2 e_1}_2^2}
 $$
-    
+
 ```
 
 
 ```{definition, name = "Givens Rotations", label = "givens"}
-A *Givens Rotation* is a matrix $G^{(i,j)}$ with entries $(g_{ij})$ such that 
+A *Givens Rotation* is a matrix $G^{(i,j)}$ with entries $(g_{ij})$ such that
 
-i) $g_{ii} = g_{jj} = \lambda$ (the $i$th and $j$th elements of the diagonal are $\lambda$). 
+i) $g_{ii} = g_{jj} = \lambda$ (the $i$th and $j$th elements of the diagonal are $\lambda$).
 ii) $g_{kk} = 1$ for all $k \notin \{i,j\}$. (all other diagonal elements are $1$)
 iii) $g_{ij} = -g_{ji} = \sigma$
-iv) $g_{ij} = 0$ for all other pairs of $i,j$. 
+iv) $g_{ij} = 0$ for all other pairs of $i,j$.
 
-In words: $G^{(i,j)}$ is the identity matrix with the $i$th and $j$th diagonal elements made $\lambda$, and the entries at $(i,j)$ and $(j,i)$ are $\sigma$. 
+In words: $G^{(i,j)}$ is the identity matrix with the $i$th and $j$th diagonal elements made $\lambda$, and the entries at $(i,j)$ and $(j,i)$ are $\sigma$.
 
 ```
 
 ```{example, name = "2x2 Givens rotation to create upper triangular matrix."}
-The general $G^{(1,2)}$ is $\begin{bmatrix} \lambda & \sigma \\ -\sigma \lambda \end{bmatrix}$. Let us consider a general $M \in \R^{2\times m}$: 
-  
-$$
-  M = \begin{bmatrix} M_{11} & M_{12} & \dots & M_{1m} \\ 
-                      M_{21} & M_{22} & \dots & M_{2m} \end{bmatrix}.
-$$
-  
-We want this Givens matrix to be orthogonal. By homework exercise \@ref(exr:q507), we know this is the case when $\lambda^2 + \delta^2 = 1$. We also want $G^{(1,2)}M$ to be an upper triangular matrix. Since 
+The general $G^{(1,2)}$ is $\begin{bmatrix} \lambda & \sigma \\ -\sigma & \lambda \end{bmatrix}$. Let us consider a general $M \in \R^{2\times m}$:
 
 $$
-  G^{(i,j)} M = 
-    \begin{bmatrix} 
-      \lambda M_{11} + \sigma M_{12} & \dots & \lambda M_{1m} + \sigma M_{2m} \\ 
-      -\sigma M_{11} + \lambda M_{12} & \dots & -\sigma M_{1m} + \lambda M_{2m} \\ 
+  M = \begin{bmatrix} M_{11} & M_{12} & \dots & M_{1m} \\
+                      M_{21} & M_{22} & \dots & M_{2m} \end{bmatrix}.
+$$
+
+We want this Givens matrix to be orthogonal. By homework exercise \@ref(exr:q507), we know this is the case when $\lambda^2 + \delta^2 = 1$. We also want $G^{(1,2)}M$ to be an upper triangular matrix. Since
+
+$$
+  G^{(i,j)} M =
+    \begin{bmatrix}
+      \lambda M_{11} + \sigma M_{12} & \dots & \lambda M_{1m} + \sigma M_{2m} \\
+      -\sigma M_{11} + \lambda M_{12} & \dots & -\sigma M_{1m} + \lambda M_{2m} \\
     \end{bmatrix},
 $$
 
-we need $\lambda M_{12} = \sigma M_{11}$. So, solving these two equations, we find that $\lambda = \frac{M_{11}}{\sqrt{M_{11}^2 + M_{21}^2}}$ and $\sigma = \frac{M_{21}}{\sqrt{M_{11}^2 + M_{21}^2}}$. Hence, given the matrix $M$, we can find a Givens rotation which when multiplied by $M$ returns an upper triangular matrix. 
+we need $\lambda M_{12} = \sigma M_{11}$. So, solving these two equations, we find that $\lambda = \frac{M_{11}}{\sqrt{M_{11}^2 + M_{21}^2}}$ and $\sigma = \frac{M_{21}}{\sqrt{M_{11}^2 + M_{21}^2}}$. Hence, given the matrix $M$, we can find a Givens rotation which when multiplied by $M$ returns an upper triangular matrix.
 
-This also means that given a vector $a \in \R^n$, we can find a Givens rotation such that $G^{(i,j)} a$ gives back $a$ except for one entry, which has been changed to $0$. 
+This also means that given a vector $a \in \R^n$, we can find a Givens rotation such that $G^{(i,j)} a$ gives back $a$ except for one entry, which has been changed to $0$.
 
 ```
 
 ### "Large" Data Problem
 
-Finally, we will take a look at how to solve a "large" data problem using QR decomposition. To do so, let $A \in \R^{n\times m}$ be a matrix with $n$ "big". By "big", we mean so large that $A$ won't fit in memory, but the first $m+1$ rows of $A$ will. 
+Finally, we will take a look at how to solve a "large" data problem using QR decomposition. To do so, let $A \in \R^{n\times m}$ be a matrix with $n$ "big". By "big", we mean so large that $A$ won't fit in memory, but the first $m+1$ rows of $A$ will.
 
 Gentleman published a few papers in 1973/1974 describing a method for incremental QR decomposition. The key ideas are as follows:
 
-1) Remember that the solution to the linear model is $(A'A)^{-1}A'b = R^{-1}(Q'b)$. 
-2) The QR decomposition of $[A b]$ gives $\begin{bmatrix} R & Q'b \\ 0 & S \end{bmatrix}$ (ex. \@ref(exr:q407) and \@ref(exr:q408))
+1) Remember that the solution to the linear model is $(A'A)^{-1}A'b = R^{-1}(Q'b)$.
+2) The QR decomposition of $\begin{bmatrix}A & b\end{bmatrix}$ gives $\begin{bmatrix} R & Q'b \\ 0 & S \end{bmatrix}$ (ex. \@ref(exr:q407) and \@ref(exr:q408))
 
-Now, if we do QR decomposition on the first $m+1$ rows of $A$ we get $\begin{bmatrix} \tilde{R}_{m+1} & \tilde{Q}_{m+1}'b_{m+1} \\ 0 & S_{m+1} \end{bmatrix}$. Now, add the next row of $A$ to get $\begin{bmatrix} \tilde{R}_{m+1} & \tilde{Q}_{m+1}'b_{m+1} \\ 0 & S_{m+1} \\ a_{m+2} & b_{m+2} \end{bmatrix}$. Hit this with the right Givens rotation to change entry $(m+1, 1)$ to $0$. This will give us something of the form $\begin{bmatrix} \tilde{R}_{m+2} & \tilde{Q}_{m+2}'b_{m+2} \\ 0 & S_{m+2} \end{bmatrix}$. Here, $\tilde{R}_{m+2}$ is still an upper triangular matrix with less than $m$ rows. Repeat the procedure until we've added all rows of $A$/elements of $b$. 
+Now, if we do QR decomposition on the first $m+1$ rows of $A$ we get $\begin{bmatrix} \tilde{R}_{m+1} & \tilde{Q}_{m+1}'b_{m+1} \\ 0 & S_{m+1} \end{bmatrix}$. Now, add the next row of $A$ to get $\begin{bmatrix} \tilde{R}_{m+1} & \tilde{Q}_{m+1}'b_{m+1} \\ 0 & S_{m+1} \\ a_{m+2} & b_{m+2} \end{bmatrix}$. Hit this with the right Givens rotation to change entry $(m+1, 1)$ to $0$. This will give us something of the form $\begin{bmatrix} \tilde{R}_{m+2} & \tilde{Q}_{m+2}'b_{m+2} \\ 0 & S_{m+2} \end{bmatrix}$. Here, $\tilde{R}_{m+2}$ is still an upper triangular matrix with less than $m$ rows. Repeat the procedure until we've added all rows of $A$/elements of $b$.
 
 ## Singular Value Decomposition (SVD)
 
-Outline: 
+Outline:
 
 I) Motivating problems
 II) SVD and solutions
@@ -857,25 +870,25 @@ IV) Random projections (a modern application of SVD)
 ### Motivating Problems
 
 ```{example, "Minimum Norm Linear System Solution", label = "svd-problem-1"}
-Let $A \in \R^{n \times m}$ with $\text{rank}(A) < m \le n$, and let $B \in \text{range}(A)$. Find $x$ s.t. 
+Let $A \in \R^{n \times m}$ with $\text{rank}(A) < m \le n$, and let $B \in \text{range}(A)$. Find $x$ s.t.
 
 $$
   x \in \argmin_{y \in \R^m} \left\{\norm{y}_2 : Ay = b \right \}
-$$  
+$$
 
 ```
 
 ```{example, "Matrix 2-norm", label = "svd-problem-2"}
-Let $A \in \R^{n \times m}$. Find 
+Let $A \in \R^{n \times m}$. Find
 
 $$
   \norm{A}_2 = \sup_{v \in \R^m\setminus\{0\}} \frac{\norm{Av}_2}{\norm{v}_2}.
-$$  
+$$
 
 ```
 
 ```{example, "Low rank matrix approximation (i.e. data compression)", label = "svd-problem-3"}
-Let $A \in \R^{n\times m}$. Find $x$ s.t. 
+Let $A \in \R^{n\times m}$. Find $x$ s.t.
 
 $$
   x = \argmin_{rank(Y) \le k}\norm{A-Y}_F.
@@ -883,23 +896,23 @@ $$
 
 ```
 
-Note: $\norm{A}_F$ is the *Frobenius norm* and is defined as $\norm{A}_F = \left(\sum_{i=1}^m \sum_{j=1}^n |a_{ij}|^2 \right)^{1/2}$. So it is sort of a Euclideaon norm extended to matrices. 
+Note: $\norm{A}_F$ is the *Frobenius norm* and is defined as $\norm{A}_F = \left(\sum_{i=1}^m \sum_{j=1}^n |a_{ij}|^2 \right)^{1/2}$. So it is sort of a Euclideaon norm extended to matrices.
 
 ### SVD
 
 #### SVD definition
 
 ```{theorem, "Singular Value Decomposition", label = 'svd'}
-Suppose $A \in \R^{n\times m}$ and $n\ge m$. Then there exists $U \in \R^{n \times n}$ and $U \in \R^{m\times m}$ that are both orthogonal, and a diagonal matrix $\Sigma \in \R^{n \times m}$ with diagonal elements $\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_m \ge 0$ such that
+Suppose $A \in \R^{n\times m}$ and $n\ge m$. Then there exists $U \in \R^{n \times n}$ and $V \in \R^{m\times m}$ that are both orthogonal, and a diagonal matrix $\Sigma \in \R^{n \times m}$ with diagonal elements $\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_m \ge 0$ such that
 
 $$ A = U \Sigma V'$$
 
 
 ```
 
-Note: 
+Note:
 
-* The diagonal elements of $\Sigma$ are called the singular values of $A$. 
+* The diagonal elements of $\Sigma$ are called the singular values of $A$.
 * The columns of $U$ are called the left singular vectors
 * The columns of $V$ are called the right singular vectors
 
@@ -929,23 +942,23 @@ $$\begin{aligned}
     & & & 0 & & \\
     & & & & \ddots & \\
     & & & & & 0 \\
-  \end{bmatrix} \cdot 
+  \end{bmatrix} \cdot
   \begin{bmatrix} z_1 \\ z_2 \end{bmatrix} = \begin{bmatrix} c_1 \\ 0 \end{bmatrix}.
 \end{aligned}$$
-  
-So, $z_1 = \begin{bmatrix} \sigma_1^{-1} & & \\ & \ddots & \\ & & \sigma_r^{-1} \end{bmatrix} c_1$. We want to minimize $\norm{y}_2 = \norm{V^\prime z}_2 = \norm{z}_2 = \sqrt{\norm{z_1}_2^2 + \norm{z_2}_2^2}$. This is done by setting $z_2=0$, which we can do since $z_2$ does not affect the equation above. (It is multiplied by all the $0$ rows of $\Sigma$.) So, the minimum norm solution is 
-  
+
+So, $z_1 = \begin{bmatrix} \sigma_1^{-1} & & \\ & \ddots & \\ & & \sigma_r^{-1} \end{bmatrix} c_1$. We want to minimize $\norm{y}_2 = \norm{V^\prime z}_2 = \norm{z}_2 = \sqrt{\norm{z_1}_2^2 + \norm{z_2}_2^2}$. This is done by setting $z_2=0$, which we can do since $z_2$ does not affect the equation above. (It is multiplied by all the $0$ rows of $\Sigma$.) So, the minimum norm solution is
+
 $$\begin{aligned}
-  x &= V 
-    \begin{bmatrix} 
-      \sigma_1^{-1} & & & \\ 
+  x &= V
+    \begin{bmatrix}
+      \sigma_1^{-1} & & & \\
       & \ddots & & \huge{c_1} \\
       & & \sigma_{r}^{-1} & \\
       & {\huge 0} & &
     \end{bmatrix} \\
     &= V \cdot V^\prime y.
 \end{aligned}$$
-    
+
 ```
 
 For the solution to example \@ref(exm:svd-problem-2), we'll need the following result:
@@ -963,49 +976,49 @@ $$
   \norm{Dv}_2^2 = \sum_{j=1}^m (D_{jj}^2 v_j)^2 \leq D_{ii}^2 \sum_{j=1}^m v_j^2 = D_{ii}^2 \norm{v}_2^2 = D_{ii}^2.
 $$
 
-Now, let $z \in \R^m$ such that $z_{ij} = \left\{ \begin{matrix} 0, & j \neq i \\ \frac{D_{ii}}{|D_{ii}|}, & j = i \end{matrix} \right .$. Then $\norm{z}_2 = \sqrt{\frac{D_{ii}^2}{|D_{ii}|^2}} = 1$, and 
+Now, let $z \in \R^m$ such that $z_{ij} = \left\{ \begin{matrix} 0, & j \neq i \\ \frac{D_{ii}}{|D_{ii}|}, & j = i \end{matrix} \right .$. Then $\norm{z}_2 = \sqrt{\frac{D_{ii}^2}{|D_{ii}|^2}} = 1$, and
 
 $$
   \norm{Dz}_2^2 = \sum_{j=1}^m (D_{jj} z_j)^2 = D_{ii}^2 \frac{D_{ii}^2}{|D_{ii}|^2} = D_{ii}^2.
 $$
-    
-Since $\norm{z}_2 = 1$, 
+
+Since $\norm{z}_2 = 1$,
 
 $$ D_{ii}^2 \norm{Dz}_2^2 \le (\max_{\norm{v}_2 = 1} |D_{ii}|)^2 \le D_{ii}^2$$,
 
-so $\norm{D}_2 = \max_{\norm{v}_2 = 1} |D_{ii}| = |D_{ii}| = max_{j} |D_{jj}|$. 
-  
+so $\norm{D}_2 = \max_{\norm{v}_2 = 1} |D_{ii}| = |D_{ii}| = max_{j} |D_{jj}|$.
+
 ```
 
 ```{solution, name = "Solution to example \\@ref(exm:svd-problem-2)"}
-First, use the SVD of $A$ to write $A = U \Sigma V^\prime$. Now, since the 2-norm is invariant under multiplication of orthogonal matrices, we have that 
+First, use the SVD of $A$ to write $A = U \Sigma V^\prime$. Now, since the 2-norm is invariant under multiplication of orthogonal matrices, we have that
 
 $$\begin{aligned}
   \norm{A}_2 &= \max_{\norm{v} = 2} \norm{U\Sigma V^\prime v}_2 \\
              &= \max_{\norm{v} = 2} \norm{\Sigma V^\prime v}_2.
 \end{aligned}$$
 
-If we let $z = V^\prime v$, we see that $\norm{z}_2 = \norm{v}_2 = 1$, since $V^\prime$ is an orthogonal matrix. Hence, 
+If we let $z = V^\prime v$, we see that $\norm{z}_2 = \norm{v}_2 = 1$, since $V^\prime$ is an orthogonal matrix. Hence,
 
 $$
   \norm{A}_2 = \max_{\norm{z}_2 = 1} \norm{\Sigma z}_2 = \norm{\Sigma}_2 = \max_{i} |\sigma_i| =  \sigma_1,
 $$
 
-where we used the lemma above to obtain the second to last equality. 
+where we used the lemma above to obtain the second to last equality.
 ```
 
 ```{solution, name = "Solution to example \\@ref(exm:svd-problem-3)"}
-Recall, $A = \sum_{i=1}^n \sigma_i u_i v_i^\prime = U \Sigma V^\prime$. We want to find $\argmin_{\text{rank}(Y) \le k} \norm{A-Y}_F$. 
+Recall, $A = \sum_{i=1}^n \sigma_i u_i v_i^\prime = U \Sigma V^\prime$. We want to find $\argmin_{\text{rank}(Y) \le k} \norm{A-Y}_F$.
 
-Case 1: If $\text{rank}(A) \le k$, then $Y = A$ is the solution. 
+Case 1: If $\text{rank}(A) \le k$, then $Y = A$ is the solution.
 
-Case 2: $\text{rank}(A) > k$. Since the Frobenius norm is orthogonally invariant, we can obtain that 
+Case 2: $\text{rank}(A) > k$. Since the Frobenius norm is orthogonally invariant, we can obtain that
 
 $$\begin{aligned}
   \norm{A-Y}_F^2 &= \norm{U\Sigma V^\prime - Y}_F^2 \\
-                 &= \norm{\Sigma - U^\prime Y V}_F^2. 
+                 &= \norm{\Sigma - U^\prime Y V}_F^2.
 \end{aligned}$$
-  
+
 If we let $X = U^\prime Y V$, we get that
 
 $$\begin{aligned}
@@ -1013,29 +1026,29 @@ $$\begin{aligned}
                  &= \sum_{i=1}^n \sum_{j=1,i\ne j}^m ( - x_{ij})^2  + \sum_{i=1}^n (\sigma_i - x_{ij})^2,
 \end{aligned}$$
 
-since $\sigma_{ij}=0$ for all $i \ne j$, and at most $k$ of the $\sigma_{ii}$ are non-zero. To minimize the expression above, we choose $Y$ such that $x_{ij}=0$ for $i\ne j$, and $x_{ii} = \sigma_i$. Hence, 
+since $\sigma_{ij}=0$ for all $i \ne j$, and at most $k$ of the $\sigma_{ii}$ are non-zero. To minimize the expression above, we choose $Y$ such that $x_{ij}=0$ for $i\ne j$, and $x_{ii} = \sigma_i$. Hence,
 
 $$
-  X = \begin{bmatrix} \sigma_1 & & & & & \\ 
-                      & \ddots & & & & \\ 
-                      & & \sigma_k & & & \\ 
-                      & & & 0 & & \\ 
-                      & & & & \ddots & \\ 
-                      & & & & & 0 \end{bmatrix}, 
+  X = \begin{bmatrix} \sigma_1 & & & & & \\
+                      & \ddots & & & & \\
+                      & & \sigma_k & & & \\
+                      & & & 0 & & \\
+                      & & & & \ddots & \\
+                      & & & & & 0 \end{bmatrix},
 $$
-  
-and $Y = U X V^\prime$. 
-  
+
+and $Y = U X V^\prime$.
+
 ```
 
 ### Existence and Properties
 
 ```{proof, name = "SVD (\\@ref(thm:svd))"}
-Recall that $\norm{A}_2 = \sup_{v \ne 0} \frac{\norm{Av}_2}{\norm{v}_2} = \max_{\norm{v}_2 = 1} \norm{Av}_2$. I.e. there exists a $v_1$ such that $\norm{v_1}_2 = 1$ and $\norm{A}_2 = \norm{Av_1}_2$. 
+Recall that $\norm{A}_2 = \sup_{v \ne 0} \frac{\norm{Av}_2}{\norm{v}_2} = \max_{\norm{v}_2 = 1} \norm{Av}_2$. I.e. there exists a $v_1$ such that $\norm{v_1}_2 = 1$ and $\norm{A}_2 = \norm{Av_1}_2$.
 
-Let $u_1$ be a vector such that $\norm{A}_2 u_1 = Av_1$. This implies that $\norm{u_1}_2 = 1$, since $\norm{\norm{A}_2u_1}_2 = \norm{A}_2 \norm{u_1}_2 = \norm{Av_1}_2 = \norm{A}_2$. 
+Let $u_1$ be a vector such that $\norm{A}_2 u_1 = Av_1$. This implies that $\norm{u_1}_2 = 1$, since $\norm{\norm{A}_2u_1}_2 = \norm{A}_2 \norm{u_1}_2 = \norm{Av_1}_2 = \norm{A}_2$.
 
-Let $\sigma_1 = \norm{A}_2$. So, $\sigma_1 u_1 = A v_1$. Using the Gram-Schmidt procedure, we can create a matrix $V_1 \in \R^{n\times (n-1)}$ and $\tilde{U}_1 = \begin{bmatrix} u_1 V_1 \end{bmatrix} \in \R^{n \times n}$ being an orthogonal matrix. Similarly, we can create $\tilde{V}_1 \in \R^{m\times m}$ such that $\tilde{V}_1 = \begin{bmatrix} v_1 V_1 \end{bmatrix} \in \R^{m \times m}$ is orthogonal. 
+Let $\sigma_1 = \norm{A}_2$. So, $\sigma_1 u_1 = A v_1$. Using the Gram-Schmidt procedure, we can create a matrix $V_1 \in \R^{n\times (n-1)}$ and $\tilde{U}_1 = \begin{bmatrix} u_1 V_1 \end{bmatrix} \in \R^{n \times n}$ being an orthogonal matrix. Similarly, we can create $\tilde{V}_1 \in \R^{m\times m}$ such that $\tilde{V}_1 = \begin{bmatrix} v_1 V_1 \end{bmatrix} \in \R^{m \times m}$ is orthogonal.
 
 Now, $A \tilde{V}_1 = \begin{bmatrix} Av_1 & AV_1 \end{bmatrix} = \begin{bmatrix} \sigma_1 u_1 & AV_1 \end{bmatrix}$. Hence, $\tilde{U}_1^\prime A \tilde{V}_1 = \begin{bmatrix} u_1 \\ U_1^\prime \end{bmatrix} \begin{bmatrix} \sigma_1 u_1 & A V_1 \end{bmatrix} = \begin{bmatrix} \sigma_1 & w^\prime \\ 0 & \tilde{A} \end{bmatrix}$, since $u_1$ is orthogonal to all columns of $U_1^\prime$. We need to show that $w=0$. Since the 2-norm is orthogonally invariant, it holds for any $z \ne 0$,
 
@@ -1045,24 +1058,24 @@ $$\begin{aligned}
              &= \norm{\begin{bmatrix} \sigma_1 & w^\prime \\ 0 & \tilde{A} \end{bmatrix}}_2^2 \\
              &\ge \frac{\norm{\begin{bmatrix} \sigma_1 & w^\prime \\ 0 & \tilde{A} \end{bmatrix} z}_2^2}{\norm{z}_2^2}.
 \end{aligned}$$
-  
+
 Let $z = \begin{bmatrix} \sigma_1 \\ w \end{bmatrix}$. Then,
 
 $$
   \sigma_1^2 \ge \frac{\norm{\begin{bmatrix} \sigma_1 & w^\prime \\ 0 & \tilde{A} \end{bmatrix} \begin{bmatrix} \sigma_1 \\ w \end{bmatrix}}_2^2}{\norm{\begin{bmatrix} \sigma_1 \\ w \end{bmatrix}}_2^2} = \frac{(\sigma_1^2 + \norm{w}_2^2)^2 + \norm{\tilde{A}w}_2^2}{\sigma_1^2 + \norm{w}_2^2}\ge \sigma_1^2 + \norm{w}_2^2 \ge \sigma_1^2,
 $$
-  
-i.e. $\norm{w}_2^2 = 0$. So, 
 
-$$ 
+i.e. $\norm{w}_2^2 = 0$. So,
+
+$$
   \tilde{U}_1 A V_1 = \begin{bmatrix} \sigma_1 & 0 \\ 0 & \tilde{A} \end{bmatrix}.
 $$
-  
-Repeat the same procedure to get $U, V$ such that $A = U^\prime \Sigma V$. 
+
+Repeat the same procedure to get $U, V$ such that $A = U^\prime \Sigma V$.
 ```
 
 ```{corollary}
-$\text{rank}(A)$ is exactly the number of non-zero singular values of $A$. 
+$\text{rank}(A)$ is exactly the number of non-zero singular values of $A$.
 ```
 
 ```{proof}
@@ -1074,20 +1087,20 @@ $\text{rank}(A) = \text{rank}(U \Sigma V^\prime ) = \text{rank}(\Sigma) =$ numbe
 ```{corollary, sigma-min-max}
 Let $A,E \in \R^{n\times m}$, $\sigma_{\text{max}}$ ($\sigma_{\text{min}}$) denote the largest (smallest) singular value of A. Then
 
-$$ 
+$$
   \sigma_{\text{max}}(A+E) \le \sigma_{\text{max}}(A) + \norm{E}_2
 $$
-  
+
 and
 
 $$
   \sigma_{\text{min}}(A+E) \ge \sigma_{\text{min}}(A) - \norm{E}_2.
 $$
-  
+
 ```
 
 ```{corollary, name = "Hoffman-Wielandt Inequality"}
-Let $A,E \in \R^{n \times m}$, $\sigma_k(\dot)$ denote the k'th largest singular value. Let $p =\min(m,n) \le \norm{E}_F^2$. Then 
+Let $A,E \in \R^{n \times m}$, $\sigma_k(\dot)$ denote the k'th largest singular value. Let $p =\min(m,n) \le \norm{E}_F^2$. Then
 
 $$
   \sum_{k=1}^p (\sigma_k(A+E) - \sigma_k(A))^2 \le \norm{E}_F^2.
@@ -1097,13 +1110,128 @@ $$
 
 ```{corollary}
 
-Let $r = \text{rank}(A)$. 
+Let $r = \text{rank}(A)$.
 
 1) $\text{range}(A) = \text{span}(u_1, \ldots, u_r)$
 2) row space of A $= \text{span}(v_1, \ldots, v_r)$
 3) $\text{null}(A) = \text{span}(v_{r+1}, \ldots, v_{m})$
 4) $\text{null}(A^\prime) = \text{span}(u_{r+1}, \ldots, v_{m})$
 
-Moreover, 
+Moreover,
+
+1) $U_r = \begin{bmatrix} u_1 & \cdots & u_r \end{bmatrix}$, $U_r U_r^\prime = P_{\text{range}(A)}$
+2) $U_{n-r} = \begin{bmatrix} u_{r+1} & \cdots & u_n \end{bmatrix}$, $U_{n-r} U_{n-r}^\prime = P_{\text{null}(A)}$
+3) $V_r = \begin{bmatrix} v_1 & \cdots & v_r \end{bmatrix}$, V_r V_r^\prime = P_{\text{row}(A)}$
+2) $V_{n-r} = \begin{bmatrix} v_{r+1} & \cdots & v_n \end{bmatrix}$, $V_{n-r} V_{n-r}^\prime = P_{\text{null}(A)}$
+
+where $P_{\mathcal{B}}$ is the projection onto the space $\mathcal{B}$. 
+```
+
+
+```{definition, name = 'Pseudo-inverse', label = 'pseudo-inverse'}
+For a matrix $A \in \R^{n\times m}$, we call $A^+ \in \R^{m\times n}$ a pseudo-inverse to $A$ if 
+
+1) $AA^+A = A$
+2) $A^+AA^+ = A^+$
+3) $(AA^+)^\prime = AA^+$
+4) $(A^+A)^\prime = A^+A$
+
+```
+
+```{theorem}
+For any matrix $A \in \R^{n \times m}$, there exists a unique pseudo-inverse $A^+$.
+```
+
+```{proof}
+Suppose $B$ and $C$ are both pseudo-inverses of $A$. Then 
+
+$$\begin{aligned}
+  BA &= B(ACA) \\
+     &= (BA)(CA) \\
+     &= (BA)^\prime (CA)^\prime \\
+     &= A^\prime B^\prime A^\prime C^\prime \\
+     &= (ABA)^\prime C^\prime \\
+     &= A^\prime C^\prime \\
+     &= (CA)^\prime \\
+     &= CA.
+\end{aligned}$$
+
+Similarly,
+
+$$\begin{aligned}
+  AB &= (ACA)B \\
+     &= (AC)(AB) \\
+     &= (AC)^\prime (AB)^\prime \\
+     &= C^\prime A^\prime B^\prime A^\prime \\
+     &= C^\prime (ABA)^\prime \\
+     &= C^\prime A^\prime \\
+     &= (AC)^\prime \\
+     &= AC.
+\end{aligned}$$
   
+So, $B = BAB = CAB = CAC = C$. This shows that if there exists a pseudo-inverse, it is unique.
+  
+  
+Now, let $D \in \R^{n\times m}$ be a diagonal matrix with $d_{ii}$ its diagonal elements. Then the diagonal matrix $E \in \R^{m\times n}$ with diagonal elements $d_{ii}^{-1}$ for $d_{ii} \neq 0$ and $0$ otherwise is the pseudo-inverse of $D$. 
+
+So,
+
+$$[DE]_{ij} = \sum_{k=1}^m D_{ik} E_{kj} = \left\{\begin{array}{rl} 0, & i \neq j \\ 1, & i = j, d_{ii} \neq 0 \\ 0, & i = j, d_{ii} = 0 \end{array} \right .$$
+
+and 
+
+$$[ED]_{ij} = \sum_{k=1}^n D_{ik} E_{kj} = \left\{\begin{array}{rl} 0, & i \neq j \\ 1, & i = j, d_{ii} \neq 0 \\ 0, & i = j, d_{ii} = 0 \end{array} \right .$$
+
+Since $ED$ and $DE$ are both diagonal matrices, $(ED)^{\prime} = ED$ and $(DE)^{\prime} = DE$. 
+
+Furthermore, 
+
+$$[DED]_{ij} = \sum_{k=1}^n D_{ik}[ED]_{kj} = \left\{\begin{array}{rl} 0, & i \neq j \\ D_{ij}, & i = j \end{array} \right .$$
+
+and  
+
+$$[EDE]_{ij} = \sum_{k=1}^n E_{ik}[DE]_{kj} = \left\{\begin{array}{rl} 0, & i \neq j \\ E_{ij}, & i = j \end{array} \right .$$
+
+So $E$ satisfies the four conditions of a pseudo-inverse. I.e. for any diagonal matrix, there exists a pseudo-inverse.
+
+Now, we know that there exist $U,\Sigma, V$ such that $A = U\Sigma V^\prime$. Let $B = V \Sigma^+ U^\prime$. Recall that $U^\prime U = I$ and $V^\prime V = I$. 
+
+1) $ABA = U\Sigma V^\prime V \Sigma^+ U^\prime U\Sigma V^\prime = U \Sigma \Sigma^+ \Sigma V^\prime = U \Sigma V^\prime = A$
+2) $BAB = V \Sigma^+ U^\prime U \Sigma V^\prime V \Sigma^+ U = V \Sigma^+ \Sigma \Sigma^+ U^\prime = V \Sigma^+ U^\prime = B$
+3) 
+
+$$\begin{aligned} 
+  (AB)^\prime = B^\prime A^\prime &= (V \Sigma^+ U^\prime)^\prime (U \Sigma V^\prime)^\prime \\
+                                  &= U (\Sigma^+)^\prime V^\prime V \Sigma^\prime U^\prime \\
+                                  &= U (\Sigma \Sigma^+)^\prime U^\prime \\
+                                  &= U \Sigma \Sigma^+ U^\prime \\
+                                  &= U \Sigma V^\prime V \Sigma^+ U^\prime \\
+                                  &= AB
+\end{aligned}$$
+
+4) 
+
+$$\begin{aligned} 
+  (BA)^\prime = A^\prime B^\prime &= (U \Sigma V^\prime)^\prime (V \Sigma^+ U^\prime)^\prime \\
+                                  &= V \Sigma^\prime U^\prime U (\Sigma^+)^\prime V^\prime \\
+                                  &= V (\Sigma^+ \Sigma)^\prime V^\prime \\
+                                  &= V \Sigma^+ \Sigma V^\prime \\
+                                  &= V \Sigma^+ U^\prime U \Sigma V^\prime \\
+                                  &= BA.
+\end{aligned}$$
+
+So, $B$ is a pseudo-inverse of $A$. 
+                                  
+Hence, any matrix has a unique pseudo-inverse.
+
+```
+
+### Random Projections
+
+Let $A \in \R^{n\times m}$, $m >> n$. When this is the case, it is very hard to compute the SVD. So instead we try to find a matrix $C$ with $\text{range}(C) \approx \text{range}(A)$. In other words, $A \approx P_{\text{range}(C)}A$. One way to find such a $C$ is to simply sample columns from $A$. 
+
+```{theorem}
+Suppose $A \in \R^{n \times m}$, $C$ is as in the algorithm `inexactRankK` (see [here]('../Lecture scripts/Singular Value Decomposition.jl')), and $H$ is the $k$ left singular vectors of $C$. Then
+
+$$\norm{A-HH^\prime A}_F^2 \le \norm{A-A_k}_F^2 + 
 ```
