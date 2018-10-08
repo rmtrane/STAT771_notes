@@ -16,4 +16,6 @@ description: "This is my collection of notes for the STAT 771 class taught at UW
 \newcommand{\argmin}{\text{argmin}}
 \newcommand{\argmax}{\text{argmax}}
 
+\newcommand{\w}{\omega}
+
 # Intro {-}

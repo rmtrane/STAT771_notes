@@ -1099,7 +1099,7 @@ $$
 
 ```
 
-```{corollary, name = "Hoffman-Wielandt Inequality"}
+```{corollary, name = "Hoffman-Wielandt Inequality", label = "hoffman-wielandt"}
 Let $A,E \in \R^{n \times m}$, $\sigma_k(\dot)$ denote the k'th largest singular value. Let $p =\min(m,n) \le \norm{E}_F^2$. Then
 
 $$
@@ -1233,5 +1233,274 @@ Let $A \in \R^{n\times m}$, $m >> n$. When this is the case, it is very hard to 
 ```{theorem}
 Suppose $A \in \R^{n \times m}$, $C$ is as in the algorithm `inexactRankK` (see [here]('../Lecture scripts/Singular Value Decomposition.jl')), and $H$ is the $k$ left singular vectors of $C$. Then
 
-$$\norm{A-HH^\prime A}_F^2 \le \norm{A-A_k}_F^2 + 
+$$\norm{A-HH^\prime A}_F^2 \le \norm{A-A_k}_F^2 + 2\sqrt{k} \norm{AA^\prime - CC^\prime}_F,$$
+
+where $A_k$ is the rank $k$ approximation of $A$.
+```
+
+```{proof}
+Recall that $\norm{A}_F^2 = \text{tr}(A^\prime A)$, and $H^\prime H = I$, since the columns of $H$ are singular vectors, i.e. are orthogonal to each other. 
+
+$$\begin{aligned}
+  \norm{A - HH^\prime A}_F^2 &= \text{tr}((A-HH^\prime A)^\prime (A-HH^\prime A)) \\
+                            &= \text{tr}((A^\prime - A^\prime H H^\prime)(A-HH^\prime A)) \\
+                            &= \text{tr}(A^\prime A - A^\prime H H^\prime A - A^\prime HH^\prime A + A^\prime H H^\prime HH^\prime A) \\
+                            &= \text{tr}(A^\prime A - A^\prime H H^\prime A) \\
+                            &= \text{tr}(A^\prime A) - \text{tr}(A^\prime H H^\prime A) \\
+                            &= \norm{A}_F^2 - \norm{A^\prime H}.
+\end{aligned}$$
+
+Since
+
+$$
+  \norm{A}_F^2 = \norm{A-A_k}_F^2 + \sum_{j=1}^k \sigma_j^2(A),
+$$
+
+we have that
+  
+$$\begin{aligned}
+  \norm{A-H H^\prime A}_F^2 &= \norm{A-A_k}_F^2 + \sum_{j=1}^k \sigma_j^2(A) - \norm{A^\prime H}_F^2 \\
+                            &= \norm{A-A_k}_F^2 + \sum_{j=1}^k \left[\sigma_j^2(A) - \sigma_j^2(C)\right] + \sum_{j=1}^k \sigma_j^2{C} - \norm{A^\prime H}_F^2. 
+\end{aligned}$$
+
+Note that, using the Cauchy-Schwarts inequality, we get
+
+$$\begin{aligned}
+  \sum_{j=1}^k \left[\sigma_j^2(A) - \sigma_j^2(C)\right] &= \left | \begin{bmatrix} 1 \\ \vdots \\ 1 \end{bmatrix} \cdot \begin{bmatrix} \sigma_1^2(A) - \sigma_1^2(C) & \cdots & \sigma_k^2(A) - \sigma_k^2(C) \end{bmatrix} \right | \\
+                                                          &\le \sqrt{\norm{\begin{bmatrix} 1 \\ \vdots \\ 1 \end{bmatrix}} \norm{\begin{bmatrix} \sigma_1^2(A) - \sigma_1^2(C) & \cdots & \sigma_k^2(A) - \sigma_k^2(C) \end{bmatrix}}} \\
+                                                          &= \sqrt{k} \sqrt{\sum_{j=1}^k \left(\sigma_j^2(A) - \sigma_j^2(C)\right)^2} \\
+                                                          &\le \sqrt{k} \sqrt{\sum_{j=1}^k \left(\sigma_j(AA^\prime) - \sigma_j(CC^\prime)\right)^2} \\
+                                                          &= \sqrt{k} \sqrt{\sum_{j=1}^k \left(\sigma_j(CC^\prime + AA^\prime - CC^\prime) - \sigma_j(CC^\prime)\right)^2} \\
+                                                          &\le \sqrt{k} \norm{AA^\prime - CC^\prime}_F.
+\end{aligned}$$
+  
+If $H_1, \ldots, H_k$ denote columns of $H$, then $A^\prime H = \begin{bmatrix} A^\prime H_1 & \cdots & A^\prime H_k \end{bmatrix}$. Since 
+
+$$
+  \norm{A^\prime H}_F^2 = \sum_{j=1}^k \norm{A^\prime H_j}_2^2,
+$$
+  
+we can use Cauchy-Schwartz as above to obtain that
+    
+$$\begin{aligned}
+  \sum_{j=1}^k \sigma_j^2(C) - \norm{A^\prime H}_F^2 &\le \sqrt{k} \sqrt{\sum_{j=1}^k \left[\sigma_j{CC^\prime} - H_j^\prime A A^\prime H_j\right]^2} \\
+                                                     &= \sqrt{k} \sqrt{\sum_{j=1}^k \left[H_j^\prime CC^\prime H_j - H_j^\prime A A^\prime H_j\right]^2} \\
+                                                     &\le \sqrt{k} \norm{AA^\prime - CC^\prime}_F,
+\end{aligned}$$
+  
+where we in the last step use the Hoffman-Wielandt inequality (corollary \@ref(cor:hoffman-wielandt)). 
+  
+Combining all of this, we get
+
+$$
+  \norm{A - HH^\prime A}_F^2 \le \norm{A-A_k}_F^2 + 2\sqrt{k} \norm{AA^\prime - CC^\prime}_F.
+$$
+
+```
+
+
+## Iterative Methods 
+
+### Overview 
+
+First, some references:
+
+a) Golub and Van Loan
+b) Saad (2000): *Iterative methods for sparse linear systems* [link](https://www-users.cs.umn.edu/~saad/IterMethBook_2ndEd.pdf)
+c) Shewchuk (1994): *Introduction to Conjugated Gradients without the Agonizing Pain* [link](https://www.cs.cmu.edu/~quake-papers/painless-conjugate-gradient.pdf)
+d) Gower and Richtarik (2015): *Randomized Iterative Methods for Linear Systems* [link](https://arxiv.org/abs/1506.03296)
+
+### Outline
+
+We will be going throuh the following:
+
+i) Why iterative methods?
+ii) Splitting Methods
+iii) Randomized Kaezmarz Method
+iv) Gradient Descent
+v) Conjugated Gradients
+vi) GMRES (optional)
+
+### Motivation
+
+These methods have had a great impact historically speaking. They take advantage of any sparsity found in a matrix, making them "easier" computational. 
+
+When working with huge systems (such as weather prediction, computational chemistry, genomics, etc), this is the way to deal with it.
+
+### Splitting Methods
+
+Let $A$ be a matrix, and $b$ a vector. Let
+
+- $x^c$ denote the current iterate
+- $x^+$ denote the next iterate
+- $r^c$ denote the current residual
+- $r^+$ denote the next residual
+
+where $r^c = Ax^c - b$ and $r^+ = Ax^+ - b$. The goal is to find methods to minimize the residual by iteratively defining $x^+$ based on $x^c$. 
+
+A splitting method takes a matrix $A$ and splits it. One way of doing so is by splitting $A$ into three parts $A = D - E - F$, where
+
+* $D$ is the diagonal
+* $E$ is the negative lower triangular part of $A$ excluding the diagonal
+* $F$ is the negative upper triangular part of $A$ excluding the diagonal
+
+Based on this split, there are a few different ways to iteratively update $r^+$.
+
+```{definition, name = "The Jacobi Method"}
+*The Jacobi Method* finds $x^+$ from $x^c$ using the following rule:
+  
+$$x_i^+ = \frac{b_i - \sum_{k\neq i}A_{ik}x_k^c}{A_{ii}}.$$
+
+If we do this for all $i$, we can write this in matrix form:
+  
+$$x^+ = D^{-1}(b + (E+F)x^c).$$
+
+```
+
+For the Jacobi Method, we can see that $r_i^+ = 0:$
+
+$$\begin{aligned}
+  x_i^+ &= \frac{b_i - \sum_{k\neq i}A_{ik}x_k^c}{A_{ii}} \iff \\
+  A_{ii}x_i^+ &= b_i - \sum_{k\neq i}A_{ik}x_k^c \iff \\
+  0 &= b_i - \sum_{k\neq i}A_{ik}x_k^c - A_{ii}x_i^+ = b_i - \sum_{k}A_{ik}x_k^c = r_i^+.
+\end{aligned}$$
+
+```{definition, name = "The Gauss-Seidel Method"}
+*The Gauss-Seidel Method* finds $x^+$ from $x^c$ using the following rule: 
+  
+$$x_i^+ = \frac{1}{A_ii}\left(b_i - \sum_{k=1}^{i-1} A_{ik}x_k^+ - \sum_{k=i+1}^d A_{ik} x_k^c\right),$$
+
+which in matrix formulation is 
+
+$$x^+ = D^{-1}(b + Ex^+ + Fx^c)$$,
+
+or equivalently
+
+$$x^+ = (D-E)^{-1}(b + Fx^c).$$
+
+```
+
+As for the Jacobi method, it can be seen that $r_i^+ = 0$.
+
+```{definition, name = "Successive Over Relaxation (SOR)"}
+
+When we update $x^c$ to $x^+$ using a rule of the form 
+
+$$ (D-\omega E)x^+ = (\omega F + (1-\omega)D)x^c + \omega b,$$
+
+it is called a *Successive Over Relaxation* method. 
+  
+```
+
+Note: if we pick $\omega = 1$, we get back the Gauss-Seidel method.
+
+```{definition, name = "Backward SOR"}
+
+The following is called the *Backward SOR*:
+
+$$ (D-\omega E)x^+ = (\omega F + (1-\omega)D)x^c + \omega b,$$
+
+```
+
+```{definition, name = "Symmetric SOR"}
+
+The *Symmetric SOR* is a method where we first find $z$ based on the rule 
+
+$$(D-\omega F)z = (\omega F + (1-\omega)D)x^c+\omega b$$
+
+before using the rule
+
+$$(D- \omega F)x^+ = (\omega F + (1-\omega)D)z + \omega b$$
+  
+to find $x^+$. 
+  
+```
+
+### Convergence
+
+All of the schemes mentioned above are of the form $x^+ = G x^c + f$:
+
+* **Jacobi**: $G = D^{-1}(E+F)$, $f = D^{-1}b$.
+
+* **Gauss-Seidel**: $G = (D-E)^{-1}F$, $f = (D-E)^{-1} b$.
+
+* **SOR**: $G = (D - \omega E)^{-1}(\omega F + (1- \omega)D)$, $f = \omega (D-\omega E)^{-1} b$.
+
+Now, if we assume that $x^*$ is a vector such that $Ax^* = b$, then $(I-G)x^* = f$: (for the following, keep in mind that $A = D - E - F$)
+
+* **Jacobi**: 
+
+$$\begin{aligned} 
+  f &= D^{-1}b \\ 
+    &= D^{-1}Ax^* \\
+    &= D^{-1}(D-E-F)x^* \\
+    &= (DD^{-1} - D^{-1}(E+F))x^*\\
+    &= (I - G)x^*.
+\end{aligned}$$
+
+* **Gauss-Seidel**:
+
+$$\begin{aligned}
+  f &= (D-E)^{-1}b \\
+    &= (D-E)^{-1}Ax^* \\
+    &= (D-E)^{-1}(D-E-F)x^* \\
+    &= ((D-E)^{-1}(D-E)-(D-E)^{-1}F)x^* \\
+    &= (I - G)x^*.
+\end{aligned}$$
+
+* **SOR**:
+
+$$\begin{aligned}
+  f &= \w (D-\w E)^{-1}b\\
+    &= \w (D-\w E)^{-1}Ax^* \\
+    &= \w (D-\w E)^{-1}(D-E-F)x^* \\
+    &= (D-\w E)^{-1}(\w D-\w E-\w F)x^* \\
+    &= (D-\w E)^{-1}(D - D + \w D-\w E-\w F)x^* \\
+    &= (D-\w E)^{-1}(D -\w E - [(1-\w)D + \w F])x^* \\
+    &= ((D-\w E)^{-1}(D -\w E) - (D-\w E)^{-1}[D(1-\w) + \w F])x^* \\
+    &= (I - G)x^*.
+\end{aligned}$$
+
+
+```{lemma, label = "next-current-diff"}
+For the Jacobi, Gauss-Seidel, and SOR methods, if there exists a $x^*$ s.t. $Ax^* = b$, then $x^+ - x^* = G(x^c - x^*)$.
+```
+
+```{proof}
+
+We just saw that $Ax^* = b$ implies $(I-G)x^* = f$. We also saw that $x^+ = Gx^c + f$. Hence
+
+$$\begin{aligned}
+  x^+ &= G x^c + f \\
+      &= G x^c + (I-G)x^* \\
+      &= G x^c + x^* - Gx^* \iff \\
+  x^+ - x^* &= G(x^c - x^*).
+\end{aligned}$$
+    
+```
+
+
+```{theorem}
+
+Suppose there exists a $x^*$ s.t. $A x^* = b$. Let $x_0$ be arbitrary and define a sequence $\{x_k\}_{k \in \N}$ by 
+
+$$
+  x_k = Gx_{k-1} + f.
+$$
+  
+If $\rho(G) < 1$, then $x^*$ is unique, and $x_k \rightarrow x^*$ as $k \rightarrow \infty$. 
+ 
+```
+
+In the theorem above, $\rho(G)$ is the spectral radius of the matrix $G$. This is defined as the largest eigenvalue of the matrix $G$. 
+
+```{definition, name = "Jordan Canonical Form", label = "jordan"}
+Let $A \in \R^{n \times n}$. There exists an $X$ which is invertible, and a block-diagonal matrix $J$, whose blocks are of the form $\lambda I + E$, where $\lambda$ is an eigenvalue of $A$, and 
+
+$$
+  E = \left\{ \begin{array}{rl} 1, & j = i+1 \\ 0, & \text{ otherwise} \end{array} \right .
+$$
+    
+such that $A = XJX^{-1}$.
+
 ```

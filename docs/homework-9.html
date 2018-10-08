@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="homework-3.html">
-<link rel="next" href="homework-5.html">
+<link rel="prev" href="homework-8.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -157,93 +157,40 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="homework-4" class="section level2">
-<h2><span class="header-section-number">2.4</span> Homework 4</h2>
+<div id="homework-9" class="section level2">
+<h2><span class="header-section-number">2.9</span> Homework 9</h2>
 
 <div class="exercise">
-<span id="exr:q401" class="exercise"><strong>Exercise 1.28  </strong></span>In the solution to <a href="orthogonalization.html#exm:linear-system">1.2</a>, why do <span class="math inline">\(0\)</span> rows on the left-hand side of <a href="orthogonalization.html#eq:sol-linear-system">(1.1)</a> correspond to <span class="math inline">\(0\)</span> entries of the <span class="math inline">\(c\)</span> vector on the right-hand side.
-</div>
-
-
-<div class="solution">
- <span class="solution"><em>Solution. </em></span> By definition of matrix multiplication, if the <span class="math inline">\(i\)</span>th row is a zero row of <span class="math inline">\(A\)</span>, then <span class="math inline">\(c_{ij} = [AB]_{ij} = \sum{j=1}^n a_{ij} b_{ij} = 0\)</span>, no matter what <span class="math inline">\(B\)</span> is.
+<span id="exr:q901" class="exercise"><strong>Exercise 1.54  </strong></span>What do we need from A to ensure that the different iterative method shcemes are well-defined?
 </div>
 
 
 <div class="exercise">
-<span id="exr:q402" class="exercise"><strong>Exercise 1.29  </strong></span>Let <span class="math inline">\(Q\)</span> be an orthogonal matrix. Show that <span class="math inline">\({\left \vert \left \vert Qx \right \vert \right \vert}_2 = {\left \vert \left \vert x \right \vert \right \vert}_2\)</span>.
-</div>
-
-
-<div class="solution">
-<p> <span class="solution"><em>Solution. </em></span>  Since <span class="math inline">\({\left \vert \left \vert x \right \vert \right \vert}_2^2 = x^\prime x\)</span> and <span class="math inline">\(Q^\prime Q = 1\)</span> (<span class="math inline">\(Q\)</span> is orthogonal),</p>
-<p><span class="math display">\[ 
-  {\left \vert \left \vert Qx \right \vert \right \vert}^2_2 = (Qx)^\prime Qx = x^\prime Q^\prime Q x = x^\prime x = {\left \vert \left \vert x \right \vert \right \vert}^2_2.
-\]</span></p>
+<span id="exr:q902" class="exercise"><strong>Exercise 1.55  </strong></span>Does lemma <a href="iterative-methods.html#lem:next-current-diff">1.13</a> hold for the symmetric SOR?
 </div>
 
 
 <div class="exercise">
-<span id="exr:q403" class="exercise"><strong>Exercise 1.30  </strong></span>Let f be a vector-valued function over <span class="math inline">\({\mathbb{R}}^d\)</span>. When is <span class="math display">\[{\text{argmin}}_x {\left \vert \left \vert f(x) \right \vert \right \vert}_2 = {\text{argmin}}_x {\left \vert \left \vert f(x) \right \vert \right \vert}_2^2.\]</span>
+<p><span id="exr:q903" class="exercise"><strong>Exercise 1.56  </strong></span>Compute <span class="math inline">\(J^k\)</span> where <span class="math inline">\(J = I\lambda + E\)</span> (the Jordan Canonical Form from definition <a href="iterative-methods.html#def:jordan">1.15</a>)</p>
+<p>Show that if <span class="math inline">\(G = XJX^{-1}\)</span> and <span class="math inline">\(\rho(G) &lt; 1\)</span>, then <span class="math inline">\(J^k \rightarrow 0\)</span> as <span class="math inline">\(k\rightarrow \infty\)</span>.</p>
 </div>
 
 
-<div class="solution">
- <span class="solution"><em>Solution. </em></span> Most of the time…?
 </div>
+<!-- </div> -->
 
 
-<div class="exercise">
-<span id="exr:q404" class="exercise"><strong>Exercise 1.31  </strong></span>Prove that <span class="math inline">\(P^T P + I\)</span> from solution to example <a href="orthogonalization.html#exm:und-linear-system">1.4</a> is invertible.
-</div>
 
 
-<div class="solution">
- <span class="solution"><em>Solution. </em></span>  <span class="math display">\[
-  (P^TP + I)x = P^TPx + x = 0 \Leftrightarrow P^TPx = -x \Leftrightarrow P^TP = -I \lor x = 0.
-\]</span>
-</div>
 
 
-<div class="exercise">
-<span id="exr:q405" class="exercise"><strong>Exercise 1.32  </strong></span>Write out the solution to example <a href="orthogonalization.html#exm:constrained-least-squares">1.6</a>. Also consider the case where <span class="math inline">\(p \ge m\)</span>.
-</div>
-
-
-<div class="exercise">
-<span id="exr:q406" class="exercise"><strong>Exercise 1.33  </strong></span>For all motivating problems, implement solutions.
-</div>
-
-<p></br></p>
-<p>For the following, assume <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span> with <span class="math inline">\(\text{rank}(A) = m\)</span>, and <span class="math inline">\(b \in {\mathbb{R}}^n\)</span>. Let <span class="math inline">\(C = \begin{bmatrix} A &amp; b \end{bmatrix}\)</span>.</p>
-
-<div class="exercise">
-<span id="exr:q407" class="exercise"><strong>Exercise 1.34  </strong></span>What does the last column of <span class="math inline">\(R\)</span> (from the QR decomposition of <span class="math inline">\(C\)</span>) represent?
-</div>
-
-
-<div class="solution">
- <span class="solution"><em>Solution. </em></span> ??
-</div>
-
-
-<div class="exercise">
-<span id="exr:q408" class="exercise"><strong>Exercise 1.35  </strong></span>What does the last entry of last column of <span class="math inline">\(R\)</span> (from the QR decomposition of <span class="math inline">\(C\)</span>) represent?
-</div>
-
-
-<div class="exercise">
-<span id="exr:q409" class="exercise"><strong>Exercise 1.36  </strong></span>How can this be used in computation?
-</div>
-
-</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="homework-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="homework-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="homework-8.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -612,7 +612,7 @@ Show that if $H_1, \dots, H_r$ are Householder reflections, then $H_r \cdots H_1
 
 ```{solution, s506}
 
-$$(H_r \cdots H_1)^\prime (H_r \cdots H_1) &= H_1^\prime \cdots \H_r^\prime H_r \cdots H_1 = I,$$
+$$(H_r \cdots H_1)^\prime (H_r \cdots H_1) = H_1^\prime \cdots H_r^\prime H_r \cdots H_1 = I,$$
   
 since all $H_i$ are Householder reflections, which implies they are orthogonal, which implies $H_i^\prime H_i = I$. 
 ```
@@ -739,7 +739,7 @@ $$
 So, $Av_i = \sigma_i u_i$ for all $i$. 
 
 Similarly, $A^\prime = V \Sigma U^\prime$ implies $A^\prime U = V \Sigma$. As above, this gives us $A^\prime u_i = \sigma_i v_i$.
-  
+
 ```
 
 
@@ -756,5 +756,26 @@ Proof corollary \@ref(cor:sigma-min-max).
 ## Homework 8
 
 ```{exercise, q801}
-What is the solution to $\min_{x} \norm{Ax-b}_2^2 in terms of the Moore-Penrose inverse? (pseudo-inverse)
+What is the solution to $\min_{x} \norm{Ax-b}_2^2$ in terms of the Moore-Penrose inverse? (pseudo-inverse)
+```
+
+```{exercise, q802}
+Let $Q$ be an orthogonal matrix with columns $q_1, \ldots, q_n$. Let $Z \in \R^{n \times n}$ be a symmetric matrix. Show that $\sum_{i=1}^n (q_i^\prime Z q_i)^2 \leq \norm{Z}_F^2$.
+```
+
+## Homework 9
+
+```{exercise, q901}
+What do we need from A to ensure that the different iterative method shcemes are well-defined?
+```
+
+```{exercise, q902}
+Does lemma \@ref(lem:next-current-diff) hold for the symmetric SOR?
+```
+
+```{exercise, q903}
+Compute $J^k$ where $J = I\lambda + E$ (the Jordan Canonical Form from definition \@ref(def:jordan))
+
+Show that if $G = XJX^{-1}$ and $\rho(G) < 1$, then $J^k \rightarrow 0$ as $k\rightarrow \infty$.
+
 ```

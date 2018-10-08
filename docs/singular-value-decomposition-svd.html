@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="orthogonalization.html">
-<link rel="next" href="homework-assignments.html">
+<link rel="next" href="iterative-methods.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -121,6 +121,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.4.3" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#existence-and-properties"><i class="fa fa-check"></i><b>1.4.3</b> Existence and Properties</a></li>
 <li class="chapter" data-level="1.4.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#random-projections"><i class="fa fa-check"></i><b>1.4.4</b> Random Projections</a></li>
 </ul></li>
+<li class="chapter" data-level="1.5" data-path="iterative-methods.html"><a href="iterative-methods.html"><i class="fa fa-check"></i><b>1.5</b> Iterative Methods</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="iterative-methods.html"><a href="iterative-methods.html#overview"><i class="fa fa-check"></i><b>1.5.1</b> Overview</a></li>
+<li class="chapter" data-level="1.5.2" data-path="iterative-methods.html"><a href="iterative-methods.html#outline"><i class="fa fa-check"></i><b>1.5.2</b> Outline</a></li>
+<li class="chapter" data-level="1.5.3" data-path="iterative-methods.html"><a href="iterative-methods.html#motivation"><i class="fa fa-check"></i><b>1.5.3</b> Motivation</a></li>
+<li class="chapter" data-level="1.5.4" data-path="iterative-methods.html"><a href="iterative-methods.html#splitting-methods"><i class="fa fa-check"></i><b>1.5.4</b> Splitting Methods</a></li>
+<li class="chapter" data-level="1.5.5" data-path="iterative-methods.html"><a href="iterative-methods.html#convergence"><i class="fa fa-check"></i><b>1.5.5</b> Convergence</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
 <li class="chapter" data-level="2.1" data-path="homework-1.html"><a href="homework-1.html"><i class="fa fa-check"></i><b>2.1</b> Homework 1</a></li>
@@ -131,6 +138,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.6" data-path="homework-6.html"><a href="homework-6.html"><i class="fa fa-check"></i><b>2.6</b> Homework 6</a></li>
 <li class="chapter" data-level="2.7" data-path="homework-7.html"><a href="homework-7.html"><i class="fa fa-check"></i><b>2.7</b> Homework 7</a></li>
 <li class="chapter" data-level="2.8" data-path="homework-8.html"><a href="homework-8.html"><i class="fa fa-check"></i><b>2.8</b> Homework 8</a></li>
+<li class="chapter" data-level="2.9" data-path="homework-9.html"><a href="homework-9.html"><i class="fa fa-check"></i><b>2.9</b> Homework 9</a></li>
 </ul></li>
 </ul>
 
@@ -354,7 +362,7 @@ Repeat the same procedure to get <span class="math inline">\(U, V\)</span> such 
 
 
 <div class="corollary">
-<p><span id="cor:unnamed-chunk-41" class="corollary"><strong>Corollary 1.4  (Hoffman-Wielandt Inequality)  </strong></span>Let <span class="math inline">\(A,E \in {\mathbb{R}}^{n \times m}\)</span>, <span class="math inline">\(\sigma_k(\dot)\)</span> denote the k’th largest singular value. Let <span class="math inline">\(p =\min(m,n) \le {\left \vert \left \vert E \right \vert \right \vert}_F^2\)</span>. Then</p>
+<p><span id="cor:hoffman-wielandt" class="corollary"><strong>Corollary 1.4  (Hoffman-Wielandt Inequality)  </strong></span>Let <span class="math inline">\(A,E \in {\mathbb{R}}^{n \times m}\)</span>, <span class="math inline">\(\sigma_k(\dot)\)</span> denote the k’th largest singular value. Let <span class="math inline">\(p =\min(m,n) \le {\left \vert \left \vert E \right \vert \right \vert}_F^2\)</span>. Then</p>
 <p><span class="math display">\[
   \sum_{k=1}^p (\sigma_k(A+E) - \sigma_k(A))^2 \le {\left \vert \left \vert E \right \vert \right \vert}_F^2.
 \]</span></p>
@@ -362,7 +370,7 @@ Repeat the same procedure to get <span class="math inline">\(U, V\)</span> such 
 
 
 <div class="corollary">
-<p><span id="cor:unnamed-chunk-42" class="corollary"><strong>Corollary 1.5  </strong></span> Let <span class="math inline">\(r = \text{rank}(A)\)</span>.</p>
+<p><span id="cor:unnamed-chunk-41" class="corollary"><strong>Corollary 1.5  </strong></span> Let <span class="math inline">\(r = \text{rank}(A)\)</span>.</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(\text{range}(A) = \text{span}(u_1, \ldots, u_r)\)</span></li>
 <li>row space of A <span class="math inline">\(= \text{span}(v_1, \ldots, v_r)\)</span></li>
@@ -392,7 +400,7 @@ where <span class="math inline">\(P_{\mathcal{B}}\)</span> is the projection ont
 
 
 <div class="theorem">
-<span id="thm:unnamed-chunk-43" class="theorem"><strong>Theorem 1.4  </strong></span>For any matrix <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span>, there exists a unique pseudo-inverse <span class="math inline">\(A^+\)</span>.
+<span id="thm:unnamed-chunk-42" class="theorem"><strong>Theorem 1.4  </strong></span>For any matrix <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span>, there exists a unique pseudo-inverse <span class="math inline">\(A^+\)</span>.
 </div>
 
 
@@ -466,21 +474,66 @@ where <span class="math inline">\(P_{\mathcal{B}}\)</span> is the projection ont
 <p>Let <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span>, <span class="math inline">\(m &gt;&gt; n\)</span>. When this is the case, it is very hard to compute the SVD. So instead we try to find a matrix <span class="math inline">\(C\)</span> with <span class="math inline">\(\text{range}(C) \approx \text{range}(A)\)</span>. In other words, <span class="math inline">\(A \approx P_{\text{range}(C)}A\)</span>. One way to find such a <span class="math inline">\(C\)</span> is to simply sample columns from <span class="math inline">\(A\)</span>.</p>
 
 <div class="theorem">
-<p><span id="thm:unnamed-chunk-45" class="theorem"><strong>Theorem 1.5  </strong></span>Suppose <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span>, <span class="math inline">\(C\)</span> is as in the algorithm <code>inexactRankK</code> (see <a href="&#39;../Lecture%20scripts/Singular%20Value%20Decomposition.jl&#39;">here</a>), and <span class="math inline">\(H\)</span> is the <span class="math inline">\(k\)</span> left singular vectors of <span class="math inline">\(C\)</span>. Then</p>
-$$_F^2 _F^2 +
+<p><span id="thm:unnamed-chunk-44" class="theorem"><strong>Theorem 1.5  </strong></span>Suppose <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span>, <span class="math inline">\(C\)</span> is as in the algorithm <code>inexactRankK</code> (see <a href="&#39;../Lecture%20scripts/Singular%20Value%20Decomposition.jl&#39;">here</a>), and <span class="math inline">\(H\)</span> is the <span class="math inline">\(k\)</span> left singular vectors of <span class="math inline">\(C\)</span>. Then</p>
+<p><span class="math display">\[{\left \vert \left \vert A-HH^\prime A \right \vert \right \vert}_F^2 \le {\left \vert \left \vert A-A_k \right \vert \right \vert}_F^2 + 2\sqrt{k} {\left \vert \left \vert AA^\prime - CC^\prime \right \vert \right \vert}_F,\]</span></p>
+where <span class="math inline">\(A_k\)</span> is the rank <span class="math inline">\(k\)</span> approximation of <span class="math inline">\(A\)</span>.
 </div>
 
 
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> Recall that <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_F^2 = \text{tr}(A^\prime A)\)</span>, and <span class="math inline">\(H^\prime H = I\)</span>, since the columns of <span class="math inline">\(H\)</span> are singular vectors, i.e. are orthogonal to each other.</p>
+<p><span class="math display">\[\begin{aligned}
+  {\left \vert \left \vert A - HH^\prime A \right \vert \right \vert}_F^2 &amp;= \text{tr}((A-HH^\prime A)^\prime (A-HH^\prime A)) \\
+                            &amp;= \text{tr}((A^\prime - A^\prime H H^\prime)(A-HH^\prime A)) \\
+                            &amp;= \text{tr}(A^\prime A - A^\prime H H^\prime A - A^\prime HH^\prime A + A^\prime H H^\prime HH^\prime A) \\
+                            &amp;= \text{tr}(A^\prime A - A^\prime H H^\prime A) \\
+                            &amp;= \text{tr}(A^\prime A) - \text{tr}(A^\prime H H^\prime A) \\
+                            &amp;= {\left \vert \left \vert A \right \vert \right \vert}_F^2 - {\left \vert \left \vert A^\prime H \right \vert \right \vert}.
+\end{aligned}\]</span></p>
+<p>Since</p>
+<p><span class="math display">\[
+  {\left \vert \left \vert A \right \vert \right \vert}_F^2 = {\left \vert \left \vert A-A_k \right \vert \right \vert}_F^2 + \sum_{j=1}^k \sigma_j^2(A),
+\]</span></p>
+<p>we have that</p>
+<p><span class="math display">\[\begin{aligned}
+  {\left \vert \left \vert A-H H^\prime A \right \vert \right \vert}_F^2 &amp;= {\left \vert \left \vert A-A_k \right \vert \right \vert}_F^2 + \sum_{j=1}^k \sigma_j^2(A) - {\left \vert \left \vert A^\prime H \right \vert \right \vert}_F^2 \\
+                            &amp;= {\left \vert \left \vert A-A_k \right \vert \right \vert}_F^2 + \sum_{j=1}^k \left[\sigma_j^2(A) - \sigma_j^2(C)\right] + \sum_{j=1}^k \sigma_j^2{C} - {\left \vert \left \vert A^\prime H \right \vert \right \vert}_F^2. 
+\end{aligned}\]</span></p>
+<p>Note that, using the Cauchy-Schwarts inequality, we get</p>
+<p><span class="math display">\[\begin{aligned}
+  \sum_{j=1}^k \left[\sigma_j^2(A) - \sigma_j^2(C)\right] &amp;= \left | \begin{bmatrix} 1 \\ \vdots \\ 1 \end{bmatrix} \cdot \begin{bmatrix} \sigma_1^2(A) - \sigma_1^2(C) &amp; \cdots &amp; \sigma_k^2(A) - \sigma_k^2(C) \end{bmatrix} \right | \\
+                                                          &amp;\le \sqrt{{\left \vert \left \vert \begin{bmatrix} 1 \\ \vdots \\ 1 \end{bmatrix} \right \vert \right \vert} {\left \vert \left \vert \begin{bmatrix} \sigma_1^2(A) - \sigma_1^2(C) &amp; \cdots &amp; \sigma_k^2(A) - \sigma_k^2(C) \end{bmatrix} \right \vert \right \vert}} \\
+                                                          &amp;= \sqrt{k} \sqrt{\sum_{j=1}^k \left(\sigma_j^2(A) - \sigma_j^2(C)\right)^2} \\
+                                                          &amp;\le \sqrt{k} \sqrt{\sum_{j=1}^k \left(\sigma_j(AA^\prime) - \sigma_j(CC^\prime)\right)^2} \\
+                                                          &amp;= \sqrt{k} \sqrt{\sum_{j=1}^k \left(\sigma_j(CC^\prime + AA^\prime - CC^\prime) - \sigma_j(CC^\prime)\right)^2} \\
+                                                          &amp;\le \sqrt{k} {\left \vert \left \vert AA^\prime - CC^\prime \right \vert \right \vert}_F.
+\end{aligned}\]</span></p>
+<p>If <span class="math inline">\(H_1, \ldots, H_k\)</span> denote columns of <span class="math inline">\(H\)</span>, then <span class="math inline">\(A^\prime H = \begin{bmatrix} A^\prime H_1 &amp; \cdots &amp; A^\prime H_k \end{bmatrix}\)</span>. Since</p>
+<p><span class="math display">\[
+  {\left \vert \left \vert A^\prime H \right \vert \right \vert}_F^2 = \sum_{j=1}^k {\left \vert \left \vert A^\prime H_j \right \vert \right \vert}_2^2,
+\]</span></p>
+<p>we can use Cauchy-Schwartz as above to obtain that</p>
+<p><span class="math display">\[\begin{aligned}
+  \sum_{j=1}^k \sigma_j^2(C) - {\left \vert \left \vert A^\prime H \right \vert \right \vert}_F^2 &amp;\le \sqrt{k} \sqrt{\sum_{j=1}^k \left[\sigma_j{CC^\prime} - H_j^\prime A A^\prime H_j\right]^2} \\
+                                                     &amp;= \sqrt{k} \sqrt{\sum_{j=1}^k \left[H_j^\prime CC^\prime H_j - H_j^\prime A A^\prime H_j\right]^2} \\
+                                                     &amp;\le \sqrt{k} {\left \vert \left \vert AA^\prime - CC^\prime \right \vert \right \vert}_F,
+\end{aligned}\]</span></p>
+<p>where we in the last step use the Hoffman-Wielandt inequality (corollary <a href="singular-value-decomposition-svd.html#cor:hoffman-wielandt">1.4</a>).</p>
+<p>Combining all of this, we get</p>
+<p><span class="math display">\[
+  {\left \vert \left \vert A - HH^\prime A \right \vert \right \vert}_F^2 \le {\left \vert \left \vert A-A_k \right \vert \right \vert}_F^2 + 2\sqrt{k} {\left \vert \left \vert AA^\prime - CC^\prime \right \vert \right \vert}_F.
+\]</span></p>
+</div>
+
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
 <a href="orthogonalization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="homework-assignments.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="iterative-methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

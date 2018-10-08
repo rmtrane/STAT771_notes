@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="homework-3.html">
-<link rel="next" href="homework-5.html">
+<link rel="prev" href="singular-value-decomposition-svd.html">
+<link rel="next" href="homework-assignments.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -157,93 +157,189 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="homework-4" class="section level2">
-<h2><span class="header-section-number">2.4</span> Homework 4</h2>
+<div id="iterative-methods" class="section level2">
+<h2><span class="header-section-number">1.5</span> Iterative Methods</h2>
+<div id="overview" class="section level3">
+<h3><span class="header-section-number">1.5.1</span> Overview</h3>
+<p>First, some references:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Golub and Van Loan</li>
+<li>Saad (2000): <em>Iterative methods for sparse linear systems</em> <a href="https://www-users.cs.umn.edu/~saad/IterMethBook_2ndEd.pdf">link</a></li>
+<li>Shewchuk (1994): <em>Introduction to Conjugated Gradients without the Agonizing Pain</em> <a href="https://www.cs.cmu.edu/~quake-papers/painless-conjugate-gradient.pdf">link</a></li>
+<li>Gower and Richtarik (2015): <em>Randomized Iterative Methods for Linear Systems</em> <a href="https://arxiv.org/abs/1506.03296">link</a></li>
+</ol>
+</div>
+<div id="outline" class="section level3">
+<h3><span class="header-section-number">1.5.2</span> Outline</h3>
+<p>We will be going throuh the following:</p>
+<ol style="list-style-type: lower-roman">
+<li>Why iterative methods?</li>
+<li>Splitting Methods</li>
+<li>Randomized Kaezmarz Method</li>
+<li>Gradient Descent</li>
+<li>Conjugated Gradients</li>
+<li>GMRES (optional)</li>
+</ol>
+</div>
+<div id="motivation" class="section level3">
+<h3><span class="header-section-number">1.5.3</span> Motivation</h3>
+<p>These methods have had a great impact historically speaking. They take advantage of any sparsity found in a matrix, making them “easier” computational.</p>
+<p>When working with huge systems (such as weather prediction, computational chemistry, genomics, etc), this is the way to deal with it.</p>
+</div>
+<div id="splitting-methods" class="section level3">
+<h3><span class="header-section-number">1.5.4</span> Splitting Methods</h3>
+<p>Let <span class="math inline">\(A\)</span> be a matrix, and <span class="math inline">\(b\)</span> a vector. Let</p>
+<ul>
+<li><span class="math inline">\(x^c\)</span> denote the current iterate</li>
+<li><span class="math inline">\(x^+\)</span> denote the next iterate</li>
+<li><span class="math inline">\(r^c\)</span> denote the current residual</li>
+<li><span class="math inline">\(r^+\)</span> denote the next residual</li>
+</ul>
+<p>where <span class="math inline">\(r^c = Ax^c - b\)</span> and <span class="math inline">\(r^+ = Ax^+ - b\)</span>. The goal is to find methods to minimize the residual by iteratively defining <span class="math inline">\(x^+\)</span> based on <span class="math inline">\(x^c\)</span>.</p>
+<p>A splitting method takes a matrix <span class="math inline">\(A\)</span> and splits it. One way of doing so is by splitting <span class="math inline">\(A\)</span> into three parts <span class="math inline">\(A = D - E - F\)</span>, where</p>
+<ul>
+<li><span class="math inline">\(D\)</span> is the diagonal</li>
+<li><span class="math inline">\(E\)</span> is the negative lower triangular part of <span class="math inline">\(A\)</span> excluding the diagonal</li>
+<li><span class="math inline">\(F\)</span> is the negative upper triangular part of <span class="math inline">\(A\)</span> excluding the diagonal</li>
+</ul>
+<p>Based on this split, there are a few different ways to iteratively update <span class="math inline">\(r^+\)</span>.</p>
 
-<div class="exercise">
-<span id="exr:q401" class="exercise"><strong>Exercise 1.28  </strong></span>In the solution to <a href="orthogonalization.html#exm:linear-system">1.2</a>, why do <span class="math inline">\(0\)</span> rows on the left-hand side of <a href="orthogonalization.html#eq:sol-linear-system">(1.1)</a> correspond to <span class="math inline">\(0\)</span> entries of the <span class="math inline">\(c\)</span> vector on the right-hand side.
+<div class="definition">
+<p><span id="def:unnamed-chunk-46" class="definition"><strong>Definition 1.10  (The Jacobi Method)  </strong></span><em>The Jacobi Method</em> finds <span class="math inline">\(x^+\)</span> from <span class="math inline">\(x^c\)</span> using the following rule:</p>
+<p><span class="math display">\[x_i^+ = \frac{b_i - \sum_{k\neq i}A_{ik}x_k^c}{A_{ii}}.\]</span></p>
+<p>If we do this for all <span class="math inline">\(i\)</span>, we can write this in matrix form:</p>
+<p><span class="math display">\[x^+ = D^{-1}(b + (E+F)x^c).\]</span></p>
+</div>
+
+<p>For the Jacobi Method, we can see that <span class="math inline">\(r_i^+ = 0:\)</span></p>
+<p><span class="math display">\[\begin{aligned}
+  x_i^+ &amp;= \frac{b_i - \sum_{k\neq i}A_{ik}x_k^c}{A_{ii}} \iff \\
+  A_{ii}x_i^+ &amp;= b_i - \sum_{k\neq i}A_{ik}x_k^c \iff \\
+  0 &amp;= b_i - \sum_{k\neq i}A_{ik}x_k^c - A_{ii}x_i^+ = b_i - \sum_{k}A_{ik}x_k^c = r_i^+.
+\end{aligned}\]</span></p>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-47" class="definition"><strong>Definition 1.11  (The Gauss-Seidel Method)  </strong></span><em>The Gauss-Seidel Method</em> finds <span class="math inline">\(x^+\)</span> from <span class="math inline">\(x^c\)</span> using the following rule:</p>
+<p><span class="math display">\[x_i^+ = \frac{1}{A_ii}\left(b_i - \sum_{k=1}^{i-1} A_{ik}x_k^+ - \sum_{k=i+1}^d A_{ik} x_k^c\right),\]</span></p>
+<p>which in matrix formulation is</p>
+<p><span class="math display">\[x^+ = D^{-1}(b + Ex^+ + Fx^c)\]</span>,</p>
+<p>or equivalently</p>
+<p><span class="math display">\[x^+ = (D-E)^{-1}(b + Fx^c).\]</span></p>
+</div>
+
+<p>As for the Jacobi method, it can be seen that <span class="math inline">\(r_i^+ = 0\)</span>.</p>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-48" class="definition"><strong>Definition 1.12  (Successive Over Relaxation (SOR))  </strong></span> When we update <span class="math inline">\(x^c\)</span> to <span class="math inline">\(x^+\)</span> using a rule of the form</p>
+<p><span class="math display">\[ (D-\omega E)x^+ = (\omega F + (1-\omega)D)x^c + \omega b,\]</span></p>
+it is called a <em>Successive Over Relaxation</em> method.
+</div>
+
+<p>Note: if we pick <span class="math inline">\(\omega = 1\)</span>, we get back the Gauss-Seidel method.</p>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-49" class="definition"><strong>Definition 1.13  (Backward SOR)  </strong></span> The following is called the <em>Backward SOR</em>:</p>
+<p><span class="math display">\[ (D-\omega E)x^+ = (\omega F + (1-\omega)D)x^c + \omega b,\]</span></p>
 </div>
 
 
-<div class="solution">
- <span class="solution"><em>Solution. </em></span> By definition of matrix multiplication, if the <span class="math inline">\(i\)</span>th row is a zero row of <span class="math inline">\(A\)</span>, then <span class="math inline">\(c_{ij} = [AB]_{ij} = \sum{j=1}^n a_{ij} b_{ij} = 0\)</span>, no matter what <span class="math inline">\(B\)</span> is.
+<div class="definition">
+<p><span id="def:unnamed-chunk-50" class="definition"><strong>Definition 1.14  (Symmetric SOR)  </strong></span> The <em>Symmetric SOR</em> is a method where we first find <span class="math inline">\(z\)</span> based on the rule</p>
+<p><span class="math display">\[(D-\omega F)z = (\omega F + (1-\omega)D)x^c+\omega b\]</span></p>
+<p>before using the rule</p>
+<p><span class="math display">\[(D- \omega F)x^+ = (\omega F + (1-\omega)D)z + \omega b\]</span></p>
+to find <span class="math inline">\(x^+\)</span>.
+</div>
+
+</div>
+<div id="convergence" class="section level3">
+<h3><span class="header-section-number">1.5.5</span> Convergence</h3>
+<p>All of the schemes mentioned above are of the form <span class="math inline">\(x^+ = G x^c + f\)</span>:</p>
+<ul>
+<li><p><strong>Jacobi</strong>: <span class="math inline">\(G = D^{-1}(E+F)\)</span>, <span class="math inline">\(f = D^{-1}b\)</span>.</p></li>
+<li><p><strong>Gauss-Seidel</strong>: <span class="math inline">\(G = (D-E)^{-1}F\)</span>, <span class="math inline">\(f = (D-E)^{-1} b\)</span>.</p></li>
+<li><p><strong>SOR</strong>: <span class="math inline">\(G = (D - \omega E)^{-1}(\omega F + (1- \omega)D)\)</span>, <span class="math inline">\(f = \omega (D-\omega E)^{-1} b\)</span>.</p></li>
+</ul>
+<p>Now, if we assume that <span class="math inline">\(x^*\)</span> is a vector such that <span class="math inline">\(Ax^* = b\)</span>, then <span class="math inline">\((I-G)x^* = f\)</span>: (for the following, keep in mind that <span class="math inline">\(A = D - E - F\)</span>)</p>
+<ul>
+<li><strong>Jacobi</strong>:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned} 
+  f &amp;= D^{-1}b \\ 
+    &amp;= D^{-1}Ax^* \\
+    &amp;= D^{-1}(D-E-F)x^* \\
+    &amp;= (DD^{-1} - D^{-1}(E+F))x^*\\
+    &amp;= (I - G)x^*.
+\end{aligned}\]</span></p>
+<ul>
+<li><strong>Gauss-Seidel</strong>:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+  f &amp;= (D-E)^{-1}b \\
+    &amp;= (D-E)^{-1}Ax^* \\
+    &amp;= (D-E)^{-1}(D-E-F)x^* \\
+    &amp;= ((D-E)^{-1}(D-E)-(D-E)^{-1}F)x^* \\
+    &amp;= (I - G)x^*.
+\end{aligned}\]</span></p>
+<ul>
+<li><strong>SOR</strong>:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+  f &amp;= {\omega}(D-{\omega}E)^{-1}b\\
+    &amp;= {\omega}(D-{\omega}E)^{-1}Ax^* \\
+    &amp;= {\omega}(D-{\omega}E)^{-1}(D-E-F)x^* \\
+    &amp;= (D-{\omega}E)^{-1}({\omega}D-{\omega}E-{\omega}F)x^* \\
+    &amp;= (D-{\omega}E)^{-1}(D - D + {\omega}D-{\omega}E-{\omega}F)x^* \\
+    &amp;= (D-{\omega}E)^{-1}(D -{\omega}E - [(1-{\omega})D + {\omega}F])x^* \\
+    &amp;= ((D-{\omega}E)^{-1}(D -{\omega}E) - (D-{\omega}E)^{-1}[D(1-{\omega}) + {\omega}F])x^* \\
+    &amp;= (I - G)x^*.
+\end{aligned}\]</span></p>
+
+<div class="lemma">
+<span id="lem:next-current-diff" class="lemma"><strong>Lemma 1.13  </strong></span>For the Jacobi, Gauss-Seidel, and SOR methods, if there exists a <span class="math inline">\(x^*\)</span> s.t. <span class="math inline">\(Ax^* = b\)</span>, then <span class="math inline">\(x^+ - x^* = G(x^c - x^*)\)</span>.
 </div>
 
 
-<div class="exercise">
-<span id="exr:q402" class="exercise"><strong>Exercise 1.29  </strong></span>Let <span class="math inline">\(Q\)</span> be an orthogonal matrix. Show that <span class="math inline">\({\left \vert \left \vert Qx \right \vert \right \vert}_2 = {\left \vert \left \vert x \right \vert \right \vert}_2\)</span>.
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span>  We just saw that <span class="math inline">\(Ax^* = b\)</span> implies <span class="math inline">\((I-G)x^* = f\)</span>. We also saw that <span class="math inline">\(x^+ = Gx^c + f\)</span>. Hence</p>
+<span class="math display">\[\begin{aligned}
+  x^+ &amp;= G x^c + f \\
+      &amp;= G x^c + (I-G)x^* \\
+      &amp;= G x^c + x^* - Gx^* \iff \\
+  x^+ - x^* &amp;= G(x^c - x^*).
+\end{aligned}\]</span>
 </div>
 
 
-<div class="solution">
-<p> <span class="solution"><em>Solution. </em></span>  Since <span class="math inline">\({\left \vert \left \vert x \right \vert \right \vert}_2^2 = x^\prime x\)</span> and <span class="math inline">\(Q^\prime Q = 1\)</span> (<span class="math inline">\(Q\)</span> is orthogonal),</p>
-<p><span class="math display">\[ 
-  {\left \vert \left \vert Qx \right \vert \right \vert}^2_2 = (Qx)^\prime Qx = x^\prime Q^\prime Q x = x^\prime x = {\left \vert \left \vert x \right \vert \right \vert}^2_2.
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-52" class="theorem"><strong>Theorem 1.6  </strong></span> Suppose there exists a <span class="math inline">\(x^*\)</span> s.t. <span class="math inline">\(A x^* = b\)</span>. Let <span class="math inline">\(x_0\)</span> be arbitrary and define a sequence <span class="math inline">\(\{x_k\}_{k \in {\mathbb{N}}}\)</span> by</p>
+<p><span class="math display">\[
+  x_k = Gx_{k-1} + f.
 \]</span></p>
+If <span class="math inline">\(\rho(G) &lt; 1\)</span>, then <span class="math inline">\(x^*\)</span> is unique, and <span class="math inline">\(x_k \rightarrow x^*\)</span> as <span class="math inline">\(k \rightarrow \infty\)</span>.
+</div>
+
+<p>In the theorem above, <span class="math inline">\(\rho(G)\)</span> is the spectral radius of the matrix <span class="math inline">\(G\)</span>. This is defined as the largest eigenvalue of the matrix <span class="math inline">\(G\)</span>.</p>
+
+<div class="definition">
+<p><span id="def:jordan" class="definition"><strong>Definition 1.15  (Jordan Canonical Form)  </strong></span>Let <span class="math inline">\(A \in {\mathbb{R}}^{n \times n}\)</span>. There exists an <span class="math inline">\(X\)</span> which is invertible, and a block-diagonal matrix <span class="math inline">\(J\)</span>, whose blocks are of the form <span class="math inline">\(\lambda I + E\)</span>, where <span class="math inline">\(\lambda\)</span> is an eigenvalue of <span class="math inline">\(A\)</span>, and</p>
+<p><span class="math display">\[
+  E = \left\{ \begin{array}{rl} 1, &amp; j = i+1 \\ 0, &amp; \text{ otherwise} \end{array} \right .
+\]</span></p>
+<p>such that <span class="math inline">\(A = XJX^{-1}\)</span>.</p>
 </div>
 
 
-<div class="exercise">
-<span id="exr:q403" class="exercise"><strong>Exercise 1.30  </strong></span>Let f be a vector-valued function over <span class="math inline">\({\mathbb{R}}^d\)</span>. When is <span class="math display">\[{\text{argmin}}_x {\left \vert \left \vert f(x) \right \vert \right \vert}_2 = {\text{argmin}}_x {\left \vert \left \vert f(x) \right \vert \right \vert}_2^2.\]</span>
 </div>
-
-
-<div class="solution">
- <span class="solution"><em>Solution. </em></span> Most of the time…?
 </div>
-
-
-<div class="exercise">
-<span id="exr:q404" class="exercise"><strong>Exercise 1.31  </strong></span>Prove that <span class="math inline">\(P^T P + I\)</span> from solution to example <a href="orthogonalization.html#exm:und-linear-system">1.4</a> is invertible.
-</div>
-
-
-<div class="solution">
- <span class="solution"><em>Solution. </em></span>  <span class="math display">\[
-  (P^TP + I)x = P^TPx + x = 0 \Leftrightarrow P^TPx = -x \Leftrightarrow P^TP = -I \lor x = 0.
-\]</span>
-</div>
-
-
-<div class="exercise">
-<span id="exr:q405" class="exercise"><strong>Exercise 1.32  </strong></span>Write out the solution to example <a href="orthogonalization.html#exm:constrained-least-squares">1.6</a>. Also consider the case where <span class="math inline">\(p \ge m\)</span>.
-</div>
-
-
-<div class="exercise">
-<span id="exr:q406" class="exercise"><strong>Exercise 1.33  </strong></span>For all motivating problems, implement solutions.
-</div>
-
-<p></br></p>
-<p>For the following, assume <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span> with <span class="math inline">\(\text{rank}(A) = m\)</span>, and <span class="math inline">\(b \in {\mathbb{R}}^n\)</span>. Let <span class="math inline">\(C = \begin{bmatrix} A &amp; b \end{bmatrix}\)</span>.</p>
-
-<div class="exercise">
-<span id="exr:q407" class="exercise"><strong>Exercise 1.34  </strong></span>What does the last column of <span class="math inline">\(R\)</span> (from the QR decomposition of <span class="math inline">\(C\)</span>) represent?
-</div>
-
-
-<div class="solution">
- <span class="solution"><em>Solution. </em></span> ??
-</div>
-
-
-<div class="exercise">
-<span id="exr:q408" class="exercise"><strong>Exercise 1.35  </strong></span>What does the last entry of last column of <span class="math inline">\(R\)</span> (from the QR decomposition of <span class="math inline">\(C\)</span>) represent?
-</div>
-
-
-<div class="exercise">
-<span id="exr:q409" class="exercise"><strong>Exercise 1.36  </strong></span>How can this be used in computation?
-</div>
-
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="homework-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="homework-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="singular-value-decomposition-svd.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="homework-assignments.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
