@@ -230,7 +230,7 @@ with $|\delta| \leq u$, where $u$ is commonly $2\cdot \epsilon$. (**NOTE: NEED T
 
 
 
-**Example:* Matrix storage. Let $A \in \mathbb{R}^{m\times n}$. Then:
+**Example:** Matrix storage. Let $A \in \mathbb{R}^{m\times n}$. Then:
 
 $$
 \left| fl(A) - A \right | \leq u \left | A \right |
@@ -476,7 +476,7 @@ $$x \in \argmin_{z \in \R^m} \left\{ \norm{z}_2 \left | \norm{Ay - b}_2 = \min_{
 ```
 
 ```{example, name = 'Motivating Problem 5 (Constrained Least Squares Regression)', label = "constrained-least-squares"}
-Assume $A \in \R^{n\times m}, n \geq m, \text{rank}(A) < m$, and $b \in \R^n$. Let $C \in \R^{p\times m}, \text{C} = p$, and $d \in \R^{p}$. Find $x \in \R^m$ s.t.
+Assume $A \in \R^{n\times m}, n \geq m, \text{rank}(A) = m$, and $b \in \R^n$. Let $C \in \R^{p\times m}, \text{rank}(C) = p$, and $d \in \R^{p}$. Find $x \in \R^m$ s.t.
 
 $$x = \argmin_{y \in \R^m} \norm{Ay - b}_2\quad \text{s.t.} \quad Cy = d.$$
 ```
@@ -790,7 +790,7 @@ There exists Householder refelctions $H_1, \cdots, H_r$ such that $H_r \cdots H_
 ```
 
 ```{proof}
-Let $A\Pi = \begin{bmatrix} a_1 \dots a_r \end{bmatrix}$. Choose $H_1$ s.t. $H_1 a_1 = R_{11} e_1 = a_1 - 2v_1v_1^\prime a_1$ (last equality due to definition of Householder reflections). This is equivalent to $v_1(2v_1^\prime a_1) = a_1 - R_{11}e_1$.
+Let $A\Pi = \begin{bmatrix} a_1 & \cdots & a_r \end{bmatrix}$. Choose $H_1$ s.t. $H_1 a_1 = R_{11} e_1 = a_1 - 2v_1v_1^\prime a_1$ (last equality due to definition of Householder reflections). This is equivalent to $v_1(2v_1^\prime a_1) = a_1 - R_{11}e_1$.
 
 Now, let $v_1 = \frac{a_1 - R_{11}e_1}{\norm{a_1 - R_{11}e_2}_2}$. Plug this into the equation for $R_{11}e_1$ above to get
 
@@ -805,7 +805,7 @@ $$
 $$
 
 $$
-  H_1 = I - \frac{a_1 - \norm{a_1}_2e_1)(a_1 - \norm{a_1}_2 e_1)}{\norm{a_1 - \norm{a_1}_2 e_1}_2^2}
+  H_1 = I - \frac{a_1 - \norm{a_1}_2e_1)((a_1 - \norm{a_1}_2 e_1)}{\norm{a_1 - \norm{a_1}_2 e_1}_2^2}
 $$
 
 ```
@@ -1108,20 +1108,20 @@ $$
 
 ```
 
-```{corollary}
+```{corollary, for-q703}
 
 Let $r = \text{rank}(A)$.
 
 1) $\text{range}(A) = \text{span}(u_1, \ldots, u_r)$
 2) row space of A $= \text{span}(v_1, \ldots, v_r)$
 3) $\text{null}(A) = \text{span}(v_{r+1}, \ldots, v_{m})$
-4) $\text{null}(A^\prime) = \text{span}(u_{r+1}, \ldots, v_{m})$
+4) $\text{null}(A^\prime) = \text{span}(u_{r+1}, \ldots, u_{m})$
 
 Moreover,
 
 1) $U_r = \begin{bmatrix} u_1 & \cdots & u_r \end{bmatrix}$, $U_r U_r^\prime = P_{\text{range}(A)}$
 2) $U_{n-r} = \begin{bmatrix} u_{r+1} & \cdots & u_n \end{bmatrix}$, $U_{n-r} U_{n-r}^\prime = P_{\text{null}(A)}$
-3) $V_r = \begin{bmatrix} v_1 & \cdots & v_r \end{bmatrix}$, V_r V_r^\prime = P_{\text{row}(A)}$
+3) $V_r = \begin{bmatrix} v_1 & \cdots & v_r \end{bmatrix}$, $V_r V_r^\prime = P_{\text{row}(A)}$
 2) $V_{n-r} = \begin{bmatrix} v_{r+1} & \cdots & v_n \end{bmatrix}$, $V_{n-r} V_{n-r}^\prime = P_{\text{null}(A)}$
 
 where $P_{\mathcal{B}}$ is the projection onto the space $\mathcal{B}$. 
@@ -1504,3 +1504,184 @@ $$
 such that $A = XJX^{-1}$.
 
 ```
+
+### Randomized Kaczmarz Method
+
+Consider $Ax = b$. Let the rows of $A$ be denoted as $a_1^\prime, a_2^\prime, \dots, a_n^\prime$, and $b = (b_1, \dots, b_n)^\prime$. Now, the goal is to choose the next iteration of $x$ such that $r^+ = b_i - a_i^\prime x^+ = 0$. Let's say we try to set $x^+ = x^c + v$ for some appropriate $v$. What should $v$ be then? We want $b_i = a_i^\prime (x^c + v)$, which would imply that $a_i^\prime v = b_i - a_i^\prime x^c$. This has many possible solutions. So let's look for a particular one, namely one that is proportional to $a_i$: $v=\alpha a_i$. Then $\alpha \norm{a_i}_2^2 = b_i - a_i^\prime x^c$ which implies $\alpha = \frac{b_i - a_i^\prime x^c}{\norm{a_i}_2^2}$. 
+
+The above approach gives us Kaczmarz Method: the next iterate of $x$ is $x^+ = x^c + \frac{b_i - a_i^\prime x^c}{\norm{a_i}_2^2}a_i$. 
+
+Now, the *Randomized* Kaczmarz Method is the one where we randomly choose which column to use for the next iteration based on the probability distribution over all columns of $A$ given by $P(i = l) = \frac{\norm{a_l}_2^2}{\norm{A}_F^2}$. The following theorem guarantees us that this approach actually works, i.e. we converge towards the solution of $Ax = b$.
+
+```{theorem, name = "Randomized Kaczmarz Method", label = "rand-kaczmarz"}
+Suppose $A \in \R^{n\times m}$ is invertible and $x^* = A^{-1}b$. 
+
+Given a sequence of i.i.d. random variables $i_1, i_2, \dots$ ($P(i_k = l) = \frac{\norm{a_l}_2^2}{\norm{A}_F^2}$), and $x_0$ an arbitrary initial value, define 
+
+$$ x_k = x_{k-1} + \frac{b_{i_{k-1}}-a_{i_{k-1}}^\prime x_{k-1}}{\norm{a_{i_{k-1}}}_2^2}a_{i_{k-1}}$$
+  
+for all $k > 1$. Then
+
+$$E\left[\norm{x_k - x^*}_2^2 \right] \leq \left(1-\frac{\sigma_{min}(A)^2}{\norm{A}_F^2}\right)^k \norm{x_0 - x^*}_2^2.$$
+
+```
+
+Note that the above result (by Chebyshev) implies 
+
+$$P\left[\norm{x_k - x^*}_2 > \epsilon \right] \leq \frac{1}{\epsilon^2}E\left[\norm{x_k - x^*}_2^2\right]$$
+
+which in turn implies $x_k \rightarrow_p x^*$ as $k \rightarrow \infty$.
+
+```{proof}
+First of all, note that since $i_k$ is independent of $i_{l}$ for all $l < k$, $i_k$ is independent of all $x_l$ for all $l < k$. 
+
+**Observation 1:** $x_{k+1} - x_k$ is orthogonal to $x_{k+1} - x^*$. Therefore $$\norm{x_{k+1} - x^*}_2^2 = \norm{x_{k} - x^*}_2^2 - \norm{x_{k+1}-x_k}_2^2.$$
+
+Since $b_{i_k} = a_{i_k}^\prime x^*$, we have that 
+
+$$\begin{aligned}
+  x_{k+1} - x_k &= \frac{b_{i_k}-a_{i_k}^\prime x_k}{\norm{a_{i_k}}_2^2}a_{i_k} \\
+                &= \frac{a_{i_k}^\prime x^*-a_{i_k}^\prime x_k}{\norm{a_{i_k}}_2^2}a_{i_k} \\
+                &= \frac{a_{i_k}^\prime (x^*- x_k)}{\norm{a_{i_k}}_2^2}a_{i_k}.
+\end{aligned}$$
+
+So
+
+$$\begin{aligned}
+  \norm{x_{k+1} - x_k}_2^2  &= \norm{a_{i_k}}_2^2 \frac{[a_{i_k}^\prime (x_k - x^*)]^2}{\norm{a_{i_k}}_2^4} \\
+                            &= \frac{[a_{i_k}^\prime (x_k - x^*)]^2}{\norm{a_{i_k}}_2^2}.
+\end{aligned}$$
+
+    
+**Observation 2:** For any vector $y \in \R^n$ it holds that 
+  
+$$E\left(\frac{(a_{i_0}^\prime y)^2}{\norm{a_{i_0}}_2^2}\right) \geq \frac{\sigma_{min}^2(A)}{\norm{A}_F^2} \norm{y}_2^2.$$
+
+"Proof:"
+  
+Recall that $\norm{A}_2^2 = \max_{y \neq 0} \frac{\norm{Ay}_2^2}{\norm{y}_2^2} = \sigma_{max}(A)^2 >= \sigma_{min}(A)^2$. With this in mind
+
+$$\begin{aligned}
+  \sum_{i=1}^n (a_i^\prime y)^2 &= \norm{Ay}_2^2 \ge \sigma_{min}(A)^2 \norm{y}_2^2.
+\end{aligned}$$
+  
+Divide through by $\norm{A}_F^2$ to get $\sum_{i=1}^n \frac{1}{\norm{A}_F^2}(a_i^\prime y)^2 \ge \frac{\sigma_{min}(A)^2}{\norm{A}_F^2} \norm{y}_2^2$, before we simply multiply each term in the sum by $1 = \frac{\norm{a_i}_2^2}{\norm{a_i}_2^2}$. So
+
+$$\begin{aligned}
+  \frac{\sigma_{min}(A)^2}{\norm{A}_F^2} \norm{y}_2^2 &\le \sum_{i=1}^n \frac{\norm{a_i}_2^2}{\norm{A}_F^2}\frac{(a_i^\prime y)^2}{\norm{a_i}_2^2} \\
+                                                      &= \sum_{i=1}^n P(i_0 = i) \frac{(a_i^\prime y)^2}{\norm{a_i}_2^2} \\
+                                                      &= E\left(\frac{(a_{i_0}^\prime y)^2}{\norm{a_{i_0}}_2^2}\right).
+\end{aligned}$$
+
+
+  
+Now, using these two observations together:
+  
+$$\begin{aligned}
+  E\left[\norm{x_{k+1} - x^*}_2^2 | x_k \right ] &= E\left[\norm{x_k - x^*}_2^2 | x_k\right] - E\left[ \norm{x_{k+1} - x_k}_2^2 | x_k \right] \\
+                                                 &= \norm{x_k - x^*}_2^2 - E\left[ \frac{(a_{i_k}^\prime (x_k - x^*))^2}{\norm{a_{i_k}}_2^2} \right] \\
+                                                 &\le \norm{x_k - x^*}_2^2 - \frac{\sigma_{min}(A)^2}{\norm{A}_F^2} \norm{x_k - x^*}_2^2 \\
+                                                 &= (1 - \frac{\sigma_{min}(A)^2}{\norm{A}_F^2})\norm{x_k - x^*}_2^2.
+\end{aligned}$$
+    
+Finally, taking expectation on both sides gives us that $E\left[\norm{x_{k+1} - x^*}_2^2\right] \le \left(1 - \frac{\sigma_{min}(A)^2}{\norm{A}_F^2}\right)E\left[\norm{x_k - x^*}_2^2\right]$. This upper bound holds for any $k$, so we can repeatedly use this to get
+  
+$$
+  E\left[\norm{x_{k+1} - x^*}_2^2\right] \le \left(1 - \frac{\sigma_{min}(A)^2}{\norm{A}_F^2}\right)^k \norm{x_0 - x^*}_2^2
+$$
+    
+since $E[\norm{x_0 - x^*}_2^2] = \norm{x_0 - x^*}_2^2$.
+  
+```
+
+### Gradient Descent
+
+The Gradient Descent iterative method updates the current $x^c$ to $x^+$ by 
+
+\begin{align}
+  x^+ &= x^c + \alpha \sum_{i=1}^n a_i (b_i - a_i x^c) \\
+      &= x^c + \alpha A^\prime (b - Ax^c)
+\end{align}
+
+The question now is: how do we choose $\alpha$? 
+
+**Strategy 1**
+
+Choose the $\alpha$ that minimizes $\norm{r^+}_2^2 = \norm{Ax^+ - b}_2^2$. 
+
+```{lemma}
+
+$$\argmin_\alpha \norm{r^+}_2^2 = \frac{\norm{A^\prime r^c}_2^2}{\norm{AA^\prime r^c}_2^2}$$
+
+```
+
+```{proof}
+First, note that by homework exercise \@ref(exr:q1102), $A^\prime r^c \neq 0$, since if this were the case, the problem would be solved already. 
+
+$$
+  \norm{r^+}_2^2 = \norm{r^c}_2^2 - 2\alpha \norm{A^\prime r^c}_2^2 + \alpha^2 \norm{AA^\prime r^c}_2^2,
+$$
+  
+since $r^+ = Ax^+ - b = A(x^c + \alpha A^\prime (b - Ax^c)) - b = Ax^c - b - \alpha A A^\prime ( Ax^c - b) = r^c - \alpha A A^\prime r^c$, and $\norm{r^+}_2^2 = (r^+)^\prime r^+$.
+
+Differentiate this equation with respect to $\alpha$, equate to $0$, and solve for $\alpha$ will yield the result.
+```
+
+```{theorem, grad-descent}
+Suppose $A$ is invertible. Given $x_0 \R^n$, let $x_k$ be defined as 
+
+$$x_k = x_{k-1} + \alpha_{k-1}A^\prime (b-Ax_{k-1}),$$ 
+  
+where
+
+$$ \alpha_k = \frac{\norm{A^\prime r_k}_2^2}{\norm{AA^\prime r_k}_2^2}.$$
+  
+Then 
+
+$$
+  \norm{r_k}_2^2 \le \left(1 - \frac{4\sigma_1^2 \sigma_n^2}{\sigma_1^2 + \sigma_n^2}\right)^k \norm{r_0}_2^2.
+$$
+
+```
+
+```{proof}
+
+$$\begin{aligned}
+  \norm{r_{k+1}}_2^2 &= \norm{r_k}_2^2 - \alpha_k 2\norm{A^\prime r_k}_2^2 + \alpha_k^2 \norm{AA^\prime r_k}_2^2 \\
+                     &= \norm{r_k}_2^2 - \frac{\norm{A^\prime r_k}_2^4}{\norm{A A^\prime r_k}_2^2} \\
+                     &= \norm{r_k}_2^2 \left(1 - \frac{\norm{A^\prime r_k}_2^4}{\norm{r_k}_2^2 \norm{AA^\prime r_k}_2^2}\right).
+\end{aligned}$$
+
+If we let $A = U\Sigma V^\prime$ be the SVD of $A$, then
+
+$$\begin{aligned}
+  1 - \frac{\norm{A^\prime r_k}_2^4}{\norm{r_k}_2^2 \norm{AA^\prime r_k}_2^2} &= 1 - \frac{\norm{\Sigma U^\prime r_k}_2^4}{\norm{U^\prime r_k}_2^2 \norm{\Sigma \Sigma^\prime U^\prime r_k}_2^2} \\
+    &= 1 - \frac{\norm{w}_2^4}{\norm{\Sigma^{-1}w}_2^2 \norm{\Sigma w}_2^2}.
+\end{aligned}$$
+  
+We want to find an upper bound on $\norm{\Sigma^{-1}u}_2^2 \norm{\Sigma u}_2^2$ for any unit vector $w$. 
+
+$$\begin{aligned}
+  \norm{\Sigma^{-1}u}_2^2 \norm{\Sigma u}_2^2 &= \left( \sum_{i=1}^k \frac{u_i^2}{\sigma_i^2} \right) \left( \sum_{i=1}^n \sigma_i^2 u_i^2\right) \\
+  \le \frac{(\sigma_1^2 + \sigma_n^2)^2}{4\sigma_1^2 \sigma_n^2},
+\end{aligned}$$
+  
+where the last inequality is the Kontorovich inequality (see homework \@ref(exr:q1104)).
+
+```
+
+**Strategy 2**
+
+Choose $\alpha = \argmin_\alpha \norm{x_{k+1} - x^*}_2^2$. 
+
+**Strategy 3**
+
+Note that $\norm{r^+}_2 = \norm{(I - \alpha A A^\prime)r^c}_2 \le \norm{I-\alpha A A^\prime}_2 \norm{r^c}_2$. 
+
+Choose $\alpha = \argmin_\alpha \norm{I - \alpha A A^\prime}_2$. 
+
+**Strategy 4**
+
+Note that $\norm{x_{k+1} - x^*}_2 \le \norm{I-\alpha A A^\prime}_2 \norm{x_k - x^*}_2$. 
+
+Choose $\alpha = \argmin_\alpha \norm{I-\alpha A A^\prime}_2 \norm{x_k - x^*}_2$. 

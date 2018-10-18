@@ -182,7 +182,7 @@ Is there a general formula for determining the largest positive value for a give
 The largest positive, finite value is 
 
 $$
-  \left(\sum_{i=0}^{p-1} (\beta-1)\beta^{-i}\right)\cdot \beta^{e_{max}}.
+  \left(\sum_{i=0}^{p-1} (\beta-1)\beta^{-i}\right)\cdot \beta^{e_{max}} = ... = \frac{\beta^p - 1}{\beta^{p-1}}\beta^{e_max}.
 $$
 ```
 
@@ -200,6 +200,10 @@ nextfloat(Float64(0)) == 2^(-1074)
 
 ```{exercise, q207}
 Verify the smallest normalized, positive number that can be represented.
+```
+
+```{julia}
+nextfloat(Float64(0))*2^(52)
 ```
 
 ```{exercise, q208}
@@ -245,7 +249,7 @@ Show that $\left|\left| A \right|\right|_1 =$ max of the $l^1$ norms of the colu
 ```
 
 ```{solution, label = 's211'}
-By definition, $\norm{A}_1 = \max_{x\neq 0}\frac{\norm{Ax}_1}{\norm{x}_1}$. Let $A \in \R^{m\times n}$ and $x \in \R^n$ s.t. $\norm{x}_1 = 1$. 
+By definition, $\norm{A}_1 = \max_{x\neq 0}\frac{\norm{Ax}_1}{\norm{x}_1} = \max_{\norm{x}_1 = 1} \norm{Ax}_1$. Let $A \in \R^{m\times n}$ and $x \in \R^n$ s.t. $\norm{x}_1 = 1$. 
 
 Recall that 
 
@@ -255,7 +259,7 @@ where $A_{*,j}$ is the $j^\prime$th column of $A$. So
 
 $$
 \begin{aligned}
-  \norm{Ax}_1 &= \sum_{i=1}^m \sum_{j=1}^n | x_j A_{i,j} | \\
+  \norm{Ax}_1 &= \sum_{i=1}^m \left | \sum_{j=1}^n  x_j A_{i,j} \right| \\
               &\leq \sum_{i=1}^m \sum_{j=1}^n | x_j | \cdot | A_{i,j} | \\
               &= \sum_{j=1}^n | x_j | \left\{\sum_{i=1}^m | A_{i,j} | \right \} \\
               &= \sum_{j=1}^n | x_j | \norm{A_{*,j}} \\
@@ -264,9 +268,15 @@ $$
 \end{aligned}
 $$
 
-Since $\max_{j \in \{1, \ldots, n\}}\norm{A_{*,j}} = \norm{A\cdot \mathbf{1}_i}$ for $i = \argmax \norm{A_{*,j}}_1$. Here, we let $1_i = (x_j)_{j=1}^n$ be defined as 
+I.e. $\max_{\norm{x}_1 = 1} \norm{Ax}_1 \le \max_{j \in \{1,\ldots, n\}} \norm{A_{*,j}}$. 
+  
+Now, let $1_i = (x_j)_{j=1}^n$ be defined as 
 
 $$x_j = \left\{ \begin{array}{rl} 1, & \text{ if } j = i \\ 0, & \text{ otherwise}\end{array} \right .$$
+
+Then $\norm{1_i}_1 = 1$. Since $\max_{j \in \{1, \ldots, n\}}\norm{A_{*,j}} = \norm{A\cdot \mathbf{1}_i}$ for $i = \argmax \norm{A_{*,j}}_1$, we have that $\max_{j \in \{1,\ldots,n\}} \norm{A_{*,j}}_1 \le \max_{\norm{x}_1 = 1} \norm{Ax}_1$. 
+
+
 ```
 
 
@@ -275,7 +285,7 @@ Let $A \in \R^{n \times m}$. Show that $\left|\left| A \right|\right|_\infty =$ 
 ```
 
 ```{solution, label = "s212"}
-Let $j \in \{1, \ldots, n\}$ such that $|a_{j1}| + \dots + |a_{jm}| \ge |a_{i1}| + \dots + |a_{im}|$ for all $i \in \{1, \ldots , n\}$, and let $\tilde{x} \in \R^{m}$ such that $\tilde{x}_i = sign(a_{ji})$. Note that for all $x \in \R^{m}$ with $\norm{x}_\infty = 1$ it holds that $|x_i| \le 1$. So,
+Let $j \in \{1, \ldots, n\}$ such that $|a_{j1}| + \dots + |a_{jm}| \ge |a_{i1}| + \dots + |a_{im}|$ for all $i \in \{1, \ldots , n\}$, and let $\tilde{x} \in \R^{m}$ such that $\tilde{x}_i = \text{sign}(a_{ji})$. Note that for all $x \in \R^{m}$ with $\norm{x}_\infty = 1$ it holds that $|x_i| \le 1$. So,
 
 $$\begin{aligned}
   |a_{i1}x_1 + \dots + a_{im}x_m| &\le |a_{i1}| + \dots + |a_{im}| \\
@@ -334,7 +344,7 @@ Since $\norm{F}_p < 1$ by assumption, the only solution to the inequality above 
 
 Note that $\sum_{k=0}^N F^k (I - F) = I - F^{N+1}$. Since $\norm{F^k}_p < \norm{F}_p^k < 1$, we know that $F^N \rightarrow 0$ as $N \rightarrow \infty$. So, $\sum_{k=0}^\infty F^k (I-F) = I$, and using that $I-F$ is invertible, we get $(I-F)^{-1} = \sum_{k=0}^\infty F^k$. Finally,
 
-$$\norm{(I-F)^{-1}}_p \leq \sum{k=1}^\infty \norm{F}_p^k = \frac{1}{1- \norm{F}_p}$$. 
+$$\norm{(I-F)^{-1}}_p \leq \sum_{k=1}^\infty \norm{F}_p^k = \frac{1}{1- \norm{F}_p}$$. 
 
 ```
 
@@ -347,27 +357,68 @@ Since we never use any properties of the infinity norm to prove these theorems a
 ```
 
 
-
 ```{exercise, q303}
 Generate examples that show the bound in theorem \@ref(thm:kappa-bound) is too conservative.
 ```
 
+```{julia}
+using LinearAlgebra
+
+p = 53 # precision for float-64
+u = 2.0^(-p+1)
+A = [
+    0. 0 0.000001;
+    200000 0 0;
+    0 1 20000;
+]
+x = [1.; 1; 1;]
+b = A*x
+
+kappa = norm(A, Inf) * norm(inv(A), Inf)
+bound = 2.0*u*kappa/(1.0 - u*kappa)
+
+println("Diff: $(norm(x - inv(A)*b, Inf)/norm(x,Inf))")
+println("Bound: $(bound)")
+```
 
 ```{exercise, q304}
 Generate examples that show the bound is nearly achieved
 ```
 
+```{julia}
+using LinearAlgebra
+
+A = [
+    0. 0 1.;
+    1 0 0;
+    0 1 0;
+]
+x = [1.; 1; 1;]
+b = A*x
+
+kappa = norm(A, Inf) * norm(inv(A), Inf)
+bound = 2.0*2.0^(-p+1)*kappa/(1.0 - 2.0^(-p+1)*kappa)
+
+println("Diff: $(norm(x - inv(A)*b, Inf)/norm(x,Inf))")
+println("Bound: $(bound)")
+```
 
 ```{exercise, q305}
 For motivating problems 1-5, when is $x$ unique?
 ```
 
 ```{solution}
-\\newline 
 
-- Motivating Problem 1: x is unique by definition
+- Motivating Problem 1:
+    * when $A$ is invertible
+- Motivating Problem 2: Always. 
+    * Since $F(y) = \norm{Ay - b}_2 = (Ay-b)^\prime (Ay-b)$ is convex (twice differentiated is positive definite because $\nabla^2 f = A^\prime A$ and $A$ has full rank).
+    * (since objective function is $A^\prime A$, and it is positive definite (because A is full rank), then the function is convex, and you always have a unique solution)
+- Motivating Problem 3: Always.
+- Motivating Problem 4: Always. 
+    * We know how to characterize all $z$ that satisfy objective: $Q\begin{bmatrix} R & S \\ 0 & 0 \end{bmatrix} \Pi^\prime = A$.
 
-- Motivating Problem 2: 
+- Motivating Problem 5: always
 
 ```
 
@@ -375,7 +426,24 @@ For motivating problems 1-5, when is $x$ unique?
 For motivating problem 5, what happens if $p\geq m$? Explore the case where $m >> n$.
 ```
 
+```{solution, s306}
+* For m >> n, you have an undertermined system with more unknowns than equations. Since the null space of A has a dimension larger than zero, for any particular solution xp for the system, xp+h with $h \in \text{null}(A)$ is also a solution, and there are infinitely many choices for h. The constraint system might help narrow down the solutions from the null space.
+* For p >= m: if C becomes inconsistent, we cannot narrow down the solutions in the null space. If C is consistent and rank(C)=m, then we can pick a unique solution. If the rank of C is less than m, then C constrains some of the possible solutions for y.
+```
+
 ```{exercise, q307}
+What do you get if you multiply a matrix by a permutation matrix from the left? From the right? A permutation with itself?
+```
+
+```{solution}
+From the left: permute rows.
+
+From the right: permute columns.
+
+Permutation squared gives you the identity.
+```
+
+```{exercise, q308}
 Suppose $R \in \R^{m\times m}$ is an upper triangular matrix with $R_{ii} \neq 0$ for all $i = 1,\ldots, n$. Is $R$ invertible?
 ```
 
@@ -383,11 +451,11 @@ Suppose $R \in \R^{m\times m}$ is an upper triangular matrix with $R_{ii} \neq 0
 Since $R$ is an upper triangular matrix, $\det(R) = \prod_{i=1}^{m} R_{ii} > 0$. Hence, $R$ is invertible. 
 ```
 
-```{exercise, q308}
+```{exercise, q309}
 Assume $R$ is an invertible upper triangular matrix. Implement a solution to invert $R$. 
 ```
 
-```{solution, s308}
+```{solution, s310}
 First, we will show that the inverse of $R$ is also an upper triangular matrix. So, let $B = R^{-1}$. The $RB = I$. We will show this using induction. Let $i = n - 0, j < i$. Then, since $r_{ij} = 0$ for all $i > j$,
 
 $$\begin{aligned}
@@ -510,14 +578,60 @@ Prove that $P^T P + I$ from solution to example \@ref(exm:und-linear-system) is 
 
 ```{solution, s404}
 
+For all non-zero $x$,
+
 $$
-  (P^TP + I)x = P^TPx + x = 0 \Leftrightarrow P^TPx = -x \Leftrightarrow P^TP = -I \lor x = 0.
+  x^\prime(P^TP + I)x = x^\prime P^\prime P x + x^\prime x = \norm{Px}_2 + \norm{x}_2 > 0.
 $$
+  
+This means $P^\prime P + I$ is positive definite, which in turne implies that it is invertible. 
   
 ```
 
 ```{exercise, q405}
 Write out the solution to example \@ref(exm:constrained-least-squares). Also consider the case where $p \ge m$.
+```
+
+```{solution, s405}
+First we do QR decomposition on $C^\prime$:
+
+$$\begin{aligned}
+C^\prime = Q\begin{bmatrix} R \\ 0 \end{bmatrix}
+\end{aligned}$$
+
+Then we have:
+
+$$\begin{aligned}
+AQ &= \begin{bmatrix} A_1 & A_2 \end{bmatrix} \\
+Q^\prime y &= \begin{bmatrix} y_1 \\ y_2 \end{bmatrix} \\
+\end{aligned}$$
+
+And we can update the objective:
+
+$$\begin{aligned}
+O &= \min \|Ay-b\|_2 : Cy = d\\
+&= \min \|AQQ^\prime y -b\|_2 : Cy = d\\
+&= \min \left\| \begin{bmatrix} A_1 & A_2 \end{bmatrix} \begin{bmatrix} y_1 \\ y_2 \end{bmatrix} - b \right\| _2 : Cy = d\\
+&= \min \left\| A_1y_1 + A_2 y_2 - b \right\|_2 : Cy = d\\
+\end{aligned}$$
+
+We can also update the constraint:
+
+$$\begin{aligned}
+O &= \min \left\| A_1y_1 + A_2 y_2 - b \right\|_2 : \begin{bmatrix} R^\prime & 0 \end{bmatrix} Q^\prime y = d \\
+&= \min \left\| A_1y_1 + A_2 y_2 - b \right\|_2 : \begin{bmatrix} R^\prime & 0 \end{bmatrix} \begin{bmatrix} y_1 \\ y_2 \end{bmatrix} = d \\
+&= \min \left\| A_1y_1 + A_2 y_2 - b \right\|_2 : R^\prime y_1 = d \\
+&= \min \left\| A_1y_1 + A_2 y_2 - b \right\|_2 : y_1 = (R^\prime)^{-1}d  \\
+&= \min \left\| A_1(R^\prime)^{-1}d + A_2 y_2 - b \right\|_2\\
+&= \min \left\| A_2 y_2 - (b - A_1(R^\prime)^{-1}d)\right\|_2\\
+\end{aligned}$$
+
+So $y_1$ can be calculated using a consistent linear system solver, and now the objective is the same as that of a least squares solver, which can be used to calculate $y_2$. We can finally recover $y$:
+
+$$\begin{aligned}
+y &= Q \begin{bmatrix} y_1 \\ y_2 \end{bmatrix} \\
+\end{aligned}$$
+
 ```
 
 ```{exercise, q406}
@@ -534,15 +648,23 @@ What does the last column of $R$ (from the QR decomposition of $C$) represent?
 ```
 
 ```{solution, s407}
-?? 
+Generally, $Q^\prime b$, which is the projection of b onto the column space of A. If $b$ is in the column space of $A$, then it is specifically $Rx$ where $x$ is the solution to $Ax = b$. 
 ```
 
 ```{exercise, q408}
 What does the last entry of last column of $R$ (from the QR decomposition of $C$) represent?
 ```
 
+```{solution, s408}
+The square of the last entry of the last column of $R$ is the sum of squares of the residuals.
+```
+
 ```{exercise, q409}
 How can this be used in computation?
+```
+
+```{exercise, s409}
+We can use it for incremental QR for large datasets.
 ```
 
 ## Homework 5
@@ -554,21 +676,23 @@ Create examples to show that the function works (well enough).
 ```
 
 ```{solution, s501}
-See [here](Homework/gram_schmidt.jl).
+See [here](../Homework/gram_schmidt.jl).
 ```
 
 ```{exercise, q502}
 Find examples where Gram-Schmidt fails, i.e. where either $Q R \neq A$ or $Q^TQ \neq I$. 
 ```
 
-
+```{solution, s502}
+Let $A = \begin{bmatrix} 1 & 1 & 1 \\ 10^{-8} & 0 & 0 \\ 0 & 10^{-8} & 0 \end{bmatrix}$. Then $Q^\prime Q \neq I$.
+```
 
 ```{exercise, q503}
 Look up the modified Gram-Schmidt Procedure and implement it (again assuming $A$ has full column rank). 
 ```
 
 ```{solution, s503}
-See [here](Homework/modified_gs.jl).
+See [here](../Homework/modified_gs.jl).
 ```
 
 
@@ -615,8 +739,8 @@ Show that if $H_1, \dots, H_r$ are Householder reflections, then $H_r \cdots H_1
 $$(H_r \cdots H_1)^\prime (H_r \cdots H_1) = H_1^\prime \cdots H_r^\prime H_r \cdots H_1 = I,$$
   
 since all $H_i$ are Householder reflections, which implies they are orthogonal, which implies $H_i^\prime H_i = I$. 
-```
 
+```
 
 
 ```{exercise, q507}
@@ -696,16 +820,17 @@ b) Modified Gram-Schmidt
 c) Householder
 d) Givens rotations
 
-for any arbitrary, dense $n \times n$ matrix. (dense = don't know how many entries are $0$.)
+for any arbitrary, dense $n \times m$ matrix. (dense = don't know how many entries are $0$.)
 
 ```
 
 ```{solution, s601}
 
-a) Gram-Schmidt requires $2nm^2$ computations. 
+a) Gram-Schmidt requires $O(m^2n)$ computations.
 b) Same as Gram-Schmidt. 
-c)
-d)
+c) $O(m^2n)$.
+d) $O(m^2n)$.
+
 
 ```
 
@@ -713,16 +838,34 @@ d)
 Compare the computational complexity of Householder and Givens for a sparse matrix (i.e. a matrix where a substantial number of entries are $0$).
 ```
 
+```{solution, s602}
+Householder still have the same complexity even for sparse matrices, whereas for Givens we do not have to complete as many multiplications with Givens rotations. (Everytime we encounter a 0 in the lower triangular matrix that can be paired with a zero above it, we can pair them up, and skip the computation.)
+```
+
 ```{exercise, q603}
-Implement QR decomposition using Householder. Write it as a function that takes a matrix $A \in \R^{n\times m}$ with $\text{rank}(A) = m$ as it's input, and gives back $Q$ and $R$.
+Implement QR decomposition using Householder. Write it as a function that takes a matrix $A \in \R^{n\times m}$ with $\text{rank}(A) = m$ as its input, and gives back $Q$ and $R$.
+```
+
+```{solution, s603}
+See [here](../Homework/QR_householder.jl).
 ```
 
 ```{exercise, q604}
 Implement QR decomposition using Givens. (As above.)
 ```
 
+```{solution, s604}
+See [here](../Homework/QR_givens.jl)
+```
+
 ```{exercise, q605}
 What happens in theorem \@ref(thm:svd) if $m > n$.
+```
+
+```{solution}
+
+If $m > n$, the diagonal matrix of the SVD of $A$ will be of the form $\begin{bmatrix} \Sigma & 0 \end{bmatrix}$, where $\Sigma = \begin{bmatrix} \sigma_1 & & \\ & \ddots & \\ & & \sigma_n \end{bmatrix}$. 
+
 ```
 
 ```{exercise, q606}
@@ -735,6 +878,8 @@ Using the SVD of $A$, we see that $AV = U\Sigma$, which implies
 $$
   A \begin{bmatrix} v_1 & \cdots & v_m \end{bmatrix} = \begin{bmatrix} \sigma_1 u_1 & \cdots & \sigma_m u_m \end{bmatrix}.
 $$
+  
+where $v_1, \dots, v_m$ are the right singular vectors of $A$, and $u_1, \dots, u_m$ are the left singular vectors of $A$. 
 
 So, $Av_i = \sigma_i u_i$ for all $i$. 
 
@@ -749,8 +894,87 @@ Similarly, $A^\prime = V \Sigma U^\prime$ implies $A^\prime U = V \Sigma$. As ab
 Show that $\norm{A}_F^2 = \sum_{i=1}^n\sum_{j=1}^n a_{ij}^2$ is orthogonally invariant, i.e. if $Q,P$ are orthogonal matrices, then $\norm{QA}_F^2 = \norm{A}_F^2$ and $\norm{AP}_F^2 = \norm{A}_F^2$. 
 ```
 
+```{solution, s701}
+
+Recall, that $\norm{A}_F^2 = \text{trace}(A^\prime A)$. So,
+
+$$
+  \norm{QA}_F^2 = \text{trace}(A^\prime Q^\prime Q A) = \text{trace}(A^\prime A) = \norm{A}_F^2,
+$$
+
+and 
+
+$$
+  \norm{AP}_F^2 = \text{trace}(P^\prime A^\prime A P) = \text{trace}(A^\prime A P P^\prime) = \text{trace}(A^\prime A) = \norm{A}_F^2.
+$$
+
+```
+
 ```{exercise, q702}
 Proof corollary \@ref(cor:sigma-min-max).
+```
+
+```{solution, s702}
+Recall that $\sigma_{\max} (A) = \norm{A}_2$. Hence, $\sigma_{\max}(A+E) = \norm{A+E}_2 \leq \norm{A}_2 + \norm{E}_2 = \sigma_{\max}(A) + \norm{E}_2$. 
+
+For the second inequality, recall that $\sigma_{\min}(A) = \min_{x \neq 0} \frac{\norm{Ax}}{\norm{x}}$. First, consider the case where $\sigma_{\min}(A) = 0$. Then the result holds. Second, consider the case where $\sigma_{\min}(A) > 0$. Then
+
+$$\begin{aligned}
+  \sigma_{\min}(A+E) &= \min_{v \neq 0} \frac{\norm{(A+E)v}_2}{\norm{v}_2} \ge \min_{v \ne 0} \frac{\norm{Av}_2}{\norm{v}_2} - \max_{v \ne 0} \frac{\norm{Ev}_2}{\norm{v}_2} \\
+  &= \sigma_{\min}(A) - \norm{E}_2,
+\end{aligned}$$
+  
+where we use the inverse triangle equality. 
+
+```
+
+```{exercise, q703}
+Proof corollary \@ref(cor:for-q703).
+```
+
+```{solution, name = "1"}
+
+Let $b \in \text{range}(A)$. Then there exists some $z$ such that $Az = b$. Use the SVD of A to get 
+
+$$
+  b = U\Sigma V^\prime z.
+$$
+  
+Since $\text{rank}(A) = r$, the last $n-r$ rows of $\Sigma$ are all $0$, so $U \Sigma V^\prime = U_r \Sigma_r (V_r)^\prime$, where $U_r$ is the first $r$ columns of $U$, $\Sigma_r$ the first $r$ columns and $r$ rows of $\Sigma$, and $V_r$ the first $r$ columns of $V$. Hence, $\Sigma_r (V_r)^\prime z = y \in \R^r$. So, $b = U_r y$, which means it is in the span of the first $r$ columns of $U$. Hence, $\text{range}(A) \subset \text{span}\{u_1, \dots, u_r\}$. 
+
+Now, let $b \in \text{span}\{u_1, \dots, u_r\}$. Then $b = U_r y$ for some $y \in \R^r$. Recall that $U = A V \Sigma^{-1}$, hence $U_r = A V_r \Sigma_r^{-1}$. So, $b = A V \Sigma_r^{-1} y$. Since $V \Sigma_r^{-1} y = z \in \R^m$, $b$ is in the range of $A$. Hence, $\text{span}\{u_1, \dots, u_r\} \subset \text{range}(A)$.
+
+```
+
+```{solution, name = "2"}
+Note that the row space of $A$ is the range of $A^\prime$. Solve as above. 
+```
+
+```{solution, name = "3"}
+
+Let $b \in \text{span}\{v_{r+1}, \dots, v_{m}\}$. Then $b = x_{r+1} v_{r+1} + \cdots + x_m v_{r+1}$ for some coefficients $x_j \in \R$. Then 
+
+$$\begin{aligned}
+Ab  &= U \Sigma V^\prime b \\ 
+    &= U \Sigma (x_{r+1} V^\prime v_{r+1} + \cdots + x_{m} V^\prime v_m) \\
+    &= U \Sigma \begin{bmatrix} 0 \\ \vdots  \\ 0 \\ x_{r+1} \\ \vdots \\ x_{m} \end{bmatrix},
+\end{aligned}$$
+
+since all columns of $V$ are orthogonal. 
+
+Since the last $n-r$ rows of $\Sigma$ are all $0$ rows, $\Sigma V^\prime b = 0$, so $Ab = 0$, so $b \in \text{null}(A)$. Hence, $\text{span}\{v_{r+1}, \ldots, v_{m}\} \subset \text{null}(A)$.
+
+Now, Assume $b \in$ null($A$), then $Ab = 0$. Because $b \in R^m$ and $v_1, \cdots, v_m$ is a base for $R^m$, there exists a sequence $\{x_i\}$ s.t.  $b = x_1v_1 + \cdots + x_rv_r + x_{r+1}v_{r+1} + \cdots + x_{m}v_m$.
+
+Assume for contradiction that $b \notin$ span($v_{r+1}, \cdots, v_m$), i.e. that $x_1, \cdots, x_r$ are not all zero. Then
+
+$$Ab= \sum_{i=1}^{r} \sigma_i u_i v_i^T b = \sum_{i=1}^{r}[ \sigma_i u_i v_i^T (\sum_{j=1}^{m}x_jv_j)]= 
+\sum_{i=1}^{r}[ \sigma_i u_i (\sum_{j=1}^{m}x_jv_i^Tv_j)] = \sum_{i=1}^{r} \sigma_i u_i x_i
+\neq 0$$
+
+But this contradicts the assumption that $b \in \text{null}(A)$. So, $b$ must be in $\text{span}\{v_{r+1}, \cdots, v_m\}$. Hence, $\text{null}(A) \subset \text{span}\{v_{r+1}, \cdots, v_m\}$.
+
+
 ```
 
 ## Homework 8
@@ -759,14 +983,44 @@ Proof corollary \@ref(cor:sigma-min-max).
 What is the solution to $\min_{x} \norm{Ax-b}_2^2$ in terms of the Moore-Penrose inverse? (pseudo-inverse)
 ```
 
+```{solution, s801}
+To find the solution, we differentiate and set equal to $0$. So, differentiate $g(x) = x^\prime A^\prime A x - x^\prime A b - b^\prime A x + b^\prime b$ and set to $0$:
+
+$$\frac{dg}{dx} = x^\prime (A^\prime A + A^\prime A) - b^\prime A - (A^\prime b)^\prime = 2x^\prime (A^\prime A) - 2b^\prime A = 0$$
+  
+which implies $(A A^\prime)x = b A^\prime$. Check that $x = A^+b$ satisfies this. 
+
+```
+
 ```{exercise, q802}
 Let $Q$ be an orthogonal matrix with columns $q_1, \ldots, q_n$. Let $Z \in \R^{n \times n}$ be a symmetric matrix. Show that $\sum_{i=1}^n (q_i^\prime Z q_i)^2 \leq \norm{Z}_F^2$.
+```
+
+```{solution, s802}
+
+Since the frobenius norm is invariant to mulitplication by orthogonal matrices: $\norm{Z}_F^2 = \norm{Q^\prime Z Q}_F^2$. Since 
+
+$$\begin{aligned}
+   \begin{bmatrix} q_1^\prime & \cdots q_n^\prime \end{bmatrix} Z \begin{bmatrix} q_1 \\ \vdots q_n \end{bmatrix} &= 
+          \begin{bmatrix} q_1^\prime & \cdots q_n^\prime \end{bmatrix} \begin{bmatrix} Z q_1 \\ \vdots Z q_n \end{bmatrix} \\
+  &= \begin{bmatrix}  q_1^\prime Z q_1 & \cdots & q_1^\prime Z q_n \\
+                      \vdots & \ddots & \vdots \\
+                      q_n^\prime Z q_1 & \cdots & q_n^\prime Z q_n
+\end{bmatrix},
+\end{aligned}$$
+
+we have that $\norm{Z}_F^2 = \sum_{i=1}^n \sum_{j=1}^n (q_i^\prime Z q_j)^2 \ge \sum_{i=1}^n (q_i^\prime Z q_i)^2$.
+
 ```
 
 ## Homework 9
 
 ```{exercise, q901}
-What do we need from A to ensure that the different iterative method shcemes are well-defined?
+What do we need from $A$ to ensure that the different iterative method schemes are well-defined?
+```
+
+```{solution, s901}
+A must be square and diagonal entries must be non-zero.
 ```
 
 ```{exercise, q902}
@@ -778,4 +1032,129 @@ Compute $J^k$ where $J = I\lambda + E$ (the Jordan Canonical Form from definitio
 
 Show that if $G = XJX^{-1}$ and $\rho(G) < 1$, then $J^k \rightarrow 0$ as $k\rightarrow \infty$.
 
+```
+
+## Homework 10
+
+```{exercise, q1001}
+Implement Jacobi, Gauss-Seidel without using the `\` operator.
+```
+
+```{solution, s1001}
+See [Jacobi]("../Homework/jacobi.jl") and [Gauss-Seidel]("../Homework/gauss_seidel.jl").
+```
+
+```{exercise, q1002}
+Implement SOR, SSOR without using the `\` operator.
+```
+
+```{solution, s1002}
+See [SOR]("../Homework/SOR.jl").
+```
+
+```{exercise, q1003}
+Randomly generate problems and 
+
+a) at each iteration, record residual norm and absolute error
+b) compare rate of convergence against spectral radious
+c) put all this information into a narrative using graphics
+
+```
+
+```{exercise, q1004}
+Prove that observation 1 from the proof of \@ref(thm:rand-kaczmarz) is true.
+```
+
+```{exercise, q1005}
+Implement Random Kaczmarz for random permutations.
+```
+
+```{exercise, q1006}
+Give a detailed comparison of cycle, randomized, and random permutation Kaczmarz.
+```
+
+
+## Homework 11
+
+```{exercise, q1101}
+
+Show that $\alpha \sum_{i=1}^n a_i (b_i - a_i x^c) = \alpha A^\prime (b - Ax^c)$.
+
+```
+
+```{exercise, q1102}
+Show that if $A^\prime r^c = 0$, then $x^c = x^*$, where $Ax^* = b$. 
+```
+
+```{exercise, q1103}
+Why is it enough to find an upper bound on $\norm{\Sigma^{-1}u}_2^2 \norm{\Sigma u}_2^2$ for any unit vector $w$ in the proof of theorem \@ref(thm:grad-descent)? 
+```
+
+```{exercise, q1104, name = "Kontorovich's Inequality"}
+Let $0 < u_n \le u_{n-1} \le \cdots \le u_1$. Then
+
+$$\left(\sum_{i=1}^n p_i u_i\right)\left(\sum_{i=1}^n \frac{p_i}{u_i}\right) \leq \frac{(u_1 + u_n)^2}{4u_1u_n}$$
+
+```
+
+```{exercise, q1105}
+For strategy 2, answer the following questions:
+  
+a) What is $\alpha$? Is it practical?
+b) With this $\alpha$, will we converge? If so, what is the rate of convergence?
+
+```
+
+```{exercise, q1106}
+For strategy 3, what is $\alpha$?
+```
+
+```{exercise, q1107}
+For strategy 4, show the inequality holds.
+```
+
+```{exercise, q1108}
+For strategy 4, what is $\alpha$?
+```
+
+```{exercise, q1109}
+Implement a single update of the gradient descent method for a user supplied alpha, assuming that A is invertible.
+```
+
+```{exercise, q1110}
+Now, implement four algorithms one for each of the four strategies of alpha discussed in class.
+```
+
+```{exercise, q1111}
+Generate several test problems for your four algorithms, and compare their performance.
+```
+
+```{exercise, q1112}
+In a narrative, explain which algorithm you would use and when you would use this algorithm.
+```
+
+**Understanding Gradient Descent's Dependence on the Condition Number**
+
+```{exercise, q1113}
+Write a function to generate 2 equations with 2 unknowns such that the coefficient matrix is dense and symmetric with user specified nonzero eigenvalues.
+```
+
+```{exercise, q1114}
+How are the eigenvalues related to the singular values?
+```
+
+```{exercise, q1115}
+How are the eigenvectors related to the left and right singular vectors?
+```
+
+```{exercise, q1116}
+Write a function to draw the level sets of an arbitrary residual function $f\left(x\right) = \norm{Ax - b}_2^2$.
+```
+
+```{exercise, q1117}
+Run Gradient Descent using the step size (alpha) from Strategy 2 to solve a sequence of problems where the difference between the singular values of your problem increases in size. Plot the points that Gradient Descent visits (on your level set plot) as it finds its way to the solution.
+```
+
+```{exercise, q1118}
+What do you observe? What is the impact of the singular values on gradient descent? Why does this make sense based on your graphs?
 ```
