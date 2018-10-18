@@ -127,6 +127,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.3" data-path="iterative-methods.html"><a href="iterative-methods.html#motivation"><i class="fa fa-check"></i><b>1.5.3</b> Motivation</a></li>
 <li class="chapter" data-level="1.5.4" data-path="iterative-methods.html"><a href="iterative-methods.html#splitting-methods"><i class="fa fa-check"></i><b>1.5.4</b> Splitting Methods</a></li>
 <li class="chapter" data-level="1.5.5" data-path="iterative-methods.html"><a href="iterative-methods.html#convergence"><i class="fa fa-check"></i><b>1.5.5</b> Convergence</a></li>
+<li class="chapter" data-level="1.5.6" data-path="iterative-methods.html"><a href="iterative-methods.html#randomized-kaczmarz-method"><i class="fa fa-check"></i><b>1.5.6</b> Randomized Kaczmarz Method</a></li>
+<li class="chapter" data-level="1.5.7" data-path="iterative-methods.html"><a href="iterative-methods.html#gradient-descent"><i class="fa fa-check"></i><b>1.5.7</b> Gradient Descent</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -139,6 +141,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.7" data-path="homework-7.html"><a href="homework-7.html"><i class="fa fa-check"></i><b>2.7</b> Homework 7</a></li>
 <li class="chapter" data-level="2.8" data-path="homework-8.html"><a href="homework-8.html"><i class="fa fa-check"></i><b>2.8</b> Homework 8</a></li>
 <li class="chapter" data-level="2.9" data-path="homework-9.html"><a href="homework-9.html"><i class="fa fa-check"></i><b>2.9</b> Homework 9</a></li>
+<li class="chapter" data-level="2.10" data-path="homework-10.html"><a href="homework-10.html"><i class="fa fa-check"></i><b>2.10</b> Homework 10</a></li>
+<li class="chapter" data-level="2.11" data-path="homework-11.html"><a href="homework-11.html"><i class="fa fa-check"></i><b>2.11</b> Homework 11</a></li>
 </ul></li>
 </ul>
 
@@ -199,7 +203,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="example">
-<p><span id="exm:constrained-least-squares" class="example"><strong>Example 1.6  (Motivating Problem 5 (Constrained Least Squares Regression))  </strong></span>Assume <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}, n \geq m, \text{rank}(A) &lt; m\)</span>, and <span class="math inline">\(b \in {\mathbb{R}}^n\)</span>. Let <span class="math inline">\(C \in {\mathbb{R}}^{p\times m}, \text{C} = p\)</span>, and <span class="math inline">\(d \in {\mathbb{R}}^{p}\)</span>. Find <span class="math inline">\(x \in {\mathbb{R}}^m\)</span> s.t.</p>
+<p><span id="exm:constrained-least-squares" class="example"><strong>Example 1.6  (Motivating Problem 5 (Constrained Least Squares Regression))  </strong></span>Assume <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}, n \geq m, \text{rank}(A) = m\)</span>, and <span class="math inline">\(b \in {\mathbb{R}}^n\)</span>. Let <span class="math inline">\(C \in {\mathbb{R}}^{p\times m}, \text{rank}(C) = p\)</span>, and <span class="math inline">\(d \in {\mathbb{R}}^{p}\)</span>. Find <span class="math inline">\(x \in {\mathbb{R}}^m\)</span> s.t.</p>
 <span class="math display">\[x = {\text{argmin}}_{y \in {\mathbb{R}}^m} {\left \vert \left \vert Ay - b \right \vert \right \vert}_2\quad \text{s.t.} \quad Cy = d.\]</span>
 </div>
 
@@ -279,7 +283,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><span class="math display" id="eq:least-squares-eq1">\[
   \min {\left \vert \left \vert Q \begin{bmatrix} R \\ 0 \end{bmatrix}\Pi^T y - b \right \vert \right \vert}_2. \tag{1.2}
 \]</span></p>
-<p>Since <span class="math inline">\(Q^T = Q^{-1}\)</span> is orthogonal, <span class="math inline">\({\left \vert \left \vert Q^T x \right \vert \right \vert}_2 = {\left \vert \left \vert x \right \vert \right \vert}_2\)</span> for all <span class="math inline">\(x\)</span> (homework exercise <a href="homework-4.html#exr:q402">1.29</a>). So, we get that <a href="orthogonalization.html#eq:least-squares-eq1">(1.2)</a> is the same as</p>
+<p>Since <span class="math inline">\(Q^T = Q^{-1}\)</span> is orthogonal, <span class="math inline">\({\left \vert \left \vert Q^T x \right \vert \right \vert}_2 = {\left \vert \left \vert x \right \vert \right \vert}_2\)</span> for all <span class="math inline">\(x\)</span> (homework exercise <a href="homework-4.html#exr:q402">1.30</a>). So, we get that <a href="orthogonalization.html#eq:least-squares-eq1">(1.2)</a> is the same as</p>
 <p><span class="math display">\[
   \min{\left \vert \left \vert \begin{bmatrix} R \\ 0 \end{bmatrix} \Pi^T y - Q^T b \right \vert \right \vert}_2.
 \]</span></p>
@@ -309,7 +313,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     x &amp;\in {\text{argmin}}_z \left\{{\left \vert \left \vert R^{-1}c - R^{-1} S z_2 \right \vert \right \vert}_2^2 + {\left \vert \left \vert z_2 \right \vert \right \vert}_2^2\right\},
   \end{aligned}
 \]</span></p>
-<p>where the last equality is a consequence of the result proved in homework <a href="homework-4.html#exr:q403">1.30</a>. Now, let <span class="math inline">\(d = R^{-1}c\)</span> and <span class="math inline">\(P = R^{-1}S\)</span>. Then we can find the minimum of the above expression by differentiating and setting equal to zero:</p>
+<p>where the last equality is a consequence of the result proved in homework <a href="homework-4.html#exr:q403">1.31</a>. Now, let <span class="math inline">\(d = R^{-1}c\)</span> and <span class="math inline">\(P = R^{-1}S\)</span>. Then we can find the minimum of the above expression by differentiating and setting equal to zero:</p>
 <span class="math display">\[\begin{align}
   0 &amp;= -P^Td + (P^TP + I)z_2 \rightarrow \\
   z_2 &amp;= (P^T P + I)^{-1}P^Td.
@@ -469,7 +473,7 @@ So by definition (<a href="orthogonalization.html#def:orthogonal">1.5</a>), <spa
 
 
 <div class="proof">
-<p> <span class="proof"><em>Proof. </em></span> Let <span class="math inline">\(A\Pi = \begin{bmatrix} a_1 \dots a_r \end{bmatrix}\)</span>. Choose <span class="math inline">\(H_1\)</span> s.t. <span class="math inline">\(H_1 a_1 = R_{11} e_1 = a_1 - 2v_1v_1^\prime a_1\)</span> (last equality due to definition of Householder reflections). This is equivalent to <span class="math inline">\(v_1(2v_1^\prime a_1) = a_1 - R_{11}e_1\)</span>.</p>
+<p> <span class="proof"><em>Proof. </em></span> Let <span class="math inline">\(A\Pi = \begin{bmatrix} a_1 &amp; \cdots &amp; a_r \end{bmatrix}\)</span>. Choose <span class="math inline">\(H_1\)</span> s.t. <span class="math inline">\(H_1 a_1 = R_{11} e_1 = a_1 - 2v_1v_1^\prime a_1\)</span> (last equality due to definition of Householder reflections). This is equivalent to <span class="math inline">\(v_1(2v_1^\prime a_1) = a_1 - R_{11}e_1\)</span>.</p>
 <p>Now, let <span class="math inline">\(v_1 = \frac{a_1 - R_{11}e_1}{{\left \vert \left \vert a_1 - R_{11}e_2 \right \vert \right \vert}_2}\)</span>. Plug this into the equation for <span class="math inline">\(R_{11}e_1\)</span> above to get</p>
 <p><span class="math display">\[
   R_{11}e_1 = a_1 - \frac{(a_1 - R_{11}e_1)}{{\left \vert \left \vert a_1 - R_{11}e_1 \right \vert \right \vert}_2}\frac{a_1^\prime a_1 - R_{11} a_1^\prime e_1}{{\left \vert \left \vert a_1 - R_{11}e_1 \right \vert \right \vert}_2}.
@@ -479,7 +483,7 @@ So by definition (<a href="orthogonalization.html#def:orthogonal">1.5</a>), <spa
   R_{11} = \pm {\left \vert \left \vert a_1 \right \vert \right \vert}_2, v_1 = \frac{a_1 - {\left \vert \left \vert a_1 \right \vert \right \vert}e_1}{{\left \vert \left \vert a_1 - {\left \vert \left \vert a_1 \right \vert \right \vert}_2 e_1 \right \vert \right \vert}_2}.
 \]</span></p>
 <p><span class="math display">\[
-  H_1 = I - \frac{a_1 - {\left \vert \left \vert a_1 \right \vert \right \vert}_2e_1)(a_1 - {\left \vert \left \vert a_1 \right \vert \right \vert}_2 e_1)}{{\left \vert \left \vert a_1 - {\left \vert \left \vert a_1 \right \vert \right \vert}_2 e_1 \right \vert \right \vert}_2^2}
+  H_1 = I - \frac{a_1 - {\left \vert \left \vert a_1 \right \vert \right \vert}_2e_1)((a_1 - {\left \vert \left \vert a_1 \right \vert \right \vert}_2 e_1)}{{\left \vert \left \vert a_1 - {\left \vert \left \vert a_1 \right \vert \right \vert}_2 e_1 \right \vert \right \vert}_2^2}
 \]</span></p>
 </div>
 
@@ -502,7 +506,7 @@ So by definition (<a href="orthogonalization.html#def:orthogonal">1.5</a>), <spa
   M = \begin{bmatrix} M_{11} &amp; M_{12} &amp; \dots &amp; M_{1m} \\
                       M_{21} &amp; M_{22} &amp; \dots &amp; M_{2m} \end{bmatrix}.
 \]</span></p>
-<p>We want this Givens matrix to be orthogonal. By homework exercise <a href="homework-5.html#exr:q507">1.43</a>, we know this is the case when <span class="math inline">\(\lambda^2 + \delta^2 = 1\)</span>. We also want <span class="math inline">\(G^{(1,2)}M\)</span> to be an upper triangular matrix. Since</p>
+<p>We want this Givens matrix to be orthogonal. By homework exercise <a href="homework-5.html#exr:q507">1.45</a>, we know this is the case when <span class="math inline">\(\lambda^2 + \delta^2 = 1\)</span>. We also want <span class="math inline">\(G^{(1,2)}M\)</span> to be an upper triangular matrix. Since</p>
 <p><span class="math display">\[
   G^{(i,j)} M =
     \begin{bmatrix}
@@ -521,7 +525,7 @@ So by definition (<a href="orthogonalization.html#def:orthogonal">1.5</a>), <spa
 <p>Gentleman published a few papers in 1973/1974 describing a method for incremental QR decomposition. The key ideas are as follows:</p>
 <ol style="list-style-type: decimal">
 <li>Remember that the solution to the linear model is <span class="math inline">\((A&#39;A)^{-1}A&#39;b = R^{-1}(Q&#39;b)\)</span>.</li>
-<li>The QR decomposition of <span class="math inline">\(\begin{bmatrix}A &amp; b\end{bmatrix}\)</span> gives <span class="math inline">\(\begin{bmatrix} R &amp; Q&#39;b \\ 0 &amp; S \end{bmatrix}\)</span> (ex. <a href="homework-4.html#exr:q407">1.34</a> and <a href="homework-4.html#exr:q408">1.35</a>)</li>
+<li>The QR decomposition of <span class="math inline">\(\begin{bmatrix}A &amp; b\end{bmatrix}\)</span> gives <span class="math inline">\(\begin{bmatrix} R &amp; Q&#39;b \\ 0 &amp; S \end{bmatrix}\)</span> (ex. <a href="homework-4.html#exr:q407">1.35</a> and <a href="homework-4.html#exr:q408">1.36</a>)</li>
 </ol>
 <p>Now, if we do QR decomposition on the first <span class="math inline">\(m+1\)</span> rows of <span class="math inline">\(A\)</span> we get <span class="math inline">\(\begin{bmatrix} \tilde{R}_{m+1} &amp; \tilde{Q}_{m+1}&#39;b_{m+1} \\ 0 &amp; S_{m+1} \end{bmatrix}\)</span>. Now, add the next row of <span class="math inline">\(A\)</span> to get <span class="math inline">\(\begin{bmatrix} \tilde{R}_{m+1} &amp; \tilde{Q}_{m+1}&#39;b_{m+1} \\ 0 &amp; S_{m+1} \\ a_{m+2} &amp; b_{m+2} \end{bmatrix}\)</span>. Hit this with the right Givens rotation to change entry <span class="math inline">\((m+1, 1)\)</span> to <span class="math inline">\(0\)</span>. This will give us something of the form <span class="math inline">\(\begin{bmatrix} \tilde{R}_{m+2} &amp; \tilde{Q}_{m+2}&#39;b_{m+2} \\ 0 &amp; S_{m+2} \end{bmatrix}\)</span>. Here, <span class="math inline">\(\tilde{R}_{m+2}\)</span> is still an upper triangular matrix with less than <span class="math inline">\(m\)</span> rows. Repeat the procedure until we’ve added all rows of <span class="math inline">\(A\)</span>/elements of <span class="math inline">\(b\)</span>.</p>
 </div>
@@ -571,7 +575,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["STAT771_notes.pdf"],
 "toc": {
 "collapse": "section"
 },

@@ -127,6 +127,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.3" data-path="iterative-methods.html"><a href="iterative-methods.html#motivation"><i class="fa fa-check"></i><b>1.5.3</b> Motivation</a></li>
 <li class="chapter" data-level="1.5.4" data-path="iterative-methods.html"><a href="iterative-methods.html#splitting-methods"><i class="fa fa-check"></i><b>1.5.4</b> Splitting Methods</a></li>
 <li class="chapter" data-level="1.5.5" data-path="iterative-methods.html"><a href="iterative-methods.html#convergence"><i class="fa fa-check"></i><b>1.5.5</b> Convergence</a></li>
+<li class="chapter" data-level="1.5.6" data-path="iterative-methods.html"><a href="iterative-methods.html#randomized-kaczmarz-method"><i class="fa fa-check"></i><b>1.5.6</b> Randomized Kaczmarz Method</a></li>
+<li class="chapter" data-level="1.5.7" data-path="iterative-methods.html"><a href="iterative-methods.html#gradient-descent"><i class="fa fa-check"></i><b>1.5.7</b> Gradient Descent</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -139,6 +141,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.7" data-path="homework-7.html"><a href="homework-7.html"><i class="fa fa-check"></i><b>2.7</b> Homework 7</a></li>
 <li class="chapter" data-level="2.8" data-path="homework-8.html"><a href="homework-8.html"><i class="fa fa-check"></i><b>2.8</b> Homework 8</a></li>
 <li class="chapter" data-level="2.9" data-path="homework-9.html"><a href="homework-9.html"><i class="fa fa-check"></i><b>2.9</b> Homework 9</a></li>
+<li class="chapter" data-level="2.10" data-path="homework-10.html"><a href="homework-10.html"><i class="fa fa-check"></i><b>2.10</b> Homework 10</a></li>
+<li class="chapter" data-level="2.11" data-path="homework-11.html"><a href="homework-11.html"><i class="fa fa-check"></i><b>2.11</b> Homework 11</a></li>
 </ul></li>
 </ul>
 
@@ -205,7 +209,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Based on this split, there are a few different ways to iteratively update <span class="math inline">\(r^+\)</span>.</p>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-46" class="definition"><strong>Definition 1.10  (The Jacobi Method)  </strong></span><em>The Jacobi Method</em> finds <span class="math inline">\(x^+\)</span> from <span class="math inline">\(x^c\)</span> using the following rule:</p>
+<p><span id="def:unnamed-chunk-45" class="definition"><strong>Definition 1.10  (The Jacobi Method)  </strong></span><em>The Jacobi Method</em> finds <span class="math inline">\(x^+\)</span> from <span class="math inline">\(x^c\)</span> using the following rule:</p>
 <p><span class="math display">\[x_i^+ = \frac{b_i - \sum_{k\neq i}A_{ik}x_k^c}{A_{ii}}.\]</span></p>
 <p>If we do this for all <span class="math inline">\(i\)</span>, we can write this in matrix form:</p>
 <p><span class="math display">\[x^+ = D^{-1}(b + (E+F)x^c).\]</span></p>
@@ -219,7 +223,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 \end{aligned}\]</span></p>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-47" class="definition"><strong>Definition 1.11  (The Gauss-Seidel Method)  </strong></span><em>The Gauss-Seidel Method</em> finds <span class="math inline">\(x^+\)</span> from <span class="math inline">\(x^c\)</span> using the following rule:</p>
+<p><span id="def:unnamed-chunk-46" class="definition"><strong>Definition 1.11  (The Gauss-Seidel Method)  </strong></span><em>The Gauss-Seidel Method</em> finds <span class="math inline">\(x^+\)</span> from <span class="math inline">\(x^c\)</span> using the following rule:</p>
 <p><span class="math display">\[x_i^+ = \frac{1}{A_ii}\left(b_i - \sum_{k=1}^{i-1} A_{ik}x_k^+ - \sum_{k=i+1}^d A_{ik} x_k^c\right),\]</span></p>
 <p>which in matrix formulation is</p>
 <p><span class="math display">\[x^+ = D^{-1}(b + Ex^+ + Fx^c)\]</span>,</p>
@@ -230,7 +234,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As for the Jacobi method, it can be seen that <span class="math inline">\(r_i^+ = 0\)</span>.</p>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-48" class="definition"><strong>Definition 1.12  (Successive Over Relaxation (SOR))  </strong></span> When we update <span class="math inline">\(x^c\)</span> to <span class="math inline">\(x^+\)</span> using a rule of the form</p>
+<p><span id="def:unnamed-chunk-47" class="definition"><strong>Definition 1.12  (Successive Over Relaxation (SOR))  </strong></span> When we update <span class="math inline">\(x^c\)</span> to <span class="math inline">\(x^+\)</span> using a rule of the form</p>
 <p><span class="math display">\[ (D-\omega E)x^+ = (\omega F + (1-\omega)D)x^c + \omega b,\]</span></p>
 it is called a <em>Successive Over Relaxation</em> method.
 </div>
@@ -238,13 +242,13 @@ it is called a <em>Successive Over Relaxation</em> method.
 <p>Note: if we pick <span class="math inline">\(\omega = 1\)</span>, we get back the Gauss-Seidel method.</p>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-49" class="definition"><strong>Definition 1.13  (Backward SOR)  </strong></span> The following is called the <em>Backward SOR</em>:</p>
+<p><span id="def:unnamed-chunk-48" class="definition"><strong>Definition 1.13  (Backward SOR)  </strong></span> The following is called the <em>Backward SOR</em>:</p>
 <p><span class="math display">\[ (D-\omega E)x^+ = (\omega F + (1-\omega)D)x^c + \omega b,\]</span></p>
 </div>
 
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-50" class="definition"><strong>Definition 1.14  (Symmetric SOR)  </strong></span> The <em>Symmetric SOR</em> is a method where we first find <span class="math inline">\(z\)</span> based on the rule</p>
+<p><span id="def:unnamed-chunk-49" class="definition"><strong>Definition 1.14  (Symmetric SOR)  </strong></span> The <em>Symmetric SOR</em> is a method where we first find <span class="math inline">\(z\)</span> based on the rule</p>
 <p><span class="math display">\[(D-\omega F)z = (\omega F + (1-\omega)D)x^c+\omega b\]</span></p>
 <p>before using the rule</p>
 <p><span class="math display">\[(D- \omega F)x^+ = (\omega F + (1-\omega)D)z + \omega b\]</span></p>
@@ -312,7 +316,7 @@ to find <span class="math inline">\(x^+\)</span>.
 
 
 <div class="theorem">
-<p><span id="thm:unnamed-chunk-52" class="theorem"><strong>Theorem 1.6  </strong></span> Suppose there exists a <span class="math inline">\(x^*\)</span> s.t. <span class="math inline">\(A x^* = b\)</span>. Let <span class="math inline">\(x_0\)</span> be arbitrary and define a sequence <span class="math inline">\(\{x_k\}_{k \in {\mathbb{N}}}\)</span> by</p>
+<p><span id="thm:unnamed-chunk-51" class="theorem"><strong>Theorem 1.6  </strong></span> Suppose there exists a <span class="math inline">\(x^*\)</span> s.t. <span class="math inline">\(A x^* = b\)</span>. Let <span class="math inline">\(x_0\)</span> be arbitrary and define a sequence <span class="math inline">\(\{x_k\}_{k \in {\mathbb{N}}}\)</span> by</p>
 <p><span class="math display">\[
   x_k = Gx_{k-1} + f.
 \]</span></p>
@@ -329,6 +333,132 @@ If <span class="math inline">\(\rho(G) &lt; 1\)</span>, then <span class="math i
 <p>such that <span class="math inline">\(A = XJX^{-1}\)</span>.</p>
 </div>
 
+</div>
+<div id="randomized-kaczmarz-method" class="section level3">
+<h3><span class="header-section-number">1.5.6</span> Randomized Kaczmarz Method</h3>
+<p>Consider <span class="math inline">\(Ax = b\)</span>. Let the rows of <span class="math inline">\(A\)</span> be denoted as <span class="math inline">\(a_1^\prime, a_2^\prime, \dots, a_n^\prime\)</span>, and <span class="math inline">\(b = (b_1, \dots, b_n)^\prime\)</span>. Now, the goal is to choose the next iteration of <span class="math inline">\(x\)</span> such that <span class="math inline">\(r^+ = b_i - a_i^\prime x^+ = 0\)</span>. Let’s say we try to set <span class="math inline">\(x^+ = x^c + v\)</span> for some appropriate <span class="math inline">\(v\)</span>. What should <span class="math inline">\(v\)</span> be then? We want <span class="math inline">\(b_i = a_i^\prime (x^c + v)\)</span>, which would imply that <span class="math inline">\(a_i^\prime v = b_i - a_i^\prime x^c\)</span>. This has many possible solutions. So let’s look for a particular one, namely one that is proportional to <span class="math inline">\(a_i\)</span>: <span class="math inline">\(v=\alpha a_i\)</span>. Then <span class="math inline">\(\alpha {\left \vert \left \vert a_i \right \vert \right \vert}_2^2 = b_i - a_i^\prime x^c\)</span> which implies <span class="math inline">\(\alpha = \frac{b_i - a_i^\prime x^c}{{\left \vert \left \vert a_i \right \vert \right \vert}_2^2}\)</span>.</p>
+<p>The above approach gives us Kaczmarz Method: the next iterate of <span class="math inline">\(x\)</span> is <span class="math inline">\(x^+ = x^c + \frac{b_i - a_i^\prime x^c}{{\left \vert \left \vert a_i \right \vert \right \vert}_2^2}a_i\)</span>.</p>
+<p>Now, the <em>Randomized</em> Kaczmarz Method is the one where we randomly choose which column to use for the next iteration based on the probability distribution over all columns of <span class="math inline">\(A\)</span> given by <span class="math inline">\(P(i = l) = \frac{{\left \vert \left \vert a_l \right \vert \right \vert}_2^2}{{\left \vert \left \vert A \right \vert \right \vert}_F^2}\)</span>. The following theorem guarantees us that this approach actually works, i.e. we converge towards the solution of <span class="math inline">\(Ax = b\)</span>.</p>
+
+<div class="theorem">
+<p><span id="thm:rand-kaczmarz" class="theorem"><strong>Theorem 1.7  (Randomized Kaczmarz Method)  </strong></span>Suppose <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span> is invertible and <span class="math inline">\(x^* = A^{-1}b\)</span>.</p>
+<p>Given a sequence of i.i.d. random variables <span class="math inline">\(i_1, i_2, \dots\)</span> (<span class="math inline">\(P(i_k = l) = \frac{{\left \vert \left \vert a_l \right \vert \right \vert}_2^2}{{\left \vert \left \vert A \right \vert \right \vert}_F^2}\)</span>), and <span class="math inline">\(x_0\)</span> an arbitrary initial value, define</p>
+<p><span class="math display">\[ x_k = x_{k-1} + \frac{b_{i_{k-1}}-a_{i_{k-1}}^\prime x_{k-1}}{{\left \vert \left \vert a_{i_{k-1}} \right \vert \right \vert}_2^2}a_{i_{k-1}}\]</span></p>
+<p>for all <span class="math inline">\(k &gt; 1\)</span>. Then</p>
+<p><span class="math display">\[E\left[{\left \vert \left \vert x_k - x^* \right \vert \right \vert}_2^2 \right] \leq \left(1-\frac{\sigma_{min}(A)^2}{{\left \vert \left \vert A \right \vert \right \vert}_F^2}\right)^k {\left \vert \left \vert x_0 - x^* \right \vert \right \vert}_2^2.\]</span></p>
+</div>
+
+<p>Note that the above result (by Chebyshev) implies</p>
+<p><span class="math display">\[P\left[{\left \vert \left \vert x_k - x^* \right \vert \right \vert}_2 &gt; \epsilon \right] \leq \frac{1}{\epsilon^2}E\left[{\left \vert \left \vert x_k - x^* \right \vert \right \vert}_2^2\right]\]</span></p>
+<p>which in turn implies <span class="math inline">\(x_k \rightarrow_p x^*\)</span> as <span class="math inline">\(k \rightarrow \infty\)</span>.</p>
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> First of all, note that since <span class="math inline">\(i_k\)</span> is independent of <span class="math inline">\(i_{l}\)</span> for all <span class="math inline">\(l &lt; k\)</span>, <span class="math inline">\(i_k\)</span> is independent of all <span class="math inline">\(x_l\)</span> for all <span class="math inline">\(l &lt; k\)</span>.</p>
+<p><strong>Observation 1:</strong> <span class="math inline">\(x_{k+1} - x_k\)</span> is orthogonal to <span class="math inline">\(x_{k+1} - x^*\)</span>. Therefore <span class="math display">\[{\left \vert \left \vert x_{k+1} - x^* \right \vert \right \vert}_2^2 = {\left \vert \left \vert x_{k} - x^* \right \vert \right \vert}_2^2 - {\left \vert \left \vert x_{k+1}-x_k \right \vert \right \vert}_2^2.\]</span></p>
+<p>Since <span class="math inline">\(b_{i_k} = a_{i_k}^\prime x^*\)</span>, we have that</p>
+<p><span class="math display">\[\begin{aligned}
+  x_{k+1} - x_k &amp;= \frac{b_{i_k}-a_{i_k}^\prime x_k}{{\left \vert \left \vert a_{i_k} \right \vert \right \vert}_2^2}a_{i_k} \\
+                &amp;= \frac{a_{i_k}^\prime x^*-a_{i_k}^\prime x_k}{{\left \vert \left \vert a_{i_k} \right \vert \right \vert}_2^2}a_{i_k} \\
+                &amp;= \frac{a_{i_k}^\prime (x^*- x_k)}{{\left \vert \left \vert a_{i_k} \right \vert \right \vert}_2^2}a_{i_k}.
+\end{aligned}\]</span></p>
+<p>So</p>
+<p><span class="math display">\[\begin{aligned}
+  {\left \vert \left \vert x_{k+1} - x_k \right \vert \right \vert}_2^2  &amp;= {\left \vert \left \vert a_{i_k} \right \vert \right \vert}_2^2 \frac{[a_{i_k}^\prime (x_k - x^*)]^2}{{\left \vert \left \vert a_{i_k} \right \vert \right \vert}_2^4} \\
+                            &amp;= \frac{[a_{i_k}^\prime (x_k - x^*)]^2}{{\left \vert \left \vert a_{i_k} \right \vert \right \vert}_2^2}.
+\end{aligned}\]</span></p>
+<p><strong>Observation 2:</strong> For any vector <span class="math inline">\(y \in {\mathbb{R}}^n\)</span> it holds that</p>
+<p><span class="math display">\[E\left(\frac{(a_{i_0}^\prime y)^2}{{\left \vert \left \vert a_{i_0} \right \vert \right \vert}_2^2}\right) \geq \frac{\sigma_{min}^2(A)}{{\left \vert \left \vert A \right \vert \right \vert}_F^2} {\left \vert \left \vert y \right \vert \right \vert}_2^2.\]</span></p>
+<p>“Proof:”</p>
+<p>Recall that <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_2^2 = \max_{y \neq 0} \frac{{\left \vert \left \vert Ay \right \vert \right \vert}_2^2}{{\left \vert \left \vert y \right \vert \right \vert}_2^2} = \sigma_{max}(A)^2 &gt;= \sigma_{min}(A)^2\)</span>. With this in mind</p>
+<p><span class="math display">\[\begin{aligned}
+  \sum_{i=1}^n (a_i^\prime y)^2 &amp;= {\left \vert \left \vert Ay \right \vert \right \vert}_2^2 \ge \sigma_{min}(A)^2 {\left \vert \left \vert y \right \vert \right \vert}_2^2.
+\end{aligned}\]</span></p>
+<p>Divide through by <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_F^2\)</span> to get <span class="math inline">\(\sum_{i=1}^n \frac{1}{{\left \vert \left \vert A \right \vert \right \vert}_F^2}(a_i^\prime y)^2 \ge \frac{\sigma_{min}(A)^2}{{\left \vert \left \vert A \right \vert \right \vert}_F^2} {\left \vert \left \vert y \right \vert \right \vert}_2^2\)</span>, before we simply multiply each term in the sum by <span class="math inline">\(1 = \frac{{\left \vert \left \vert a_i \right \vert \right \vert}_2^2}{{\left \vert \left \vert a_i \right \vert \right \vert}_2^2}\)</span>. So</p>
+<p><span class="math display">\[\begin{aligned}
+  \frac{\sigma_{min}(A)^2}{{\left \vert \left \vert A \right \vert \right \vert}_F^2} {\left \vert \left \vert y \right \vert \right \vert}_2^2 &amp;\le \sum_{i=1}^n \frac{{\left \vert \left \vert a_i \right \vert \right \vert}_2^2}{{\left \vert \left \vert A \right \vert \right \vert}_F^2}\frac{(a_i^\prime y)^2}{{\left \vert \left \vert a_i \right \vert \right \vert}_2^2} \\
+                                                      &amp;= \sum_{i=1}^n P(i_0 = i) \frac{(a_i^\prime y)^2}{{\left \vert \left \vert a_i \right \vert \right \vert}_2^2} \\
+                                                      &amp;= E\left(\frac{(a_{i_0}^\prime y)^2}{{\left \vert \left \vert a_{i_0} \right \vert \right \vert}_2^2}\right).
+\end{aligned}\]</span></p>
+<p>Now, using these two observations together:</p>
+<p><span class="math display">\[\begin{aligned}
+  E\left[{\left \vert \left \vert x_{k+1} - x^* \right \vert \right \vert}_2^2 | x_k \right ] &amp;= E\left[{\left \vert \left \vert x_k - x^* \right \vert \right \vert}_2^2 | x_k\right] - E\left[ {\left \vert \left \vert x_{k+1} - x_k \right \vert \right \vert}_2^2 | x_k \right] \\
+                                                 &amp;= {\left \vert \left \vert x_k - x^* \right \vert \right \vert}_2^2 - E\left[ \frac{(a_{i_k}^\prime (x_k - x^*))^2}{{\left \vert \left \vert a_{i_k} \right \vert \right \vert}_2^2} \right] \\
+                                                 &amp;\le {\left \vert \left \vert x_k - x^* \right \vert \right \vert}_2^2 - \frac{\sigma_{min}(A)^2}{{\left \vert \left \vert A \right \vert \right \vert}_F^2} {\left \vert \left \vert x_k - x^* \right \vert \right \vert}_2^2 \\
+                                                 &amp;= (1 - \frac{\sigma_{min}(A)^2}{{\left \vert \left \vert A \right \vert \right \vert}_F^2}){\left \vert \left \vert x_k - x^* \right \vert \right \vert}_2^2.
+\end{aligned}\]</span></p>
+<p>Finally, taking expectation on both sides gives us that <span class="math inline">\(E\left[{\left \vert \left \vert x_{k+1} - x^* \right \vert \right \vert}_2^2\right] \le \left(1 - \frac{\sigma_{min}(A)^2}{{\left \vert \left \vert A \right \vert \right \vert}_F^2}\right)E\left[{\left \vert \left \vert x_k - x^* \right \vert \right \vert}_2^2\right]\)</span>. This upper bound holds for any <span class="math inline">\(k\)</span>, so we can repeatedly use this to get</p>
+<p><span class="math display">\[
+  E\left[{\left \vert \left \vert x_{k+1} - x^* \right \vert \right \vert}_2^2\right] \le \left(1 - \frac{\sigma_{min}(A)^2}{{\left \vert \left \vert A \right \vert \right \vert}_F^2}\right)^k {\left \vert \left \vert x_0 - x^* \right \vert \right \vert}_2^2
+\]</span></p>
+since <span class="math inline">\(E[{\left \vert \left \vert x_0 - x^* \right \vert \right \vert}_2^2] = {\left \vert \left \vert x_0 - x^* \right \vert \right \vert}_2^2\)</span>.
+</div>
+
+</div>
+<div id="gradient-descent" class="section level3">
+<h3><span class="header-section-number">1.5.7</span> Gradient Descent</h3>
+<p>The Gradient Descent iterative method updates the current <span class="math inline">\(x^c\)</span> to <span class="math inline">\(x^+\)</span> by</p>
+<span class="math display">\[\begin{align}
+  x^+ &amp;= x^c + \alpha \sum_{i=1}^n a_i (b_i - a_i x^c) \\
+      &amp;= x^c + \alpha A^\prime (b - Ax^c)
+\end{align}\]</span>
+<p>The question now is: how do we choose <span class="math inline">\(\alpha\)</span>?</p>
+<p><strong>Strategy 1</strong></p>
+<p>Choose the <span class="math inline">\(\alpha\)</span> that minimizes <span class="math inline">\({\left \vert \left \vert r^+ \right \vert \right \vert}_2^2 = {\left \vert \left \vert Ax^+ - b \right \vert \right \vert}_2^2\)</span>.</p>
+
+<div class="lemma">
+<p><span id="lem:unnamed-chunk-53" class="lemma"><strong>Lemma 1.14  </strong></span> <span class="math display">\[{\text{argmin}}_\alpha {\left \vert \left \vert r^+ \right \vert \right \vert}_2^2 = \frac{{\left \vert \left \vert A^\prime r^c \right \vert \right \vert}_2^2}{{\left \vert \left \vert AA^\prime r^c \right \vert \right \vert}_2^2}\]</span></p>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> First, note that by homework exercise <a href="homework-11.html#exr:q1102">1.67</a>, <span class="math inline">\(A^\prime r^c \neq 0\)</span>, since if this were the case, the problem would be solved already.</p>
+<p><span class="math display">\[
+  {\left \vert \left \vert r^+ \right \vert \right \vert}_2^2 = {\left \vert \left \vert r^c \right \vert \right \vert}_2^2 - 2\alpha {\left \vert \left \vert A^\prime r^c \right \vert \right \vert}_2^2 + \alpha^2 {\left \vert \left \vert AA^\prime r^c \right \vert \right \vert}_2^2,
+\]</span></p>
+<p>since <span class="math inline">\(r^+ = Ax^+ - b = A(x^c + \alpha A^\prime (b - Ax^c)) - b = Ax^c - b - \alpha A A^\prime ( Ax^c - b) = r^c - \alpha A A^\prime r^c\)</span>, and <span class="math inline">\({\left \vert \left \vert r^+ \right \vert \right \vert}_2^2 = (r^+)^\prime r^+\)</span>.</p>
+Differentiate this equation with respect to <span class="math inline">\(\alpha\)</span>, equate to <span class="math inline">\(0\)</span>, and solve for <span class="math inline">\(\alpha\)</span> will yield the result.
+</div>
+
+
+<div class="theorem">
+<p><span id="thm:grad-descent" class="theorem"><strong>Theorem 1.8  </strong></span>Suppose <span class="math inline">\(A\)</span> is invertible. Given <span class="math inline">\(x_0 {\mathbb{R}}^n\)</span>, let <span class="math inline">\(x_k\)</span> be defined as</p>
+<p><span class="math display">\[x_k = x_{k-1} + \alpha_{k-1}A^\prime (b-Ax_{k-1}),\]</span></p>
+<p>where</p>
+<p><span class="math display">\[ \alpha_k = \frac{{\left \vert \left \vert A^\prime r_k \right \vert \right \vert}_2^2}{{\left \vert \left \vert AA^\prime r_k \right \vert \right \vert}_2^2}.\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+  {\left \vert \left \vert r_k \right \vert \right \vert}_2^2 \le \left(1 - \frac{4\sigma_1^2 \sigma_n^2}{\sigma_1^2 + \sigma_n^2}\right)^k {\left \vert \left \vert r_0 \right \vert \right \vert}_2^2.
+\]</span></p>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span>  <span class="math display">\[\begin{aligned}
+  {\left \vert \left \vert r_{k+1} \right \vert \right \vert}_2^2 &amp;= {\left \vert \left \vert r_k \right \vert \right \vert}_2^2 - \alpha_k 2{\left \vert \left \vert A^\prime r_k \right \vert \right \vert}_2^2 + \alpha_k^2 {\left \vert \left \vert AA^\prime r_k \right \vert \right \vert}_2^2 \\
+                     &amp;= {\left \vert \left \vert r_k \right \vert \right \vert}_2^2 - \frac{{\left \vert \left \vert A^\prime r_k \right \vert \right \vert}_2^4}{{\left \vert \left \vert A A^\prime r_k \right \vert \right \vert}_2^2} \\
+                     &amp;= {\left \vert \left \vert r_k \right \vert \right \vert}_2^2 \left(1 - \frac{{\left \vert \left \vert A^\prime r_k \right \vert \right \vert}_2^4}{{\left \vert \left \vert r_k \right \vert \right \vert}_2^2 {\left \vert \left \vert AA^\prime r_k \right \vert \right \vert}_2^2}\right).
+\end{aligned}\]</span></p>
+<p>If we let <span class="math inline">\(A = U\Sigma V^\prime\)</span> be the SVD of <span class="math inline">\(A\)</span>, then</p>
+<p><span class="math display">\[\begin{aligned}
+  1 - \frac{{\left \vert \left \vert A^\prime r_k \right \vert \right \vert}_2^4}{{\left \vert \left \vert r_k \right \vert \right \vert}_2^2 {\left \vert \left \vert AA^\prime r_k \right \vert \right \vert}_2^2} &amp;= 1 - \frac{{\left \vert \left \vert \Sigma U^\prime r_k \right \vert \right \vert}_2^4}{{\left \vert \left \vert U^\prime r_k \right \vert \right \vert}_2^2 {\left \vert \left \vert \Sigma \Sigma^\prime U^\prime r_k \right \vert \right \vert}_2^2} \\
+    &amp;= 1 - \frac{{\left \vert \left \vert w \right \vert \right \vert}_2^4}{{\left \vert \left \vert \Sigma^{-1}w \right \vert \right \vert}_2^2 {\left \vert \left \vert \Sigma w \right \vert \right \vert}_2^2}.
+\end{aligned}\]</span></p>
+<p>We want to find an upper bound on <span class="math inline">\({\left \vert \left \vert \Sigma^{-1}u \right \vert \right \vert}_2^2 {\left \vert \left \vert \Sigma u \right \vert \right \vert}_2^2\)</span> for any unit vector <span class="math inline">\(w\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+  {\left \vert \left \vert \Sigma^{-1}u \right \vert \right \vert}_2^2 {\left \vert \left \vert \Sigma u \right \vert \right \vert}_2^2 &amp;= \left( \sum_{i=1}^k \frac{u_i^2}{\sigma_i^2} \right) \left( \sum_{i=1}^n \sigma_i^2 u_i^2\right) \\
+  \le \frac{(\sigma_1^2 + \sigma_n^2)^2}{4\sigma_1^2 \sigma_n^2},
+\end{aligned}\]</span></p>
+<p>where the last inequality is the Kontorovich inequality (see homework <a href="homework-11.html#exr:q1104">1.69</a>).</p>
+</div>
+
+<p><strong>Strategy 2</strong></p>
+<p>Choose <span class="math inline">\(\alpha = {\text{argmin}}_\alpha {\left \vert \left \vert x_{k+1} - x^* \right \vert \right \vert}_2^2\)</span>.</p>
+<p><strong>Strategy 3</strong></p>
+<p>Note that <span class="math inline">\({\left \vert \left \vert r^+ \right \vert \right \vert}_2 = {\left \vert \left \vert (I - \alpha A A^\prime)r^c \right \vert \right \vert}_2 \le {\left \vert \left \vert I-\alpha A A^\prime \right \vert \right \vert}_2 {\left \vert \left \vert r^c \right \vert \right \vert}_2\)</span>.</p>
+<p>Choose <span class="math inline">\(\alpha = {\text{argmin}}_\alpha {\left \vert \left \vert I - \alpha A A^\prime \right \vert \right \vert}_2\)</span>.</p>
+<p><strong>Strategy 4</strong></p>
+<p>Note that <span class="math inline">\({\left \vert \left \vert x_{k+1} - x^* \right \vert \right \vert}_2 \le {\left \vert \left \vert I-\alpha A A^\prime \right \vert \right \vert}_2 {\left \vert \left \vert x_k - x^* \right \vert \right \vert}_2\)</span>.</p>
+<p>Choose <span class="math inline">\(\alpha = {\text{argmin}}_\alpha {\left \vert \left \vert I-\alpha A A^\prime \right \vert \right \vert}_2 {\left \vert \left \vert x_k - x^* \right \vert \right \vert}_2\)</span>.</p>
 
 </div>
 </div>
@@ -372,7 +502,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["STAT771_notes.pdf"],
 "toc": {
 "collapse": "section"
 },

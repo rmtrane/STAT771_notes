@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="iterative-methods.html">
-<link rel="next" href="homework-1.html">
+<link rel="prev" href="homework-10.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -161,16 +161,120 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="homework-assignments" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> Homework Assignments</h1> 
+<div id="homework-11" class="section level2">
+<h2><span class="header-section-number">2.11</span> Homework 11</h2>
+
+<div class="exercise">
+<p><span id="exr:q1101" class="exercise"><strong>Exercise 1.66  </strong></span> Show that <span class="math inline">\(\alpha \sum_{i=1}^n a_i (b_i - a_i x^c) = \alpha A^\prime (b - Ax^c)\)</span>.</p>
 </div>
+
+
+<div class="exercise">
+<span id="exr:q1102" class="exercise"><strong>Exercise 1.67  </strong></span>Show that if <span class="math inline">\(A^\prime r^c = 0\)</span>, then <span class="math inline">\(x^c = x^*\)</span>, where <span class="math inline">\(Ax^* = b\)</span>.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1103" class="exercise"><strong>Exercise 1.68  </strong></span>Why is it enough to find an upper bound on <span class="math inline">\({\left \vert \left \vert \Sigma^{-1}u \right \vert \right \vert}_2^2 {\left \vert \left \vert \Sigma u \right \vert \right \vert}_2^2\)</span> for any unit vector <span class="math inline">\(w\)</span> in the proof of theorem <a href="iterative-methods.html#thm:grad-descent">1.8</a>?
+</div>
+
+
+<div class="exercise">
+<p><span id="exr:q1104" class="exercise"><strong>Exercise 1.69  (Kontorovich’s Inequality)  </strong></span>Let <span class="math inline">\(0 &lt; u_n \le u_{n-1} \le \cdots \le u_1\)</span>. Then</p>
+<p><span class="math display">\[\left(\sum_{i=1}^n p_i u_i\right)\left(\sum_{i=1}^n \frac{p_i}{u_i}\right) \leq \frac{(u_1 + u_n)^2}{4u_1u_n}\]</span></p>
+</div>
+
+
+<div class="exercise">
+<p><span id="exr:q1105" class="exercise"><strong>Exercise 1.70  </strong></span>For strategy 2, answer the following questions:</p>
+<ol style="list-style-type: lower-alpha">
+<li>What is <span class="math inline">\(\alpha\)</span>? Is it practical?</li>
+<li>With this <span class="math inline">\(\alpha\)</span>, will we converge? If so, what is the rate of convergence?</li>
+</ol>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1106" class="exercise"><strong>Exercise 1.71  </strong></span>For strategy 3, what is <span class="math inline">\(\alpha\)</span>?
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1107" class="exercise"><strong>Exercise 1.72  </strong></span>For strategy 4, show the inequality holds.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1108" class="exercise"><strong>Exercise 1.73  </strong></span>For strategy 4, what is <span class="math inline">\(\alpha\)</span>?
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1109" class="exercise"><strong>Exercise 1.74  </strong></span>Implement a single update of the gradient descent method for a user supplied alpha, assuming that A is invertible.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1110" class="exercise"><strong>Exercise 1.75  </strong></span>Now, implement four algorithms one for each of the four strategies of alpha discussed in class.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1111" class="exercise"><strong>Exercise 1.76  </strong></span>Generate several test problems for your four algorithms, and compare their performance.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1112" class="exercise"><strong>Exercise 1.77  </strong></span>In a narrative, explain which algorithm you would use and when you would use this algorithm.
+</div>
+
+<p><strong>Understanding Gradient Descent’s Dependence on the Condition Number</strong></p>
+
+<div class="exercise">
+<span id="exr:q1113" class="exercise"><strong>Exercise 1.78  </strong></span>Write a function to generate 2 equations with 2 unknowns such that the coefficient matrix is dense and symmetric with user specified nonzero eigenvalues.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1114" class="exercise"><strong>Exercise 1.79  </strong></span>How are the eigenvalues related to the singular values?
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1115" class="exercise"><strong>Exercise 1.80  </strong></span>How are the eigenvectors related to the left and right singular vectors?
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1116" class="exercise"><strong>Exercise 1.81  </strong></span>Write a function to draw the level sets of an arbitrary residual function <span class="math inline">\(f\left(x\right) = {\left \vert \left \vert Ax - b \right \vert \right \vert}_2^2\)</span>.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1117" class="exercise"><strong>Exercise 1.82  </strong></span>Run Gradient Descent using the step size (alpha) from Strategy 2 to solve a sequence of problems where the difference between the singular values of your problem increases in size. Plot the points that Gradient Descent visits (on your level set plot) as it finds its way to the solution.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1118" class="exercise"><strong>Exercise 1.83  </strong></span>What do you observe? What is the impact of the singular values on gradient descent? Why does this make sense based on your graphs?
+</div>
+
+
+</div>
+<!-- </div> -->
+
+
+
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="iterative-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="homework-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="homework-10.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

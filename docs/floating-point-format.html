@@ -127,6 +127,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.3" data-path="iterative-methods.html"><a href="iterative-methods.html#motivation"><i class="fa fa-check"></i><b>1.5.3</b> Motivation</a></li>
 <li class="chapter" data-level="1.5.4" data-path="iterative-methods.html"><a href="iterative-methods.html#splitting-methods"><i class="fa fa-check"></i><b>1.5.4</b> Splitting Methods</a></li>
 <li class="chapter" data-level="1.5.5" data-path="iterative-methods.html"><a href="iterative-methods.html#convergence"><i class="fa fa-check"></i><b>1.5.5</b> Convergence</a></li>
+<li class="chapter" data-level="1.5.6" data-path="iterative-methods.html"><a href="iterative-methods.html#randomized-kaczmarz-method"><i class="fa fa-check"></i><b>1.5.6</b> Randomized Kaczmarz Method</a></li>
+<li class="chapter" data-level="1.5.7" data-path="iterative-methods.html"><a href="iterative-methods.html#gradient-descent"><i class="fa fa-check"></i><b>1.5.7</b> Gradient Descent</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -139,6 +141,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.7" data-path="homework-7.html"><a href="homework-7.html"><i class="fa fa-check"></i><b>2.7</b> Homework 7</a></li>
 <li class="chapter" data-level="2.8" data-path="homework-8.html"><a href="homework-8.html"><i class="fa fa-check"></i><b>2.8</b> Homework 8</a></li>
 <li class="chapter" data-level="2.9" data-path="homework-9.html"><a href="homework-9.html"><i class="fa fa-check"></i><b>2.9</b> Homework 9</a></li>
+<li class="chapter" data-level="2.10" data-path="homework-10.html"><a href="homework-10.html"><i class="fa fa-check"></i><b>2.10</b> Homework 10</a></li>
+<li class="chapter" data-level="2.11" data-path="homework-11.html"><a href="homework-11.html"><i class="fa fa-check"></i><b>2.11</b> Homework 11</a></li>
 </ul></li>
 </ul>
 
@@ -356,7 +360,7 @@ So, in total, there are <span class="math inline">\((\beta-1)\cdot \beta^{p-1}\c
 fl(x \text{op} y) = (x \text{op} y)(1+\delta),
 \]</span></p>
 <p>with <span class="math inline">\(|\delta| \leq u\)</span>, where <span class="math inline">\(u\)</span> is commonly <span class="math inline">\(2\cdot \epsilon\)</span>. (<strong>NOTE: NEED TO CLARIFY IF THE ABOVE IS CORRECT!</strong>)</p>
-<p>**Example:* Matrix storage. Let <span class="math inline">\(A \in \mathbb{R}^{m\times n}\)</span>. Then:</p>
+<p><strong>Example:</strong> Matrix storage. Let <span class="math inline">\(A \in \mathbb{R}^{m\times n}\)</span>. Then:</p>
 <p><span class="math display">\[
 \left| fl(A) - A \right | \leq u \left | A \right |
 \]</span></p>
@@ -568,7 +572,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["STAT771_notes.pdf"],
 "toc": {
 "collapse": "section"
 },

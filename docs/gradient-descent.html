@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="iterative-methods.html">
-<link rel="next" href="homework-1.html">
+<link rel="next" href="homework-assignments.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -128,8 +128,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.4" data-path="iterative-methods.html"><a href="iterative-methods.html#splitting-methods"><i class="fa fa-check"></i><b>1.5.4</b> Splitting Methods</a></li>
 <li class="chapter" data-level="1.5.5" data-path="iterative-methods.html"><a href="iterative-methods.html#convergence"><i class="fa fa-check"></i><b>1.5.5</b> Convergence</a></li>
 <li class="chapter" data-level="1.5.6" data-path="iterative-methods.html"><a href="iterative-methods.html#randomized-kaczmarz-method"><i class="fa fa-check"></i><b>1.5.6</b> Randomized Kaczmarz Method</a></li>
-<li class="chapter" data-level="1.5.7" data-path="iterative-methods.html"><a href="iterative-methods.html#gradient-descent"><i class="fa fa-check"></i><b>1.5.7</b> Gradient Descent</a></li>
 </ul></li>
+<li class="chapter" data-level="1.6" data-path="gradient-descent.html"><a href="gradient-descent.html"><i class="fa fa-check"></i><b>1.6</b> Gradient Descent</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
 <li class="chapter" data-level="2.1" data-path="homework-1.html"><a href="homework-1.html"><i class="fa fa-check"></i><b>2.1</b> Homework 1</a></li>
@@ -161,16 +161,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="homework-assignments" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> Homework Assignments</h1> 
+<div id="gradient-descent" class="section level2">
+<h2><span class="header-section-number">1.6</span> Gradient Descent</h2>
+<p>The Gradient Descent iterative method updates the current <span class="math inline">\(x^c\)</span> to <span class="math inline">\(x^+\)</span> by</p>
+<span class="math display">\[\begin{align}
+  x^+ &amp;= x^c + \alpha \sum_{i=1}^n a_i (b_i - a_i x^c) \\
+      &amp;= x^c + \alpha A^\prime (b - Ax^c) (#\eq:grad-descent-hw)
+\end{align}\]</span>
+
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
 <a href="iterative-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="homework-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="homework-assignments.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -203,7 +210,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["STAT771_notes.pdf"],
+"download": null,
 "toc": {
 "collapse": "section"
 },

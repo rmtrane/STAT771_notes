@@ -127,6 +127,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.3" data-path="iterative-methods.html"><a href="iterative-methods.html#motivation"><i class="fa fa-check"></i><b>1.5.3</b> Motivation</a></li>
 <li class="chapter" data-level="1.5.4" data-path="iterative-methods.html"><a href="iterative-methods.html#splitting-methods"><i class="fa fa-check"></i><b>1.5.4</b> Splitting Methods</a></li>
 <li class="chapter" data-level="1.5.5" data-path="iterative-methods.html"><a href="iterative-methods.html#convergence"><i class="fa fa-check"></i><b>1.5.5</b> Convergence</a></li>
+<li class="chapter" data-level="1.5.6" data-path="iterative-methods.html"><a href="iterative-methods.html#randomized-kaczmarz-method"><i class="fa fa-check"></i><b>1.5.6</b> Randomized Kaczmarz Method</a></li>
+<li class="chapter" data-level="1.5.7" data-path="iterative-methods.html"><a href="iterative-methods.html#gradient-descent"><i class="fa fa-check"></i><b>1.5.7</b> Gradient Descent</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -139,6 +141,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.7" data-path="homework-7.html"><a href="homework-7.html"><i class="fa fa-check"></i><b>2.7</b> Homework 7</a></li>
 <li class="chapter" data-level="2.8" data-path="homework-8.html"><a href="homework-8.html"><i class="fa fa-check"></i><b>2.8</b> Homework 8</a></li>
 <li class="chapter" data-level="2.9" data-path="homework-9.html"><a href="homework-9.html"><i class="fa fa-check"></i><b>2.9</b> Homework 9</a></li>
+<li class="chapter" data-level="2.10" data-path="homework-10.html"><a href="homework-10.html"><i class="fa fa-check"></i><b>2.10</b> Homework 10</a></li>
+<li class="chapter" data-level="2.11" data-path="homework-11.html"><a href="homework-11.html"><i class="fa fa-check"></i><b>2.11</b> Homework 11</a></li>
 </ul></li>
 </ul>
 
@@ -370,18 +374,18 @@ Repeat the same procedure to get <span class="math inline">\(U, V\)</span> such 
 
 
 <div class="corollary">
-<p><span id="cor:unnamed-chunk-41" class="corollary"><strong>Corollary 1.5  </strong></span> Let <span class="math inline">\(r = \text{rank}(A)\)</span>.</p>
+<p><span id="cor:for-q703" class="corollary"><strong>Corollary 1.5  </strong></span> Let <span class="math inline">\(r = \text{rank}(A)\)</span>.</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(\text{range}(A) = \text{span}(u_1, \ldots, u_r)\)</span></li>
 <li>row space of A <span class="math inline">\(= \text{span}(v_1, \ldots, v_r)\)</span></li>
 <li><span class="math inline">\(\text{null}(A) = \text{span}(v_{r+1}, \ldots, v_{m})\)</span></li>
-<li><span class="math inline">\(\text{null}(A^\prime) = \text{span}(u_{r+1}, \ldots, v_{m})\)</span></li>
+<li><span class="math inline">\(\text{null}(A^\prime) = \text{span}(u_{r+1}, \ldots, u_{m})\)</span></li>
 </ol>
 <p>Moreover,</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(U_r = \begin{bmatrix} u_1 &amp; \cdots &amp; u_r \end{bmatrix}\)</span>, <span class="math inline">\(U_r U_r^\prime = P_{\text{range}(A)}\)</span></li>
 <li><span class="math inline">\(U_{n-r} = \begin{bmatrix} u_{r+1} &amp; \cdots &amp; u_n \end{bmatrix}\)</span>, <span class="math inline">\(U_{n-r} U_{n-r}^\prime = P_{\text{null}(A)}\)</span></li>
-<li><span class="math inline">\(V_r = \begin{bmatrix} v_1 &amp; \cdots &amp; v_r \end{bmatrix}\)</span>, V_r V_r^= P_{(A)}$</li>
+<li><span class="math inline">\(V_r = \begin{bmatrix} v_1 &amp; \cdots &amp; v_r \end{bmatrix}\)</span>, <span class="math inline">\(V_r V_r^\prime = P_{\text{row}(A)}\)</span></li>
 <li><span class="math inline">\(V_{n-r} = \begin{bmatrix} v_{r+1} &amp; \cdots &amp; v_n \end{bmatrix}\)</span>, <span class="math inline">\(V_{n-r} V_{n-r}^\prime = P_{\text{null}(A)}\)</span></li>
 </ol>
 where <span class="math inline">\(P_{\mathcal{B}}\)</span> is the projection onto the space <span class="math inline">\(\mathcal{B}\)</span>.
@@ -400,7 +404,7 @@ where <span class="math inline">\(P_{\mathcal{B}}\)</span> is the projection ont
 
 
 <div class="theorem">
-<span id="thm:unnamed-chunk-42" class="theorem"><strong>Theorem 1.4  </strong></span>For any matrix <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span>, there exists a unique pseudo-inverse <span class="math inline">\(A^+\)</span>.
+<span id="thm:unnamed-chunk-41" class="theorem"><strong>Theorem 1.4  </strong></span>For any matrix <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span>, there exists a unique pseudo-inverse <span class="math inline">\(A^+\)</span>.
 </div>
 
 
@@ -474,7 +478,7 @@ where <span class="math inline">\(P_{\mathcal{B}}\)</span> is the projection ont
 <p>Let <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span>, <span class="math inline">\(m &gt;&gt; n\)</span>. When this is the case, it is very hard to compute the SVD. So instead we try to find a matrix <span class="math inline">\(C\)</span> with <span class="math inline">\(\text{range}(C) \approx \text{range}(A)\)</span>. In other words, <span class="math inline">\(A \approx P_{\text{range}(C)}A\)</span>. One way to find such a <span class="math inline">\(C\)</span> is to simply sample columns from <span class="math inline">\(A\)</span>.</p>
 
 <div class="theorem">
-<p><span id="thm:unnamed-chunk-44" class="theorem"><strong>Theorem 1.5  </strong></span>Suppose <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span>, <span class="math inline">\(C\)</span> is as in the algorithm <code>inexactRankK</code> (see <a href="&#39;../Lecture%20scripts/Singular%20Value%20Decomposition.jl&#39;">here</a>), and <span class="math inline">\(H\)</span> is the <span class="math inline">\(k\)</span> left singular vectors of <span class="math inline">\(C\)</span>. Then</p>
+<p><span id="thm:unnamed-chunk-43" class="theorem"><strong>Theorem 1.5  </strong></span>Suppose <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span>, <span class="math inline">\(C\)</span> is as in the algorithm <code>inexactRankK</code> (see <a href="&#39;../Lecture%20scripts/Singular%20Value%20Decomposition.jl&#39;">here</a>), and <span class="math inline">\(H\)</span> is the <span class="math inline">\(k\)</span> left singular vectors of <span class="math inline">\(C\)</span>. Then</p>
 <p><span class="math display">\[{\left \vert \left \vert A-HH^\prime A \right \vert \right \vert}_F^2 \le {\left \vert \left \vert A-A_k \right \vert \right \vert}_F^2 + 2\sqrt{k} {\left \vert \left \vert AA^\prime - CC^\prime \right \vert \right \vert}_F,\]</span></p>
 where <span class="math inline">\(A_k\)</span> is the rank <span class="math inline">\(k\)</span> approximation of <span class="math inline">\(A\)</span>.
 </div>
@@ -566,7 +570,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["STAT771_notes.pdf"],
 "toc": {
 "collapse": "section"
 },

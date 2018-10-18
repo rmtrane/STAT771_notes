@@ -127,6 +127,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.3" data-path="iterative-methods.html"><a href="iterative-methods.html#motivation"><i class="fa fa-check"></i><b>1.5.3</b> Motivation</a></li>
 <li class="chapter" data-level="1.5.4" data-path="iterative-methods.html"><a href="iterative-methods.html#splitting-methods"><i class="fa fa-check"></i><b>1.5.4</b> Splitting Methods</a></li>
 <li class="chapter" data-level="1.5.5" data-path="iterative-methods.html"><a href="iterative-methods.html#convergence"><i class="fa fa-check"></i><b>1.5.5</b> Convergence</a></li>
+<li class="chapter" data-level="1.5.6" data-path="iterative-methods.html"><a href="iterative-methods.html#randomized-kaczmarz-method"><i class="fa fa-check"></i><b>1.5.6</b> Randomized Kaczmarz Method</a></li>
+<li class="chapter" data-level="1.5.7" data-path="iterative-methods.html"><a href="iterative-methods.html#gradient-descent"><i class="fa fa-check"></i><b>1.5.7</b> Gradient Descent</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -139,6 +141,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.7" data-path="homework-7.html"><a href="homework-7.html"><i class="fa fa-check"></i><b>2.7</b> Homework 7</a></li>
 <li class="chapter" data-level="2.8" data-path="homework-8.html"><a href="homework-8.html"><i class="fa fa-check"></i><b>2.8</b> Homework 8</a></li>
 <li class="chapter" data-level="2.9" data-path="homework-9.html"><a href="homework-9.html"><i class="fa fa-check"></i><b>2.9</b> Homework 9</a></li>
+<li class="chapter" data-level="2.10" data-path="homework-10.html"><a href="homework-10.html"><i class="fa fa-check"></i><b>2.10</b> Homework 10</a></li>
+<li class="chapter" data-level="2.11" data-path="homework-11.html"><a href="homework-11.html"><i class="fa fa-check"></i><b>2.11</b> Homework 11</a></li>
 </ul></li>
 </ul>
 
@@ -217,7 +221,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="solution">
 <p> <span class="solution"><em>Solution. </em></span> The largest positive, finite value is</p>
 <span class="math display">\[
-  \left(\sum_{i=0}^{p-1} (\beta-1)\beta^{-i}\right)\cdot \beta^{e_{max}}.
+  \left(\sum_{i=0}^{p-1} (\beta-1)\beta^{-i}\right)\cdot \beta^{e_{max}} = ... = \frac{\beta^p - 1}{\beta^{p-1}}\beta^{e_max}.
 \]</span>
 </div>
 
@@ -238,6 +242,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span id="exr:q207" class="exercise"><strong>Exercise 1.13  </strong></span>Verify the smallest normalized, positive number that can be represented.
 </div>
 
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">nextfloat(<span class="dt">Float64</span>(<span class="fl">0</span>))*<span class="fl">2</span>^(<span class="fl">52</span>)</code></pre></div>
+<pre><code>## 2.2250738585072014e-308</code></pre>
 
 <div class="exercise">
 <span id="exr:q208" class="exercise"><strong>Exercise 1.14  </strong></span>Verify the largest, finite number that can be represented.
@@ -280,13 +286,13 @@ hence the bounds still hold.
 
 
 <div class="solution">
-<p> <span class="solution"><em>Solution. </em></span> By definition, <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_1 = \max_{x\neq 0}\frac{{\left \vert \left \vert Ax \right \vert \right \vert}_1}{{\left \vert \left \vert x \right \vert \right \vert}_1}\)</span>. Let <span class="math inline">\(A \in {\mathbb{R}}^{m\times n}\)</span> and <span class="math inline">\(x \in {\mathbb{R}}^n\)</span> s.t. <span class="math inline">\({\left \vert \left \vert x \right \vert \right \vert}_1 = 1\)</span>.</p>
+<p> <span class="solution"><em>Solution. </em></span> By definition, <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_1 = \max_{x\neq 0}\frac{{\left \vert \left \vert Ax \right \vert \right \vert}_1}{{\left \vert \left \vert x \right \vert \right \vert}_1} = \max_{{\left \vert \left \vert x \right \vert \right \vert}_1 = 1} {\left \vert \left \vert Ax \right \vert \right \vert}_1\)</span>. Let <span class="math inline">\(A \in {\mathbb{R}}^{m\times n}\)</span> and <span class="math inline">\(x \in {\mathbb{R}}^n\)</span> s.t. <span class="math inline">\({\left \vert \left \vert x \right \vert \right \vert}_1 = 1\)</span>.</p>
 <p>Recall that</p>
 <p><span class="math display">\[Ax = \sum_{j=1}^n x_j A_{*,j},\]</span></p>
 <p>where <span class="math inline">\(A_{*,j}\)</span> is the <span class="math inline">\(j^\prime\)</span>th column of <span class="math inline">\(A\)</span>. So</p>
 <p><span class="math display">\[
 \begin{aligned}
-  {\left \vert \left \vert Ax \right \vert \right \vert}_1 &amp;= \sum_{i=1}^m \sum_{j=1}^n | x_j A_{i,j} | \\
+  {\left \vert \left \vert Ax \right \vert \right \vert}_1 &amp;= \sum_{i=1}^m \left | \sum_{j=1}^n  x_j A_{i,j} \right| \\
               &amp;\leq \sum_{i=1}^m \sum_{j=1}^n | x_j | \cdot | A_{i,j} | \\
               &amp;= \sum_{j=1}^n | x_j | \left\{\sum_{i=1}^m | A_{i,j} | \right \} \\
               &amp;= \sum_{j=1}^n | x_j | {\left \vert \left \vert A_{*,j} \right \vert \right \vert} \\
@@ -294,8 +300,10 @@ hence the bounds still hold.
               &amp;= \max_{j \in \{1,\ldots, n\}} {\left \vert \left \vert A_{*,j} \right \vert \right \vert}
 \end{aligned}
 \]</span></p>
-<p>Since <span class="math inline">\(\max_{j \in \{1, \ldots, n\}}{\left \vert \left \vert A_{*,j} \right \vert \right \vert} = {\left \vert \left \vert A\cdot \mathbf{1}_i \right \vert \right \vert}\)</span> for <span class="math inline">\(i = {\text{argmax}}{\left \vert \left \vert A_{*,j} \right \vert \right \vert}_1\)</span>. Here, we let <span class="math inline">\(1_i = (x_j)_{j=1}^n\)</span> be defined as</p>
-<span class="math display">\[x_j = \left\{ \begin{array}{rl} 1, &amp; \text{ if } j = i \\ 0, &amp; \text{ otherwise}\end{array} \right .\]</span>
+<p>I.e. <span class="math inline">\(\max_{{\left \vert \left \vert x \right \vert \right \vert}_1 = 1} {\left \vert \left \vert Ax \right \vert \right \vert}_1 \le \max_{j \in \{1,\ldots, n\}} {\left \vert \left \vert A_{*,j} \right \vert \right \vert}\)</span>.</p>
+<p>Now, let <span class="math inline">\(1_i = (x_j)_{j=1}^n\)</span> be defined as</p>
+<p><span class="math display">\[x_j = \left\{ \begin{array}{rl} 1, &amp; \text{ if } j = i \\ 0, &amp; \text{ otherwise}\end{array} \right .\]</span></p>
+<p>Then <span class="math inline">\({\left \vert \left \vert 1_i \right \vert \right \vert}_1 = 1\)</span>. Since <span class="math inline">\(\max_{j \in \{1, \ldots, n\}}{\left \vert \left \vert A_{*,j} \right \vert \right \vert} = {\left \vert \left \vert A\cdot \mathbf{1}_i \right \vert \right \vert}\)</span> for <span class="math inline">\(i = {\text{argmax}}{\left \vert \left \vert A_{*,j} \right \vert \right \vert}_1\)</span>, we have that <span class="math inline">\(\max_{j \in \{1,\ldots,n\}} {\left \vert \left \vert A_{*,j} \right \vert \right \vert}_1 \le \max_{{\left \vert \left \vert x \right \vert \right \vert}_1 = 1} {\left \vert \left \vert Ax \right \vert \right \vert}_1\)</span>.</p>
 </div>
 
 
@@ -305,7 +313,7 @@ hence the bounds still hold.
 
 
 <div class="solution">
-<p> <span class="solution"><em>Solution. </em></span> Let <span class="math inline">\(j \in \{1, \ldots, n\}\)</span> such that <span class="math inline">\(|a_{j1}| + \dots + |a_{jm}| \ge |a_{i1}| + \dots + |a_{im}|\)</span> for all <span class="math inline">\(i \in \{1, \ldots , n\}\)</span>, and let <span class="math inline">\(\tilde{x} \in {\mathbb{R}}^{m}\)</span> such that <span class="math inline">\(\tilde{x}_i = sign(a_{ji})\)</span>. Note that for all <span class="math inline">\(x \in {\mathbb{R}}^{m}\)</span> with <span class="math inline">\({\left \vert \left \vert x \right \vert \right \vert}_\infty = 1\)</span> it holds that <span class="math inline">\(|x_i| \le 1\)</span>. So,</p>
+<p> <span class="solution"><em>Solution. </em></span> Let <span class="math inline">\(j \in \{1, \ldots, n\}\)</span> such that <span class="math inline">\(|a_{j1}| + \dots + |a_{jm}| \ge |a_{i1}| + \dots + |a_{im}|\)</span> for all <span class="math inline">\(i \in \{1, \ldots , n\}\)</span>, and let <span class="math inline">\(\tilde{x} \in {\mathbb{R}}^{m}\)</span> such that <span class="math inline">\(\tilde{x}_i = \text{sign}(a_{ji})\)</span>. Note that for all <span class="math inline">\(x \in {\mathbb{R}}^{m}\)</span> with <span class="math inline">\({\left \vert \left \vert x \right \vert \right \vert}_\infty = 1\)</span> it holds that <span class="math inline">\(|x_i| \le 1\)</span>. So,</p>
 <p><span class="math display">\[\begin{aligned}
   |a_{i1}x_1 + \dots + a_{im}x_m| &amp;\le |a_{i1}| + \dots + |a_{im}| \\
                                   &amp;\le |a_{j1}| + \dots + |a_{jm}| \\
@@ -381,7 +389,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["STAT771_notes.pdf"],
 "toc": {
 "collapse": "section"
 },

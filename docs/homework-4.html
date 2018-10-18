@@ -127,6 +127,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.3" data-path="iterative-methods.html"><a href="iterative-methods.html#motivation"><i class="fa fa-check"></i><b>1.5.3</b> Motivation</a></li>
 <li class="chapter" data-level="1.5.4" data-path="iterative-methods.html"><a href="iterative-methods.html#splitting-methods"><i class="fa fa-check"></i><b>1.5.4</b> Splitting Methods</a></li>
 <li class="chapter" data-level="1.5.5" data-path="iterative-methods.html"><a href="iterative-methods.html#convergence"><i class="fa fa-check"></i><b>1.5.5</b> Convergence</a></li>
+<li class="chapter" data-level="1.5.6" data-path="iterative-methods.html"><a href="iterative-methods.html#randomized-kaczmarz-method"><i class="fa fa-check"></i><b>1.5.6</b> Randomized Kaczmarz Method</a></li>
+<li class="chapter" data-level="1.5.7" data-path="iterative-methods.html"><a href="iterative-methods.html#gradient-descent"><i class="fa fa-check"></i><b>1.5.7</b> Gradient Descent</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -139,6 +141,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.7" data-path="homework-7.html"><a href="homework-7.html"><i class="fa fa-check"></i><b>2.7</b> Homework 7</a></li>
 <li class="chapter" data-level="2.8" data-path="homework-8.html"><a href="homework-8.html"><i class="fa fa-check"></i><b>2.8</b> Homework 8</a></li>
 <li class="chapter" data-level="2.9" data-path="homework-9.html"><a href="homework-9.html"><i class="fa fa-check"></i><b>2.9</b> Homework 9</a></li>
+<li class="chapter" data-level="2.10" data-path="homework-10.html"><a href="homework-10.html"><i class="fa fa-check"></i><b>2.10</b> Homework 10</a></li>
+<li class="chapter" data-level="2.11" data-path="homework-11.html"><a href="homework-11.html"><i class="fa fa-check"></i><b>2.11</b> Homework 11</a></li>
 </ul></li>
 </ul>
 
@@ -161,7 +165,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">2.4</span> Homework 4</h2>
 
 <div class="exercise">
-<span id="exr:q401" class="exercise"><strong>Exercise 1.28  </strong></span>In the solution to <a href="orthogonalization.html#exm:linear-system">1.2</a>, why do <span class="math inline">\(0\)</span> rows on the left-hand side of <a href="orthogonalization.html#eq:sol-linear-system">(1.1)</a> correspond to <span class="math inline">\(0\)</span> entries of the <span class="math inline">\(c\)</span> vector on the right-hand side.
+<span id="exr:q401" class="exercise"><strong>Exercise 1.29  </strong></span>In the solution to <a href="orthogonalization.html#exm:linear-system">1.2</a>, why do <span class="math inline">\(0\)</span> rows on the left-hand side of <a href="orthogonalization.html#eq:sol-linear-system">(1.1)</a> correspond to <span class="math inline">\(0\)</span> entries of the <span class="math inline">\(c\)</span> vector on the right-hand side.
 </div>
 
 
@@ -171,7 +175,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="exercise">
-<span id="exr:q402" class="exercise"><strong>Exercise 1.29  </strong></span>Let <span class="math inline">\(Q\)</span> be an orthogonal matrix. Show that <span class="math inline">\({\left \vert \left \vert Qx \right \vert \right \vert}_2 = {\left \vert \left \vert x \right \vert \right \vert}_2\)</span>.
+<span id="exr:q402" class="exercise"><strong>Exercise 1.30  </strong></span>Let <span class="math inline">\(Q\)</span> be an orthogonal matrix. Show that <span class="math inline">\({\left \vert \left \vert Qx \right \vert \right \vert}_2 = {\left \vert \left \vert x \right \vert \right \vert}_2\)</span>.
 </div>
 
 
@@ -184,7 +188,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="exercise">
-<span id="exr:q403" class="exercise"><strong>Exercise 1.30  </strong></span>Let f be a vector-valued function over <span class="math inline">\({\mathbb{R}}^d\)</span>. When is <span class="math display">\[{\text{argmin}}_x {\left \vert \left \vert f(x) \right \vert \right \vert}_2 = {\text{argmin}}_x {\left \vert \left \vert f(x) \right \vert \right \vert}_2^2.\]</span>
+<span id="exr:q403" class="exercise"><strong>Exercise 1.31  </strong></span>Let f be a vector-valued function over <span class="math inline">\({\mathbb{R}}^d\)</span>. When is <span class="math display">\[{\text{argmin}}_x {\left \vert \left \vert f(x) \right \vert \right \vert}_2 = {\text{argmin}}_x {\left \vert \left \vert f(x) \right \vert \right \vert}_2^2.\]</span>
 </div>
 
 
@@ -194,46 +198,91 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="exercise">
-<span id="exr:q404" class="exercise"><strong>Exercise 1.31  </strong></span>Prove that <span class="math inline">\(P^T P + I\)</span> from solution to example <a href="orthogonalization.html#exm:und-linear-system">1.4</a> is invertible.
+<span id="exr:q404" class="exercise"><strong>Exercise 1.32  </strong></span>Prove that <span class="math inline">\(P^T P + I\)</span> from solution to example <a href="orthogonalization.html#exm:und-linear-system">1.4</a> is invertible.
 </div>
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span>  <span class="math display">\[
-  (P^TP + I)x = P^TPx + x = 0 \Leftrightarrow P^TPx = -x \Leftrightarrow P^TP = -I \lor x = 0.
-\]</span>
+<p> <span class="solution"><em>Solution. </em></span>  For all non-zero <span class="math inline">\(x\)</span>,</p>
+<p><span class="math display">\[
+  x^\prime(P^TP + I)x = x^\prime P^\prime P x + x^\prime x = {\left \vert \left \vert Px \right \vert \right \vert}_2 + {\left \vert \left \vert x \right \vert \right \vert}_2 &gt; 0.
+\]</span></p>
+This means <span class="math inline">\(P^\prime P + I\)</span> is positive definite, which in turne implies that it is invertible.
 </div>
 
 
 <div class="exercise">
-<span id="exr:q405" class="exercise"><strong>Exercise 1.32  </strong></span>Write out the solution to example <a href="orthogonalization.html#exm:constrained-least-squares">1.6</a>. Also consider the case where <span class="math inline">\(p \ge m\)</span>.
+<span id="exr:q405" class="exercise"><strong>Exercise 1.33  </strong></span>Write out the solution to example <a href="orthogonalization.html#exm:constrained-least-squares">1.6</a>. Also consider the case where <span class="math inline">\(p \ge m\)</span>.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> First we do QR decomposition on <span class="math inline">\(C^\prime\)</span>:</p>
+<p><span class="math display">\[\begin{aligned}
+C^\prime = Q\begin{bmatrix} R \\ 0 \end{bmatrix}
+\end{aligned}\]</span></p>
+<p>Then we have:</p>
+<p><span class="math display">\[\begin{aligned}
+AQ &amp;= \begin{bmatrix} A_1 &amp; A_2 \end{bmatrix} \\
+Q^\prime y &amp;= \begin{bmatrix} y_1 \\ y_2 \end{bmatrix} \\
+\end{aligned}\]</span></p>
+<p>And we can update the objective:</p>
+<p><span class="math display">\[\begin{aligned}
+O &amp;= \min \|Ay-b\|_2 : Cy = d\\
+&amp;= \min \|AQQ^\prime y -b\|_2 : Cy = d\\
+&amp;= \min \left\| \begin{bmatrix} A_1 &amp; A_2 \end{bmatrix} \begin{bmatrix} y_1 \\ y_2 \end{bmatrix} - b \right\| _2 : Cy = d\\
+&amp;= \min \left\| A_1y_1 + A_2 y_2 - b \right\|_2 : Cy = d\\
+\end{aligned}\]</span></p>
+<p>We can also update the constraint:</p>
+<p><span class="math display">\[\begin{aligned}
+O &amp;= \min \left\| A_1y_1 + A_2 y_2 - b \right\|_2 : \begin{bmatrix} R^\prime &amp; 0 \end{bmatrix} Q^\prime y = d \\
+&amp;= \min \left\| A_1y_1 + A_2 y_2 - b \right\|_2 : \begin{bmatrix} R^\prime &amp; 0 \end{bmatrix} \begin{bmatrix} y_1 \\ y_2 \end{bmatrix} = d \\
+&amp;= \min \left\| A_1y_1 + A_2 y_2 - b \right\|_2 : R^\prime y_1 = d \\
+&amp;= \min \left\| A_1y_1 + A_2 y_2 - b \right\|_2 : y_1 = (R^\prime)^{-1}d  \\
+&amp;= \min \left\| A_1(R^\prime)^{-1}d + A_2 y_2 - b \right\|_2\\
+&amp;= \min \left\| A_2 y_2 - (b - A_1(R^\prime)^{-1}d)\right\|_2\\
+\end{aligned}\]</span></p>
+<p>So <span class="math inline">\(y_1\)</span> can be calculated using a consistent linear system solver, and now the objective is the same as that of a least squares solver, which can be used to calculate <span class="math inline">\(y_2\)</span>. We can finally recover <span class="math inline">\(y\)</span>:</p>
+<p><span class="math display">\[\begin{aligned}
+y &amp;= Q \begin{bmatrix} y_1 \\ y_2 \end{bmatrix} \\
+\end{aligned}\]</span></p>
 </div>
 
 
 <div class="exercise">
-<span id="exr:q406" class="exercise"><strong>Exercise 1.33  </strong></span>For all motivating problems, implement solutions.
+<span id="exr:q406" class="exercise"><strong>Exercise 1.34  </strong></span>For all motivating problems, implement solutions.
 </div>
 
 <p></br></p>
 <p>For the following, assume <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span> with <span class="math inline">\(\text{rank}(A) = m\)</span>, and <span class="math inline">\(b \in {\mathbb{R}}^n\)</span>. Let <span class="math inline">\(C = \begin{bmatrix} A &amp; b \end{bmatrix}\)</span>.</p>
 
 <div class="exercise">
-<span id="exr:q407" class="exercise"><strong>Exercise 1.34  </strong></span>What does the last column of <span class="math inline">\(R\)</span> (from the QR decomposition of <span class="math inline">\(C\)</span>) represent?
+<span id="exr:q407" class="exercise"><strong>Exercise 1.35  </strong></span>What does the last column of <span class="math inline">\(R\)</span> (from the QR decomposition of <span class="math inline">\(C\)</span>) represent?
 </div>
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> ??
+ <span class="solution"><em>Solution. </em></span> Generally, <span class="math inline">\(Q^\prime b\)</span>, which is the projection of b onto the column space of A. If <span class="math inline">\(b\)</span> is in the column space of <span class="math inline">\(A\)</span>, then it is specifically <span class="math inline">\(Rx\)</span> where <span class="math inline">\(x\)</span> is the solution to <span class="math inline">\(Ax = b\)</span>.
 </div>
 
 
 <div class="exercise">
-<span id="exr:q408" class="exercise"><strong>Exercise 1.35  </strong></span>What does the last entry of last column of <span class="math inline">\(R\)</span> (from the QR decomposition of <span class="math inline">\(C\)</span>) represent?
+<span id="exr:q408" class="exercise"><strong>Exercise 1.36  </strong></span>What does the last entry of last column of <span class="math inline">\(R\)</span> (from the QR decomposition of <span class="math inline">\(C\)</span>) represent?
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> The square of the last entry of the last column of <span class="math inline">\(R\)</span> is the sum of squares of the residuals.
 </div>
 
 
 <div class="exercise">
-<span id="exr:q409" class="exercise"><strong>Exercise 1.36  </strong></span>How can this be used in computation?
+<span id="exr:q409" class="exercise"><strong>Exercise 1.37  </strong></span>How can this be used in computation?
+</div>
+
+
+<div class="exercise">
+<span id="exr:s409" class="exercise"><strong>Exercise 1.38  </strong></span>We can use it for incremental QR for large datasets.
 </div>
 
 </div>
@@ -276,7 +325,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["STAT771_notes.pdf"],
 "toc": {
 "collapse": "section"
 },
