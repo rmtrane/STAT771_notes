@@ -273,8 +273,9 @@ Let <span class="math inline">\(M \in \mathbb{R}^{n\times m}\)</span>, where <sp
 
 
 <div class="theorem">
-<p><span id="thm:unnamed-chunk-60" class="theorem"><strong>Theorem 10  (Implicit Function Theorem)  </strong></span>Let <span class="math inline">\(F:\mathbb{R}^m \to \mathbb{R}^n\)</span> be continuously differentiable. Then <span class="math inline">\(F\)</span> has a Jacobian, <span class="math inline">\(J:\mathbb{R}^m \to \mathbb{R}^{n\times m}\)</span>.</p>
-Suppose <span class="math inline">\(z^*\)</span> satisfies <span class="math inline">\(F(z^*) = 0\)</span>. Without loss of generality, suppose <span class="math inline">\(J(z^*) = \begin{bmatrix} J_1(z^*) &amp; J_2(z^*) \end{bmatrix}\)</span>, where <span class="math inline">\(J_1(z^*) \in \mathbb{R}^{n\times n}\)</span> is invertible. Then there exists an open neighborhood <span class="math inline">\(U \subseteq \mathbb{R}^{n\times n}\)</span>, and a continuous function <span class="math inline">\(g: U \to \mathbb{R}^n\)</span> such that for all <span class="math inline">\(x \in U\)</span>, <span class="math inline">\(z= \begin{bmatrix} g(x) &amp; x \end{bmatrix}^\prime\)</span> satisfies that <span class="math inline">\(F(z) = 0\)</span>.
+<p><span id="thm:unnamed-chunk-60" class="theorem"><strong>Theorem 10  (Implicit Function Theorem)  </strong></span>
+Let <span class="math inline">\(F:\mathbb{R}^m \to \mathbb{R}^n\)</span> be continuously differentiable. Then <span class="math inline">\(F\)</span> has a Jacobian, <span class="math inline">\(J:\mathbb{R}^m \to \mathbb{R}^{n\times m}\)</span>.</p>
+<p>Suppose <span class="math inline">\(z^*\)</span> satisfies <span class="math inline">\(F(z^*) = 0\)</span>. Without loss of generality, suppose <span class="math inline">\(J(z^*) = \begin{bmatrix} J_1(z^*) &amp; J_2(z^*) \end{bmatrix}\)</span>, where <span class="math inline">\(J_1(z^*) \in \mathbb{R}^{n\times n}\)</span> is invertible. Then there exists an open neighborhood <span class="math inline">\(U \subseteq \mathbb{R}^{n\times n}\)</span>, and a continuous function <span class="math inline">\(g: U \to \mathbb{R}^n\)</span> such that for all <span class="math inline">\(x \in U\)</span>, <span class="math inline">\(z= \begin{bmatrix} g(x) &amp; x \end{bmatrix}^\prime\)</span> satisfies that <span class="math inline">\(F(z) = 0\)</span>.</p>
 </div>
 
 
@@ -323,7 +324,7 @@ gitbook.start({
 },
 "download": ["STAT771_notes.pdf"],
 "toc": {
-"collapse": "section"
+"collapse": "subsection"
 },
 "toolbar": {
 "position": "fixed"

@@ -420,15 +420,15 @@ Permutation squared gives you the identity.
 <a class="sourceLine" id="cb43-9" data-line-number="9">B = invertUpperTri(A);</a>
 <a class="sourceLine" id="cb43-10" data-line-number="10">B - inv(A)  <span class="co"># should be 0 matrix</span></a></code></pre></div>
 <pre><code>## 4×4 Array{Float64,2}:
-##  0.0  0.0  0.0  0.0
-##  0.0  0.0  0.0  0.0
-##  0.0  0.0  0.0  0.0
-##  0.0  0.0  0.0  0.0</code></pre>
+##  0.0  0.0  -2.84217e-14   2.84217e-14
+##  0.0  0.0   8.88178e-16   0.0        
+##  0.0  0.0   0.0          -1.77636e-15
+##  0.0  0.0   0.0           0.0</code></pre>
 <div class="sourceCode" id="cb45"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb45-1" data-line-number="1">A*B         <span class="co"># should be identity</span></a></code></pre></div>
 <pre><code>## 4×4 Array{Float64,2}:
-##  1.0  -4.50084e-17   1.02595e-15   6.20006e-14
-##  0.0   1.0          -3.64563e-16   9.09673e-16
-##  0.0   0.0           1.0          -1.48823e-15
+##  1.0  -4.10934e-17  -3.33957e-16  -6.49396e-17
+##  0.0   1.0           3.45654e-16  -3.96299e-16
+##  0.0   0.0           1.0          -1.84862e-16
 ##  0.0   0.0           0.0           1.0</code></pre>
 </div>
             </section>
@@ -472,7 +472,7 @@ gitbook.start({
 },
 "download": ["STAT771_notes.pdf"],
 "toc": {
-"collapse": "section"
+"collapse": "subsection"
 },
 "toolbar": {
 "position": "fixed"

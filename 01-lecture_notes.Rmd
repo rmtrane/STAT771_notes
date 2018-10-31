@@ -1914,7 +1914,9 @@ Then, for all $x \in \R^{m-n}$, $z = \begin{bmatrix} -A^{-1}Bx & x \end{bmatrix}
 ```
 
 ```{theorem, name = "Implicit Function Theorem"}
+
 Let $F:\R^m \to \R^n$ be continuously differentiable. Then $F$ has a Jacobian, $J:\R^m \to \R^{n\times m}$. 
 
 Suppose $z^*$ satisfies $F(z^*) = 0$. Without loss of generality, suppose $J(z^*) = \begin{bmatrix} J_1(z^*) & J_2(z^*) \end{bmatrix}$, where $J_1(z^*) \in \R^{n\times n}$ is invertible. Then there exists an open neighborhood $U \subseteq \R^{n\times n}$, and a continuous function $g: U \to \R^n$ such that for all $x \in U$, $z= \begin{bmatrix} g(x) & x \end{bmatrix}^\prime$ satisfies that $F(z) = 0$. 
+
 ```
