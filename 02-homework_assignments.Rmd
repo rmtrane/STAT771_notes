@@ -1158,3 +1158,35 @@ Run Gradient Descent using the step size (alpha) from Strategy 2 to solve a sequ
 ```{exercise, q1118}
 What do you observe? What is the impact of the singular values on gradient descent? Why does this make sense based on your graphs?
 ```
+
+## Homework 12
+
+```{exercise, q1201}
+What conditions (if any) on $a_0, ..., a_{d-1}$ guarantee that an $A-$normalized, $A-$conjugated set $\{s_0, ..., s_{d-1}\}$ can be produced by Gram Schmidt?
+```
+
+## Homework 13
+
+```{exercise, q1301}
+Show that the procedure \@ref(conjugated_gradients) is the same as the one implemented in code provided by Patel.
+```
+
+```{exercise, q1302}
+Prove that CG converges in finitely many steps (in exact arithmetic).
+```
+
+```{exercise, q1303}
+Show that the limit in \@ref(exm:gradient-example) holds. 
+```
+
+```{exercise, q1304}
+Characterize the relationship between the Jacobian and the gradient.
+```
+
+```{exercise, q1305}
+Using IFT: when will $F(x) = 0$ have an isolated solution? (i.e. a solution where there is an open set containing that solution with no other solutions)
+```
+
+```{exercise, q1306}
+What happens if $F(z^*) = 0$ and $\text{rank}(J(z^*)) < \min(n,m)$?
+```

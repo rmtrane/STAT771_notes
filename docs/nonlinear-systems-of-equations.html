@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="homework-7.html">
-<link rel="next" href="homework-9.html">
+<link rel="prev" href="iterative-methods.html">
+<link rel="next" href="homework-assignments.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -195,48 +195,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="homework-8" class="section level2">
-<h2><span class="header-section-number">2.8</span> Homework 8</h2>
+<div id="nonlinear-systems-of-equations" class="section level2">
+<h2><span class="header-section-number">1.5</span> Nonlinear Systems of Equations</h2>
+<p><em>Outline</em>:</p>
+<p>I. Review of Jacobians </br>
+II. Motivating example: clustered data </br>
+III. Non-linear systems of equations </br>
+IV. Picard’s method </br>
+V. Newton’s method </br>
+VI. Inexact Newton’s Method </br>
+VII. Linear Search </br>
+VIII. Semi-smooth Newton’s Method </br></p>
+<div id="review-of-jacobians" class="section level3">
+<h3><span class="header-section-number">1.5.1</span> Review of Jacobians</h3>
 
-<div class="exercise">
-<span id="exr:q801" class="exercise"><strong>Exercise 55  </strong></span>What is the solution to <span class="math inline">\(\min_{x} \left \vert \left \vert Ax-b \right \vert \right \vert_2^2\)</span> in terms of the Moore-Penrose inverse? (pseudo-inverse)
+<div class="definition">
+<p><span id="def:Gradient" class="definition"><strong>Definition 17  </strong></span>Let <span class="math inline">\(f: \mathbb{R}^m \to \mathbb{R}\)</span>. The gradient of <span class="math inline">\(f\)</span> at <span class="math inline">\(x \in \mathbb{R}^m\)</span> is a vector <span class="math inline">\(g\)</span> (if it exists) such that</p>
+<p><span class="math display">\[
+  \lim_{h \to 0} \frac{\left| f(x+h) - f(x) - &lt;g,h&gt;\right |}{\left \vert \left \vert h \right \vert \right \vert} = 0.
+\]</span></p>
 </div>
 
 
-<div class="solution">
-<p> <span class="solution"><em>Solution. </em></span> To find the solution, we differentiate and set equal to <span class="math inline">\(0\)</span>. So, differentiate <span class="math inline">\(g(x) = x^\prime A^\prime A x - x^\prime A b - b^\prime A x + b^\prime b\)</span> and set to <span class="math inline">\(0\)</span>:</p>
-<p><span class="math display">\[\frac{dg}{dx} = x^\prime (A^\prime A + A^\prime A) - b^\prime A - (A^\prime b)^\prime = 2x^\prime (A^\prime A) - 2b^\prime A = 0\]</span></p>
-<p>which implies <span class="math inline">\((A A^\prime)x = b A^\prime\)</span>. Check that <span class="math inline">\(x = A^+b\)</span> satisfies this.</p>
+<div class="example">
+<p><span id="exm:gradient-example" class="example"><strong>Example 12  </strong></span>Let <span class="math inline">\(f(z) = z_1 ... z_m\)</span>. Guess that the gradient is <span class="math inline">\(g\)</span> with coordinate vectors <span class="math inline">\(g_1(x) = x_2...x_m; ...; g_k(x) = x_1,...,x_{k-1}, x_{k+1}, ..., x_m; ...; g_m(x) = x_1,...,x_{m-1}\)</span>. Check that <span class="math inline">\(g\)</span> is the gradient:</p>
+<span class="math display">\[
+  \frac{\left|(x_1+h_1)\cdots(x_m+h_m) - x_1\cdots x_m - \sum_{k=1}^m h_k \prod_{i \neq k} x_i \right|}{\sqrt{\sum_{k=1}^m h_k^2}} = \frac{\left| \sum_{k=1}^m \sum_{l\neq k} O(h_k h_l) \right |}{\sqrt{\sum_{k=1}^m h_k^2}} \to 0.
+\]</span>
 </div>
 
 
-<div class="exercise">
-<span id="exr:q802" class="exercise"><strong>Exercise 56  </strong></span>Let <span class="math inline">\(Q\)</span> be an orthogonal matrix with columns <span class="math inline">\(q_1, \ldots, q_n\)</span>. Let <span class="math inline">\(Z \in \mathbb{R}^{n \times n}\)</span> be a symmetric matrix. Show that <span class="math inline">\(\sum_{i=1}^n (q_i^\prime Z q_i)^2 \leq \left \vert \left \vert Z \right \vert \right \vert_F^2\)</span>.
+<div class="definition">
+<p><span id="def:Jacobian" class="definition"><strong>Definition 18  </strong></span>Let <span class="math inline">\(f: \mathbb{R}^m \to \mathbb{R}^n\)</span>. The Jacobian at a point <span class="math inline">\(x\)</span> in <span class="math inline">\(\mathbb{R}^m\)</span> (if it exists) is a function satisfying</p>
+<p><span class="math display">\[
+  \lim_{h\to 0} \frac{\left \vert \left \vert f(x+h) - f(x) - Jh \right \vert \right \vert}{\left \vert \left \vert h \right \vert \right \vert} = 0.
+\]</span></p>
+Note that the norm in the numerator is a norm in <span class="math inline">\(\mathbb{R}^n\)</span> and the norm in the denominator is a norm in <span class="math inline">\(\mathbb{R}^m\)</span>.
 </div>
 
 
-<div class="solution">
-<p> <span class="solution"><em>Solution. </em></span> 
-Since the frobenius norm is invariant to mulitplication by orthogonal matrices: <span class="math inline">\(\left \vert \left \vert Z \right \vert \right \vert_F^2 = \left \vert \left \vert Q^\prime Z Q \right \vert \right \vert_F^2\)</span>. Since</p>
-<p><span class="math display">\[\begin{aligned}
-   \begin{bmatrix} q_1^\prime &amp; \cdots q_n^\prime \end{bmatrix} Z \begin{bmatrix} q_1 \\ \vdots q_n \end{bmatrix} &amp;= 
-          \begin{bmatrix} q_1^\prime &amp; \cdots q_n^\prime \end{bmatrix} \begin{bmatrix} Z q_1 \\ \vdots Z q_n \end{bmatrix} \\
-  &amp;= \begin{bmatrix}  q_1^\prime Z q_1 &amp; \cdots &amp; q_1^\prime Z q_n \\
-                      \vdots &amp; \ddots &amp; \vdots \\
-                      q_n^\prime Z q_1 &amp; \cdots &amp; q_n^\prime Z q_n
-\end{bmatrix},
-\end{aligned}\]</span></p>
-<p>we have that <span class="math inline">\(\left \vert \left \vert Z \right \vert \right \vert_F^2 = \sum_{i=1}^n \sum_{j=1}^n (q_i^\prime Z q_j)^2 \ge \sum_{i=1}^n (q_i^\prime Z q_i)^2\)</span>.</p>
+<div class="example">
+<p><span id="exm:jacobian-example" class="example"><strong>Example 13  </strong></span>Let <span class="math inline">\(f: \mathbb{R}^m \to \mathbb{R}^{m-1}\)</span> be given by the coordinate functions <span class="math inline">\(f_k(z) = z_k z_{k-1}\)</span>. Guess for the Jacobian:</p>
+<span class="math display">\[
+  J_{ij} = \left\{ \begin{array}{rl} 0, &amp; j\neq 1, j \neq i+1 \\ x_{i+1}, &amp; j = 1, \\ x_i, &amp; j = i+1 \end{array} \right.
+\]</span>
 </div>
 
 </div>
+<div id="motivating-problem" class="section level3">
+<h3><span class="header-section-number">1.5.2</span> Motivating Problem</h3>
+<p>Consider a scenario where we enroll 100 patients for a study. Each patient will undergo two different treatments for a disease. The treatment is given at visits every two weeks for a one year period. At the first visit, we record which treatment is given, gender <span class="math inline">\(\{0,1\}\)</span>, and concentration of the given treatment in the patients blood. For every follow up visit, we record the treatment status <span class="math inline">\(\{0,1,2,3\}\)</span>.</p>
+<p>We would like to model the treatment status based on the other mentioned variables. To do so, we assume that the patients are independent, but the disease status is correlated in time (status at closer time points are more likely to be similar).</p>
+<p>To model this data, we let <span class="math inline">\(Y_i \in \{0,1,2,3\}^{26}\)</span> denote the disease statuses collected at the 26 visits for patient <span class="math inline">\(i\)</span>, and <span class="math inline">\(X_{ij} \in \{0,1\} \times \{0,1\} \times (0,1)\)</span> is the covariate matrix for the <span class="math inline">\(i\)</span>’th patient at time point <span class="math inline">\(j\)</span>. For a vector of coefficients <span class="math inline">\(\beta \in \mathbb{R}^p\)</span>, a correlation value <span class="math inline">\(\rho \in [0,1]\)</span>, and a function <span class="math inline">\(\mu: \mathbb{R}^p \times (\{0,1\} \times \{0,1\} \times (0,1)) \to \{0,1,2,3\}\)</span>, we define a variance function</p>
+<p><span class="math display">\[
+  V_{lj}(\rho, \beta, X_{i\cdot}) = \rho^{\vert l-j\vert}(\mu(\beta, X_{il}) + 1)(\mu(\beta, X_{ij}) + 1).
+\]</span></p>
+<p>Let <span class="math inline">\(M(\beta, X_{i\cdot}) = \begin{pmatrix} \mu(\beta, X_{i1}) &amp; \cdots &amp; \mu(\beta, X_{i26}) \end{pmatrix}^\prime\)</span>. Now, an estimator of <span class="math inline">\(\beta\)</span> can be found by solving the equation</p>
+<p><span class="math display">\[
+  0 = \sum_{i=1}^N J(\beta, X_{i\cdot})^\prime V^{-1}(\rho, \beta, X_{i\cdot})(Y_i - M(\beta, X_{i\cdot})).
+\]</span></p>
+</div>
+<div id="non-linear-equations" class="section level3">
+<h3><span class="header-section-number">1.5.3</span> Non-linear Equations</h3>
+<div id="problem-formulation" class="section level4">
+<h4><span class="header-section-number">1.5.3.1</span> Problem Formulation</h4>
+<p>The problems we will be looking at here can be formulated as <span class="math inline">\(0 = F(x)\)</span>, where <span class="math inline">\(F:\mathbb{R}^m \to \mathbb{R}^n\)</span>, or (if the righthand side is “nice enough”) <span class="math inline">\(x = G(x)\)</span>, where <span class="math inline">\(G: \mathbb{R}^m \to \mathbb{R}^m\)</span>.</p>
+</div>
+<div id="uniqueness" class="section level4">
+<h4><span class="header-section-number">1.5.3.2</span> Uniqueness</h4>
+<p>In order to be able to discuss uniqueness of solutions to non-linear equations, we need the implicit function theorem.</p>
+
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-59" class="theorem"><strong>Theorem 9  (Linear Case of the Implicit Function Theorme)  </strong></span>
+Let <span class="math inline">\(M \in \mathbb{R}^{n\times m}\)</span>, where <span class="math inline">\(m&gt;n\)</span> and <span class="math inline">\(\text{rank}(H) = n\)</span>. Without loss of generality, let <span class="math inline">\(M = \begin{bmatrix} A &amp; B \end{bmatrix}\)</span>, where <span class="math inline">\(A \in \mathbb{R}^{n\times n}\)</span> is invertible.</p>
+<p>Then, for all <span class="math inline">\(x \in \mathbb{R}^{m-n}\)</span>, <span class="math inline">\(z = \begin{bmatrix} -A^{-1}Bx &amp; x \end{bmatrix}^\prime\)</span> satisfies <span class="math inline">\(Mz = 0\)</span>.</p>
+</div>
+
+
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-60" class="theorem"><strong>Theorem 10  (Implicit Function Theorem)  </strong></span>Let <span class="math inline">\(F:\mathbb{R}^m \to \mathbb{R}^n\)</span> be continuously differentiable. Then <span class="math inline">\(F\)</span> has a Jacobian, <span class="math inline">\(J:\mathbb{R}^m \to \mathbb{R}^{n\times m}\)</span>.</p>
+Suppose <span class="math inline">\(z^*\)</span> satisfies <span class="math inline">\(F(z^*) = 0\)</span>. Without loss of generality, suppose <span class="math inline">\(J(z^*) = \begin{bmatrix} J_1(z^*) &amp; J_2(z^*) \end{bmatrix}\)</span>, where <span class="math inline">\(J_1(z^*) \in \mathbb{R}^{n\times n}\)</span> is invertible. Then there exists an open neighborhood <span class="math inline">\(U \subseteq \mathbb{R}^{n\times n}\)</span>, and a continuous function <span class="math inline">\(g: U \to \mathbb{R}^n\)</span> such that for all <span class="math inline">\(x \in U\)</span>, <span class="math inline">\(z= \begin{bmatrix} g(x) &amp; x \end{bmatrix}^\prime\)</span> satisfies that <span class="math inline">\(F(z) = 0\)</span>.
+</div>
+
+
+</div>
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="homework-7.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="homework-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="iterative-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="homework-assignments.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

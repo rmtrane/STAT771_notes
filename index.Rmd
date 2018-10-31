@@ -8,6 +8,8 @@ link-citations: yes
 description: "This is my collection of notes for the STAT 771 class taught at UW-Madison."
 ---
 
+# Intro {-}
+
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 
@@ -17,5 +19,3 @@ description: "This is my collection of notes for the STAT 771 class taught at UW
 \newcommand{\argmax}{\text{argmax}}
 
 \newcommand{\w}{\omega}
-
-# Intro {-}

@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="homework-7.html">
-<link rel="next" href="homework-9.html">
+<link rel="prev" href="homework-11.html">
+<link rel="next" href="homework-13.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -195,38 +195,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="homework-8" class="section level2">
-<h2><span class="header-section-number">2.8</span> Homework 8</h2>
+<div id="homework-12" class="section level2">
+<h2><span class="header-section-number">2.12</span> Homework 12</h2>
 
 <div class="exercise">
-<span id="exr:q801" class="exercise"><strong>Exercise 55  </strong></span>What is the solution to <span class="math inline">\(\min_{x} \left \vert \left \vert Ax-b \right \vert \right \vert_2^2\)</span> in terms of the Moore-Penrose inverse? (pseudo-inverse)
-</div>
-
-
-<div class="solution">
-<p> <span class="solution"><em>Solution. </em></span> To find the solution, we differentiate and set equal to <span class="math inline">\(0\)</span>. So, differentiate <span class="math inline">\(g(x) = x^\prime A^\prime A x - x^\prime A b - b^\prime A x + b^\prime b\)</span> and set to <span class="math inline">\(0\)</span>:</p>
-<p><span class="math display">\[\frac{dg}{dx} = x^\prime (A^\prime A + A^\prime A) - b^\prime A - (A^\prime b)^\prime = 2x^\prime (A^\prime A) - 2b^\prime A = 0\]</span></p>
-<p>which implies <span class="math inline">\((A A^\prime)x = b A^\prime\)</span>. Check that <span class="math inline">\(x = A^+b\)</span> satisfies this.</p>
-</div>
-
-
-<div class="exercise">
-<span id="exr:q802" class="exercise"><strong>Exercise 56  </strong></span>Let <span class="math inline">\(Q\)</span> be an orthogonal matrix with columns <span class="math inline">\(q_1, \ldots, q_n\)</span>. Let <span class="math inline">\(Z \in \mathbb{R}^{n \times n}\)</span> be a symmetric matrix. Show that <span class="math inline">\(\sum_{i=1}^n (q_i^\prime Z q_i)^2 \leq \left \vert \left \vert Z \right \vert \right \vert_F^2\)</span>.
-</div>
-
-
-<div class="solution">
-<p> <span class="solution"><em>Solution. </em></span> 
-Since the frobenius norm is invariant to mulitplication by orthogonal matrices: <span class="math inline">\(\left \vert \left \vert Z \right \vert \right \vert_F^2 = \left \vert \left \vert Q^\prime Z Q \right \vert \right \vert_F^2\)</span>. Since</p>
-<p><span class="math display">\[\begin{aligned}
-   \begin{bmatrix} q_1^\prime &amp; \cdots q_n^\prime \end{bmatrix} Z \begin{bmatrix} q_1 \\ \vdots q_n \end{bmatrix} &amp;= 
-          \begin{bmatrix} q_1^\prime &amp; \cdots q_n^\prime \end{bmatrix} \begin{bmatrix} Z q_1 \\ \vdots Z q_n \end{bmatrix} \\
-  &amp;= \begin{bmatrix}  q_1^\prime Z q_1 &amp; \cdots &amp; q_1^\prime Z q_n \\
-                      \vdots &amp; \ddots &amp; \vdots \\
-                      q_n^\prime Z q_1 &amp; \cdots &amp; q_n^\prime Z q_n
-\end{bmatrix},
-\end{aligned}\]</span></p>
-<p>we have that <span class="math inline">\(\left \vert \left \vert Z \right \vert \right \vert_F^2 = \sum_{i=1}^n \sum_{j=1}^n (q_i^\prime Z q_j)^2 \ge \sum_{i=1}^n (q_i^\prime Z q_i)^2\)</span>.</p>
+<span id="exr:q1201" class="exercise"><strong>Exercise 84  </strong></span>What conditions (if any) on <span class="math inline">\(a_0, ..., a_{d-1}\)</span> guarantee that an <span class="math inline">\(A-\)</span>normalized, <span class="math inline">\(A-\)</span>conjugated set <span class="math inline">\(\{s_0, ..., s_{d-1}\}\)</span> can be produced by Gram Schmidt?
 </div>
 
 </div>
@@ -235,8 +208,8 @@ Since the frobenius norm is invariant to mulitplication by orthogonal matrices: 
           </div>
         </div>
       </div>
-<a href="homework-7.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="homework-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="homework-11.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="homework-13.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

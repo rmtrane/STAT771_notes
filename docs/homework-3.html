@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>STAT 771: My notes</title>
   <meta name="description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="STAT 771: My notes" />
   <meta property="og:type" content="book" />
@@ -49,41 +49,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -100,35 +126,41 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Intro</a></li>
 <li class="chapter" data-level="1" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>1</b> Lecture Notes</a><ul>
-<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#lecture-1-96"><i class="fa fa-check"></i>Lecture 1: 9/6</a></li>
-<li class="chapter" data-level="1.1" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html"><i class="fa fa-check"></i><b>1.1</b> Positional numeral system</a></li>
-<li class="chapter" data-level="1.2" data-path="floating-point-format.html"><a href="floating-point-format.html"><i class="fa fa-check"></i><b>1.2</b> Floating Point Format</a><ul>
-<li class="chapter" data-level="1.2.1" data-path="floating-point-format.html"><a href="floating-point-format.html#ieee-standards"><i class="fa fa-check"></i><b>1.2.1</b> IEEE Standards</a></li>
-<li class="chapter" data-level="1.2.2" data-path="floating-point-format.html"><a href="floating-point-format.html#errors"><i class="fa fa-check"></i><b>1.2.2</b> Errors</a></li>
-<li class="chapter" data-level="1.2.3" data-path="floating-point-format.html"><a href="floating-point-format.html#square-linear-systems"><i class="fa fa-check"></i><b>1.2.3</b> Square Linear Systems</a></li>
+<li class="chapter" data-level="" data-path="lecture-1-96.html"><a href="lecture-1-96.html"><i class="fa fa-check"></i>Lecture 1: 9/6</a></li>
+<li class="chapter" data-level="1.1" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html"><i class="fa fa-check"></i><b>1.1</b> Positional numeral system</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html#floating-point-format"><i class="fa fa-check"></i><b>1.1.1</b> Floating Point Format</a></li>
+<li class="chapter" data-level="1.1.2" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html#ieee-standards"><i class="fa fa-check"></i><b>1.1.2</b> IEEE Standards</a></li>
+<li class="chapter" data-level="1.1.3" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html#errors"><i class="fa fa-check"></i><b>1.1.3</b> Errors</a></li>
+<li class="chapter" data-level="1.1.4" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html#square-linear-systems"><i class="fa fa-check"></i><b>1.1.4</b> Square Linear Systems</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="orthogonalization.html"><a href="orthogonalization.html"><i class="fa fa-check"></i><b>1.3</b> Orthogonalization</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="orthogonalization.html"><a href="orthogonalization.html#motivating-problems"><i class="fa fa-check"></i><b>1.3.1</b> Motivating problems</a></li>
+<li class="chapter" data-level="1.2" data-path="orthogonalization.html"><a href="orthogonalization.html"><i class="fa fa-check"></i><b>1.2</b> Orthogonalization</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="orthogonalization.html"><a href="orthogonalization.html#motivating-problems"><i class="fa fa-check"></i><b>1.2.1</b> Motivating problems</a></li>
 <li class="chapter" data-level="" data-path="orthogonalization.html"><a href="orthogonalization.html#lecture-4-918"><i class="fa fa-check"></i>Lecture 4: 9/18</a></li>
-<li class="chapter" data-level="1.3.2" data-path="orthogonalization.html"><a href="orthogonalization.html#qr-decomposition"><i class="fa fa-check"></i><b>1.3.2</b> QR Decomposition</a></li>
-<li class="chapter" data-level="1.3.3" data-path="orthogonalization.html"><a href="orthogonalization.html#existence-of-qr-decomposition."><i class="fa fa-check"></i><b>1.3.3</b> Existence of QR-decomposition.</a></li>
+<li class="chapter" data-level="1.2.2" data-path="orthogonalization.html"><a href="orthogonalization.html#qr-decomposition"><i class="fa fa-check"></i><b>1.2.2</b> QR Decomposition</a></li>
+<li class="chapter" data-level="1.2.3" data-path="orthogonalization.html"><a href="orthogonalization.html#existence-of-qr-decomposition."><i class="fa fa-check"></i><b>1.2.3</b> Existence of QR-decomposition.</a></li>
 <li class="chapter" data-level="" data-path="orthogonalization.html"><a href="orthogonalization.html#lecture-5-920"><i class="fa fa-check"></i>Lecture 5: 9/20</a></li>
-<li class="chapter" data-level="1.3.4" data-path="orthogonalization.html"><a href="orthogonalization.html#large-data-problem"><i class="fa fa-check"></i><b>1.3.4</b> “Large” Data Problem</a></li>
+<li class="chapter" data-level="1.2.4" data-path="orthogonalization.html"><a href="orthogonalization.html#large-data-problem"><i class="fa fa-check"></i><b>1.2.4</b> “Large” Data Problem</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html"><i class="fa fa-check"></i><b>1.4</b> Singular Value Decomposition (SVD)</a><ul>
-<li class="chapter" data-level="1.4.1" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#motivating-problems-1"><i class="fa fa-check"></i><b>1.4.1</b> Motivating Problems</a></li>
-<li class="chapter" data-level="1.4.2" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#svd"><i class="fa fa-check"></i><b>1.4.2</b> SVD</a></li>
-<li class="chapter" data-level="1.4.3" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#existence-and-properties"><i class="fa fa-check"></i><b>1.4.3</b> Existence and Properties</a></li>
-<li class="chapter" data-level="1.4.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#random-projections"><i class="fa fa-check"></i><b>1.4.4</b> Random Projections</a></li>
+<li class="chapter" data-level="1.3" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html"><i class="fa fa-check"></i><b>1.3</b> Singular Value Decomposition (SVD)</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#motivating-problems-1"><i class="fa fa-check"></i><b>1.3.1</b> Motivating Problems</a></li>
+<li class="chapter" data-level="1.3.2" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#svd"><i class="fa fa-check"></i><b>1.3.2</b> SVD</a></li>
+<li class="chapter" data-level="1.3.3" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#existence-and-properties"><i class="fa fa-check"></i><b>1.3.3</b> Existence and Properties</a></li>
+<li class="chapter" data-level="1.3.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#random-projections"><i class="fa fa-check"></i><b>1.3.4</b> Random Projections</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="iterative-methods.html"><a href="iterative-methods.html"><i class="fa fa-check"></i><b>1.5</b> Iterative Methods</a><ul>
-<li class="chapter" data-level="1.5.1" data-path="iterative-methods.html"><a href="iterative-methods.html#overview"><i class="fa fa-check"></i><b>1.5.1</b> Overview</a></li>
-<li class="chapter" data-level="1.5.2" data-path="iterative-methods.html"><a href="iterative-methods.html#outline"><i class="fa fa-check"></i><b>1.5.2</b> Outline</a></li>
-<li class="chapter" data-level="1.5.3" data-path="iterative-methods.html"><a href="iterative-methods.html#motivation"><i class="fa fa-check"></i><b>1.5.3</b> Motivation</a></li>
-<li class="chapter" data-level="1.5.4" data-path="iterative-methods.html"><a href="iterative-methods.html#splitting-methods"><i class="fa fa-check"></i><b>1.5.4</b> Splitting Methods</a></li>
-<li class="chapter" data-level="1.5.5" data-path="iterative-methods.html"><a href="iterative-methods.html#convergence"><i class="fa fa-check"></i><b>1.5.5</b> Convergence</a></li>
-<li class="chapter" data-level="1.5.6" data-path="iterative-methods.html"><a href="iterative-methods.html#randomized-kaczmarz-method"><i class="fa fa-check"></i><b>1.5.6</b> Randomized Kaczmarz Method</a></li>
-<li class="chapter" data-level="1.5.7" data-path="iterative-methods.html"><a href="iterative-methods.html#gradient-descent"><i class="fa fa-check"></i><b>1.5.7</b> Gradient Descent</a></li>
+<li class="chapter" data-level="1.4" data-path="iterative-methods.html"><a href="iterative-methods.html"><i class="fa fa-check"></i><b>1.4</b> Iterative Methods</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="iterative-methods.html"><a href="iterative-methods.html#overview"><i class="fa fa-check"></i><b>1.4.1</b> Overview</a></li>
+<li class="chapter" data-level="1.4.2" data-path="iterative-methods.html"><a href="iterative-methods.html#outline"><i class="fa fa-check"></i><b>1.4.2</b> Outline</a></li>
+<li class="chapter" data-level="1.4.3" data-path="iterative-methods.html"><a href="iterative-methods.html#motivation"><i class="fa fa-check"></i><b>1.4.3</b> Motivation</a></li>
+<li class="chapter" data-level="1.4.4" data-path="iterative-methods.html"><a href="iterative-methods.html#splitting-methods"><i class="fa fa-check"></i><b>1.4.4</b> Splitting Methods</a></li>
+<li class="chapter" data-level="1.4.5" data-path="iterative-methods.html"><a href="iterative-methods.html#convergence"><i class="fa fa-check"></i><b>1.4.5</b> Convergence</a></li>
+<li class="chapter" data-level="1.4.6" data-path="iterative-methods.html"><a href="iterative-methods.html#randomized-kaczmarz-method"><i class="fa fa-check"></i><b>1.4.6</b> Randomized Kaczmarz Method</a></li>
+<li class="chapter" data-level="1.4.7" data-path="iterative-methods.html"><a href="iterative-methods.html#gradient-descent"><i class="fa fa-check"></i><b>1.4.7</b> Gradient Descent</a></li>
+<li class="chapter" data-level="1.4.8" data-path="iterative-methods.html"><a href="iterative-methods.html#conjugate-gradient"><i class="fa fa-check"></i><b>1.4.8</b> Conjugate Gradient</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html"><i class="fa fa-check"></i><b>1.5</b> Nonlinear Systems of Equations</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#review-of-jacobians"><i class="fa fa-check"></i><b>1.5.1</b> Review of Jacobians</a></li>
+<li class="chapter" data-level="1.5.2" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#motivating-problem"><i class="fa fa-check"></i><b>1.5.2</b> Motivating Problem</a></li>
+<li class="chapter" data-level="1.5.3" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#non-linear-equations"><i class="fa fa-check"></i><b>1.5.3</b> Non-linear Equations</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -143,6 +175,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.9" data-path="homework-9.html"><a href="homework-9.html"><i class="fa fa-check"></i><b>2.9</b> Homework 9</a></li>
 <li class="chapter" data-level="2.10" data-path="homework-10.html"><a href="homework-10.html"><i class="fa fa-check"></i><b>2.10</b> Homework 10</a></li>
 <li class="chapter" data-level="2.11" data-path="homework-11.html"><a href="homework-11.html"><i class="fa fa-check"></i><b>2.11</b> Homework 11</a></li>
+<li class="chapter" data-level="2.12" data-path="homework-12.html"><a href="homework-12.html"><i class="fa fa-check"></i><b>2.12</b> Homework 12</a></li>
+<li class="chapter" data-level="2.13" data-path="homework-13.html"><a href="homework-13.html"><i class="fa fa-check"></i><b>2.13</b> Homework 13</a></li>
 </ul></li>
 </ul>
 
@@ -165,23 +199,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">2.3</span> Homework 3</h2>
 
 <div class="exercise">
-<span id="exr:q301" class="exercise"><strong>Exercise 1.20  </strong></span>Prove lemma <a href="floating-point-format.html#lem:proofHW">1.5</a>.
+<span id="exr:q301" class="exercise"><strong>Exercise 20  </strong></span>Prove lemma <a href="positional-numeral-system.html#lem:proofHW">5</a>.
 </div>
 
 
 <div class="solution">
 <p> <span class="solution"><em>Solution. </em></span> Recall that a matrix <span class="math inline">\(A\)</span> is invertible if and only if <span class="math inline">\(Ax = 0\)</span> implies that <span class="math inline">\(x = 0\)</span>. So to check that <span class="math inline">\(I-F\)</span> is invertible, we check this:</p>
 <p><span class="math display">\[
-  (I-F)x = x-Fx = 0 \Rightarrow x = Fx \Rightarrow {\left \vert \left \vert x \right \vert \right \vert}_p \leq {\left \vert \left \vert F \right \vert \right \vert}_p {\left \vert \left \vert x \right \vert \right \vert}_p.
+  (I-F)x = x-Fx = 0 \Rightarrow x = Fx \Rightarrow \left \vert \left \vert x \right \vert \right \vert_p \leq \left \vert \left \vert F \right \vert \right \vert_p \left \vert \left \vert x \right \vert \right \vert_p.
 \]</span></p>
-<p>Since <span class="math inline">\({\left \vert \left \vert F \right \vert \right \vert}_p &lt; 1\)</span> by assumption, the only solution to the inequality above is <span class="math inline">\(x = 0\)</span>. So, <span class="math inline">\(I-F\)</span> is invertible.</p>
-<p>Note that <span class="math inline">\(\sum_{k=0}^N F^k (I - F) = I - F^{N+1}\)</span>. Since <span class="math inline">\({\left \vert \left \vert F^k \right \vert \right \vert}_p &lt; {\left \vert \left \vert F \right \vert \right \vert}_p^k &lt; 1\)</span>, we know that <span class="math inline">\(F^N \rightarrow 0\)</span> as <span class="math inline">\(N \rightarrow \infty\)</span>. So, <span class="math inline">\(\sum_{k=0}^\infty F^k (I-F) = I\)</span>, and using that <span class="math inline">\(I-F\)</span> is invertible, we get <span class="math inline">\((I-F)^{-1} = \sum_{k=0}^\infty F^k\)</span>. Finally,</p>
-<p><span class="math display">\[{\left \vert \left \vert (I-F)^{-1} \right \vert \right \vert}_p \leq \sum_{k=1}^\infty {\left \vert \left \vert F \right \vert \right \vert}_p^k = \frac{1}{1- {\left \vert \left \vert F \right \vert \right \vert}_p}\]</span>.</p>
+<p>Since <span class="math inline">\(\left \vert \left \vert F \right \vert \right \vert_p &lt; 1\)</span> by assumption, the only solution to the inequality above is <span class="math inline">\(x = 0\)</span>. So, <span class="math inline">\(I-F\)</span> is invertible.</p>
+<p>Note that <span class="math inline">\(\sum_{k=0}^N F^k (I - F) = I - F^{N+1}\)</span>. Since <span class="math inline">\(\left \vert \left \vert F^k \right \vert \right \vert_p &lt; \left \vert \left \vert F \right \vert \right \vert_p^k &lt; 1\)</span>, we know that <span class="math inline">\(F^N \rightarrow 0\)</span> as <span class="math inline">\(N \rightarrow \infty\)</span>. So, <span class="math inline">\(\sum_{k=0}^\infty F^k (I-F) = I\)</span>, and using that <span class="math inline">\(I-F\)</span> is invertible, we get <span class="math inline">\((I-F)^{-1} = \sum_{k=0}^\infty F^k\)</span>. Finally,</p>
+<p><span class="math display">\[\left \vert \left \vert (I-F)^{-1} \right \vert \right \vert_p \leq \sum_{k=1}^\infty \left \vert \left \vert F \right \vert \right \vert_p^k = \frac{1}{1- \left \vert \left \vert F \right \vert \right \vert_p}\]</span>.</p>
 </div>
 
 
 <div class="exercise">
-<span id="exr:q302" class="exercise"><strong>Exercise 1.21  </strong></span>Consider Theorem and Lemmas under “Square Linear Systems” (<a href="floating-point-format.html#square-linear-systems">1.2.3</a>). What happens if we use <span class="math inline">\(l^{1}\)</span>-norm instead?
+<span id="exr:q302" class="exercise"><strong>Exercise 21  </strong></span>Consider Theorem and Lemmas under “Square Linear Systems” (<a href="positional-numeral-system.html#square-linear-systems">1.1.4</a>). What happens if we use <span class="math inline">\(l^{1}\)</span>-norm instead?
 </div>
 
 
@@ -191,84 +225,92 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="exercise">
-<span id="exr:q303" class="exercise"><strong>Exercise 1.22  </strong></span>Generate examples that show the bound in theorem <a href="floating-point-format.html#thm:kappa-bound">1.1</a> is too conservative.
+<span id="exr:q303" class="exercise"><strong>Exercise 22  </strong></span>Generate examples that show the bound in theorem <a href="positional-numeral-system.html#thm:kappa-bound">1</a> is too conservative.
 </div>
 
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">using LinearAlgebra
-
-p = <span class="fl">53</span> <span class="co"># precision for float-64</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb15-1" data-line-number="1">using LinearAlgebra</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">p = <span class="fl">53</span> <span class="co"># precision for float-64</span></a></code></pre></div>
 <pre><code>## 53</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">u = <span class="fl">2.0</span>^(-p+<span class="fl">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb17-1" data-line-number="1">u = <span class="fl">2.0</span>^(-p+<span class="fl">1</span>)</a></code></pre></div>
 <pre><code>## 2.220446049250313e-16</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">A = [
-    <span class="fl">0</span>. <span class="fl">0</span> <span class="fl">0.000001</span>;
-    <span class="fl">200000</span> <span class="fl">0</span> <span class="fl">0</span>;
-    <span class="fl">0</span> <span class="fl">1</span> <span class="fl">20000</span>;
-]</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb19-1" data-line-number="1">A = [</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">    <span class="fl">0</span>. <span class="fl">0</span> <span class="fl">0.000001</span>;</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">    <span class="fl">200000</span> <span class="fl">0</span> <span class="fl">0</span>;</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">    <span class="fl">0</span> <span class="fl">1</span> <span class="fl">20000</span>;</a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">]</a></code></pre></div>
 <pre><code>## 3×3 Array{Float64,2}:
 ##       0.0  0.0      1.0e-6
 ##  200000.0  0.0      0.0   
 ##       0.0  1.0  20000.0</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">x = [<span class="fl">1</span>.; <span class="fl">1</span>; <span class="fl">1</span>;]</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb21-1" data-line-number="1">x = [<span class="fl">1</span>.; <span class="fl">1</span>; <span class="fl">1</span>;]</a></code></pre></div>
 <pre><code>## 3-element Array{Float64,1}:
 ##  1.0
 ##  1.0
 ##  1.0</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">b = A*x</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb23-1" data-line-number="1">b = A*x</a></code></pre></div>
 <pre><code>## 3-element Array{Float64,1}:
 ##       1.0e-6
 ##  200000.0   
 ##   20001.0</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">
-kappa = norm(A, Inf) * norm(inv(A), Inf)</code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb25-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">kappa = norm(A, Inf) * norm(inv(A), Inf)</a></code></pre></div>
 <pre><code>## 4.0e15</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">bound = <span class="fl">2.0</span>*u*kappa/(<span class="fl">1.0</span> - u*kappa)</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb27-1" data-line-number="1">bound = <span class="fl">2.0</span>*u*kappa/(<span class="fl">1.0</span> - u*kappa)</a></code></pre></div>
 <pre><code>## 15.885635265004744</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">
-println(<span class="st">&quot;Diff: $(norm(x - inv(A)*b, Inf)/norm(x,Inf))&quot;</span>)
-println(<span class="st">&quot;Bound: $(bound)&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb29-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">println(<span class="st">&quot;Diff: $(norm(x - inv(A)*b, Inf)/norm(x,Inf))&quot;</span>)</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">println(<span class="st">&quot;Bound: $(bound)&quot;</span>)</a></code></pre></div>
 
 <div class="exercise">
-<span id="exr:q304" class="exercise"><strong>Exercise 1.23  </strong></span>Generate examples that show the bound is nearly achieved
+<span id="exr:q304" class="exercise"><strong>Exercise 23  </strong></span>Generate examples that show the bound is nearly achieved
 </div>
 
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">using LinearAlgebra
-
-A = [
-    <span class="fl">0</span>. <span class="fl">0</span> <span class="fl">1</span>.;
-    <span class="fl">1</span> <span class="fl">0</span> <span class="fl">0</span>;
-    <span class="fl">0</span> <span class="fl">1</span> <span class="fl">0</span>;
-]</code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb30-1" data-line-number="1">using LinearAlgebra</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">A = [</a>
+<a class="sourceLine" id="cb30-4" data-line-number="4">    <span class="fl">0</span>. <span class="fl">0</span> <span class="fl">1</span>.;</a>
+<a class="sourceLine" id="cb30-5" data-line-number="5">    <span class="fl">1</span> <span class="fl">0</span> <span class="fl">0</span>;</a>
+<a class="sourceLine" id="cb30-6" data-line-number="6">    <span class="fl">0</span> <span class="fl">1</span> <span class="fl">0</span>;</a>
+<a class="sourceLine" id="cb30-7" data-line-number="7">]</a></code></pre></div>
 <pre><code>## 3×3 Array{Float64,2}:
 ##  0.0  0.0  1.0
 ##  1.0  0.0  0.0
 ##  0.0  1.0  0.0</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">x = [<span class="fl">1</span>.; <span class="fl">1</span>; <span class="fl">1</span>;]</code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb32-1" data-line-number="1">x = [<span class="fl">1</span>.; <span class="fl">1</span>; <span class="fl">1</span>;]</a></code></pre></div>
 <pre><code>## 3-element Array{Float64,1}:
 ##  1.0
 ##  1.0
 ##  1.0</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">b = A*x</code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb34-1" data-line-number="1">b = A*x</a></code></pre></div>
 <pre><code>## 3-element Array{Float64,1}:
 ##  1.0
 ##  1.0
 ##  1.0</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">
-kappa = norm(A, Inf) * norm(inv(A), Inf)</code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb36-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">kappa = norm(A, Inf) * norm(inv(A), Inf)</a></code></pre></div>
 <pre><code>## 1.0</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">bound = <span class="fl">2.0</span>*<span class="fl">2.0</span>^(-p+<span class="fl">1</span>)*kappa/(<span class="fl">1.0</span> - <span class="fl">2.0</span>^(-p+<span class="fl">1</span>)*kappa)</code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb38-1" data-line-number="1">bound = <span class="fl">2.0</span>*<span class="fl">2.0</span>^(-p+<span class="fl">1</span>)*kappa/(<span class="fl">1.0</span> - <span class="fl">2.0</span>^(-p+<span class="fl">1</span>)*kappa)</a></code></pre></div>
 <pre><code>## 4.440892098500627e-16</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">
-println(<span class="st">&quot;Diff: $(norm(x - inv(A)*b, Inf)/norm(x,Inf))&quot;</span>)
-println(<span class="st">&quot;Bound: $(bound)&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb40-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2">println(<span class="st">&quot;Diff: $(norm(x - inv(A)*b, Inf)/norm(x,Inf))&quot;</span>)</a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">println(<span class="st">&quot;Bound: $(bound)&quot;</span>)</a></code></pre></div>
 
 <div class="exercise">
-<span id="exr:q305" class="exercise"><strong>Exercise 1.24  </strong></span>For motivating problems 1-5, when is <span class="math inline">\(x\)</span> unique?
+<span id="exr:q305" class="exercise"><strong>Exercise 24  </strong></span>For motivating problems 1-5, when is <span class="math inline">\(x\)</span> unique?
 </div>
 
 
 <div class="solution">
-<p> <span class="solution"><em>Solution. </em></span>  - Motivating Problem 1: * when <span class="math inline">\(A\)</span> is invertible - Motivating Problem 2: Always. * Since <span class="math inline">\(F(y) = {\left \vert \left \vert Ay - b \right \vert \right \vert}_2 = (Ay-b)^\prime (Ay-b)\)</span> is convex (twice differentiated is positive definite because <span class="math inline">\(\nabla^2 f = A^\prime A\)</span> and <span class="math inline">\(A\)</span> has full rank). * (since objective function is <span class="math inline">\(A^\prime A\)</span>, and it is positive definite (because A is full rank), then the function is convex, and you always have a unique solution) - Motivating Problem 3: Always. - Motivating Problem 4: Always. * We know how to characterize all <span class="math inline">\(z\)</span> that satisfy objective: <span class="math inline">\(Q\begin{bmatrix} R &amp; S \\ 0 &amp; 0 \end{bmatrix} \Pi^\prime = A\)</span>.</p>
+<p> <span class="solution"><em>Solution. </em></span> 
+- Motivating Problem 1:
+* when <span class="math inline">\(A\)</span> is invertible
+- Motivating Problem 2: Always.
+* Since <span class="math inline">\(F(y) = \left \vert \left \vert Ay - b \right \vert \right \vert_2 = (Ay-b)^\prime (Ay-b)\)</span> is convex (twice differentiated is positive definite because <span class="math inline">\(\nabla^2 f = A^\prime A\)</span> and <span class="math inline">\(A\)</span> has full rank).
+* (since objective function is <span class="math inline">\(A^\prime A\)</span>, and it is positive definite (because A is full rank), then the function is convex, and you always have a unique solution)
+- Motivating Problem 3: Always.
+- Motivating Problem 4: Always.
+* We know how to characterize all <span class="math inline">\(z\)</span> that satisfy objective: <span class="math inline">\(Q\begin{bmatrix} R &amp; S \\ 0 &amp; 0 \end{bmatrix} \Pi^\prime = A\)</span>.</p>
 <ul>
 <li>Motivating Problem 5: always</li>
 </ul>
@@ -276,17 +318,18 @@ println(<span class="st">&quot;Bound: $(bound)&quot;</span>)</code></pre></div>
 
 
 <div class="exercise">
-<span id="exr:q306" class="exercise"><strong>Exercise 1.25  </strong></span>For motivating problem 5, what happens if <span class="math inline">\(p\geq m\)</span>? Explore the case where <span class="math inline">\(m &gt;&gt; n\)</span>.
+<span id="exr:q306" class="exercise"><strong>Exercise 25  </strong></span>For motivating problem 5, what happens if <span class="math inline">\(p\geq m\)</span>? Explore the case where <span class="math inline">\(m &gt;&gt; n\)</span>.
 </div>
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> * For m &gt;&gt; n, you have an undertermined system with more unknowns than equations. Since the null space of A has a dimension larger than zero, for any particular solution xp for the system, xp+h with <span class="math inline">\(h \in \text{null}(A)\)</span> is also a solution, and there are infinitely many choices for h. The constraint system might help narrow down the solutions from the null space. * For p &gt;= m: if C becomes inconsistent, we cannot narrow down the solutions in the null space. If C is consistent and rank(C)=m, then we can pick a unique solution. If the rank of C is less than m, then C constrains some of the possible solutions for y.
+ <span class="solution"><em>Solution. </em></span> * For m &gt;&gt; n, you have an undertermined system with more unknowns than equations. Since the null space of A has a dimension larger than zero, for any particular solution xp for the system, xp+h with <span class="math inline">\(h \in \text{null}(A)\)</span> is also a solution, and there are infinitely many choices for h. The constraint system might help narrow down the solutions from the null space.
+* For p &gt;= m: if C becomes inconsistent, we cannot narrow down the solutions in the null space. If C is consistent and rank(C)=m, then we can pick a unique solution. If the rank of C is less than m, then C constrains some of the possible solutions for y.
 </div>
 
 
 <div class="exercise">
-<span id="exr:q307" class="exercise"><strong>Exercise 1.26  </strong></span>What do you get if you multiply a matrix by a permutation matrix from the left? From the right? A permutation with itself?
+<span id="exr:q307" class="exercise"><strong>Exercise 26  </strong></span>What do you get if you multiply a matrix by a permutation matrix from the left? From the right? A permutation with itself?
 </div>
 
 
@@ -298,7 +341,7 @@ Permutation squared gives you the identity.
 
 
 <div class="exercise">
-<span id="exr:q308" class="exercise"><strong>Exercise 1.27  </strong></span>Suppose <span class="math inline">\(R \in {\mathbb{R}}^{m\times m}\)</span> is an upper triangular matrix with <span class="math inline">\(R_{ii} \neq 0\)</span> for all <span class="math inline">\(i = 1,\ldots, n\)</span>. Is <span class="math inline">\(R\)</span> invertible?
+<span id="exr:q308" class="exercise"><strong>Exercise 27  </strong></span>Suppose <span class="math inline">\(R \in \mathbb{R}^{m\times m}\)</span> is an upper triangular matrix with <span class="math inline">\(R_{ii} \neq 0\)</span> for all <span class="math inline">\(i = 1,\ldots, n\)</span>. Is <span class="math inline">\(R\)</span> invertible?
 </div>
 
 
@@ -308,7 +351,7 @@ Permutation squared gives you the identity.
 
 
 <div class="exercise">
-<span id="exr:q309" class="exercise"><strong>Exercise 1.28  </strong></span>Assume <span class="math inline">\(R\)</span> is an invertible upper triangular matrix. Implement a solution to invert <span class="math inline">\(R\)</span>.
+<span id="exr:q309" class="exercise"><strong>Exercise 28  </strong></span>Assume <span class="math inline">\(R\)</span> is an invertible upper triangular matrix. Implement a solution to invert <span class="math inline">\(R\)</span>.
 </div>
 
 
@@ -344,49 +387,49 @@ Permutation squared gives you the identity.
 <p>See the <code>Julia</code> chunk below for an implementation of this.</p>
 </div>
 
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia"><span class="kw">function</span> invertUpperTri(A)
-    <span class="co">## Get dimensions of A</span>
-    n, m = size(A)
-
-    <span class="co">## Setup empty array to hold result</span>
-    B = zeros(n,m)
-
-    <span class="co">## Fill out diagonal with inverse diagonal from A</span>
-    <span class="kw">for</span> k = <span class="fl">1</span>:n
-        B[k, k] = <span class="fl">1</span>/A[k,k]
-    <span class="kw">end</span>
-
-    <span class="co">## Starting in the lower right corner, fill out the rest of the matrix.</span>
-    <span class="kw">for</span> i = (n-<span class="fl">1</span>):-<span class="fl">1</span>:<span class="fl">1</span>
-        <span class="kw">for</span> j = (i+<span class="fl">1</span>):n
-            B[i,j] = -sum(A[i,(i+<span class="fl">1</span>):j].*B[(i+<span class="fl">1</span>):j,j])/A[i,i]
-        <span class="kw">end</span>
-    <span class="kw">end</span>
-
-    <span class="kw">return</span>(B)
-<span class="kw">end</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">function</span> invertUpperTri(A)</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2">    <span class="co">## Get dimensions of A</span></a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">    n, m = size(A)</a>
+<a class="sourceLine" id="cb41-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb41-5" data-line-number="5">    <span class="co">## Setup empty array to hold result</span></a>
+<a class="sourceLine" id="cb41-6" data-line-number="6">    B = zeros(n,m)</a>
+<a class="sourceLine" id="cb41-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb41-8" data-line-number="8">    <span class="co">## Fill out diagonal with inverse diagonal from A</span></a>
+<a class="sourceLine" id="cb41-9" data-line-number="9">    <span class="kw">for</span> k = <span class="fl">1</span>:n</a>
+<a class="sourceLine" id="cb41-10" data-line-number="10">        B[k, k] = <span class="fl">1</span>/A[k,k]</a>
+<a class="sourceLine" id="cb41-11" data-line-number="11">    <span class="kw">end</span></a>
+<a class="sourceLine" id="cb41-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb41-13" data-line-number="13">    <span class="co">## Starting in the lower right corner, fill out the rest of the matrix.</span></a>
+<a class="sourceLine" id="cb41-14" data-line-number="14">    <span class="kw">for</span> i = (n-<span class="fl">1</span>):-<span class="fl">1</span>:<span class="fl">1</span></a>
+<a class="sourceLine" id="cb41-15" data-line-number="15">        <span class="kw">for</span> j = (i+<span class="fl">1</span>):n</a>
+<a class="sourceLine" id="cb41-16" data-line-number="16">            B[i,j] = -sum(A[i,(i+<span class="fl">1</span>):j].*B[(i+<span class="fl">1</span>):j,j])/A[i,i]</a>
+<a class="sourceLine" id="cb41-17" data-line-number="17">        <span class="kw">end</span></a>
+<a class="sourceLine" id="cb41-18" data-line-number="18">    <span class="kw">end</span></a>
+<a class="sourceLine" id="cb41-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb41-20" data-line-number="20">    <span class="kw">return</span>(B)</a>
+<a class="sourceLine" id="cb41-21" data-line-number="21"><span class="kw">end</span></a></code></pre></div>
 <pre><code>## invertUpperTri (generic function with 1 method)</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">
-<span class="co">## Create an upper triangular matrix to check</span>
-A = rand(<span class="fl">4</span>,<span class="fl">4</span>);
-A[<span class="fl">2</span>:<span class="fl">4</span>,<span class="fl">1</span>] = [<span class="fl">0</span> <span class="fl">0</span> <span class="fl">0</span>];
-A[<span class="fl">3</span>:<span class="fl">4</span>,<span class="fl">2</span>] = [<span class="fl">0</span> <span class="fl">0</span>];
-A[<span class="fl">4</span>,<span class="fl">3</span>] = <span class="fl">0</span>;
-
-<span class="co">## Check function</span>
-B = invertUpperTri(A);
-B - inv(A)  <span class="co"># should be 0 matrix</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb43-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="co">## Create an upper triangular matrix to check</span></a>
+<a class="sourceLine" id="cb43-3" data-line-number="3">A = rand(<span class="fl">4</span>,<span class="fl">4</span>);</a>
+<a class="sourceLine" id="cb43-4" data-line-number="4">A[<span class="fl">2</span>:<span class="fl">4</span>,<span class="fl">1</span>] = [<span class="fl">0</span> <span class="fl">0</span> <span class="fl">0</span>];</a>
+<a class="sourceLine" id="cb43-5" data-line-number="5">A[<span class="fl">3</span>:<span class="fl">4</span>,<span class="fl">2</span>] = [<span class="fl">0</span> <span class="fl">0</span>];</a>
+<a class="sourceLine" id="cb43-6" data-line-number="6">A[<span class="fl">4</span>,<span class="fl">3</span>] = <span class="fl">0</span>;</a>
+<a class="sourceLine" id="cb43-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb43-8" data-line-number="8"><span class="co">## Check function</span></a>
+<a class="sourceLine" id="cb43-9" data-line-number="9">B = invertUpperTri(A);</a>
+<a class="sourceLine" id="cb43-10" data-line-number="10">B - inv(A)  <span class="co"># should be 0 matrix</span></a></code></pre></div>
 <pre><code>## 4×4 Array{Float64,2}:
 ##  0.0  0.0  0.0  0.0
 ##  0.0  0.0  0.0  0.0
 ##  0.0  0.0  0.0  0.0
 ##  0.0  0.0  0.0  0.0</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">A*B         <span class="co"># should be identity</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb45-1" data-line-number="1">A*B         <span class="co"># should be identity</span></a></code></pre></div>
 <pre><code>## 4×4 Array{Float64,2}:
-##  1.0  1.04898e-17  1.17159e-16  -2.00651e-16
-##  0.0  1.0          8.70031e-17   1.60673e-16
-##  0.0  0.0          1.0           1.54363e-16
-##  0.0  0.0          0.0           1.0</code></pre>
+##  1.0  -4.50084e-17   1.02595e-15   6.20006e-14
+##  0.0   1.0          -3.64563e-16   9.09673e-16
+##  0.0   0.0           1.0          -1.48823e-15
+##  0.0   0.0           0.0           1.0</code></pre>
 </div>
             </section>
 
@@ -443,7 +486,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

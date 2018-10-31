@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>STAT 771: My notes</title>
   <meta name="description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="STAT 771: My notes" />
   <meta property="og:type" content="book" />
@@ -49,41 +49,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -100,35 +126,41 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Intro</a></li>
 <li class="chapter" data-level="1" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>1</b> Lecture Notes</a><ul>
-<li class="chapter" data-level="" data-path="lecture-notes.html"><a href="lecture-notes.html#lecture-1-96"><i class="fa fa-check"></i>Lecture 1: 9/6</a></li>
-<li class="chapter" data-level="1.1" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html"><i class="fa fa-check"></i><b>1.1</b> Positional numeral system</a></li>
-<li class="chapter" data-level="1.2" data-path="floating-point-format.html"><a href="floating-point-format.html"><i class="fa fa-check"></i><b>1.2</b> Floating Point Format</a><ul>
-<li class="chapter" data-level="1.2.1" data-path="floating-point-format.html"><a href="floating-point-format.html#ieee-standards"><i class="fa fa-check"></i><b>1.2.1</b> IEEE Standards</a></li>
-<li class="chapter" data-level="1.2.2" data-path="floating-point-format.html"><a href="floating-point-format.html#errors"><i class="fa fa-check"></i><b>1.2.2</b> Errors</a></li>
-<li class="chapter" data-level="1.2.3" data-path="floating-point-format.html"><a href="floating-point-format.html#square-linear-systems"><i class="fa fa-check"></i><b>1.2.3</b> Square Linear Systems</a></li>
+<li class="chapter" data-level="" data-path="lecture-1-96.html"><a href="lecture-1-96.html"><i class="fa fa-check"></i>Lecture 1: 9/6</a></li>
+<li class="chapter" data-level="1.1" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html"><i class="fa fa-check"></i><b>1.1</b> Positional numeral system</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html#floating-point-format"><i class="fa fa-check"></i><b>1.1.1</b> Floating Point Format</a></li>
+<li class="chapter" data-level="1.1.2" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html#ieee-standards"><i class="fa fa-check"></i><b>1.1.2</b> IEEE Standards</a></li>
+<li class="chapter" data-level="1.1.3" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html#errors"><i class="fa fa-check"></i><b>1.1.3</b> Errors</a></li>
+<li class="chapter" data-level="1.1.4" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html#square-linear-systems"><i class="fa fa-check"></i><b>1.1.4</b> Square Linear Systems</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="orthogonalization.html"><a href="orthogonalization.html"><i class="fa fa-check"></i><b>1.3</b> Orthogonalization</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="orthogonalization.html"><a href="orthogonalization.html#motivating-problems"><i class="fa fa-check"></i><b>1.3.1</b> Motivating problems</a></li>
+<li class="chapter" data-level="1.2" data-path="orthogonalization.html"><a href="orthogonalization.html"><i class="fa fa-check"></i><b>1.2</b> Orthogonalization</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="orthogonalization.html"><a href="orthogonalization.html#motivating-problems"><i class="fa fa-check"></i><b>1.2.1</b> Motivating problems</a></li>
 <li class="chapter" data-level="" data-path="orthogonalization.html"><a href="orthogonalization.html#lecture-4-918"><i class="fa fa-check"></i>Lecture 4: 9/18</a></li>
-<li class="chapter" data-level="1.3.2" data-path="orthogonalization.html"><a href="orthogonalization.html#qr-decomposition"><i class="fa fa-check"></i><b>1.3.2</b> QR Decomposition</a></li>
-<li class="chapter" data-level="1.3.3" data-path="orthogonalization.html"><a href="orthogonalization.html#existence-of-qr-decomposition."><i class="fa fa-check"></i><b>1.3.3</b> Existence of QR-decomposition.</a></li>
+<li class="chapter" data-level="1.2.2" data-path="orthogonalization.html"><a href="orthogonalization.html#qr-decomposition"><i class="fa fa-check"></i><b>1.2.2</b> QR Decomposition</a></li>
+<li class="chapter" data-level="1.2.3" data-path="orthogonalization.html"><a href="orthogonalization.html#existence-of-qr-decomposition."><i class="fa fa-check"></i><b>1.2.3</b> Existence of QR-decomposition.</a></li>
 <li class="chapter" data-level="" data-path="orthogonalization.html"><a href="orthogonalization.html#lecture-5-920"><i class="fa fa-check"></i>Lecture 5: 9/20</a></li>
-<li class="chapter" data-level="1.3.4" data-path="orthogonalization.html"><a href="orthogonalization.html#large-data-problem"><i class="fa fa-check"></i><b>1.3.4</b> “Large” Data Problem</a></li>
+<li class="chapter" data-level="1.2.4" data-path="orthogonalization.html"><a href="orthogonalization.html#large-data-problem"><i class="fa fa-check"></i><b>1.2.4</b> “Large” Data Problem</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html"><i class="fa fa-check"></i><b>1.4</b> Singular Value Decomposition (SVD)</a><ul>
-<li class="chapter" data-level="1.4.1" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#motivating-problems-1"><i class="fa fa-check"></i><b>1.4.1</b> Motivating Problems</a></li>
-<li class="chapter" data-level="1.4.2" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#svd"><i class="fa fa-check"></i><b>1.4.2</b> SVD</a></li>
-<li class="chapter" data-level="1.4.3" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#existence-and-properties"><i class="fa fa-check"></i><b>1.4.3</b> Existence and Properties</a></li>
-<li class="chapter" data-level="1.4.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#random-projections"><i class="fa fa-check"></i><b>1.4.4</b> Random Projections</a></li>
+<li class="chapter" data-level="1.3" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html"><i class="fa fa-check"></i><b>1.3</b> Singular Value Decomposition (SVD)</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#motivating-problems-1"><i class="fa fa-check"></i><b>1.3.1</b> Motivating Problems</a></li>
+<li class="chapter" data-level="1.3.2" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#svd"><i class="fa fa-check"></i><b>1.3.2</b> SVD</a></li>
+<li class="chapter" data-level="1.3.3" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#existence-and-properties"><i class="fa fa-check"></i><b>1.3.3</b> Existence and Properties</a></li>
+<li class="chapter" data-level="1.3.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#random-projections"><i class="fa fa-check"></i><b>1.3.4</b> Random Projections</a></li>
 </ul></li>
-<li class="chapter" data-level="1.5" data-path="iterative-methods.html"><a href="iterative-methods.html"><i class="fa fa-check"></i><b>1.5</b> Iterative Methods</a><ul>
-<li class="chapter" data-level="1.5.1" data-path="iterative-methods.html"><a href="iterative-methods.html#overview"><i class="fa fa-check"></i><b>1.5.1</b> Overview</a></li>
-<li class="chapter" data-level="1.5.2" data-path="iterative-methods.html"><a href="iterative-methods.html#outline"><i class="fa fa-check"></i><b>1.5.2</b> Outline</a></li>
-<li class="chapter" data-level="1.5.3" data-path="iterative-methods.html"><a href="iterative-methods.html#motivation"><i class="fa fa-check"></i><b>1.5.3</b> Motivation</a></li>
-<li class="chapter" data-level="1.5.4" data-path="iterative-methods.html"><a href="iterative-methods.html#splitting-methods"><i class="fa fa-check"></i><b>1.5.4</b> Splitting Methods</a></li>
-<li class="chapter" data-level="1.5.5" data-path="iterative-methods.html"><a href="iterative-methods.html#convergence"><i class="fa fa-check"></i><b>1.5.5</b> Convergence</a></li>
-<li class="chapter" data-level="1.5.6" data-path="iterative-methods.html"><a href="iterative-methods.html#randomized-kaczmarz-method"><i class="fa fa-check"></i><b>1.5.6</b> Randomized Kaczmarz Method</a></li>
-<li class="chapter" data-level="1.5.7" data-path="iterative-methods.html"><a href="iterative-methods.html#gradient-descent"><i class="fa fa-check"></i><b>1.5.7</b> Gradient Descent</a></li>
+<li class="chapter" data-level="1.4" data-path="iterative-methods.html"><a href="iterative-methods.html"><i class="fa fa-check"></i><b>1.4</b> Iterative Methods</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="iterative-methods.html"><a href="iterative-methods.html#overview"><i class="fa fa-check"></i><b>1.4.1</b> Overview</a></li>
+<li class="chapter" data-level="1.4.2" data-path="iterative-methods.html"><a href="iterative-methods.html#outline"><i class="fa fa-check"></i><b>1.4.2</b> Outline</a></li>
+<li class="chapter" data-level="1.4.3" data-path="iterative-methods.html"><a href="iterative-methods.html#motivation"><i class="fa fa-check"></i><b>1.4.3</b> Motivation</a></li>
+<li class="chapter" data-level="1.4.4" data-path="iterative-methods.html"><a href="iterative-methods.html#splitting-methods"><i class="fa fa-check"></i><b>1.4.4</b> Splitting Methods</a></li>
+<li class="chapter" data-level="1.4.5" data-path="iterative-methods.html"><a href="iterative-methods.html#convergence"><i class="fa fa-check"></i><b>1.4.5</b> Convergence</a></li>
+<li class="chapter" data-level="1.4.6" data-path="iterative-methods.html"><a href="iterative-methods.html#randomized-kaczmarz-method"><i class="fa fa-check"></i><b>1.4.6</b> Randomized Kaczmarz Method</a></li>
+<li class="chapter" data-level="1.4.7" data-path="iterative-methods.html"><a href="iterative-methods.html#gradient-descent"><i class="fa fa-check"></i><b>1.4.7</b> Gradient Descent</a></li>
+<li class="chapter" data-level="1.4.8" data-path="iterative-methods.html"><a href="iterative-methods.html#conjugate-gradient"><i class="fa fa-check"></i><b>1.4.8</b> Conjugate Gradient</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html"><i class="fa fa-check"></i><b>1.5</b> Nonlinear Systems of Equations</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#review-of-jacobians"><i class="fa fa-check"></i><b>1.5.1</b> Review of Jacobians</a></li>
+<li class="chapter" data-level="1.5.2" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#motivating-problem"><i class="fa fa-check"></i><b>1.5.2</b> Motivating Problem</a></li>
+<li class="chapter" data-level="1.5.3" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#non-linear-equations"><i class="fa fa-check"></i><b>1.5.3</b> Non-linear Equations</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -143,6 +175,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.9" data-path="homework-9.html"><a href="homework-9.html"><i class="fa fa-check"></i><b>2.9</b> Homework 9</a></li>
 <li class="chapter" data-level="2.10" data-path="homework-10.html"><a href="homework-10.html"><i class="fa fa-check"></i><b>2.10</b> Homework 10</a></li>
 <li class="chapter" data-level="2.11" data-path="homework-11.html"><a href="homework-11.html"><i class="fa fa-check"></i><b>2.11</b> Homework 11</a></li>
+<li class="chapter" data-level="2.12" data-path="homework-12.html"><a href="homework-12.html"><i class="fa fa-check"></i><b>2.12</b> Homework 12</a></li>
+<li class="chapter" data-level="2.13" data-path="homework-13.html"><a href="homework-13.html"><i class="fa fa-check"></i><b>2.13</b> Homework 13</a></li>
 </ul></li>
 </ul>
 
@@ -162,7 +196,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="singular-value-decomposition-svd" class="section level2">
-<h2><span class="header-section-number">1.4</span> Singular Value Decomposition (SVD)</h2>
+<h2><span class="header-section-number">1.3</span> Singular Value Decomposition (SVD)</h2>
 <p>Outline:</p>
 <ol style="list-style-type: upper-roman">
 <li>Motivating problems</li>
@@ -171,40 +205,40 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Random projections (a modern application of SVD)</li>
 </ol>
 <div id="motivating-problems-1" class="section level3">
-<h3><span class="header-section-number">1.4.1</span> Motivating Problems</h3>
+<h3><span class="header-section-number">1.3.1</span> Motivating Problems</h3>
 
 <div class="example">
-<p><span id="exm:svd-problem-1" class="example"><strong>Example 1.9  </strong></span>Let <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span> with <span class="math inline">\(\text{rank}(A) &lt; m \le n\)</span>, and let <span class="math inline">\(B \in \text{range}(A)\)</span>. Find <span class="math inline">\(x\)</span> s.t.</p>
+<p><span id="exm:svd-problem-1" class="example"><strong>Example 9  </strong></span>Let <span class="math inline">\(A \in \mathbb{R}^{n \times m}\)</span> with <span class="math inline">\(\text{rank}(A) &lt; m \le n\)</span>, and let <span class="math inline">\(B \in \text{range}(A)\)</span>. Find <span class="math inline">\(x\)</span> s.t.</p>
 <p><span class="math display">\[
-  x \in {\text{argmin}}_{y \in {\mathbb{R}}^m} \left\{{\left \vert \left \vert y \right \vert \right \vert}_2 : Ay = b \right \}
+  x \in \text{argmin}_{y \in \mathbb{R}^m} \left\{\left \vert \left \vert y \right \vert \right \vert_2 : Ay = b \right \}
 \]</span></p>
 </div>
 
 
 <div class="example">
-<p><span id="exm:svd-problem-2" class="example"><strong>Example 1.10  </strong></span>Let <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span>. Find</p>
+<p><span id="exm:svd-problem-2" class="example"><strong>Example 10  </strong></span>Let <span class="math inline">\(A \in \mathbb{R}^{n \times m}\)</span>. Find</p>
 <p><span class="math display">\[
-  {\left \vert \left \vert A \right \vert \right \vert}_2 = \sup_{v \in {\mathbb{R}}^m\setminus\{0\}} \frac{{\left \vert \left \vert Av \right \vert \right \vert}_2}{{\left \vert \left \vert v \right \vert \right \vert}_2}.
+  \left \vert \left \vert A \right \vert \right \vert_2 = \sup_{v \in \mathbb{R}^m\setminus\{0\}} \frac{\left \vert \left \vert Av \right \vert \right \vert_2}{\left \vert \left \vert v \right \vert \right \vert_2}.
 \]</span></p>
 </div>
 
 
 <div class="example">
-<p><span id="exm:svd-problem-3" class="example"><strong>Example 1.11  </strong></span>Let <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span>. Find <span class="math inline">\(x\)</span> s.t.</p>
+<p><span id="exm:svd-problem-3" class="example"><strong>Example 11  </strong></span>Let <span class="math inline">\(A \in \mathbb{R}^{n\times m}\)</span>. Find <span class="math inline">\(x\)</span> s.t.</p>
 <p><span class="math display">\[
-  x = {\text{argmin}}_{rank(Y) \le k}{\left \vert \left \vert A-Y \right \vert \right \vert}_F.
+  x = \text{argmin}_{rank(Y) \le k}\left \vert \left \vert A-Y \right \vert \right \vert_F.
 \]</span></p>
 </div>
 
-<p>Note: <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_F\)</span> is the <em>Frobenius norm</em> and is defined as <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_F = \left(\sum_{i=1}^m \sum_{j=1}^n |a_{ij}|^2 \right)^{1/2}\)</span>. So it is sort of a Euclideaon norm extended to matrices.</p>
+<p>Note: <span class="math inline">\(\left \vert \left \vert A \right \vert \right \vert_F\)</span> is the <em>Frobenius norm</em> and is defined as <span class="math inline">\(\left \vert \left \vert A \right \vert \right \vert_F = \left(\sum_{i=1}^m \sum_{j=1}^n |a_{ij}|^2 \right)^{1/2}\)</span>. So it is sort of a Euclideaon norm extended to matrices.</p>
 </div>
 <div id="svd" class="section level3">
-<h3><span class="header-section-number">1.4.2</span> SVD</h3>
+<h3><span class="header-section-number">1.3.2</span> SVD</h3>
 <div id="svd-definition" class="section level4">
-<h4><span class="header-section-number">1.4.2.1</span> SVD definition</h4>
+<h4><span class="header-section-number">1.3.2.1</span> SVD definition</h4>
 
 <div class="theorem">
-<p><span id="thm:svd" class="theorem"><strong>Theorem 1.3  </strong></span>Suppose <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span> and <span class="math inline">\(n\ge m\)</span>. Then there exists <span class="math inline">\(U \in {\mathbb{R}}^{n \times n}\)</span> and <span class="math inline">\(V \in {\mathbb{R}}^{m\times m}\)</span> that are both orthogonal, and a diagonal matrix <span class="math inline">\(\Sigma \in {\mathbb{R}}^{n \times m}\)</span> with diagonal elements <span class="math inline">\(\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_m \ge 0\)</span> such that</p>
+<p><span id="thm:svd" class="theorem"><strong>Theorem 3  </strong></span>Suppose <span class="math inline">\(A \in \mathbb{R}^{n\times m}\)</span> and <span class="math inline">\(n\ge m\)</span>. Then there exists <span class="math inline">\(U \in \mathbb{R}^{n \times n}\)</span> and <span class="math inline">\(V \in \mathbb{R}^{m\times m}\)</span> that are both orthogonal, and a diagonal matrix <span class="math inline">\(\Sigma \in \mathbb{R}^{n \times m}\)</span> with diagonal elements <span class="math inline">\(\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_m \ge 0\)</span> such that</p>
 <p><span class="math display">\[ A = U \Sigma V&#39;\]</span></p>
 </div>
 
@@ -216,20 +250,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 
 <div class="corollary">
-<span id="cor:cor-svd" class="corollary"><strong>Corollary 1.1  </strong></span><span class="math inline">\(\text{rank}(A)\)</span> is the number of non-zero singular values of <span class="math inline">\(A\)</span>.
+<span id="cor:cor-svd" class="corollary"><strong>Corollary 1  </strong></span><span class="math inline">\(\text{rank}(A)\)</span> is the number of non-zero singular values of <span class="math inline">\(A\)</span>.
 </div>
 
 </div>
 <div id="solutions-to-motivating-problems" class="section level4">
-<h4><span class="header-section-number">1.4.2.2</span> Solutions to motivating problems</h4>
+<h4><span class="header-section-number">1.3.2.2</span> Solutions to motivating problems</h4>
 
 <div class="solution">
-<p> <span class="solution"><em>Solution</em> (Solution to example <a href="singular-value-decomposition-svd.html#exm:svd-problem-1">1.9</a>). </span>  Since <span class="math inline">\(b \in \text{range}(A)\)</span>, there exists a <span class="math inline">\(y\)</span> such that <span class="math inline">\(Ay = b\)</span>. Now, by theorem <a href="singular-value-decomposition-svd.html#thm:svd">1.3</a> there exist <span class="math inline">\(U\)</span>,<span class="math inline">\(V\)</span>, and <span class="math inline">\(\Sigma\)</span> such that <span class="math inline">\(A=U\Sigma V^\prime\)</span>. Since <span class="math inline">\(U\)</span> is orthogonal, <span class="math inline">\(U^{-1} = U^\prime\)</span>. So,</p>
+<p> <span class="solution"><em>Solution</em> (Solution to example <a href="singular-value-decomposition-svd.html#exm:svd-problem-1">9</a>). </span> 
+Since <span class="math inline">\(b \in \text{range}(A)\)</span>, there exists a <span class="math inline">\(y\)</span> such that <span class="math inline">\(Ay = b\)</span>. Now, by theorem <a href="singular-value-decomposition-svd.html#thm:svd">3</a> there exist <span class="math inline">\(U\)</span>,<span class="math inline">\(V\)</span>, and <span class="math inline">\(\Sigma\)</span> such that <span class="math inline">\(A=U\Sigma V^\prime\)</span>. Since <span class="math inline">\(U\)</span> is orthogonal, <span class="math inline">\(U^{-1} = U^\prime\)</span>. So,</p>
 <p><span class="math display">\[\begin{aligned}
   U\Sigma V^\prime y &amp;= b \Leftrightarrow \\
   \Sigma V^\prime y &amp;= U^\prime b.
 \end{aligned}\]</span></p>
-<p>Let <span class="math inline">\(z = V^\prime y\)</span> and <span class="math inline">\(c = U^\prime b\)</span>. By corollary <a href="singular-value-decomposition-svd.html#cor:cor-svd">1.1</a> we now that there are exactly <span class="math inline">\(\text{rank}(A) = r\)</span> non-zero singular values. So</p>
+<p>Let <span class="math inline">\(z = V^\prime y\)</span> and <span class="math inline">\(c = U^\prime b\)</span>. By corollary <a href="singular-value-decomposition-svd.html#cor:cor-svd">1</a> we now that there are exactly <span class="math inline">\(\text{rank}(A) = r\)</span> non-zero singular values. So</p>
 <p><span class="math display">\[\begin{aligned}
   \begin{bmatrix}
   \sigma_1 &amp; &amp; &amp; &amp; &amp; \\
@@ -241,7 +276,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   \end{bmatrix} \cdot
   \begin{bmatrix} z_1 \\ z_2 \end{bmatrix} = \begin{bmatrix} c_1 \\ 0 \end{bmatrix}.
 \end{aligned}\]</span></p>
-<p>So, <span class="math inline">\(z_1 = \begin{bmatrix} \sigma_1^{-1} &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; \sigma_r^{-1} \end{bmatrix} c_1\)</span>. We want to minimize <span class="math inline">\({\left \vert \left \vert y \right \vert \right \vert}_2 = {\left \vert \left \vert V^\prime z \right \vert \right \vert}_2 = {\left \vert \left \vert z \right \vert \right \vert}_2 = \sqrt{{\left \vert \left \vert z_1 \right \vert \right \vert}_2^2 + {\left \vert \left \vert z_2 \right \vert \right \vert}_2^2}\)</span>. This is done by setting <span class="math inline">\(z_2=0\)</span>, which we can do since <span class="math inline">\(z_2\)</span> does not affect the equation above. (It is multiplied by all the <span class="math inline">\(0\)</span> rows of <span class="math inline">\(\Sigma\)</span>.) So, the minimum norm solution is</p>
+<p>So, <span class="math inline">\(z_1 = \begin{bmatrix} \sigma_1^{-1} &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; \sigma_r^{-1} \end{bmatrix} c_1\)</span>. We want to minimize <span class="math inline">\(\left \vert \left \vert y \right \vert \right \vert_2 = \left \vert \left \vert V^\prime z \right \vert \right \vert_2 = \left \vert \left \vert z \right \vert \right \vert_2 = \sqrt{\left \vert \left \vert z_1 \right \vert \right \vert_2^2 + \left \vert \left \vert z_2 \right \vert \right \vert_2^2}\)</span>. This is done by setting <span class="math inline">\(z_2=0\)</span>, which we can do since <span class="math inline">\(z_2\)</span> does not affect the equation above. (It is multiplied by all the <span class="math inline">\(0\)</span> rows of <span class="math inline">\(\Sigma\)</span>.) So, the minimum norm solution is</p>
 <p><span class="math display">\[\begin{aligned}
   x &amp;= V
     \begin{bmatrix}
@@ -254,53 +289,54 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 \end{aligned}\]</span></p>
 </div>
 
-<p>For the solution to example <a href="singular-value-decomposition-svd.html#exm:svd-problem-2">1.10</a>, we’ll need the following result:</p>
+<p>For the solution to example <a href="singular-value-decomposition-svd.html#exm:svd-problem-2">10</a>, we’ll need the following result:</p>
 
 <div class="lemma">
-<p><span id="lem:unnamed-chunk-34" class="lemma"><strong>Lemma 1.12  </strong></span> Let <span class="math inline">\(D\)</span> be a non-zero diagonal matrix of size <span class="math inline">\(n \times m\)</span>, <span class="math inline">\(n\ge m\)</span>. Then, <span class="math display">\[{\left \vert \left \vert D \right \vert \right \vert}_2 = \max_i |D_{ii}|\]</span>.</p>
+<p><span id="lem:unnamed-chunk-34" class="lemma"><strong>Lemma 12  </strong></span>
+Let <span class="math inline">\(D\)</span> be a non-zero diagonal matrix of size <span class="math inline">\(n \times m\)</span>, <span class="math inline">\(n\ge m\)</span>. Then, <span class="math display">\[\left \vert \left \vert D \right \vert \right \vert_2 = \max_i |D_{ii}|\]</span>.</p>
 </div>
 
 
 <div class="proof">
-<p> <span class="proof"><em>Proof. </em></span> Note that <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_2 = \max_{{\left \vert \left \vert v \right \vert \right \vert}_2 = 1} {\left \vert \left \vert Av \right \vert \right \vert}_2\)</span>. Also, if we let <span class="math inline">\(D_{ii} = \max_{j} |D_{jj}|\)</span> and <span class="math inline">\(v\)</span> be a vector with norm <span class="math inline">\(1\)</span>,</p>
+<p> <span class="proof"><em>Proof. </em></span> Note that <span class="math inline">\(\left \vert \left \vert A \right \vert \right \vert_2 = \max_{\left \vert \left \vert v \right \vert \right \vert_2 = 1} \left \vert \left \vert Av \right \vert \right \vert_2\)</span>. Also, if we let <span class="math inline">\(D_{ii} = \max_{j} |D_{jj}|\)</span> and <span class="math inline">\(v\)</span> be a vector with norm <span class="math inline">\(1\)</span>,</p>
 <p><span class="math display">\[
-  {\left \vert \left \vert Dv \right \vert \right \vert}_2^2 = \sum_{j=1}^m (D_{jj}^2 v_j)^2 \leq D_{ii}^2 \sum_{j=1}^m v_j^2 = D_{ii}^2 {\left \vert \left \vert v \right \vert \right \vert}_2^2 = D_{ii}^2.
+  \left \vert \left \vert Dv \right \vert \right \vert_2^2 = \sum_{j=1}^m (D_{jj}^2 v_j)^2 \leq D_{ii}^2 \sum_{j=1}^m v_j^2 = D_{ii}^2 \left \vert \left \vert v \right \vert \right \vert_2^2 = D_{ii}^2.
 \]</span></p>
-<p>Now, let <span class="math inline">\(z \in {\mathbb{R}}^m\)</span> such that <span class="math inline">\(z_{ij} = \left\{ \begin{matrix} 0, &amp; j \neq i \\ \frac{D_{ii}}{|D_{ii}|}, &amp; j = i \end{matrix} \right .\)</span>. Then <span class="math inline">\({\left \vert \left \vert z \right \vert \right \vert}_2 = \sqrt{\frac{D_{ii}^2}{|D_{ii}|^2}} = 1\)</span>, and</p>
+<p>Now, let <span class="math inline">\(z \in \mathbb{R}^m\)</span> such that <span class="math inline">\(z_{ij} = \left\{ \begin{matrix} 0, &amp; j \neq i \\ \frac{D_{ii}}{|D_{ii}|}, &amp; j = i \end{matrix} \right .\)</span>. Then <span class="math inline">\(\left \vert \left \vert z \right \vert \right \vert_2 = \sqrt{\frac{D_{ii}^2}{|D_{ii}|^2}} = 1\)</span>, and</p>
 <p><span class="math display">\[
-  {\left \vert \left \vert Dz \right \vert \right \vert}_2^2 = \sum_{j=1}^m (D_{jj} z_j)^2 = D_{ii}^2 \frac{D_{ii}^2}{|D_{ii}|^2} = D_{ii}^2.
+  \left \vert \left \vert Dz \right \vert \right \vert_2^2 = \sum_{j=1}^m (D_{jj} z_j)^2 = D_{ii}^2 \frac{D_{ii}^2}{|D_{ii}|^2} = D_{ii}^2.
 \]</span></p>
-<p>Since <span class="math inline">\({\left \vert \left \vert z \right \vert \right \vert}_2 = 1\)</span>,</p>
-<p><span class="math display">\[ D_{ii}^2 {\left \vert \left \vert Dz \right \vert \right \vert}_2^2 \le (\max_{{\left \vert \left \vert v \right \vert \right \vert}_2 = 1} |D_{ii}|)^2 \le D_{ii}^2\]</span>,</p>
-<p>so <span class="math inline">\({\left \vert \left \vert D \right \vert \right \vert}_2 = \max_{{\left \vert \left \vert v \right \vert \right \vert}_2 = 1} |D_{ii}| = |D_{ii}| = max_{j} |D_{jj}|\)</span>.</p>
+<p>Since <span class="math inline">\(\left \vert \left \vert z \right \vert \right \vert_2 = 1\)</span>,</p>
+<p><span class="math display">\[ D_{ii}^2 \left \vert \left \vert Dz \right \vert \right \vert_2^2 \le (\max_{\left \vert \left \vert v \right \vert \right \vert_2 = 1} |D_{ii}|)^2 \le D_{ii}^2\]</span>,</p>
+<p>so <span class="math inline">\(\left \vert \left \vert D \right \vert \right \vert_2 = \max_{\left \vert \left \vert v \right \vert \right \vert_2 = 1} |D_{ii}| = |D_{ii}| = max_{j} |D_{jj}|\)</span>.</p>
 </div>
 
 
 <div class="solution">
-<p> <span class="solution"><em>Solution</em> (Solution to example <a href="singular-value-decomposition-svd.html#exm:svd-problem-2">1.10</a>). </span> First, use the SVD of <span class="math inline">\(A\)</span> to write <span class="math inline">\(A = U \Sigma V^\prime\)</span>. Now, since the 2-norm is invariant under multiplication of orthogonal matrices, we have that</p>
+<p> <span class="solution"><em>Solution</em> (Solution to example <a href="singular-value-decomposition-svd.html#exm:svd-problem-2">10</a>). </span> First, use the SVD of <span class="math inline">\(A\)</span> to write <span class="math inline">\(A = U \Sigma V^\prime\)</span>. Now, since the 2-norm is invariant under multiplication of orthogonal matrices, we have that</p>
 <p><span class="math display">\[\begin{aligned}
-  {\left \vert \left \vert A \right \vert \right \vert}_2 &amp;= \max_{{\left \vert \left \vert v \right \vert \right \vert} = 2} {\left \vert \left \vert U\Sigma V^\prime v \right \vert \right \vert}_2 \\
-             &amp;= \max_{{\left \vert \left \vert v \right \vert \right \vert} = 2} {\left \vert \left \vert \Sigma V^\prime v \right \vert \right \vert}_2.
+  \left \vert \left \vert A \right \vert \right \vert_2 &amp;= \max_{\left \vert \left \vert v \right \vert \right \vert = 2} \left \vert \left \vert U\Sigma V^\prime v \right \vert \right \vert_2 \\
+             &amp;= \max_{\left \vert \left \vert v \right \vert \right \vert = 2} \left \vert \left \vert \Sigma V^\prime v \right \vert \right \vert_2.
 \end{aligned}\]</span></p>
-<p>If we let <span class="math inline">\(z = V^\prime v\)</span>, we see that <span class="math inline">\({\left \vert \left \vert z \right \vert \right \vert}_2 = {\left \vert \left \vert v \right \vert \right \vert}_2 = 1\)</span>, since <span class="math inline">\(V^\prime\)</span> is an orthogonal matrix. Hence,</p>
+<p>If we let <span class="math inline">\(z = V^\prime v\)</span>, we see that <span class="math inline">\(\left \vert \left \vert z \right \vert \right \vert_2 = \left \vert \left \vert v \right \vert \right \vert_2 = 1\)</span>, since <span class="math inline">\(V^\prime\)</span> is an orthogonal matrix. Hence,</p>
 <p><span class="math display">\[
-  {\left \vert \left \vert A \right \vert \right \vert}_2 = \max_{{\left \vert \left \vert z \right \vert \right \vert}_2 = 1} {\left \vert \left \vert \Sigma z \right \vert \right \vert}_2 = {\left \vert \left \vert \Sigma \right \vert \right \vert}_2 = \max_{i} |\sigma_i| =  \sigma_1,
+  \left \vert \left \vert A \right \vert \right \vert_2 = \max_{\left \vert \left \vert z \right \vert \right \vert_2 = 1} \left \vert \left \vert \Sigma z \right \vert \right \vert_2 = \left \vert \left \vert \Sigma \right \vert \right \vert_2 = \max_{i} |\sigma_i| =  \sigma_1,
 \]</span></p>
 where we used the lemma above to obtain the second to last equality.
 </div>
 
 
 <div class="solution">
-<p> <span class="solution"><em>Solution</em> (Solution to example <a href="singular-value-decomposition-svd.html#exm:svd-problem-3">1.11</a>). </span> Recall, <span class="math inline">\(A = \sum_{i=1}^n \sigma_i u_i v_i^\prime = U \Sigma V^\prime\)</span>. We want to find <span class="math inline">\({\text{argmin}}_{\text{rank}(Y) \le k} {\left \vert \left \vert A-Y \right \vert \right \vert}_F\)</span>.</p>
+<p> <span class="solution"><em>Solution</em> (Solution to example <a href="singular-value-decomposition-svd.html#exm:svd-problem-3">11</a>). </span> Recall, <span class="math inline">\(A = \sum_{i=1}^n \sigma_i u_i v_i^\prime = U \Sigma V^\prime\)</span>. We want to find <span class="math inline">\(\text{argmin}_{\text{rank}(Y) \le k} \left \vert \left \vert A-Y \right \vert \right \vert_F\)</span>.</p>
 <p>Case 1: If <span class="math inline">\(\text{rank}(A) \le k\)</span>, then <span class="math inline">\(Y = A\)</span> is the solution.</p>
 <p>Case 2: <span class="math inline">\(\text{rank}(A) &gt; k\)</span>. Since the Frobenius norm is orthogonally invariant, we can obtain that</p>
 <p><span class="math display">\[\begin{aligned}
-  {\left \vert \left \vert A-Y \right \vert \right \vert}_F^2 &amp;= {\left \vert \left \vert U\Sigma V^\prime - Y \right \vert \right \vert}_F^2 \\
-                 &amp;= {\left \vert \left \vert \Sigma - U^\prime Y V \right \vert \right \vert}_F^2.
+  \left \vert \left \vert A-Y \right \vert \right \vert_F^2 &amp;= \left \vert \left \vert U\Sigma V^\prime - Y \right \vert \right \vert_F^2 \\
+                 &amp;= \left \vert \left \vert \Sigma - U^\prime Y V \right \vert \right \vert_F^2.
 \end{aligned}\]</span></p>
 <p>If we let <span class="math inline">\(X = U^\prime Y V\)</span>, we get that</p>
 <p><span class="math display">\[\begin{aligned}
-  {\left \vert \left \vert A-Y \right \vert \right \vert}_F^2 &amp;= \sum_{i=1}^n \sum_{j=1}^m (\sigma_{ij} - x_{ij})^2 \\
+  \left \vert \left \vert A-Y \right \vert \right \vert_F^2 &amp;= \sum_{i=1}^n \sum_{j=1}^m (\sigma_{ij} - x_{ij})^2 \\
                  &amp;= \sum_{i=1}^n \sum_{j=1,i\ne j}^m ( - x_{ij})^2  + \sum_{i=1}^n (\sigma_i - x_{ij})^2,
 \end{aligned}\]</span></p>
 <p>since <span class="math inline">\(\sigma_{ij}=0\)</span> for all <span class="math inline">\(i \ne j\)</span>, and at most <span class="math inline">\(k\)</span> of the <span class="math inline">\(\sigma_{ii}\)</span> are non-zero. To minimize the expression above, we choose <span class="math inline">\(Y\)</span> such that <span class="math inline">\(x_{ij}=0\)</span> for <span class="math inline">\(i\ne j\)</span>, and <span class="math inline">\(x_{ii} = \sigma_i\)</span>. Hence,</p>
@@ -318,24 +354,24 @@ where we used the lemma above to obtain the second to last equality.
 </div>
 </div>
 <div id="existence-and-properties" class="section level3">
-<h3><span class="header-section-number">1.4.3</span> Existence and Properties</h3>
+<h3><span class="header-section-number">1.3.3</span> Existence and Properties</h3>
 
 <div class="proof">
-<p> <span class="proof"><em>Proof</em> (SVD (<a href="singular-value-decomposition-svd.html#thm:svd">1.3</a>)). </span> Recall that <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_2 = \sup_{v \ne 0} \frac{{\left \vert \left \vert Av \right \vert \right \vert}_2}{{\left \vert \left \vert v \right \vert \right \vert}_2} = \max_{{\left \vert \left \vert v \right \vert \right \vert}_2 = 1} {\left \vert \left \vert Av \right \vert \right \vert}_2\)</span>. I.e. there exists a <span class="math inline">\(v_1\)</span> such that <span class="math inline">\({\left \vert \left \vert v_1 \right \vert \right \vert}_2 = 1\)</span> and <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_2 = {\left \vert \left \vert Av_1 \right \vert \right \vert}_2\)</span>.</p>
-<p>Let <span class="math inline">\(u_1\)</span> be a vector such that <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_2 u_1 = Av_1\)</span>. This implies that <span class="math inline">\({\left \vert \left \vert u_1 \right \vert \right \vert}_2 = 1\)</span>, since <span class="math inline">\({\left \vert \left \vert {\left \vert \left \vert A \right \vert \right \vert}_2u_1 \right \vert \right \vert}_2 = {\left \vert \left \vert A \right \vert \right \vert}_2 {\left \vert \left \vert u_1 \right \vert \right \vert}_2 = {\left \vert \left \vert Av_1 \right \vert \right \vert}_2 = {\left \vert \left \vert A \right \vert \right \vert}_2\)</span>.</p>
-<p>Let <span class="math inline">\(\sigma_1 = {\left \vert \left \vert A \right \vert \right \vert}_2\)</span>. So, <span class="math inline">\(\sigma_1 u_1 = A v_1\)</span>. Using the Gram-Schmidt procedure, we can create a matrix <span class="math inline">\(V_1 \in {\mathbb{R}}^{n\times (n-1)}\)</span> and <span class="math inline">\(\tilde{U}_1 = \begin{bmatrix} u_1 V_1 \end{bmatrix} \in {\mathbb{R}}^{n \times n}\)</span> being an orthogonal matrix. Similarly, we can create <span class="math inline">\(\tilde{V}_1 \in {\mathbb{R}}^{m\times m}\)</span> such that <span class="math inline">\(\tilde{V}_1 = \begin{bmatrix} v_1 V_1 \end{bmatrix} \in {\mathbb{R}}^{m \times m}\)</span> is orthogonal.</p>
+<p> <span class="proof"><em>Proof</em> (SVD (<a href="singular-value-decomposition-svd.html#thm:svd">3</a>)). </span> Recall that <span class="math inline">\(\left \vert \left \vert A \right \vert \right \vert_2 = \sup_{v \ne 0} \frac{\left \vert \left \vert Av \right \vert \right \vert_2}{\left \vert \left \vert v \right \vert \right \vert_2} = \max_{\left \vert \left \vert v \right \vert \right \vert_2 = 1} \left \vert \left \vert Av \right \vert \right \vert_2\)</span>. I.e. there exists a <span class="math inline">\(v_1\)</span> such that <span class="math inline">\(\left \vert \left \vert v_1 \right \vert \right \vert_2 = 1\)</span> and <span class="math inline">\(\left \vert \left \vert A \right \vert \right \vert_2 = \left \vert \left \vert Av_1 \right \vert \right \vert_2\)</span>.</p>
+<p>Let <span class="math inline">\(u_1\)</span> be a vector such that <span class="math inline">\(\left \vert \left \vert A \right \vert \right \vert_2 u_1 = Av_1\)</span>. This implies that <span class="math inline">\(\left \vert \left \vert u_1 \right \vert \right \vert_2 = 1\)</span>, since <span class="math inline">\(\left \vert \left \vert \left \vert \left \vert A \right \vert \right \vert_2u_1 \right \vert \right \vert_2 = \left \vert \left \vert A \right \vert \right \vert_2 \left \vert \left \vert u_1 \right \vert \right \vert_2 = \left \vert \left \vert Av_1 \right \vert \right \vert_2 = \left \vert \left \vert A \right \vert \right \vert_2\)</span>.</p>
+<p>Let <span class="math inline">\(\sigma_1 = \left \vert \left \vert A \right \vert \right \vert_2\)</span>. So, <span class="math inline">\(\sigma_1 u_1 = A v_1\)</span>. Using the Gram-Schmidt procedure, we can create a matrix <span class="math inline">\(V_1 \in \mathbb{R}^{n\times (n-1)}\)</span> and <span class="math inline">\(\tilde{U}_1 = \begin{bmatrix} u_1 V_1 \end{bmatrix} \in \mathbb{R}^{n \times n}\)</span> being an orthogonal matrix. Similarly, we can create <span class="math inline">\(\tilde{V}_1 \in \mathbb{R}^{m\times m}\)</span> such that <span class="math inline">\(\tilde{V}_1 = \begin{bmatrix} v_1 V_1 \end{bmatrix} \in \mathbb{R}^{m \times m}\)</span> is orthogonal.</p>
 <p>Now, <span class="math inline">\(A \tilde{V}_1 = \begin{bmatrix} Av_1 &amp; AV_1 \end{bmatrix} = \begin{bmatrix} \sigma_1 u_1 &amp; AV_1 \end{bmatrix}\)</span>. Hence, <span class="math inline">\(\tilde{U}_1^\prime A \tilde{V}_1 = \begin{bmatrix} u_1 \\ U_1^\prime \end{bmatrix} \begin{bmatrix} \sigma_1 u_1 &amp; A V_1 \end{bmatrix} = \begin{bmatrix} \sigma_1 &amp; w^\prime \\ 0 &amp; \tilde{A} \end{bmatrix}\)</span>, since <span class="math inline">\(u_1\)</span> is orthogonal to all columns of <span class="math inline">\(U_1^\prime\)</span>. We need to show that <span class="math inline">\(w=0\)</span>. Since the 2-norm is orthogonally invariant, it holds for any <span class="math inline">\(z \ne 0\)</span>,</p>
 <p><span class="math display">\[\begin{aligned}
-  \sigma_1^2 &amp;= {\left \vert \left \vert A \right \vert \right \vert}_2^2 \\
-             &amp;= {\left \vert \left \vert \tilde{U}_1^\prime A \tilde{V}_1 \right \vert \right \vert}_2^2 \\
-             &amp;= {\left \vert \left \vert \begin{bmatrix} \sigma_1 &amp; w^\prime \\ 0 &amp; \tilde{A} \end{bmatrix} \right \vert \right \vert}_2^2 \\
-             &amp;\ge \frac{{\left \vert \left \vert \begin{bmatrix} \sigma_1 &amp; w^\prime \\ 0 &amp; \tilde{A} \end{bmatrix} z \right \vert \right \vert}_2^2}{{\left \vert \left \vert z \right \vert \right \vert}_2^2}.
+  \sigma_1^2 &amp;= \left \vert \left \vert A \right \vert \right \vert_2^2 \\
+             &amp;= \left \vert \left \vert \tilde{U}_1^\prime A \tilde{V}_1 \right \vert \right \vert_2^2 \\
+             &amp;= \left \vert \left \vert \begin{bmatrix} \sigma_1 &amp; w^\prime \\ 0 &amp; \tilde{A} \end{bmatrix} \right \vert \right \vert_2^2 \\
+             &amp;\ge \frac{\left \vert \left \vert \begin{bmatrix} \sigma_1 &amp; w^\prime \\ 0 &amp; \tilde{A} \end{bmatrix} z \right \vert \right \vert_2^2}{\left \vert \left \vert z \right \vert \right \vert_2^2}.
 \end{aligned}\]</span></p>
 <p>Let <span class="math inline">\(z = \begin{bmatrix} \sigma_1 \\ w \end{bmatrix}\)</span>. Then,</p>
 <p><span class="math display">\[
-  \sigma_1^2 \ge \frac{{\left \vert \left \vert \begin{bmatrix} \sigma_1 &amp; w^\prime \\ 0 &amp; \tilde{A} \end{bmatrix} \begin{bmatrix} \sigma_1 \\ w \end{bmatrix} \right \vert \right \vert}_2^2}{{\left \vert \left \vert \begin{bmatrix} \sigma_1 \\ w \end{bmatrix} \right \vert \right \vert}_2^2} = \frac{(\sigma_1^2 + {\left \vert \left \vert w \right \vert \right \vert}_2^2)^2 + {\left \vert \left \vert \tilde{A}w \right \vert \right \vert}_2^2}{\sigma_1^2 + {\left \vert \left \vert w \right \vert \right \vert}_2^2}\ge \sigma_1^2 + {\left \vert \left \vert w \right \vert \right \vert}_2^2 \ge \sigma_1^2,
+  \sigma_1^2 \ge \frac{\left \vert \left \vert \begin{bmatrix} \sigma_1 &amp; w^\prime \\ 0 &amp; \tilde{A} \end{bmatrix} \begin{bmatrix} \sigma_1 \\ w \end{bmatrix} \right \vert \right \vert_2^2}{\left \vert \left \vert \begin{bmatrix} \sigma_1 \\ w \end{bmatrix} \right \vert \right \vert_2^2} = \frac{(\sigma_1^2 + \left \vert \left \vert w \right \vert \right \vert_2^2)^2 + \left \vert \left \vert \tilde{A}w \right \vert \right \vert_2^2}{\sigma_1^2 + \left \vert \left \vert w \right \vert \right \vert_2^2}\ge \sigma_1^2 + \left \vert \left \vert w \right \vert \right \vert_2^2 \ge \sigma_1^2,
 \]</span></p>
-<p>i.e. <span class="math inline">\({\left \vert \left \vert w \right \vert \right \vert}_2^2 = 0\)</span>. So,</p>
+<p>i.e. <span class="math inline">\(\left \vert \left \vert w \right \vert \right \vert_2^2 = 0\)</span>. So,</p>
 <p><span class="math display">\[
   \tilde{U}_1 A V_1 = \begin{bmatrix} \sigma_1 &amp; 0 \\ 0 &amp; \tilde{A} \end{bmatrix}.
 \]</span></p>
@@ -344,37 +380,39 @@ Repeat the same procedure to get <span class="math inline">\(U, V\)</span> such 
 
 
 <div class="corollary">
-<span id="cor:unnamed-chunk-39" class="corollary"><strong>Corollary 1.2  </strong></span><span class="math inline">\(\text{rank}(A)\)</span> is exactly the number of non-zero singular values of <span class="math inline">\(A\)</span>.
+<span id="cor:unnamed-chunk-39" class="corollary"><strong>Corollary 2  </strong></span><span class="math inline">\(\text{rank}(A)\)</span> is exactly the number of non-zero singular values of <span class="math inline">\(A\)</span>.
 </div>
 
 
 <div class="proof">
-<p> <span class="proof"><em>Proof. </em></span>  <span class="math inline">\(\text{rank}(A) = \text{rank}(U \Sigma V^\prime ) = \text{rank}(\Sigma) =\)</span> number of non-zero diagonal elements.</p>
+<p> <span class="proof"><em>Proof. </em></span> 
+<span class="math inline">\(\text{rank}(A) = \text{rank}(U \Sigma V^\prime ) = \text{rank}(\Sigma) =\)</span> number of non-zero diagonal elements.</p>
 </div>
 
 
 <div class="corollary">
-<p><span id="cor:sigma-min-max" class="corollary"><strong>Corollary 1.3  </strong></span>Let <span class="math inline">\(A,E \in {\mathbb{R}}^{n\times m}\)</span>, <span class="math inline">\(\sigma_{\text{max}}\)</span> (<span class="math inline">\(\sigma_{\text{min}}\)</span>) denote the largest (smallest) singular value of A. Then</p>
+<p><span id="cor:sigma-min-max" class="corollary"><strong>Corollary 3  </strong></span>Let <span class="math inline">\(A,E \in \mathbb{R}^{n\times m}\)</span>, <span class="math inline">\(\sigma_{\text{max}}\)</span> (<span class="math inline">\(\sigma_{\text{min}}\)</span>) denote the largest (smallest) singular value of A. Then</p>
 <p><span class="math display">\[
-  \sigma_{\text{max}}(A+E) \le \sigma_{\text{max}}(A) + {\left \vert \left \vert E \right \vert \right \vert}_2
+  \sigma_{\text{max}}(A+E) \le \sigma_{\text{max}}(A) + \left \vert \left \vert E \right \vert \right \vert_2
 \]</span></p>
 <p>and</p>
 <p><span class="math display">\[
-  \sigma_{\text{min}}(A+E) \ge \sigma_{\text{min}}(A) - {\left \vert \left \vert E \right \vert \right \vert}_2.
+  \sigma_{\text{min}}(A+E) \ge \sigma_{\text{min}}(A) - \left \vert \left \vert E \right \vert \right \vert_2.
 \]</span></p>
 </div>
 
 
 <div class="corollary">
-<p><span id="cor:hoffman-wielandt" class="corollary"><strong>Corollary 1.4  (Hoffman-Wielandt Inequality)  </strong></span>Let <span class="math inline">\(A,E \in {\mathbb{R}}^{n \times m}\)</span>, <span class="math inline">\(\sigma_k(\dot)\)</span> denote the k’th largest singular value. Let <span class="math inline">\(p =\min(m,n) \le {\left \vert \left \vert E \right \vert \right \vert}_F^2\)</span>. Then</p>
+<p><span id="cor:hoffman-wielandt" class="corollary"><strong>Corollary 4  (Hoffman-Wielandt Inequality)  </strong></span>Let <span class="math inline">\(A,E \in \mathbb{R}^{n \times m}\)</span>, <span class="math inline">\(\sigma_k(\dot)\)</span> denote the k’th largest singular value. Let <span class="math inline">\(p =\min(m,n) \le \left \vert \left \vert E \right \vert \right \vert_F^2\)</span>. Then</p>
 <p><span class="math display">\[
-  \sum_{k=1}^p (\sigma_k(A+E) - \sigma_k(A))^2 \le {\left \vert \left \vert E \right \vert \right \vert}_F^2.
+  \sum_{k=1}^p (\sigma_k(A+E) - \sigma_k(A))^2 \le \left \vert \left \vert E \right \vert \right \vert_F^2.
 \]</span></p>
 </div>
 
 
 <div class="corollary">
-<p><span id="cor:for-q703" class="corollary"><strong>Corollary 1.5  </strong></span> Let <span class="math inline">\(r = \text{rank}(A)\)</span>.</p>
+<p><span id="cor:for-q703" class="corollary"><strong>Corollary 5  </strong></span>
+Let <span class="math inline">\(r = \text{rank}(A)\)</span>.</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(\text{range}(A) = \text{span}(u_1, \ldots, u_r)\)</span></li>
 <li>row space of A <span class="math inline">\(= \text{span}(v_1, \ldots, v_r)\)</span></li>
@@ -393,7 +431,7 @@ where <span class="math inline">\(P_{\mathcal{B}}\)</span> is the projection ont
 
 
 <div class="definition">
-<p><span id="def:pseudo-inverse" class="definition"><strong>Definition 1.9  (Pseudo-inverse)  </strong></span>For a matrix <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span>, we call <span class="math inline">\(A^+ \in {\mathbb{R}}^{m\times n}\)</span> a pseudo-inverse to <span class="math inline">\(A\)</span> if</p>
+<p><span id="def:pseudo-inverse" class="definition"><strong>Definition 9  (Pseudo-inverse)  </strong></span>For a matrix <span class="math inline">\(A \in \mathbb{R}^{n\times m}\)</span>, we call <span class="math inline">\(A^+ \in \mathbb{R}^{m\times n}\)</span> a pseudo-inverse to <span class="math inline">\(A\)</span> if</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(AA^+A = A\)</span></li>
 <li><span class="math inline">\(A^+AA^+ = A^+\)</span></li>
@@ -404,7 +442,7 @@ where <span class="math inline">\(P_{\mathcal{B}}\)</span> is the projection ont
 
 
 <div class="theorem">
-<span id="thm:unnamed-chunk-41" class="theorem"><strong>Theorem 1.4  </strong></span>For any matrix <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span>, there exists a unique pseudo-inverse <span class="math inline">\(A^+\)</span>.
+<span id="thm:unnamed-chunk-41" class="theorem"><strong>Theorem 4  </strong></span>For any matrix <span class="math inline">\(A \in \mathbb{R}^{n \times m}\)</span>, there exists a unique pseudo-inverse <span class="math inline">\(A^+\)</span>.
 </div>
 
 
@@ -432,7 +470,7 @@ where <span class="math inline">\(P_{\mathcal{B}}\)</span> is the projection ont
      &amp;= AC.
 \end{aligned}\]</span></p>
 <p>So, <span class="math inline">\(B = BAB = CAB = CAC = C\)</span>. This shows that if there exists a pseudo-inverse, it is unique.</p>
-<p>Now, let <span class="math inline">\(D \in {\mathbb{R}}^{n\times m}\)</span> be a diagonal matrix with <span class="math inline">\(d_{ii}\)</span> its diagonal elements. Then the diagonal matrix <span class="math inline">\(E \in {\mathbb{R}}^{m\times n}\)</span> with diagonal elements <span class="math inline">\(d_{ii}^{-1}\)</span> for <span class="math inline">\(d_{ii} \neq 0\)</span> and <span class="math inline">\(0\)</span> otherwise is the pseudo-inverse of <span class="math inline">\(D\)</span>.</p>
+<p>Now, let <span class="math inline">\(D \in \mathbb{R}^{n\times m}\)</span> be a diagonal matrix with <span class="math inline">\(d_{ii}\)</span> its diagonal elements. Then the diagonal matrix <span class="math inline">\(E \in \mathbb{R}^{m\times n}\)</span> with diagonal elements <span class="math inline">\(d_{ii}^{-1}\)</span> for <span class="math inline">\(d_{ii} \neq 0\)</span> and <span class="math inline">\(0\)</span> otherwise is the pseudo-inverse of <span class="math inline">\(D\)</span>.</p>
 <p>So,</p>
 <p><span class="math display">\[[DE]_{ij} = \sum_{k=1}^m D_{ik} E_{kj} = \left\{\begin{array}{rl} 0, &amp; i \neq j \\ 1, &amp; i = j, d_{ii} \neq 0 \\ 0, &amp; i = j, d_{ii} = 0 \end{array} \right .\]</span></p>
 <p>and</p>
@@ -474,58 +512,58 @@ where <span class="math inline">\(P_{\mathcal{B}}\)</span> is the projection ont
 
 </div>
 <div id="random-projections" class="section level3">
-<h3><span class="header-section-number">1.4.4</span> Random Projections</h3>
-<p>Let <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span>, <span class="math inline">\(m &gt;&gt; n\)</span>. When this is the case, it is very hard to compute the SVD. So instead we try to find a matrix <span class="math inline">\(C\)</span> with <span class="math inline">\(\text{range}(C) \approx \text{range}(A)\)</span>. In other words, <span class="math inline">\(A \approx P_{\text{range}(C)}A\)</span>. One way to find such a <span class="math inline">\(C\)</span> is to simply sample columns from <span class="math inline">\(A\)</span>.</p>
+<h3><span class="header-section-number">1.3.4</span> Random Projections</h3>
+<p>Let <span class="math inline">\(A \in \mathbb{R}^{n\times m}\)</span>, <span class="math inline">\(m &gt;&gt; n\)</span>. When this is the case, it is very hard to compute the SVD. So instead we try to find a matrix <span class="math inline">\(C\)</span> with <span class="math inline">\(\text{range}(C) \approx \text{range}(A)\)</span>. In other words, <span class="math inline">\(A \approx P_{\text{range}(C)}A\)</span>. One way to find such a <span class="math inline">\(C\)</span> is to simply sample columns from <span class="math inline">\(A\)</span>.</p>
 
 <div class="theorem">
-<p><span id="thm:unnamed-chunk-43" class="theorem"><strong>Theorem 1.5  </strong></span>Suppose <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span>, <span class="math inline">\(C\)</span> is as in the algorithm <code>inexactRankK</code> (see <a href="&#39;../Lecture%20scripts/Singular%20Value%20Decomposition.jl&#39;">here</a>), and <span class="math inline">\(H\)</span> is the <span class="math inline">\(k\)</span> left singular vectors of <span class="math inline">\(C\)</span>. Then</p>
-<p><span class="math display">\[{\left \vert \left \vert A-HH^\prime A \right \vert \right \vert}_F^2 \le {\left \vert \left \vert A-A_k \right \vert \right \vert}_F^2 + 2\sqrt{k} {\left \vert \left \vert AA^\prime - CC^\prime \right \vert \right \vert}_F,\]</span></p>
+<p><span id="thm:unnamed-chunk-43" class="theorem"><strong>Theorem 5  </strong></span>Suppose <span class="math inline">\(A \in \mathbb{R}^{n \times m}\)</span>, <span class="math inline">\(C\)</span> is as in the algorithm <code>inexactRankK</code> (see <a href="&#39;../Lecture%20scripts/Singular%20Value%20Decomposition.jl&#39;">here</a>), and <span class="math inline">\(H\)</span> is the <span class="math inline">\(k\)</span> left singular vectors of <span class="math inline">\(C\)</span>. Then</p>
+<p><span class="math display">\[\left \vert \left \vert A-HH^\prime A \right \vert \right \vert_F^2 \le \left \vert \left \vert A-A_k \right \vert \right \vert_F^2 + 2\sqrt{k} \left \vert \left \vert AA^\prime - CC^\prime \right \vert \right \vert_F,\]</span></p>
 where <span class="math inline">\(A_k\)</span> is the rank <span class="math inline">\(k\)</span> approximation of <span class="math inline">\(A\)</span>.
 </div>
 
 
 <div class="proof">
-<p> <span class="proof"><em>Proof. </em></span> Recall that <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}_F^2 = \text{tr}(A^\prime A)\)</span>, and <span class="math inline">\(H^\prime H = I\)</span>, since the columns of <span class="math inline">\(H\)</span> are singular vectors, i.e. are orthogonal to each other.</p>
+<p> <span class="proof"><em>Proof. </em></span> Recall that <span class="math inline">\(\left \vert \left \vert A \right \vert \right \vert_F^2 = \text{tr}(A^\prime A)\)</span>, and <span class="math inline">\(H^\prime H = I\)</span>, since the columns of <span class="math inline">\(H\)</span> are singular vectors, i.e. are orthogonal to each other.</p>
 <p><span class="math display">\[\begin{aligned}
-  {\left \vert \left \vert A - HH^\prime A \right \vert \right \vert}_F^2 &amp;= \text{tr}((A-HH^\prime A)^\prime (A-HH^\prime A)) \\
+  \left \vert \left \vert A - HH^\prime A \right \vert \right \vert_F^2 &amp;= \text{tr}((A-HH^\prime A)^\prime (A-HH^\prime A)) \\
                             &amp;= \text{tr}((A^\prime - A^\prime H H^\prime)(A-HH^\prime A)) \\
                             &amp;= \text{tr}(A^\prime A - A^\prime H H^\prime A - A^\prime HH^\prime A + A^\prime H H^\prime HH^\prime A) \\
                             &amp;= \text{tr}(A^\prime A - A^\prime H H^\prime A) \\
                             &amp;= \text{tr}(A^\prime A) - \text{tr}(A^\prime H H^\prime A) \\
-                            &amp;= {\left \vert \left \vert A \right \vert \right \vert}_F^2 - {\left \vert \left \vert A^\prime H \right \vert \right \vert}.
+                            &amp;= \left \vert \left \vert A \right \vert \right \vert_F^2 - \left \vert \left \vert A^\prime H \right \vert \right \vert.
 \end{aligned}\]</span></p>
 <p>Since</p>
 <p><span class="math display">\[
-  {\left \vert \left \vert A \right \vert \right \vert}_F^2 = {\left \vert \left \vert A-A_k \right \vert \right \vert}_F^2 + \sum_{j=1}^k \sigma_j^2(A),
+  \left \vert \left \vert A \right \vert \right \vert_F^2 = \left \vert \left \vert A-A_k \right \vert \right \vert_F^2 + \sum_{j=1}^k \sigma_j^2(A),
 \]</span></p>
 <p>we have that</p>
 <p><span class="math display">\[\begin{aligned}
-  {\left \vert \left \vert A-H H^\prime A \right \vert \right \vert}_F^2 &amp;= {\left \vert \left \vert A-A_k \right \vert \right \vert}_F^2 + \sum_{j=1}^k \sigma_j^2(A) - {\left \vert \left \vert A^\prime H \right \vert \right \vert}_F^2 \\
-                            &amp;= {\left \vert \left \vert A-A_k \right \vert \right \vert}_F^2 + \sum_{j=1}^k \left[\sigma_j^2(A) - \sigma_j^2(C)\right] + \sum_{j=1}^k \sigma_j^2{C} - {\left \vert \left \vert A^\prime H \right \vert \right \vert}_F^2. 
+  \left \vert \left \vert A-H H^\prime A \right \vert \right \vert_F^2 &amp;= \left \vert \left \vert A-A_k \right \vert \right \vert_F^2 + \sum_{j=1}^k \sigma_j^2(A) - \left \vert \left \vert A^\prime H \right \vert \right \vert_F^2 \\
+                            &amp;= \left \vert \left \vert A-A_k \right \vert \right \vert_F^2 + \sum_{j=1}^k \left[\sigma_j^2(A) - \sigma_j^2(C)\right] + \sum_{j=1}^k \sigma_j^2{C} - \left \vert \left \vert A^\prime H \right \vert \right \vert_F^2. 
 \end{aligned}\]</span></p>
 <p>Note that, using the Cauchy-Schwarts inequality, we get</p>
 <p><span class="math display">\[\begin{aligned}
   \sum_{j=1}^k \left[\sigma_j^2(A) - \sigma_j^2(C)\right] &amp;= \left | \begin{bmatrix} 1 \\ \vdots \\ 1 \end{bmatrix} \cdot \begin{bmatrix} \sigma_1^2(A) - \sigma_1^2(C) &amp; \cdots &amp; \sigma_k^2(A) - \sigma_k^2(C) \end{bmatrix} \right | \\
-                                                          &amp;\le \sqrt{{\left \vert \left \vert \begin{bmatrix} 1 \\ \vdots \\ 1 \end{bmatrix} \right \vert \right \vert} {\left \vert \left \vert \begin{bmatrix} \sigma_1^2(A) - \sigma_1^2(C) &amp; \cdots &amp; \sigma_k^2(A) - \sigma_k^2(C) \end{bmatrix} \right \vert \right \vert}} \\
+                                                          &amp;\le \sqrt{\left \vert \left \vert \begin{bmatrix} 1 \\ \vdots \\ 1 \end{bmatrix} \right \vert \right \vert \left \vert \left \vert \begin{bmatrix} \sigma_1^2(A) - \sigma_1^2(C) &amp; \cdots &amp; \sigma_k^2(A) - \sigma_k^2(C) \end{bmatrix} \right \vert \right \vert} \\
                                                           &amp;= \sqrt{k} \sqrt{\sum_{j=1}^k \left(\sigma_j^2(A) - \sigma_j^2(C)\right)^2} \\
                                                           &amp;\le \sqrt{k} \sqrt{\sum_{j=1}^k \left(\sigma_j(AA^\prime) - \sigma_j(CC^\prime)\right)^2} \\
                                                           &amp;= \sqrt{k} \sqrt{\sum_{j=1}^k \left(\sigma_j(CC^\prime + AA^\prime - CC^\prime) - \sigma_j(CC^\prime)\right)^2} \\
-                                                          &amp;\le \sqrt{k} {\left \vert \left \vert AA^\prime - CC^\prime \right \vert \right \vert}_F.
+                                                          &amp;\le \sqrt{k} \left \vert \left \vert AA^\prime - CC^\prime \right \vert \right \vert_F.
 \end{aligned}\]</span></p>
 <p>If <span class="math inline">\(H_1, \ldots, H_k\)</span> denote columns of <span class="math inline">\(H\)</span>, then <span class="math inline">\(A^\prime H = \begin{bmatrix} A^\prime H_1 &amp; \cdots &amp; A^\prime H_k \end{bmatrix}\)</span>. Since</p>
 <p><span class="math display">\[
-  {\left \vert \left \vert A^\prime H \right \vert \right \vert}_F^2 = \sum_{j=1}^k {\left \vert \left \vert A^\prime H_j \right \vert \right \vert}_2^2,
+  \left \vert \left \vert A^\prime H \right \vert \right \vert_F^2 = \sum_{j=1}^k \left \vert \left \vert A^\prime H_j \right \vert \right \vert_2^2,
 \]</span></p>
 <p>we can use Cauchy-Schwartz as above to obtain that</p>
 <p><span class="math display">\[\begin{aligned}
-  \sum_{j=1}^k \sigma_j^2(C) - {\left \vert \left \vert A^\prime H \right \vert \right \vert}_F^2 &amp;\le \sqrt{k} \sqrt{\sum_{j=1}^k \left[\sigma_j{CC^\prime} - H_j^\prime A A^\prime H_j\right]^2} \\
+  \sum_{j=1}^k \sigma_j^2(C) - \left \vert \left \vert A^\prime H \right \vert \right \vert_F^2 &amp;\le \sqrt{k} \sqrt{\sum_{j=1}^k \left[\sigma_j{CC^\prime} - H_j^\prime A A^\prime H_j\right]^2} \\
                                                      &amp;= \sqrt{k} \sqrt{\sum_{j=1}^k \left[H_j^\prime CC^\prime H_j - H_j^\prime A A^\prime H_j\right]^2} \\
-                                                     &amp;\le \sqrt{k} {\left \vert \left \vert AA^\prime - CC^\prime \right \vert \right \vert}_F,
+                                                     &amp;\le \sqrt{k} \left \vert \left \vert AA^\prime - CC^\prime \right \vert \right \vert_F,
 \end{aligned}\]</span></p>
-<p>where we in the last step use the Hoffman-Wielandt inequality (corollary <a href="singular-value-decomposition-svd.html#cor:hoffman-wielandt">1.4</a>).</p>
+<p>where we in the last step use the Hoffman-Wielandt inequality (corollary <a href="singular-value-decomposition-svd.html#cor:hoffman-wielandt">4</a>).</p>
 <p>Combining all of this, we get</p>
 <p><span class="math display">\[
-  {\left \vert \left \vert A - HH^\prime A \right \vert \right \vert}_F^2 \le {\left \vert \left \vert A-A_k \right \vert \right \vert}_F^2 + 2\sqrt{k} {\left \vert \left \vert AA^\prime - CC^\prime \right \vert \right \vert}_F.
+  \left \vert \left \vert A - HH^\prime A \right \vert \right \vert_F^2 \le \left \vert \left \vert A-A_k \right \vert \right \vert_F^2 + 2\sqrt{k} \left \vert \left \vert AA^\prime - CC^\prime \right \vert \right \vert_F.
 \]</span></p>
 </div>
 
@@ -586,7 +624,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

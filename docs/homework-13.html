@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="homework-7.html">
-<link rel="next" href="homework-9.html">
+<link rel="prev" href="homework-12.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -195,48 +195,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="homework-8" class="section level2">
-<h2><span class="header-section-number">2.8</span> Homework 8</h2>
+<div id="homework-13" class="section level2">
+<h2><span class="header-section-number">2.13</span> Homework 13</h2>
 
 <div class="exercise">
-<span id="exr:q801" class="exercise"><strong>Exercise 55  </strong></span>What is the solution to <span class="math inline">\(\min_{x} \left \vert \left \vert Ax-b \right \vert \right \vert_2^2\)</span> in terms of the Moore-Penrose inverse? (pseudo-inverse)
-</div>
-
-
-<div class="solution">
-<p> <span class="solution"><em>Solution. </em></span> To find the solution, we differentiate and set equal to <span class="math inline">\(0\)</span>. So, differentiate <span class="math inline">\(g(x) = x^\prime A^\prime A x - x^\prime A b - b^\prime A x + b^\prime b\)</span> and set to <span class="math inline">\(0\)</span>:</p>
-<p><span class="math display">\[\frac{dg}{dx} = x^\prime (A^\prime A + A^\prime A) - b^\prime A - (A^\prime b)^\prime = 2x^\prime (A^\prime A) - 2b^\prime A = 0\]</span></p>
-<p>which implies <span class="math inline">\((A A^\prime)x = b A^\prime\)</span>. Check that <span class="math inline">\(x = A^+b\)</span> satisfies this.</p>
+<span id="exr:q1301" class="exercise"><strong>Exercise 85  </strong></span>Show that the procedure @ref(conjugated_gradients) is the same as the one implemented in code provided by Patel.
 </div>
 
 
 <div class="exercise">
-<span id="exr:q802" class="exercise"><strong>Exercise 56  </strong></span>Let <span class="math inline">\(Q\)</span> be an orthogonal matrix with columns <span class="math inline">\(q_1, \ldots, q_n\)</span>. Let <span class="math inline">\(Z \in \mathbb{R}^{n \times n}\)</span> be a symmetric matrix. Show that <span class="math inline">\(\sum_{i=1}^n (q_i^\prime Z q_i)^2 \leq \left \vert \left \vert Z \right \vert \right \vert_F^2\)</span>.
+<span id="exr:q1302" class="exercise"><strong>Exercise 86  </strong></span>Prove that CG converges in finitely many steps (in exact arithmetic).
 </div>
 
 
-<div class="solution">
-<p> <span class="solution"><em>Solution. </em></span> 
-Since the frobenius norm is invariant to mulitplication by orthogonal matrices: <span class="math inline">\(\left \vert \left \vert Z \right \vert \right \vert_F^2 = \left \vert \left \vert Q^\prime Z Q \right \vert \right \vert_F^2\)</span>. Since</p>
-<p><span class="math display">\[\begin{aligned}
-   \begin{bmatrix} q_1^\prime &amp; \cdots q_n^\prime \end{bmatrix} Z \begin{bmatrix} q_1 \\ \vdots q_n \end{bmatrix} &amp;= 
-          \begin{bmatrix} q_1^\prime &amp; \cdots q_n^\prime \end{bmatrix} \begin{bmatrix} Z q_1 \\ \vdots Z q_n \end{bmatrix} \\
-  &amp;= \begin{bmatrix}  q_1^\prime Z q_1 &amp; \cdots &amp; q_1^\prime Z q_n \\
-                      \vdots &amp; \ddots &amp; \vdots \\
-                      q_n^\prime Z q_1 &amp; \cdots &amp; q_n^\prime Z q_n
-\end{bmatrix},
-\end{aligned}\]</span></p>
-<p>we have that <span class="math inline">\(\left \vert \left \vert Z \right \vert \right \vert_F^2 = \sum_{i=1}^n \sum_{j=1}^n (q_i^\prime Z q_j)^2 \ge \sum_{i=1}^n (q_i^\prime Z q_i)^2\)</span>.</p>
+<div class="exercise">
+<span id="exr:q1303" class="exercise"><strong>Exercise 87  </strong></span>Show that the limit in <a href="nonlinear-systems-of-equations.html#exm:gradient-example">12</a> holds.
 </div>
 
+
+<div class="exercise">
+<span id="exr:q1304" class="exercise"><strong>Exercise 88  </strong></span>Characterize the relationship between the Jacobian and the gradient.
 </div>
+
+
+<div class="exercise">
+<span id="exr:q1305" class="exercise"><strong>Exercise 89  </strong></span>Using IFT: when will <span class="math inline">\(F(x) = 0\)</span> have an isolated solution? (i.e. a solution where there is an open set containing that solution with no other solutions)
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1306" class="exercise"><strong>Exercise 90  </strong></span>What happens if <span class="math inline">\(F(z^*) = 0\)</span> and <span class="math inline">\(\text{rank}(J(z^*)) &lt; \min(n,m)\)</span>?
+</div>
+
+
+</div>
+<!-- </div> -->
+
+
+
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="homework-7.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="homework-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="homework-12.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,6 +1,6 @@
 # Lecture Notes
 
-### Lecture 1: 9/6 {-}
+## Lecture 1: 9/6 {-}
 
 Goals for the first few lectures:
 
@@ -27,7 +27,7 @@ iii. An exponent: $e \in \mathbb{Z}$.
 
 The representation $d_0.d_1d_2... \times \beta^e$ means $\left(d_0 + d_1\cdot \beta^{-1} + ... + d_{p-1}\beta^{-(p-1)}\right)\cdot \beta^e$.
 
-## Floating Point Format
+### Floating Point Format
 
 ```{definition}
 A fp is one that can be represented in a base $\beta$ with a fixed digit $p$ (precision), and whose exponent is between $e_{min}$ and $e_{max}$.
@@ -1685,3 +1685,236 @@ Choose $\alpha = \argmin_\alpha \norm{I - \alpha A A^\prime}_2$.
 Note that $\norm{x_{k+1} - x^*}_2 \le \norm{I-\alpha A A^\prime}_2 \norm{x_k - x^*}_2$. 
 
 Choose $\alpha = \argmin_\alpha \norm{I-\alpha A A^\prime}_2 \norm{x_k - x^*}_2$. 
+
+### Conjugate Gradient
+
+#### Orthogonal Search Directions
+
+Let $A \in \R^{d \times d}$ be a symmetric positive definite matrix, $\{x_k\}$ be a sequence where $x_0$ is arbitrary, and
+
+$$x_{k+1} = x_k - \alpha_k s_k.$$
+
+We call $\alpha_k$ the step length, and $s_k$ the search direction.
+
+The question is then: given an orthonormal set of vectors $\{s_k\}$ and an arbitrary $x_0$, how do we choose $\alpha_k$ such that we eventually find $x^*$ with $Ax^* = b$?
+
+From $\{s_k\}$, take all unique vectors: $s_0, s_1, ..., s_{d_1}$ (note: we there are at most $d$ since these are orthonormal vectors from $\R^d$). Since we assumed that $A$ is positive definite, it is invertible. Let $x^* = A^{-1}x$ and take $\alpha_k = \left<x_0 - x^*, s_k\right>$.
+
+This gives us that
+
+\begin{align}
+  x_0 - x^* &= \sum_{i=0}^{d-1} \alpha_i s_i \iff \\
+  x_0 - \sum_{i=0}^{d-1} \alpha_i s_i &= x^*
+\end{align}
+
+But since $x_k - x_{k+1} = \alpha_k s_k$, 
+
+\begin{align}
+  x^* &= x_0 - \sum_{i=0}^{d-1} \alpha_i s_i \\
+      &= x_0 - \sum_{i=0}^{d-1} (x_i - x_{i+1}) \\ 
+      &= x_d.
+\end{align}
+
+So, this choice of $\alpha_k$ ensures that we will eventually find the solution. Since $A$ is symmetric and positive definite,
+
+\begin{align}
+  \alpha_k &= (x_0 - x^*)^\prime s_k \\
+           &= (Ax_0 - Ax^*)^\prime A^{-1} s_k \\
+           &= (Ax_0 - b)^\prime A^{-1} s_k \\
+           &= \left<Ax_0 - b, s_k\right>_{A^{-1}}.
+\end{align}
+
+This shows us that our choice of $\alpha_k$ is actually the inner product of $Ax_0 - b$ and $s_k$ with respect to the matrix $A^{-1}$. But calculating $A^{-1}$ requires a lot of effort. 
+
+Now, what if we use the inner product $\left<\cdot,\cdot\right>_A$ instead? I.e. $\alpha_k = \left<x_0-x^*,s_k\right>_A = (Ax_0 - Ax^*)^\prime s_k = r_0^\prime s_k$. This we can actually calculate. The problem now is that the $s_k$'s are not orthonormal in this new metric. So, we need a way to create a set that is:
+
+#### Conjugation 
+
+```{definition, name = "Conjugated Set"}
+A set of vectors $\{s_0, \ldots, s_{d-1}\} \subset \R^d$ are ($A-$)conjugated if they are orthogonal w.r.t. the metric $<\cdot,\cdot>_A$ (i.e. $s_i^\prime A s_j = 0$ for all $i \neq j$).
+```
+
+We can use Gram-Schmidt to do this: given a set of linearly independent vectors $\{a_0, ..., a_{d-1}\}$, let $s_0 = \frac{a_0}{\norm{a_0}_A}$ and 
+
+$$
+  s_j = \frac{a_j - \sum_{i=0}^{j-1} <a_j, s_i>_A \cdot s_i}{\norm{a_j - \sum_{i=0}^{j-1} <a_j, s_i>_A \cdot s_i}_A}
+$$
+
+for all $j > 0$. 
+
+Given a set $\{s_0, ..., s_{d-1}\}$ that is $A-$conjugated and an arbitrary $x_0$, pick 
+
+$$\alpha_k = \frac{<x_0-x^*, s_k>_A}{\norm{s_k}_A} = \frac{r_0^\prime s_k}{\norm{s_k}_A}.$$
+
+```{lemma}
+Let $A \in \R^{d\times d}$ be a symmetric, positive definite matrix (i.e. all eigenvalues are positive), $b\in \R^d$ be arbitrary, and $x^* \in \R^d$ such that $Ax^* = b$. Let $\{s_0, ..., s_{d-1}\}$ be an $A-$conjugated and $A-$normalized set, and $x_0 \in \R^d$ be arbitrary. 
+
+Define the sequence $\{x_k\}$ by $x_{k+1} = x_k - \alpha_k s_k$, where $\alpha_k = r_k^\prime s_k$. 
+Then the following hold:
+
+1) $\alpha_k = r_0^\prime s_k$, 
+2) $0 = r_{k+1}^\prime s_j$ for all $j=0,1,...,k$. 
+3) $x_d = x^*$.
+
+```
+
+```{proof}
+By definition, $x_k = x_0 - \sum_{i=0}^{k-1} \alpha_i s_i$. This implies that $Ax_k = r_k = r_0 - \sum_{i=0}^{k-1} \alpha_i A s_i$. 
+
+WTS (1): 
+  
+$$\begin{aligned}
+  \alpha_k &= s_k^\prime r_k \\
+           &= s_k^\prime r_0 - \sum_{i=0}^{k-1}\alpha_i s_k^\prime A s_i \\
+           &= s_k^\prime r_0 - \sum_{i=0}^{k-1}\alpha_i <s_k,s_i>_A \\
+           &= s_k^\prime r_0
+\end{aligned}$$
+  
+WTS (2): Let $l < k$. Recall that $A$ is symmetrical, i.e. $A^\prime = A$, and $s_i^\prime A s_l = 0$ for all $i \neq l$. Now, 
+  
+$$\begin{aligned}
+  r_{k+1}^\prime s_l &= \left(r_0 - \sum_{i=0}^k \alpha_i A s_i\right)^\prime s_l \\
+                     &= r_0^\prime s_l - \sum_{i=0}^k \alpha_i s_i^\prime A^\prime s_l \\
+                     &= \alpha_l - \alpha_l s_l^\prime A s_l = 0.
+\end{aligned}$$
+  
+WTS (3): Suppose $x_d \neq x^*$. Then $r_d = Ax_d - b \neq 0$. But (2) implies that $r_d^\prime s_l = 0$ for all $l < d$. I.e. $r_d$ is linearly independent of $\text{span}\{s_0, ..., s_{d-1}\} \subset \R^d$, so $r_d$ must be $0$, which contradicts the assumption that $x_d \neq x^*$.
+
+```
+
+#### What is the choice of vectors to conjugate? (ref:conjugated_gradients)
+
+Conjugate gradient $A-$conjugates residuals $r_0, ..., r_{d-1}$. 
+
+**Step 0**: given arbitrary $x_0 \in \R^d$, compute $s_0 = \frac{r_0}{\norm{r_0}_A}$. Update the iterate to $x_1 = x_0 - \alpha_0 s_0$, where $\alpha_0 = r_0^\prime s_0$, and update the residual to $r_1 = r_0 - \alpha_0 A s_0$. 
+
+**Step 1**: 
+
+i) $U_{12} = <r_1, s_0>_A = r_1^\prime A s_0 = r_1^\prime \frac{r_0-r_1}{\alpha_0} = -\frac{\norm{r_1}^2}{\alpha_0}$, since $r_0 \perp r_1$.
+ii) Unnormalized $A-$conjugate direction: $P_1 = r_1 - U_{12} \cdot s_0$.
+iii) Normalize and compute search direction: $U_{22} = \norm{P_1}_A$ and $s_1 = \frac{P_1}{U_{22}}$. 
+
+_Update_: $x_2 = x_1 - \alpha_1 s_1$ and $r_2 = r_1 - \alpha_1 A s_1$, where $\alpha_1 = r_1^\prime s_1 = \left(r_1^\prime r_1 - U_{12} r_1^\prime s_0\right)/U_{22} = \frac{\norm{r_1}_2^2}{U_{22}}$ (since $r_1^\prime s_0 = 0$). 
+
+Check that lemma still holds: 
+
+i) step length: $\alpha_1 = r_1^\prime s_1 = (r_0 - \alpha_0 A s_0)^\prime s_1 = r_0^\prime s_1$
+ii) orthogonality: $r_2^\prime s_j = r_0 - \alpha_0 A s_0 - \alpha_1 A s_1)^\prime s_j = r_0^\prime s_j - \alpha_j = 0$.
+
+A few key observations: 
+
+i) $r_0 \in \text{span}\{s_0\}, r_1 \in \text{span}\{s_0,s_1\}$. 
+ii) since $r_2 \perp s_0, s_1$, $r_2^\prime r_j = 0$ for $j=0,1$. 
+
+In general, let's say we're at step $L$. This means we have already calculated $s_0, ..., s_{L-1}$, $r_0,...,r_L$, and $x_0,...,x_L$. To get the next iterate, we would do the following:
+
+A) Gram-Schmidt:
+    1. Compute the inner products for $x_L$ with $s_j$ for all $j < L$. Recall that $r_{j+1} = r_j - \alpha_j r_L^\prime A s_j$. For $j < L-1$: $<r_L, s_j>_A = r_L^\prime A s_j = r_L^\prime \left(\frac{r_{j+1} - r_j}{-\alpha_j}\right) = 0$, since $r_L \perp s_j$ for all $j < L-1$, and $r_j$ is simply a linear combination of these. <\br>
+       For $j = L-1$: $<r_L, s_{L-1}>_A = r_A^\prime \left(\frac{r_L - r_{L-1}}{-\alpha_{L-1}}\right) = \frac{\norm{r_L}_2^2}{-\alpha_{L-1}}$.
+    2. Find unnormalized search direction: \newline
+       $P_L = r_L - \sum_{j=0}^{L-1} <r_L, s_j>_A s_j = r_L + \frac{\norm{r_L}_2^2}{\alpha_{L-1}}s_{L-1}$
+    3. Calculate normalization constant: $\norm{P_L}_A$
+    4. Calculate final normalization direction: $s_L = \frac{P_L}{\norm{P_L}_A}$.
+B) Update iterates:
+    1. $\alpha_L = <s_L, r_L> = \frac{\norm{r_L}_2^2}{\norm{P_L}_A}$.
+    2. $x_{L+1} = x_L - \alpha_L s_L$.
+    3. $r_{L+1} = r_L - \alpha_L A s_L$.
+
+When working with exact arithmetic, CG is guaranteed to converge in a finite number of steps. However, when implementing in algorithms, there's no such guarentee. It will converge in the limit, and the convergence rate is of the order $\frac{\sqrt{k} - 1}{\sqrt{k} + 1}$, where $k$ is the condition number. If $k$ is very large, the convergence happens very slowly. This is why there are a lot of work being done in socalled "precondition methods", that is methods that aim at transforming the matrix $A$ such that the condition number is smaller, but features are not lost. 
+
+So far, we have talked abouth iterative methods without much motivation or justification. However, as we will see later, iterative methods are very useful when dealing with non-linear systems of equations.
+
+## Nonlinear Systems of Equations
+
+_Outline_: 
+
+I. Review of Jacobians </br>
+II. Motivating example: clustered data </br>
+III. Non-linear systems of equations </br>
+IV. Picard's method </br>
+V. Newton's method </br>
+VI. Inexact Newton's Method </br>
+VII. Linear Search </br>
+VIII. Semi-smooth Newton's Method </br>
+
+### Review of Jacobians
+
+```{definition, "Gradient"}
+Let $f: \R^m \to \R$. The gradient of $f$ at $x \in \R^m$ is a vector $g$ (if it exists) such that 
+
+$$
+  \lim_{h \to 0} \frac{\left| f(x+h) - f(x) - <g,h>\right |}{\norm{h}} = 0.
+$$
+
+```
+
+```{example, label = "gradient-example"}
+Let $f(z) = z_1 ... z_m$. Guess that the gradient is $g$ with coordinate vectors $g_1(x) = x_2...x_m; ...; g_k(x) = x_1,...,x_{k-1}, x_{k+1}, ..., x_m; ...; g_m(x) = x_1,...,x_{m-1}$. Check that $g$ is the gradient:
+  
+$$
+  \frac{\left|(x_1+h_1)\cdots(x_m+h_m) - x_1\cdots x_m - \sum_{k=1}^m h_k \prod_{i \neq k} x_i \right|}{\sqrt{\sum_{k=1}^m h_k^2}} = \frac{\left| \sum_{k=1}^m \sum_{l\neq k} O(h_k h_l) \right |}{\sqrt{\sum_{k=1}^m h_k^2}} \to 0.
+$$
+  
+```
+
+```{definition, "Jacobian"}
+Let $f: \R^m \to \R^n$. The Jacobian at a point $x$ in $\R^m$ (if it exists) is a function satisfying 
+
+$$
+  \lim_{h\to 0} \frac{\norm{f(x+h) - f(x) - Jh}}{\norm{h}} = 0.
+$$
+  
+Note that the norm in the numerator is a norm in $\R^n$ and the norm in the denominator is a norm in $\R^m$. 
+  
+```
+
+```{example, label = "jacobian-example"}
+Let $f: \R^m \to \R^{m-1}$ be given by the coordinate functions $f_k(z) = z_k z_{k-1}$. Guess for the Jacobian:
+  
+$$
+  J_{ij} = \left\{ \begin{array}{rl} 0, & j\neq 1, j \neq i+1 \\ x_{i+1}, & j = 1, \\ x_i, & j = i+1 \end{array} \right.
+$$
+  
+```
+
+### Motivating Problem
+
+Consider a scenario where we enroll 100 patients for a study. Each patient will undergo two different treatments for a disease. The treatment is given at visits every two weeks for a one year period. At the first visit, we record which treatment is given, gender $\{0,1\}$, and concentration of the given treatment in the patients blood. For every follow up visit, we record the treatment status $\{0,1,2,3\}$. 
+
+We would like to model the treatment status based on the other mentioned variables. To do so, we assume that the patients are independent, but the disease status is correlated in time (status at closer time points are more likely to be similar). 
+
+To model this data, we let $Y_i \in \{0,1,2,3\}^{26}$ denote the disease statuses collected at the 26 visits for patient $i$, and $X_{ij} \in \{0,1\} \times \{0,1\} \times (0,1)$ is the covariate matrix for the $i$'th patient at time point $j$. For a vector of coefficients $\beta \in \R^p$, a correlation value $\rho \in [0,1]$, and a function $\mu: \R^p \times (\{0,1\} \times \{0,1\} \times (0,1)) \to \{0,1,2,3\}$, we define a variance function 
+
+$$
+  V_{lj}(\rho, \beta, X_{i\cdot}) = \rho^{\vert l-j\vert}(\mu(\beta, X_{il}) + 1)(\mu(\beta, X_{ij}) + 1).
+$$
+
+Let $M(\beta, X_{i\cdot}) = \begin{pmatrix} \mu(\beta, X_{i1}) & \cdots & \mu(\beta, X_{i26}) \end{pmatrix}^\prime$. Now, an estimator of $\beta$ can be found by solving the equation 
+
+$$
+  0 = \sum_{i=1}^N J(\beta, X_{i\cdot})^\prime V^{-1}(\rho, \beta, X_{i\cdot})(Y_i - M(\beta, X_{i\cdot})).
+$$
+
+### Non-linear Equations
+
+#### Problem Formulation
+
+The problems we will be looking at here can be formulated as $0 = F(x)$, where $F:\R^m \to \R^n$, or (if the righthand side is "nice enough") $x = G(x)$, where $G: \R^m \to \R^m$. 
+
+#### Uniqueness
+
+In order to be able to discuss uniqueness of solutions to non-linear equations, we need the implicit function theorem.
+
+```{theorem, name = "Linear Case of the Implicit Function Theorme"}
+
+Let $M \in \R^{n\times m}$, where $m>n$ and $\text{rank}(H) = n$. Without loss of generality, let $M = \begin{bmatrix} A & B \end{bmatrix}$, where $A \in \R^{n\times n}$ is invertible. 
+
+Then, for all $x \in \R^{m-n}$, $z = \begin{bmatrix} -A^{-1}Bx & x \end{bmatrix}^\prime$ satisfies $Mz = 0$.
+
+```
+
+```{theorem, name = "Implicit Function Theorem"}
+Let $F:\R^m \to \R^n$ be continuously differentiable. Then $F$ has a Jacobian, $J:\R^m \to \R^{n\times m}$. 
+
+Suppose $z^*$ satisfies $F(z^*) = 0$. Without loss of generality, suppose $J(z^*) = \begin{bmatrix} J_1(z^*) & J_2(z^*) \end{bmatrix}$, where $J_1(z^*) \in \R^{n\times n}$ is invertible. Then there exists an open neighborhood $U \subseteq \R^{n\times n}$, and a continuous function $g: U \to \R^n$ such that for all $x \in U$, $z= \begin{bmatrix} g(x) & x \end{bmatrix}^\prime$ satisfies that $F(z) = 0$. 
+```
