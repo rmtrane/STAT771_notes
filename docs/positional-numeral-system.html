@@ -49,67 +49,41 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 </head>
@@ -161,6 +135,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.5.1" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#review-of-jacobians"><i class="fa fa-check"></i><b>1.5.1</b> Review of Jacobians</a></li>
 <li class="chapter" data-level="1.5.2" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#motivating-problem"><i class="fa fa-check"></i><b>1.5.2</b> Motivating Problem</a></li>
 <li class="chapter" data-level="1.5.3" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#non-linear-equations"><i class="fa fa-check"></i><b>1.5.3</b> Non-linear Equations</a></li>
+<li class="chapter" data-level="1.5.4" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#picards-method"><i class="fa fa-check"></i><b>1.5.4</b> Picard’s Method</a></li>
+<li class="chapter" data-level="1.5.5" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#newtons-method"><i class="fa fa-check"></i><b>1.5.5</b> Newton’s Method</a></li>
+<li class="chapter" data-level="1.5.6" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#inexact-newtons-method"><i class="fa fa-check"></i><b>1.5.6</b> Inexact Newton’s Method</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -177,6 +154,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.11" data-path="homework-11.html"><a href="homework-11.html"><i class="fa fa-check"></i><b>2.11</b> Homework 11</a></li>
 <li class="chapter" data-level="2.12" data-path="homework-12.html"><a href="homework-12.html"><i class="fa fa-check"></i><b>2.12</b> Homework 12</a></li>
 <li class="chapter" data-level="2.13" data-path="homework-13.html"><a href="homework-13.html"><i class="fa fa-check"></i><b>2.13</b> Homework 13</a></li>
+<li class="chapter" data-level="2.14" data-path="homework-14.html"><a href="homework-14.html"><i class="fa fa-check"></i><b>2.14</b> Homework 14</a></li>
+<li class="chapter" data-level="2.15" data-path="homework-15.html"><a href="homework-15.html"><i class="fa fa-check"></i><b>2.15</b> Homework 15</a></li>
+<li class="chapter" data-level="2.16" data-path="homework-16.html"><a href="homework-16.html"><i class="fa fa-check"></i><b>2.16</b> Homework 16</a><ul>
+<li class="chapter" data-level="2.16.1" data-path="homework-16.html"><a href="homework-16.html#newtons-method-1"><i class="fa fa-check"></i><b>2.16.1</b> Newton’s Method</a></li>
+</ul></li>
+<li class="chapter" data-level="2.17" data-path="homework-16-1.html"><a href="homework-16-1.html"><i class="fa fa-check"></i><b>2.17</b> Homework 16</a></li>
+<li class="chapter" data-level="2.18" data-path="homework-17.html"><a href="homework-17.html"><i class="fa fa-check"></i><b>2.18</b> Homework 17</a></li>
 </ul></li>
 </ul>
 
@@ -283,8 +267,7 @@ So, in total, there are <span class="math inline">\((\beta-1)\cdot \beta^{p-1}\c
 <p>The smallest normalized number is the one with all digits <span class="math inline">\(0\)</span> (except for the leading digit, of course, which has to be <span class="math inline">\(1\)</span> for it to be normalized), and <span class="math inline">\(e = -14\)</span>. So the smallest normalized FP number:</p>
 <p><span class="math display">\[
 \left(1 + 0\cdot 2^{-1} + ... + 0\cdot 2^{-10}\right)\cdot 2^{-14} = 2^{-14} \approx 6.10\cdot 10^{-5}
-\]</span>
-Finally, the largest (finite) FP number in the 16 bit standard is the one where the exponent is as large as possible (<span class="math inline">\(e = 15\)</span>), and all digits are <span class="math inline">\(1\)</span>. So</p>
+\]</span> Finally, the largest (finite) FP number in the 16 bit standard is the one where the exponent is as large as possible (<span class="math inline">\(e = 15\)</span>), and all digits are <span class="math inline">\(1\)</span>. So</p>
 <p><span class="math display">\[
 \left(1 + 1\cdot 2^{-1} + ... + 1\cdot 2^{-10}\right)\cdot 2^{15} = 65504
 \]</span></p>
@@ -324,8 +307,7 @@ Finally, the largest (finite) FP number in the 16 bit standard is the one where 
 <p>The smallest normalized number is the one with all digits <span class="math inline">\(0\)</span> (except for the leading digit, of course, which has to be <span class="math inline">\(1\)</span> for it to be normalized), and <span class="math inline">\(e = -126\)</span>. So the smallest normalized FP number:</p>
 <p><span class="math display">\[
 \left(1 + 0\cdot 2^{-1} + ... + 0\cdot 2^{-23}\right)\cdot 2^{-126} = 2^{-126} \approx 1.18\cdot 10^{-38}
-\]</span>
-Finally, the largest (finite) FP number in the 32 bit standard is the one where the exponent is as large as possible (<span class="math inline">\(e = 127\)</span>), and all digits are <span class="math inline">\(1\)</span>. So</p>
+\]</span> Finally, the largest (finite) FP number in the 32 bit standard is the one where the exponent is as large as possible (<span class="math inline">\(e = 127\)</span>), and all digits are <span class="math inline">\(1\)</span>. So</p>
 <p><span class="math display">\[
 \left(1 + 1\cdot 2^{-1} + ... + 1\cdot 2^{-126}\right)\cdot 2^{127} = 3.40\cdot 10^{38}
 \]</span></p>
@@ -413,24 +395,24 @@ fl(x \text{op} y) = (x \text{op} y)(1+\delta),
 \left| fl(A) - A \right | \leq u \left | A \right |
 \]</span></p>
 <p><strong>Example:</strong> Dot product. Let <span class="math inline">\(x,y \in \mathbb{R}^{n}\)</span>. Recall that the dot product of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> is definted as <span class="math inline">\(x&#39;y = \sum_{i=1}^{n} x_i \cdot y_i\)</span>. This can be calculated in the following way:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb1-1" data-line-number="1">fl = <span class="kw">function</span>(x,y)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="co"># Get length of x</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  n = length(x)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="co"># Check that length of y is equal to length of x. If not, throw error.</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="kw">if</span>(length(y) != n)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="kw">return</span> <span class="st">&quot;ERROR: y does not have same dimension as x&quot;</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="kw">end</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="co"># s will be the result of the dot product calculation</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">  s = <span class="fl">0</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">  <span class="kw">for</span> i = <span class="fl">1</span>:n</a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">    s += x[i]*y[i]</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">  <span class="kw">end</span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">  <span class="kw">return</span>(s)</a>
-<a class="sourceLine" id="cb1-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18"><span class="kw">end</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">fl = <span class="kw">function</span>(x,y)
+  <span class="co"># Get length of x</span>
+  n = length(x)
+  <span class="co"># Check that length of y is equal to length of x. If not, throw error.</span>
+  <span class="kw">if</span>(length(y) != n)
+    <span class="kw">return</span> <span class="st">&quot;ERROR: y does not have same dimension as x&quot;</span>
+  <span class="kw">end</span>
+
+  <span class="co"># s will be the result of the dot product calculation</span>
+  s = <span class="fl">0</span>
+
+  <span class="kw">for</span> i = <span class="fl">1</span>:n
+    s += x[i]*y[i]
+  <span class="kw">end</span>
+
+  <span class="kw">return</span>(s)
+
+<span class="kw">end</span></code></pre></div>
 <p>Next we want to prove the following lemma:</p>
 
 <div class="lemma">
@@ -459,14 +441,14 @@ fl(x \text{op} y) = (x \text{op} y)(1+\delta),
 | \eta | = \left | \prod_{i=1}^n (1 + \delta_i) - 1 \right |.
 \]</span></p>
 <p>By induction, we will show that the expression above is less than or equal to <span class="math inline">\((1 + u)^n - 1\)</span>. [TO BE COMPLETED!]</p>
-<p>Since <span class="math inline">\(1+u \leq e^{u}\)</span> for all <span class="math inline">\(u \in \mathbb{R}\)</span>, we have that</p>
-<p><span class="math display">\[\begin{align*}
+<p>Since <span class="math inline">\(1+u \leq e^{u}\)</span> for all <span class="math inline">\(u \in {\mathbb{R}}\)</span>, we have that</p>
+<span class="math display">\[\begin{align*}
   | \eta | &amp;\leq e^{n\cdot u} - 1 \\
           &amp;\leq n\cdot u + \frac{(n\cdot u)^2}{2!} + \frac{(n\cdot u)^3}{3!} + \ldots \text{(used the Taylor expansion)}\\
           &amp;\leq n\cdot u + \frac{(n\cdot u)^2}{2^1} + \frac{(n\cdot u)^3}{2^2} + \frac{(n\cdot u)^4}{2^3} + \ldots (\text{used that } x! &gt; 2^{x-1} \text{ for } x &gt; 1) \\
           &amp;= \sum_{k=0}^{\infty} n\cdot u \left(\frac{n\cdot u}{2}\right)^k \text{\small (identify this as a geometric series with } r = \tfrac{n\cdot u}{2} \text{, \small which is less than 1 by assumption)} \\
           &amp;= \frac{n\cdot u}{1-\tfrac{n\cdot u}{2}},
-\end{align*}\]</span></p>
+\end{align*}\]</span>
 which is exactly what we wanted.
 </div>
 
@@ -474,48 +456,48 @@ which is exactly what we wanted.
 
 <div class="proof">
 <p> <span class="proof"><em>Proof. </em></span> Let <span class="math inline">\(s_p\)</span> denote the value of <span class="math inline">\(s\)</span> after the <span class="math inline">\(p\)</span>’th iteration of the algorithm described above. Then, since we’re assuming the Fundamental Axiom, we have that <span class="math inline">\(s_1 = fl(x_1y_y) = x_1 y_1 (1 + \delta_1)\)</span>, where <span class="math inline">\(|\delta_1| \leq u\)</span>. We can similarly find <span class="math inline">\(s_p\)</span> as</p>
-<p><span class="math display">\[\begin{align*}
+<span class="math display">\[\begin{align*}
 s_p &amp;= fl(s_{p-1} + fl(x_p y_p)) \\
     &amp;= (s_{p-1} + fl(x_p y_p))(1 + \epsilon_p) (\text{where } |\epsilon_p| \leq u) \\
     &amp;= (s_{p-1} + x_py_p(1 + \delta_p))(1 + \epsilon_p) (\text{where } |\delta_p| \leq u).
-\end{align*}\]</span></p>
+\end{align*}\]</span>
 <p>Let <span class="math inline">\(\epsilon_1 = 0\)</span>. <span class="math inline">\(s_p\)</span> is a recursive formula, and can be rewritten as follows:</p>
 <p><span class="math display">\[
 s_p = \sum_{i=1}^p x_iy_i (1 + \delta_i)\prod_{j=1}^p (1 + \epsilon_j).
 \]</span></p>
 <p>So,</p>
-<p><span class="math display">\[\begin{align*}
+<span class="math display">\[\begin{align*}
   | s_n - x^\prime y |  &amp;= \left | \sum_{i=1}^n (x_i y_i)(1 + \delta_i)\prod_{j=1}^p (1 + \epsilon_j) - \sum_{i=1}^{n}x_iy_i\right | \\
                         &amp;= \left | \sum_{i=1}^n (x_i y_i)\left((1 + \delta_i)\prod_{j=1}^p (1 + \epsilon_j) - 1 \right) \right | \\
                         &amp;\leq \sum_{i=1}^n \left |x_i y_i \right |\left | (1 + \delta_i)\prod_{j=1}^p (1 + \epsilon_j) - 1 \right| .
-\end{align*}\]</span></p>
+\end{align*}\]</span>
 <p>We now use <a href="positional-numeral-system.html#lem:lemForProof">4</a> to get:</p>
-<p><span class="math display">\[\begin{align*}
+<span class="math display">\[\begin{align*}
 \sum_{i=1}^n \left |x_i y_i \right |\left | (1 + \delta_i)\prod_{j=1}^p (1 + \epsilon_j) - 1 \right| &amp;\leq  \frac{nu}{1-\tfrac{nu}{2}} \sum_{i=1}^n \left |x_i y_i \right | \\
 &amp;\leq \frac{nu}{0.995} \sum_{i=1}^n |x_i| |y_i | \\
 &amp;\leq 1.01 \cdot nu \cdot |x|^\prime |y|
-\end{align*}\]</span></p>
+\end{align*}\]</span>
 </div>
 
 </div>
 </div>
 <div id="square-linear-systems" class="section level3">
 <h3><span class="header-section-number">1.1.4</span> Square Linear Systems</h3>
-<p>In the following, let <span class="math inline">\(A \in \mathbb{R}^{n \times m}\)</span> be an invertible matrix, and assume <span class="math inline">\(Ax = b\)</span> for a <span class="math inline">\(b \neq 0\)</span>. This implies that <span class="math inline">\(x = A^{-1}b\)</span>.</p>
+<p>In the following, let <span class="math inline">\(A \in {\mathbb{R}}^{n \times m}\)</span> be an invertible matrix, and assume <span class="math inline">\(Ax = b\)</span> for a <span class="math inline">\(b \neq 0\)</span>. This implies that <span class="math inline">\(x = A^{-1}b\)</span>.</p>
 
 <div class="theorem">
-<p><span id="thm:kappa-bound" class="theorem"><strong>Theorem 1  </strong></span>Let <span class="math inline">\(\kappa_\infty = \left \vert \left \vert A \right \vert \right \vert_\infty \left \vert \left \vert A^{-1} \right \vert \right \vert_\infty\)</span>. Assume we can store <span class="math inline">\(A\)</span> with precision <span class="math inline">\(E\)</span> (i.e. as <span class="math inline">\(A+E\)</span>), where <span class="math inline">\(\left \vert \left \vert E \right \vert \right \vert_\infty \leq u \left \vert \left \vert A \right \vert \right \vert_\infty\)</span>, and <span class="math inline">\(b\)</span> with precision <span class="math inline">\(e\)</span> (i.e. as <span class="math inline">\(b+e\)</span>), where <span class="math inline">\(\left \vert \left \vert e \right \vert \right \vert_\infty \leq u \left \vert \left \vert b \right \vert \right \vert_\infty\)</span>.</p>
-<p>If <span class="math inline">\(\left \vert \left \vert A+E \right \vert \right \vert\hat{x} = b+e\)</span> and <span class="math inline">\(u\cdot \kappa_\infty &lt; 1\)</span>, then</p>
+<p><span id="thm:kappa-bound" class="theorem"><strong>Theorem 1  </strong></span>Let <span class="math inline">\(\kappa_\infty = {\left \vert \left \vert A \right \vert \right \vert}_\infty {\left \vert \left \vert A^{-1} \right \vert \right \vert}_\infty\)</span>. Assume we can store <span class="math inline">\(A\)</span> with precision <span class="math inline">\(E\)</span> (i.e. as <span class="math inline">\(A+E\)</span>), where <span class="math inline">\({\left \vert \left \vert E \right \vert \right \vert}_\infty \leq u {\left \vert \left \vert A \right \vert \right \vert}_\infty\)</span>, and <span class="math inline">\(b\)</span> with precision <span class="math inline">\(e\)</span> (i.e. as <span class="math inline">\(b+e\)</span>), where <span class="math inline">\({\left \vert \left \vert e \right \vert \right \vert}_\infty \leq u {\left \vert \left \vert b \right \vert \right \vert}_\infty\)</span>.</p>
+<p>If <span class="math inline">\({\left \vert \left \vert A+E \right \vert \right \vert}\hat{x} = b+e\)</span> and <span class="math inline">\(u\cdot \kappa_\infty &lt; 1\)</span>, then</p>
 <span class="math display">\[
-  \frac{\left \vert \left \vert x-\hat{x} \right \vert \right \vert_\infty}{\left \vert \left \vert x \right \vert \right \vert} \leq \frac{2\cdot u \cdot \kappa_\infty}{1-u\cdot \kappa_\infty}
+  \frac{{\left \vert \left \vert x-\hat{x} \right \vert \right \vert}_\infty}{{\left \vert \left \vert x \right \vert \right \vert}} \leq \frac{2\cdot u \cdot \kappa_\infty}{1-u\cdot \kappa_\infty}
 \]</span>
 </div>
 
 
 <div class="lemma">
-<p><span id="lem:proofHW" class="lemma"><strong>Lemma 5  </strong></span>Let <span class="math inline">\(I\in \mathbb{R}^{n \times n}\)</span> be the identity matrix, and <span class="math inline">\(F \in \mathbb{R}^{n\times n}\)</span> s.t. <span class="math inline">\(\left \vert \left \vert F \right \vert \right \vert_p &lt; 1\)</span> for some <span class="math inline">\(p \in [1,\infty]\)</span>. Then <span class="math inline">\(I-F\)</span> is invertible, and</p>
+<p><span id="lem:proofHW" class="lemma"><strong>Lemma 5  </strong></span>Let <span class="math inline">\(I\in {\mathbb{R}}^{n \times n}\)</span> be the identity matrix, and <span class="math inline">\(F \in {\mathbb{R}}^{n\times n}\)</span> s.t. <span class="math inline">\({\left \vert \left \vert F \right \vert \right \vert}_p &lt; 1\)</span> for some <span class="math inline">\(p \in [1,\infty]\)</span>. Then <span class="math inline">\(I-F\)</span> is invertible, and</p>
 <span class="math display">\[
-  \left \vert \left \vert (I-F)^{-1} \right \vert \right \vert_p \leq \frac{1}{1-\left \vert \left \vert F \right \vert \right \vert_p}
+  {\left \vert \left \vert (I-F)^{-1} \right \vert \right \vert}_p \leq \frac{1}{1-{\left \vert \left \vert F \right \vert \right \vert}_p}
 \]</span>
 </div>
 
@@ -526,59 +508,55 @@ s_p = \sum_{i=1}^p x_iy_i (1 + \delta_i)\prod_{j=1}^p (1 + \epsilon_j).
 
 
 <div class="lemma">
-<p><span id="lem:unnamed-chunk-14" class="lemma"><strong>Lemma 6  </strong></span>Suppose <span class="math inline">\(\exists \epsilon &gt; 0\)</span> s.t. <span class="math inline">\(\left \vert \left \vert \Delta A \right \vert \right \vert \leq \epsilon \left \vert \left \vert A \right \vert \right \vert\)</span> and <span class="math inline">\(\left \vert \left \vert \Delta b \right \vert \right \vert \leq \epsilon \left \vert \left \vert b \right \vert \right \vert\)</span>, and <span class="math inline">\(y\)</span> s.t. <span class="math inline">\((A+\Delta A)y = b+\Delta b\)</span>.</p>
-If <span class="math inline">\(\epsilon \left \vert \left \vert A \right \vert \right \vert\left \vert \left \vert A^{-1} \right \vert \right \vert = r &lt; 1\)</span>, then <span class="math inline">\(A+\Delta A\)</span> is invertible and <span class="math display">\[\frac{\left \vert \left \vert y \right \vert \right \vert}{\left \vert \left \vert x \right \vert \right \vert} \leq \frac{1+r}{1-r}.\]</span>
+<p><span id="lem:unnamed-chunk-14" class="lemma"><strong>Lemma 6  </strong></span>Suppose <span class="math inline">\(\exists \epsilon &gt; 0\)</span> s.t. <span class="math inline">\({\left \vert \left \vert \Delta A \right \vert \right \vert} \leq \epsilon {\left \vert \left \vert A \right \vert \right \vert}\)</span> and <span class="math inline">\({\left \vert \left \vert \Delta b \right \vert \right \vert} \leq \epsilon {\left \vert \left \vert b \right \vert \right \vert}\)</span>, and <span class="math inline">\(y\)</span> s.t. <span class="math inline">\((A+\Delta A)y = b+\Delta b\)</span>.</p>
+If <span class="math inline">\(\epsilon {\left \vert \left \vert A \right \vert \right \vert}{\left \vert \left \vert A^{-1} \right \vert \right \vert} = r &lt; 1\)</span>, then <span class="math inline">\(A+\Delta A\)</span> is invertible and <span class="math display">\[\frac{{\left \vert \left \vert y \right \vert \right \vert}}{{\left \vert \left \vert x \right \vert \right \vert}} \leq \frac{1+r}{1-r}.\]</span>
 </div>
 
 
 <div class="proof">
-<p> <span class="proof"><em>Proof. </em></span> Note that <span class="math inline">\(A+\Delta A = A\left (I + A^{-1}\Delta A\right ) = A\left (I - \left(- A^{-1}\Delta A\right)\right)\)</span>. Since <span class="math inline">\(\left \vert \left \vert -A^{-1}\Delta A \right \vert \right \vert = \left \vert \left \vert A^{-1}\Delta A \right \vert \right \vert \leq \epsilon \left \vert \left \vert A^{-1} \right \vert \right \vert\cdot \left \vert \left \vert A \right \vert \right \vert &lt; 1\)</span> (by assumptions), Lemma <a href="positional-numeral-system.html#lem:proofHW">5</a> gives us that <span class="math inline">\(I + A^{-1}\Delta A\)</span> is invertible. Since <span class="math inline">\(A\)</span> is also invertible (again, by assumption), <span class="math inline">\(A+\Delta A\)</span> is invertible (product of two invertible matrices is invertible).</p>
+<p> <span class="proof"><em>Proof. </em></span> Note that <span class="math inline">\(A+\Delta A = A\left (I + A^{-1}\Delta A\right ) = A\left (I - \left(- A^{-1}\Delta A\right)\right)\)</span>. Since <span class="math inline">\({\left \vert \left \vert -A^{-1}\Delta A \right \vert \right \vert} = {\left \vert \left \vert A^{-1}\Delta A \right \vert \right \vert} \leq \epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert}\cdot {\left \vert \left \vert A \right \vert \right \vert} &lt; 1\)</span> (by assumptions), Lemma <a href="positional-numeral-system.html#lem:proofHW">5</a> gives us that <span class="math inline">\(I + A^{-1}\Delta A\)</span> is invertible. Since <span class="math inline">\(A\)</span> is also invertible (again, by assumption), <span class="math inline">\(A+\Delta A\)</span> is invertible (product of two invertible matrices is invertible).</p>
 <p>Performing some linear algebra:</p>
-<p><span class="math display">\[\begin{align*}
+<span class="math display">\[\begin{align*}
   (A + \Delta A) &amp;=  b + \Delta b \Leftrightarrow \\
   A(I + A^{-1} \Delta A) y &amp;= b + \Delta b \Leftrightarrow \\
   (I + A^{-1} \Delta A) y &amp;= A^{-1}b + A^{-1}\Delta b \Leftrightarrow \\
   y &amp;= (I + A^{-1} \Delta A)^{-1} A^{-1}b + A^{-1}\Delta b.
-\end{align*}\]</span></p>
-<p>Remember that <span class="math inline">\(A^{-1}b = x\)</span>. From the definition of <span class="math inline">\(r\)</span> we have that <span class="math inline">\(\left \vert \left \vert A^{-1} \right \vert \right \vert = \frac{r}{\left \vert \left \vert A \right \vert \right \vert}\)</span>. These two identities with the assumption that <span class="math inline">\(\left \vert \left \vert \Delta b \right \vert \right \vert \leq \epsilon b\)</span> gives us</p>
+\end{align*}\]</span>
+<p>Remember that <span class="math inline">\(A^{-1}b = x\)</span>. From the definition of <span class="math inline">\(r\)</span> we have that <span class="math inline">\({\left \vert \left \vert A^{-1} \right \vert \right \vert} = \frac{r}{{\left \vert \left \vert A \right \vert \right \vert}}\)</span>. These two identities with the assumption that <span class="math inline">\({\left \vert \left \vert \Delta b \right \vert \right \vert} \leq \epsilon b\)</span> gives us</p>
 <p><span class="math display">\[
 \begin{aligned}
-  \left \vert \left \vert y \right \vert \right \vert &amp;\leq \left \vert \left \vert (I + A^{-1}\Delta A)^{-1} \right \vert \right \vert \left( \left \vert \left \vert x \right \vert \right \vert + \left \vert \left \vert A^{-1}\Delta b \right \vert \right \vert\right) \\
-  &amp;\leq \frac{1}{1-\left \vert \left \vert A^{-1}\Delta A \right \vert \right \vert} \left( \left \vert \left \vert x \right \vert \right \vert + \frac{r}{\epsilon \left \vert \left \vert A \right \vert \right \vert} \cdot \left \vert \left \vert \Delta b \right \vert \right \vert \right) \\
-  &amp;\leq \frac{1}{1-r} \left( \left \vert \left \vert x \right \vert \right \vert + \frac{r}{\epsilon \left \vert \left \vert A \right \vert \right \vert} \cdot \epsilon \left \vert \left \vert b \right \vert \right \vert \right) \\
-  &amp;= \frac{1}{1-r} \left( \left \vert \left \vert x \right \vert \right \vert + \frac{r \cdot \left \vert \left \vert b \right \vert \right \vert}{\left \vert \left \vert A \right \vert \right \vert} \right).
+  {\left \vert \left \vert y \right \vert \right \vert} &amp;\leq {\left \vert \left \vert (I + A^{-1}\Delta A)^{-1} \right \vert \right \vert} \left( {\left \vert \left \vert x \right \vert \right \vert} + {\left \vert \left \vert A^{-1}\Delta b \right \vert \right \vert}\right) \\
+  &amp;\leq \frac{1}{1-{\left \vert \left \vert A^{-1}\Delta A \right \vert \right \vert}} \left( {\left \vert \left \vert x \right \vert \right \vert} + \frac{r}{\epsilon {\left \vert \left \vert A \right \vert \right \vert}} \cdot {\left \vert \left \vert \Delta b \right \vert \right \vert} \right) \\
+  &amp;\leq \frac{1}{1-r} \left( {\left \vert \left \vert x \right \vert \right \vert} + \frac{r}{\epsilon {\left \vert \left \vert A \right \vert \right \vert}} \cdot \epsilon {\left \vert \left \vert b \right \vert \right \vert} \right) \\
+  &amp;= \frac{1}{1-r} \left( {\left \vert \left \vert x \right \vert \right \vert} + \frac{r \cdot {\left \vert \left \vert b \right \vert \right \vert}}{{\left \vert \left \vert A \right \vert \right \vert}} \right).
 \end{aligned}
 \]</span></p>
-<p>Finally, recall that <span class="math inline">\(Ax=b\)</span>, hence <span class="math inline">\(\left \vert \left \vert A \right \vert \right \vert\cdot\left \vert \left \vert x \right \vert \right \vert \geq \left \vert \left \vert b \right \vert \right \vert\)</span>, so <span class="math inline">\(\left \vert \left \vert x \right \vert \right \vert \geq \frac{\left \vert \left \vert b \right \vert \right \vert}{\left \vert \left \vert A \right \vert \right \vert}\)</span>. So,</p>
+<p>Finally, recall that <span class="math inline">\(Ax=b\)</span>, hence <span class="math inline">\({\left \vert \left \vert A \right \vert \right \vert}\cdot{\left \vert \left \vert x \right \vert \right \vert} \geq {\left \vert \left \vert b \right \vert \right \vert}\)</span>, so <span class="math inline">\({\left \vert \left \vert x \right \vert \right \vert} \geq \frac{{\left \vert \left \vert b \right \vert \right \vert}}{{\left \vert \left \vert A \right \vert \right \vert}}\)</span>. So,</p>
 <p><span class="math display">\[
 \begin{aligned}
-  \left \vert \left \vert y \right \vert \right \vert \leq \frac{1}{1-r}  \left( \left \vert \left \vert x \right \vert \right \vert + r \cdot \left \vert \left \vert x \right \vert \right \vert \right) \Leftrightarrow \\
-  \frac{\left \vert \left \vert y \right \vert \right \vert}{\left \vert \left \vert x \right \vert \right \vert} \leq \frac{1+r}{1-r}.
+  {\left \vert \left \vert y \right \vert \right \vert} \leq \frac{1}{1-r}  \left( {\left \vert \left \vert x \right \vert \right \vert} + r \cdot {\left \vert \left \vert x \right \vert \right \vert} \right) \Leftrightarrow \\
+  \frac{{\left \vert \left \vert y \right \vert \right \vert}}{{\left \vert \left \vert x \right \vert \right \vert}} \leq \frac{1+r}{1-r}.
 \end{aligned}
 \]</span></p>
 </div>
 
 
 <div class="lemma">
-<span id="lem:unnamed-chunk-16" class="lemma"><strong>Lemma 7  </strong></span><span class="math display">\[\frac{\left \vert \left \vert y - x \right \vert \right \vert}{\left \vert \left \vert x \right \vert \right \vert} \leq \frac{2\epsilon \left \vert \left \vert A^{-1} \right \vert \right \vert\cdot \left \vert \left \vert A \right \vert \right \vert}{1-r}.\]</span>
+<span id="lem:unnamed-chunk-16" class="lemma"><strong>Lemma 7  </strong></span><span class="math display">\[\frac{{\left \vert \left \vert y - x \right \vert \right \vert}}{{\left \vert \left \vert x \right \vert \right \vert}} \leq \frac{2\epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert}\cdot {\left \vert \left \vert A \right \vert \right \vert}}{1-r}.\]</span>
 </div>
 
 
 <div class="proof">
-<p> <span class="proof"><em>Proof. </em></span> 
-<span class="math display">\[
+<p> <span class="proof"><em>Proof. </em></span>  <span class="math display">\[
 \begin{aligned}
   \left(A+\Delta A\right)y &amp;= b + \Delta b \Leftrightarrow \\
   Ay - b &amp;= \Delta b - \Delta Ay \Leftrightarrow \\
   y - A^{-1}b &amp;= A^{-1} \Delta b - A^{-1}\Delta A y \Leftrightarrow \\
   y - x &amp;= A^{-1} \Delta b - A^{-1}\Delta A y \Leftrightarrow \\
-  \left \vert \left \vert y - x \right \vert \right \vert &amp;\leq \left \vert \left \vert A^{-1} \right \vert \right \vert \left \vert \left \vert \Delta b \right \vert \right \vert + \left \vert \left \vert A^{-1} \right \vert \right \vert \left \vert \left \vert \Delta A \right \vert \right \vert\left \vert \left \vert y \right \vert \right \vert \\ %\Leftrightarrow \\
-  &amp;\leq \left \vert \left \vert A^{-1} \right \vert \right \vert \epsilon \left \vert \left \vert b \right \vert \right \vert + \left \vert \left \vert A^{-1} \right \vert \right \vert \epsilon\left \vert \left \vert A \right \vert \right \vert\left \vert \left \vert y \right \vert \right \vert \\ %\Leftrightarrow \\
-  &amp;\leq \epsilon \left \vert \left \vert A^{-1} \right \vert \right \vert \left \vert \left \vert A \right \vert \right \vert\left \vert \left \vert x \right \vert \right \vert + \epsilon\left \vert \left \vert A^{-1} \right \vert \right \vert\left \vert \left \vert A \right \vert \right \vert\left \vert \left \vert y \right \vert \right \vert \\ % \Leftrightarrow \\
-  &amp;\leq \epsilon \left \vert \left \vert A^{-1} \right \vert \right \vert \left \vert \left \vert A \right \vert \right \vert\left(\left \vert \left \vert x \right \vert \right \vert + \left \vert \left \vert y \right \vert \right \vert\right) \\
-  &amp;= \epsilon \left \vert \left \vert A^{-1} \right \vert \right \vert \left \vert \left \vert A \right \vert \right \vert\left(\left \vert \left \vert x \right \vert \right \vert + \frac{1+r}{1-r}\left \vert \left \vert x \right \vert \right \vert\right) \Leftrightarrow \\
-\frac{\left \vert \left \vert y-x \right \vert \right \vert}{\left \vert \left \vert x \right \vert \right \vert} &amp;\leq \epsilon \left \vert \left \vert A^{-1} \right \vert \right \vert \left \vert \left \vert A \right \vert \right \vert \left(\frac{1-r}{1-r} + \frac{1+r}{1-r}\right) \\
-  &amp;= 2\epsilon \left \vert \left \vert A^{-1} \right \vert \right \vert \left \vert \left \vert A \right \vert \right \vert \frac{1}{1-r}
+  {\left \vert \left \vert y - x \right \vert \right \vert} &amp;\leq {\left \vert \left \vert A^{-1} \right \vert \right \vert} {\left \vert \left \vert \Delta b \right \vert \right \vert} + {\left \vert \left \vert A^{-1} \right \vert \right \vert} {\left \vert \left \vert \Delta A \right \vert \right \vert}{\left \vert \left \vert y \right \vert \right \vert} \\   &amp;\leq {\left \vert \left \vert A^{-1} \right \vert \right \vert} \epsilon {\left \vert \left \vert b \right \vert \right \vert} + {\left \vert \left \vert A^{-1} \right \vert \right \vert} \epsilon{\left \vert \left \vert A \right \vert \right \vert}{\left \vert \left \vert y \right \vert \right \vert} \\   &amp;\leq \epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert} {\left \vert \left \vert A \right \vert \right \vert}{\left \vert \left \vert x \right \vert \right \vert} + \epsilon{\left \vert \left \vert A^{-1} \right \vert \right \vert}{\left \vert \left \vert A \right \vert \right \vert}{\left \vert \left \vert y \right \vert \right \vert} \\   &amp;\leq \epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert} {\left \vert \left \vert A \right \vert \right \vert}\left({\left \vert \left \vert x \right \vert \right \vert} + {\left \vert \left \vert y \right \vert \right \vert}\right) \\
+  &amp;= \epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert} {\left \vert \left \vert A \right \vert \right \vert}\left({\left \vert \left \vert x \right \vert \right \vert} + \frac{1+r}{1-r}{\left \vert \left \vert x \right \vert \right \vert}\right) \Leftrightarrow \\
+\frac{{\left \vert \left \vert y-x \right \vert \right \vert}}{{\left \vert \left \vert x \right \vert \right \vert}} &amp;\leq \epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert} {\left \vert \left \vert A \right \vert \right \vert} \left(\frac{1-r}{1-r} + \frac{1+r}{1-r}\right) \\
+  &amp;= 2\epsilon {\left \vert \left \vert A^{-1} \right \vert \right \vert} {\left \vert \left \vert A \right \vert \right \vert} \frac{1}{1-r}
 \end{aligned}
 \]</span></p>
 </div>
@@ -640,7 +618,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

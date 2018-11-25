@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="homework-5.html">
-<link rel="next" href="homework-7.html">
+<link rel="prev" href="homework-13.html">
+<link rel="next" href="homework-15.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -179,79 +179,69 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="homework-6" class="section level2">
-<h2><span class="header-section-number">2.6</span> Homework 6</h2>
+<div id="homework-14" class="section level2">
+<h2><span class="header-section-number">2.14</span> Homework 14</h2>
 
 <div class="exercise">
-<p><span id="exr:q601" class="exercise"><strong>Exercise 46  </strong></span>Determine the computational complexity of the QR decomposition using</p>
-<ol style="list-style-type: lower-alpha">
-<li>Gram-Schmidt</li>
-<li>Modified Gram-Schmidt</li>
-<li>Householder</li>
-<li>Givens rotations</li>
+<span id="exr:q1401" class="exercise"><strong>Exercise 91  </strong></span>Proof theorem <a href="nonlinear-systems-of-equations.html#thm:contracts">11</a>. Why does <span class="math inline">\(D\)</span> have to be closed? (Hint: need <span class="math inline">\(\lim_{k \to \infty} x_k \in D\)</span>)
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1402" class="exercise"><strong>Exercise 92  </strong></span>Does this hold if we replace <span class="math inline">\(R^m\)</span> with an arbitrary metric space? (Hint: no, need completeness)
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1403" class="exercise"><strong>Exercise 93  </strong></span>Solve <span class="math inline">\(x = G(x)\)</span> by hand. What is <span class="math inline">\(G(x)\)</span> doing?
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1404" class="exercise"><strong>Exercise 94  </strong></span>Show that <span class="math inline">\(G(x)\)</span> is a contraction.
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1405" class="exercise"><strong>Exercise 95  </strong></span>What is the impact of the singular values of <span class="math inline">\(J(x^*)\)</span> on the “localness” of the results in theorem <a href="nonlinear-systems-of-equations.html#thm:with-assumptions">12</a>?
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1406" class="exercise"><strong>Exercise 96  </strong></span>Why is the first result from theorem <a href="nonlinear-systems-of-equations.html#thm:with-assumptions">12</a> important?
+</div>
+
+
+<div class="exercise">
+<p><span id="exr:q1407" class="exercise"><strong>Exercise 97  </strong></span>Proof and interpret the following:</p>
+<p>Let <span class="math inline">\(A,B \in {\mathbb{R}}^{n \times m}\)</span> and assume <span class="math inline">\(A\)</span> is non-singular. If for some <span class="math inline">\(\epsilon \in (0,1)\)</span>, <span class="math inline">\({\left \vert \left \vert AB - I \right \vert \right \vert} &lt; I - \epsilon\)</span>, then <span class="math inline">\(B\)</span> is invertible and</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\({\left \vert \left \vert A - B^{-1} \right \vert \right \vert} &lt; (I-\epsilon){\left \vert \left \vert B^{-1} \right \vert \right \vert}\)</span>,</li>
+<li><span class="math inline">\({\left \vert \left \vert B^{-1} \right \vert \right \vert} \le \frac{1}{\epsilon} {\left \vert \left \vert A \right \vert \right \vert}\)</span>.</li>
 </ol>
-<p>for any arbitrary, dense <span class="math inline">\(n \times m\)</span> matrix. (dense = don’t know how many entries are <span class="math inline">\(0\)</span>.)</p>
-</div>
-
-
-<div class="solution">
-<p> <span class="solution"><em>Solution. </em></span>  a) Gram-Schmidt requires <span class="math inline">\(O(m^2n)\)</span> computations. b) Same as Gram-Schmidt. c) <span class="math inline">\(O(m^2n)\)</span>. d) <span class="math inline">\(O(m^2n)\)</span>.</p>
 </div>
 
 
 <div class="exercise">
-<span id="exr:q602" class="exercise"><strong>Exercise 47  </strong></span>Compare the computational complexity of Householder and Givens for a sparse matrix (i.e. a matrix where a substantial number of entries are <span class="math inline">\(0\)</span>).
-</div>
-
-
-<div class="solution">
- <span class="solution"><em>Solution. </em></span> Householder still have the same complexity even for sparse matrices, whereas for Givens we do not have to complete as many multiplications with Givens rotations. (Everytime we encounter a 0 in the lower triangular matrix that can be paired with a zero above it, we can pair them up, and skip the computation.)
+<span id="exr:q1408" class="exercise"><strong>Exercise 98  </strong></span>What happens if I use the mean value theorem instead of Fundamental Theorem of Calculus? (Hint: remember we cannot generalize 1D MVT to multi D).
 </div>
 
 
 <div class="exercise">
-<span id="exr:q603" class="exercise"><strong>Exercise 48  </strong></span>Implement QR decomposition using Householder. Write it as a function that takes a matrix <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span> with <span class="math inline">\(\text{rank}(A) = m\)</span> as its input, and gives back <span class="math inline">\(Q\)</span> and <span class="math inline">\(R\)</span>.
-</div>
-
-
-<div class="solution">
- <span class="solution"><em>Solution. </em></span> See <a href="../Homework/QR_householder.jl">here</a>.
-</div>
-
-
-<div class="exercise">
-<span id="exr:q604" class="exercise"><strong>Exercise 49  </strong></span>Implement QR decomposition using Givens. (As above.)
-</div>
-
-
-<div class="solution">
- <span class="solution"><em>Solution. </em></span> See <a href="../Homework/QR_givens.jl">here</a>
-</div>
-
-
-<div class="exercise">
-<span id="exr:q605" class="exercise"><strong>Exercise 50  </strong></span>What happens in theorem <a href="singular-value-decomposition-svd.html#thm:svd">3</a> if <span class="math inline">\(m &gt; n\)</span>.
-</div>
-
-
-<div class="solution">
-<p> <span class="solution"><em>Solution. </em></span>  If <span class="math inline">\(m &gt; n\)</span>, the diagonal matrix of the SVD of <span class="math inline">\(A\)</span> will be of the form <span class="math inline">\(\begin{bmatrix} \Sigma &amp; 0 \end{bmatrix}\)</span>, where <span class="math inline">\(\Sigma = \begin{bmatrix} \sigma_1 &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; \sigma_n \end{bmatrix}\)</span>.</p>
-</div>
-
-
-<div class="exercise">
-<span id="exr:q606" class="exercise"><strong>Exercise 51  </strong></span>If <span class="math inline">\(u,v\)</span> are respectively left and right singular vectors corresponding to the singular value <span class="math inline">\(\sigma\)</span>, show that <span class="math inline">\(Av = \sigma u\)</span>, and <span class="math inline">\(A&#39;u = \sigma v\)</span>.
-</div>
-
-
-<div class="solution">
-<p> <span class="solution"><em>Solution. </em></span> Using the SVD of <span class="math inline">\(A\)</span>, we see that <span class="math inline">\(AV = U\Sigma\)</span>, which implies</p>
+<p><span id="exr:q1409" class="exercise"><strong>Exercise 99  </strong></span>Consider Newtons method. Using FTC, <span class="math inline">\(e = x-x^*\)</span>, proof that if <span class="math inline">\(e_0 = x_0 - x^*\)</span>, and <span class="math inline">\(e\)</span> sufficiently small, then</p>
 <p><span class="math display">\[
-  A \begin{bmatrix} v_1 &amp; \cdots &amp; v_m \end{bmatrix} = \begin{bmatrix} \sigma_1 u_1 &amp; \cdots &amp; \sigma_m u_m \end{bmatrix}.
+  \frac{3}{5}\kappa \left(J(x^*)\right)^{-1} \frac{{\left \vert \left \vert e \right \vert \right \vert}}{{\left \vert \left \vert e_0 \right \vert \right \vert}} \le \frac{{\left \vert \left \vert F(x) \right \vert \right \vert}}{{\left \vert \left \vert F(x_0) \right \vert \right \vert}} \le \frac{5}{3}\kappa \left(J(x^*)\right) \frac{{\left \vert \left \vert e \right \vert \right \vert}}{{\left \vert \left \vert e_0 \right \vert \right \vert}}
 \]</span></p>
-<p>where <span class="math inline">\(v_1, \dots, v_m\)</span> are the right singular vectors of <span class="math inline">\(A\)</span>, and <span class="math inline">\(u_1, \dots, u_m\)</span> are the left singular vectors of <span class="math inline">\(A\)</span>.</p>
-<p>So, <span class="math inline">\(Av_i = \sigma_i u_i\)</span> for all <span class="math inline">\(i\)</span>.</p>
-<p>Similarly, <span class="math inline">\(A^\prime = V \Sigma U^\prime\)</span> implies <span class="math inline">\(A^\prime U = V \Sigma\)</span>. As above, this gives us <span class="math inline">\(A^\prime u_i = \sigma_i v_i\)</span>.</p>
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1410" class="exercise"><strong>Exercise 100  </strong></span>How should we choose <span class="math inline">\(\tau_a, \tau_r\)</span>?
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1411" class="exercise"><strong>Exercise 101  </strong></span>Guiding principles?
 </div>
 
 </div>
@@ -260,8 +250,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="homework-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="homework-7.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="homework-13.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="homework-15.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

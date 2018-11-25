@@ -300,7 +300,7 @@ Since $1+u \leq e^{u}$ for all $u \in \R$, we have that
   | \eta | &\leq e^{n\cdot u} - 1 \\
           &\leq n\cdot u + \frac{(n\cdot u)^2}{2!} + \frac{(n\cdot u)^3}{3!} + \ldots \text{(used the Taylor expansion)}\\
           &\leq n\cdot u + \frac{(n\cdot u)^2}{2^1} + \frac{(n\cdot u)^3}{2^2} + \frac{(n\cdot u)^4}{2^3} + \ldots (\text{used that } x! > 2^{x-1} \text{ for } x > 1) \\
-          &= \sum_{k=0}^{\infty} n\cdot u \left(\frac{n\cdot u}{2}\right)^k \text{\small (identify this as a geometric series with } r = \tfrac{n\cdot u}{2} \text{, \small which is less than 1 by assumption)} \\
+          &= \sum_{k=0}^{\infty} n\cdot u \left(\frac{n\cdot u}{2}\right)^k \text{ (identify this as a geometric series with } r = \tfrac{n\cdot u}{2} \text{,  which is less than 1 by assumption)} \\
           &= \frac{n\cdot u}{1-\tfrac{n\cdot u}{2}},
 \end{align*}
 
@@ -1659,7 +1659,7 @@ $$\begin{aligned}
     &= 1 - \frac{\norm{w}_2^4}{\norm{\Sigma^{-1}w}_2^2 \norm{\Sigma w}_2^2}.
 \end{aligned}$$
   
-We want to find an upper bound on $\norm{\Sigma^{-1}u}_2^2 \norm{\Sigma u}_2^2$ for any unit vector $w$. 
+We want to find an upper bound on $\norm{\Sigma^{-1}u}_2^2 \norm{\Sigma u}_2^2$ for any unit vector $u$. 
 
 $$\begin{aligned}
   \norm{\Sigma^{-1}u}_2^2 \norm{\Sigma u}_2^2 &= \left( \sum_{i=1}^k \frac{u_i^2}{\sigma_i^2} \right) \left( \sum_{i=1}^n \sigma_i^2 u_i^2\right) \\
@@ -1782,7 +1782,7 @@ WTS (3): Suppose $x_d \neq x^*$. Then $r_d = Ax_d - b \neq 0$. But (2) implies t
 
 ```
 
-#### What is the choice of vectors to conjugate? (ref:conjugated_gradients)
+#### What is the choice of vectors to conjugate?{#conjugatedgradients}
 
 Conjugate gradient $A-$conjugates residuals $r_0, ..., r_{d-1}$. 
 
@@ -1920,3 +1920,247 @@ Let $F:\R^m \to \R^n$ be continuously differentiable. Then $F$ has a Jacobian, $
 Suppose $z^*$ satisfies $F(z^*) = 0$. Without loss of generality, suppose $J(z^*) = \begin{bmatrix} J_1(z^*) & J_2(z^*) \end{bmatrix}$, where $J_1(z^*) \in \R^{n\times n}$ is invertible. Then there exists an open neighborhood $U \subseteq \R^{n\times n}$, and a continuous function $g: U \to \R^n$ such that for all $x \in U$, $z= \begin{bmatrix} g(x) & x \end{bmatrix}^\prime$ satisfies that $F(z) = 0$. 
 
 ```
+
+### Picard's Method
+
+```{definition, name = "Picard's Method"}
+To find $x$ such that $x = G(x)$, Picard's method updates the current iterative $x_c$ to $x_+ = G(x_c)$. 
+```
+
+#### When does Picard's Method work?
+
+```{definition, name = "Contraction"}
+A map $G: \R^m \to \R^m$ is a *contraction* on a _closed_ set $D \subset \R^m$ if
+
+1. $x \in D \Rightarrow G(x) \in D$,
+2. There exists $\alpha \in (0,1)$ such that for all $x,y \in D$, 
+
+$$
+  \norm{G(x)-G(y)} \le \alpha\norm{x - y}.
+$$
+
+```
+
+```{theorem, contracts}
+
+If $G$ is a contraction on a closed set $D \subset \R^m$, then
+
+1. there is a unique $x^* \in D$ such that $x^* = G(x^*)$,
+2. let $x_0 \in D$, and $x_{k+1} = G(x_k)$. Then $x_k \to x^*$.
+
+```
+
+
+#### Example
+
+Consider $G(x) = 0.5(x+\frac{4}{x})$. Find $x^* = G(x^*)$. Let $x_0 = 10$. Then
+
+\begin{align*}
+  x_1 &= 5.2 \\
+  x_2 &= 2.985 \\
+  x_3 &= 2.162 \\
+  x_4 &= 2.006 \\
+  x_5 &= 2.0
+\end{align*}
+
+### Newton's Method
+
+```{definition, name = "Newton's Method", label = "newtons"}
+Given $F: \R^m \to \R^m$ with a continuous Jacobian $J: \R^m \to \R^{m \times m}$, Newton's method is given as 
+
+$$
+  x_+ = x_c - J(x_c)^{-1}F(x_c).
+$$
+
+```
+
+```{remark, name = "Intuition"}
+If $x^*$ is such that $F(x^*) = 0$, then $0 = F(x^*) \approx F(x_c) + J(x_c)(x^* - x_c)$ as long as $x_c$ is "close enough". Rearrange to get Newtons.
+
+Note: this method requires $J$ to be invertible!
+```
+
+#### Local Convergence Theory
+
+```{definition, name = "Lipschitz Continuity", label = "lipschitz"}
+
+A function is Lipschitz continuous around $x^*$ if there exists $\rho > 0, \gamma > 0$ such that for all $x,y B(x^*, \rho): \norm{J(x) - J(y)} \le \gamma \norm{x-y}$.
+
+```
+
+##### Assumptions:
+
+Suppose $F: \R^m \to \R^m$ has a continuous Jacobian $J: \R^m \to \R^{m\times m}$. Assume there exists an $x^* \in \R^m$ and $\rho^* > 0$ such that
+
+1. $F(x^*) = 0$ and $J(x^*)$ is invertible (i.e. non-singular)
+2. The Jacobian is Lipschitz continuous around $x^*$ with radius $\rho^*$.
+
+
+```{theorem, label = "with-assumptions"}
+Assume the assumptions above hold, and 
+
+$$
+  \norm{x_c - x^*} \le \min\left(\rho^*, \frac{1}{2\gamma\norm{J(x^*)^{-1}}}\right).
+$$
+  
+Then
+
+1. $J(x_c)$ is non-singular, and $\norm{J(x_c)^{-1}} \le 2\norm{J(x^*)^{-1}}$
+2. if $e_+ = x_+ - x^*$ and $e_c = x_c - x^*$, then 
+
+$$
+  \norm{e_+} \le \norm{J(x^*)^{-1}} \cdot \norm{e_c}^2 \gamma \le \frac{\norm{e_c}^2}{2}.
+$$
+
+```
+
+
+```{proof}
+1. 
+
+$$
+\begin{aligned}
+  \norm{I - J(x^*)^{-1}J(x_c)}    &= \norm{J(x^*)^{-1}(J(x^*) - J(x_c))} \\
+                                  &\le \norm{J(x^*)^{-1}}\norm{J(x^*) - J(x_c)} \\
+(\text{use Lipschitz continuity}) &\le \norm{J(x^*)^{-1}} \gamma \norm{x^* - x_c} \\
+         (\text{use assumption})  &\le \frac{\norm{J(x^*)^{-1}}\gamma}{2\gamma \norm{J(x^*)^{-1}}} = \frac{1}{2}.
+\end{aligned}
+$$
+  
+The result shown in exercise \@ref(exr:q1407) tells us that $J(x_c)$ is invertible, and that $\norm{J(x_c)^{-1}} \le \frac{1}{1/2}\norm{J(x^*)^{-1}} = 2\norm{J(x^*)^{-1}}$. 
+
+2. By Newtons method (defintion \@ref(def:newtons)), $x_+ = x_c - J(x_c)^{-1}F(x_c)$. Hence, 
+
+$$
+\begin{aligned}
+  e_+ &= e_c - J(x_c)^{-1}F(x_c) \\
+      &= J(x_c)^{-1}(J(x_c)e_c - F(x_c)) \\
+(\text{recall, } F(x^*) = 0) &= J(x_c)^{-1}(J(x_c)e_c - (F(x_c) - F(x^*))) \\
+      &= J(x_c)^{-1}(J(x_c) e_c - \int_0^1 J(x^* + t e_c)e_c dt).
+\end{aligned}
+$$ 
+
+This implies that 
+  
+$$\begin{aligned}
+  \norm{e_+} &\le \norm{J(x_c)^{-1}}\int_0^1 \norm{J(x^* + t e_c) - J(x_c)} \norm{e_c} dt \\
+             &\le \norm{J(x_c)^{-1}}\int_0^1 \gamma \norm{x^* + t(x-x^*) - x_c} \norm{e_c} dt \\
+             &\le \norm{J(x_c)^{-1}}\int_0^1 \gamma (1-t) \norm{e_c}^2 dt \\
+             &\le \norm{J(x_c)^{-1}}\frac{1}{2}\gamma \norm{e_c}^2 \\
+             &\le \gamma \norm{J(x^*)^{-1}}\norm{e_c}^2 \\
+(\text{ a mix of Lipschitz and reverse triangle inequality})&\le \frac{\gamma\norm{J(x^*)^{-1}} \norm{e_c}}{2\gamma \norm{J(x^*)^{-1}}} \le \frac{1}{2}\norm{e_c}.
+\end{aligned}$$
+
+```
+
+
+```{definition, name = "Rates of Convergence", label = "convergence-rates"}
+
+Let $\{x_n\} \subset \R_{>0}$ such that $x_k \to 0$. 
+
+1. If $\limsup \frac{x_{k+1}}{x_k} = \rho \in (0,1)$, then $x_k$ converges Q-linearly.
+2. If $\limsup \frac{x_{k+1}}{x_k} = 0$, then $x_k$ converges Q-super linearly.
+3. If $\limsup \frac{x_{k+1}^2}{x_k} = L \in \R\setminus [0,1)$, then $x_k$ converges Q-quadraticly. 
+4. If there exists a sequence $\{y_k\} \subset \R_{>0}$ such that $x_k \le y_k$ and $y_k$ converges Q-(super)linearly/quadratically, then $x_k$ converges R-(super)linearly/quadratically. 
+
+```
+
+#### Stopping Criteria
+
+**Option 1**: Monitor $\norm{x_{k+1} - x_k}$, and stop when this is below some predetermined threshold. This is a good idea for Newton's Method, because 
+
+$$
+\norm{x_{k+1} - x_k} = \norm{e_{k+1} - e_k} \ge \norm{e_k} - \norm{e_{k+1}} \ge \norm{e_k}- \frac{1}{2}\norm{e_k} = \frac{1}{2}\norm{e_k}.
+$$ 
+
+However, in general it might not be such a good idea. Especially not when dealing with non-linear equations, as the sequence $x_k$ can be stagnant for a while with small changes, but still be far from the solution.
+
+**Option 2**: Monitor $\norm{F(x_k)}$, and stop when $\norm{F(x_k)} \le \tau_a + \tau_r \norm{F(x_0)}.
+
+
+### Inexact Newton's Method
+
+For most of the methods we've discussed so far, we have updated the current iterate to the next by $x_+ = x_c + s$. For Newton's method, $s = - J(x_c)^{-1} F(x_c)$, or in other words, $J(x_c)\cdot s + F(x_c) = 0$. However, sometimes this is not possible:
+
+1. $J(x_c)$ cannot be evaluated precisely. In such cases, we can replace $J(x_c)$ with $J_c$, where $J_c$ is chosen such that $\norm{J_c - J(x_c)^{-1}} \le \Delta_c$. So, $J_c\cdot s + F(x_c) = 0$. 
+2. $F(x_c)$ cannot be evaluated precisely. Then we can replace this with $F_c$ such that $\norm{F_c - F(x_c)} \le \epsilon_c$. So now, we're trying to solve $J(x_c)\cdot s + F_c = 0$, or $J_c\cdot s + F_c = 0$.
+3. $J(x_c) + s\cdot F(c_c)=0$ cannot be solved exactly for $s$. Instead, solve up to certain precision, i.e. find $s$ such that $\norm{J_c\cdot s + F_c} \le \eta_c \norm{F_c}$. 
+
+```{theorem, inexact-newton}
+If general assumptions hold, and $\norm{x_c - x^*} \le \min\left(\frac{1}{2\gamma \norm{J(x^*)^{-1}}}, \rho^*\right)$, then there exists $k>0$ such that 
+
+$$
+  \norm{e_+} \le k \left( \norm{e_c}^2 + (\eta_c + \Delta_c)\norm{e_c} + \epsilon_c \right).
+$$
+
+```
+
+#### Chord Method (an inexact Newton's method)
+
+In Chord's Method, we only compute $J(x_c)$ every $v$ iterations, and reuse it. 
+
+**General Pseudo-code**
+
+```bash
+i = 0
+while (stopping criteria not met)
+  i += 1
+  if (i-1) % v == 0
+    compute J(x_c)
+  
+  solve 0 = F(x_c) + s * J(x_c) # for s
+  x_+ = x_c - s * J(x_c)
+end
+```
+
+**Chord's algorithm**
+
+As inputs, takes `v`, `x0`, `F` (function), `J` (Jacobian of `F`), `eps` (threshold for stopping criteria). 
+
+```bash
+i = 0
+x = x0
+
+while norm(F(x)) > eps
+  if i mod v == 0
+    J = J(x)
+  end 
+  solve 0 = J*s + F(x) # for s
+  x = x + s
+  i += 1
+end
+
+return x
+```
+
+In relation to theorem \@ref(thm:inexact-newton), Chord's method sets $\eta_c = 0$, $\epsilon_c = 0$, and $\norm{\epsilon_c} \le \kappa (\norm{e_c}^2 + \Delta_c \norm{e_c})$. 
+
+#### Forward Difference
+
+Replace $J(x_c)$ with its numerical differential approximation. 
+
+Let $f: \R^m \to \R$ be differentiable and its gradient be Lipschitz continuous, i.e. there exists $l > 0$ such that $\norm{\nabla f(x) - \nabla f(y)} \le l \norm{x-y}$. 
+
+Choose $h = \epsilon e_i$, where $e_i$ is the standard i'th basis vector. Then
+
+$$
+  \nabla f(y)^\prime e_i = \frac{f(y + \epsilon e_i) - f(y)}{\epsilon} + \gamma,
+$$
+for some $\gamma$ with $|\gamma| \le \tfrac{l\epsilon}{2}$. 
+
+
+An algorithm to do this takes as its inputs `f` (function), `eps` (approximation size), `x` (point of interest), and proceeds as follows:
+
+```julia
+g = zeros(length(x))
+I = identity(length(x))
+f=f(x)
+
+for i in 1:length(x)
+  g[i] = (f(x + eps I[:,i]) - f)/eps
+end
+
+return g
+```
+
+In relation to theorem \@ref(thm:inexact-newton), this has $\epsilon_c$, $\eta_c = c$, and $\norm{e_+} \le \kappa \left(\norm{e_c}^2 + \epsilon \frac{l \sqrt{m}}{2}\norm{e_c}\right)$. Here, $\epsilon\frac{l \sqrt{m}}{2}$ is a bound of $\Delta_C$. 

@@ -1053,6 +1053,7 @@ See [SOR]("../Homework/SOR.jl").
 ```
 
 ```{exercise, q1003}
+
 Randomly generate problems and 
 
 a) at each iteration, record residual norm and absolute error
@@ -1077,10 +1078,10 @@ Give a detailed comparison of cycle, randomized, and random permutation Kaczmarz
 ## Homework 11
 
 ```{exercise, q1101}
-
 Show that $\alpha \sum_{i=1}^n a_i (b_i - a_i x^c) = \alpha A^\prime (b - Ax^c)$.
-
 ```
+
+
 
 ```{exercise, q1102}
 Show that if $A^\prime r^c = 0$, then $x^c = x^*$, where $Ax^* = b$. 
@@ -1168,7 +1169,7 @@ What conditions (if any) on $a_0, ..., a_{d-1}$ guarantee that an $A-$normalized
 ## Homework 13
 
 ```{exercise, q1301}
-Show that the procedure \@ref(conjugated_gradients) is the same as the one implemented in code provided by Patel.
+Show that the procedure in \@ref(conjugatedgradients) is the same as the one implemented in code provided by Patel.
 ```
 
 ```{exercise, q1302}
@@ -1176,7 +1177,7 @@ Prove that CG converges in finitely many steps (in exact arithmetic).
 ```
 
 ```{exercise, q1303}
-Show that the limit in \@ref(exm:gradient-example) holds. 
+Show that the limit in example \@ref(exm:gradient-example) holds. 
 ```
 
 ```{exercise, q1304}
@@ -1189,4 +1190,181 @@ Using IFT: when will $F(x) = 0$ have an isolated solution? (i.e. a solution wher
 
 ```{exercise, q1306}
 What happens if $F(z^*) = 0$ and $\text{rank}(J(z^*)) < \min(n,m)$?
+```
+
+## Homework 14
+
+```{exercise, q1401}
+Proof theorem \@ref(thm:contracts). Why does $D$ have to be closed? (Hint: need $\lim_{k \to \infty} x_k \in D$)
+```
+
+```{exercise, q1402}
+Does this hold if we replace $R^m$ with an arbitrary metric space? (Hint: no, need completeness)
+```
+
+```{exercise, q1403}
+Solve $x = G(x)$ by hand. What is $G(x)$ doing? 
+```
+
+```{exercise, q1404}
+Show that $G(x)$ is a contraction.
+```
+
+```{exercise, q1405}
+What is the impact of the singular values of $J(x^*)$ on the "localness" of the results in theorem \@ref(thm:with-assumptions)?
+```
+
+```{exercise, q1406}
+Why is the first result from theorem \@ref(thm:with-assumptions) important?
+```
+
+```{exercise, q1407}
+Proof and interpret the following:
+
+Let $A,B \in \R^{n \times m}$ and assume $A$ is non-singular. If for some $\epsilon \in (0,1)$, $\norm{AB - I} < I - \epsilon$, then $B$ is invertible and 
+
+1. $\norm{A - B^{-1}} < (I-\epsilon)\norm{B^{-1}}$,
+2. $\norm{B^{-1}} \le \frac{1}{\epsilon} \norm{A}$.
+
+```
+
+
+```{exercise, q1408}
+What happens if I use the mean value theorem instead of Fundamental Theorem of Calculus? (Hint: remember we cannot generalize 1D MVT to multi D).
+```
+
+```{exercise, q1409}
+Consider Newtons method. Using FTC, $e = x-x^*$, proof that if $e_0 = x_0 - x^*$, and $e$ sufficiently small, then
+
+$$
+  \frac{3}{5}\kappa \left(J(x^*)\right)^{-1} \frac{\norm{e}}{\norm{e_0}} \le \frac{\norm{F(x)}}{\norm{F(x_0)}} \le \frac{5}{3}\kappa \left(J(x^*)\right) \frac{\norm{e}}{\norm{e_0}}
+$$
+
+```
+
+```{exercise, q1410}
+How should we choose $\tau_a, \tau_r$? 
+```
+
+```{exercise, q1411}
+Guiding principles?
+```
+
+## Homework 15
+
+````{exercise, 1501}
+Prove $|f(y+h) - f(y) - \nabla f(y) | \le \frac{l}{2} \norm{h}^2$, when the gradient of $f$ is Lipschitz continuous.
+```
+
+```{exercise, 1502}
+If $f$ can be calculated at any input with accuracy $l_f u$ ($l_f > 0$), show that the right choice of $\epsilon$ is proportional to $\sqrt{u}$. I.e. this choice of $\epsilon$ give the most accuracy. (See the section [Forward Difference])
+```
+
+```{exercise, 1503}
+Choose a simple differentiable function and test a bunch of $\epsilon$ and compare to $\epsilon = \sqrt{u}$. 
+```
+
+```{exercise, 1504}
+How is Forward Difference Approximation done for $f: \R^m \to \R^n$? 
+```
+
+## Homework 16
+
+```{exercise, 1601}
+Is $f(x) = |x|$ semi-smooth?
+```
+
+```{exercise, 1602}
+Is $f(x) = \log(1+|x|)$ semi-smooth?
+```
+
+```{exercise, 1603}
+Prove that Newtons Method converges Q superlinearly. 
+```
+
+### Newton's Method
+
+The goal of this exercise is to implement Newtons method and its variants to solve a nonlinear system, and to acquaint you with their properties.
+
+You will solve for the zeros of $F\left(x,y\right)$ which has components given by
+
+$$\begin{aligned}
+  F_1(x,y) &= (1.5 - x + xy)(y-1) + (2.25 - x + xy^2)(y^2 - 1) + (2.625 - x + xy^3)(y^3-1) \\
+  F_2(x,y) &= (1.5 - x + xy)x + (2.25 - x + xy^2)(2xy) + (2.625 - x + xy^3)(3y^2x).
+\end{aligned}$$  
+    
+Stay within $[-4.5, 4.5]^2$. 
+  
+Compare the following methods: Newtons Method, Chord Method, Forward Difference Method, Broyden Method.
+
+You will need to also do line search. The code I supplied implements Newtons method with a slightly different version of line search. Implement the one I discussed in class as well.
+
+```{exercise, 1604}
+Compare the performance of the different methods and the different line search methods.
+```
+
+```{exercise, 1605}
+Track the step length for each method. What happens to the step length as you get closer to the solution. (Make some plots)
+```
+
+## Homework 16
+
+Proof or find counter example for the following four problems:
+
+```{exercise, q1601}
+If $\theta^*$ is a global minimizer, it is a local minimizer.
+```
+
+```{exercise, q1602}
+If $\theta^*$ is a strict global minimizer, it is the only global minimizer.
+```
+
+```{exercise, q1603}
+If $\theta^*$ is an isolated global minimizer, it is the only global minimizer.
+```
+
+```{exercise, q1604}
+If $\theta^*$ is a strict local minimizer, it is isolated. #there exists a neighborhood around $\theta^*$ such that $\theta^*$ is isolated in said neighborhood.
+```
+
+```{exercise, q1605}
+Is the condition sufficient?
+```
+
+```{exercise, q1606}
+Fill in the blanks!
+```
+
+## Homework 17
+
+Proof or find counter examples for each of the following three problems:
+
+```{exercise, q1701}
+Let $f \in C^1$. 
+
+$f$ is convex if and only if for all $x,y \in \R^p:\ \left(\nabla f(x) - \nabla f(y)\right)(x-y) \ge 0$. 
+```
+
+```{exercise, q1702}
+Let $f \in C^2$. 
+
+$f$ is convex if and only if for all $x \in \R^p:\ \nabla^2 f(x) \ge 0$.
+```
+
+```{exercise, q1703}
+Let $f \in C^1$. 
+
+$f$ is strongly convex with $\sigma > 0$ if and only if $\left(\nabla f(x) - \nabla f(y) \right)^\prime(x-y) \ge \sigma \norm{x-y}^2_2$. (Hint: integral form of Taylor's Theorem)
+```
+
+```{exercise, q1704}
+(1) implies (2) of theorem. Application of Taylor's theorem in integral form.
+```
+
+```{exercise, q1705}
+(3) implies (4) of theorem. 
+```
+
+```{exercise, q1706}
+Let $f \in C^2$ be a convex function with a Lipschitz continuous gradient. Then $L > 0$ implies $\nabla^2 f(x) \le L$.
 ```

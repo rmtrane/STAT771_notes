@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="homework-5.html">
-<link rel="next" href="homework-7.html">
+<link rel="prev" href="homework-16-1.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -179,89 +179,58 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="homework-6" class="section level2">
-<h2><span class="header-section-number">2.6</span> Homework 6</h2>
+<div id="homework-17" class="section level2">
+<h2><span class="header-section-number">2.18</span> Homework 17</h2>
+<p>Proof or find counter examples for each of the following three problems:</p>
 
 <div class="exercise">
-<p><span id="exr:q601" class="exercise"><strong>Exercise 46  </strong></span>Determine the computational complexity of the QR decomposition using</p>
-<ol style="list-style-type: lower-alpha">
-<li>Gram-Schmidt</li>
-<li>Modified Gram-Schmidt</li>
-<li>Householder</li>
-<li>Givens rotations</li>
-</ol>
-<p>for any arbitrary, dense <span class="math inline">\(n \times m\)</span> matrix. (dense = don’t know how many entries are <span class="math inline">\(0\)</span>.)</p>
-</div>
-
-
-<div class="solution">
-<p> <span class="solution"><em>Solution. </em></span>  a) Gram-Schmidt requires <span class="math inline">\(O(m^2n)\)</span> computations. b) Same as Gram-Schmidt. c) <span class="math inline">\(O(m^2n)\)</span>. d) <span class="math inline">\(O(m^2n)\)</span>.</p>
+<p><span id="exr:q1701" class="exercise"><strong>Exercise 117  </strong></span>Let <span class="math inline">\(f \in C^1\)</span>.</p>
+<span class="math inline">\(f\)</span> is convex if and only if for all <span class="math inline">\(x,y \in {\mathbb{R}}^p:\ \left(\nabla f(x) - \nabla f(y)\right)(x-y) \ge 0\)</span>.
 </div>
 
 
 <div class="exercise">
-<span id="exr:q602" class="exercise"><strong>Exercise 47  </strong></span>Compare the computational complexity of Householder and Givens for a sparse matrix (i.e. a matrix where a substantial number of entries are <span class="math inline">\(0\)</span>).
-</div>
-
-
-<div class="solution">
- <span class="solution"><em>Solution. </em></span> Householder still have the same complexity even for sparse matrices, whereas for Givens we do not have to complete as many multiplications with Givens rotations. (Everytime we encounter a 0 in the lower triangular matrix that can be paired with a zero above it, we can pair them up, and skip the computation.)
+<p><span id="exr:q1702" class="exercise"><strong>Exercise 118  </strong></span>Let <span class="math inline">\(f \in C^2\)</span>.</p>
+<span class="math inline">\(f\)</span> is convex if and only if for all <span class="math inline">\(x \in {\mathbb{R}}^p:\ \nabla^2 f(x) \ge 0\)</span>.
 </div>
 
 
 <div class="exercise">
-<span id="exr:q603" class="exercise"><strong>Exercise 48  </strong></span>Implement QR decomposition using Householder. Write it as a function that takes a matrix <span class="math inline">\(A \in {\mathbb{R}}^{n\times m}\)</span> with <span class="math inline">\(\text{rank}(A) = m\)</span> as its input, and gives back <span class="math inline">\(Q\)</span> and <span class="math inline">\(R\)</span>.
-</div>
-
-
-<div class="solution">
- <span class="solution"><em>Solution. </em></span> See <a href="../Homework/QR_householder.jl">here</a>.
+<p><span id="exr:q1703" class="exercise"><strong>Exercise 119  </strong></span>Let <span class="math inline">\(f \in C^1\)</span>.</p>
+<span class="math inline">\(f\)</span> is strongly convex with <span class="math inline">\(\sigma &gt; 0\)</span> if and only if <span class="math inline">\(\left(\nabla f(x) - \nabla f(y) \right)^\prime(x-y) \ge \sigma {\left \vert \left \vert x-y \right \vert \right \vert}^2_2\)</span>. (Hint: integral form of Taylor’s Theorem)
 </div>
 
 
 <div class="exercise">
-<span id="exr:q604" class="exercise"><strong>Exercise 49  </strong></span>Implement QR decomposition using Givens. (As above.)
-</div>
-
-
-<div class="solution">
- <span class="solution"><em>Solution. </em></span> See <a href="../Homework/QR_givens.jl">here</a>
+<span id="exr:q1704" class="exercise"><strong>Exercise 120  </strong></span>(1) implies (2) of theorem. Application of Taylor’s theorem in integral form.
 </div>
 
 
 <div class="exercise">
-<span id="exr:q605" class="exercise"><strong>Exercise 50  </strong></span>What happens in theorem <a href="singular-value-decomposition-svd.html#thm:svd">3</a> if <span class="math inline">\(m &gt; n\)</span>.
-</div>
-
-
-<div class="solution">
-<p> <span class="solution"><em>Solution. </em></span>  If <span class="math inline">\(m &gt; n\)</span>, the diagonal matrix of the SVD of <span class="math inline">\(A\)</span> will be of the form <span class="math inline">\(\begin{bmatrix} \Sigma &amp; 0 \end{bmatrix}\)</span>, where <span class="math inline">\(\Sigma = \begin{bmatrix} \sigma_1 &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; \sigma_n \end{bmatrix}\)</span>.</p>
+<span id="exr:q1705" class="exercise"><strong>Exercise 121  </strong></span>(3) implies (4) of theorem.
 </div>
 
 
 <div class="exercise">
-<span id="exr:q606" class="exercise"><strong>Exercise 51  </strong></span>If <span class="math inline">\(u,v\)</span> are respectively left and right singular vectors corresponding to the singular value <span class="math inline">\(\sigma\)</span>, show that <span class="math inline">\(Av = \sigma u\)</span>, and <span class="math inline">\(A&#39;u = \sigma v\)</span>.
+<span id="exr:q1706" class="exercise"><strong>Exercise 122  </strong></span>Let <span class="math inline">\(f \in C^2\)</span> be a convex function with a Lipschitz continuous gradient. Then <span class="math inline">\(L &gt; 0\)</span> implies <span class="math inline">\(\nabla^2 f(x) \le L\)</span>.
 </div>
 
 
-<div class="solution">
-<p> <span class="solution"><em>Solution. </em></span> Using the SVD of <span class="math inline">\(A\)</span>, we see that <span class="math inline">\(AV = U\Sigma\)</span>, which implies</p>
-<p><span class="math display">\[
-  A \begin{bmatrix} v_1 &amp; \cdots &amp; v_m \end{bmatrix} = \begin{bmatrix} \sigma_1 u_1 &amp; \cdots &amp; \sigma_m u_m \end{bmatrix}.
-\]</span></p>
-<p>where <span class="math inline">\(v_1, \dots, v_m\)</span> are the right singular vectors of <span class="math inline">\(A\)</span>, and <span class="math inline">\(u_1, \dots, u_m\)</span> are the left singular vectors of <span class="math inline">\(A\)</span>.</p>
-<p>So, <span class="math inline">\(Av_i = \sigma_i u_i\)</span> for all <span class="math inline">\(i\)</span>.</p>
-<p>Similarly, <span class="math inline">\(A^\prime = V \Sigma U^\prime\)</span> implies <span class="math inline">\(A^\prime U = V \Sigma\)</span>. As above, this gives us <span class="math inline">\(A^\prime u_i = \sigma_i v_i\)</span>.</p>
 </div>
+<!-- </div> -->
 
-</div>
+
+
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="homework-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="homework-7.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="homework-16-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
