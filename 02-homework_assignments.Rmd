@@ -1894,3 +1894,16 @@ Let $f \in C^2$ be a convex function with a Lipschitz continuous gradient. Then 
 Tuo
 ```
 
+## Homework 19
+
+```{exercise, q1901}
+
+Shows that 
+
+$$
+  \alpha_k^{cp} = \left \{ \begin{array}{rl} \min\left(\frac{\norm{g_k}_2^2}{g_k^\prime B_k g_k}, \frac{\Delta_k}{\norm{g_k}_2^2}) & \text{ if } g_k^\prime B_k g_k > 0 \\ \frac{\Delta_k}{\norm{g_k}}_2  & \text{ otherwise} \end{array}\right .
+$$
+      
+minimizes equation \@ref(eq:trustregion)
+
+```

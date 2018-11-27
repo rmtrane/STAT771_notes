@@ -143,6 +143,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.6" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html"><i class="fa fa-check"></i><b>1.6</b> Non-linear Unconstrained Optimization</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#motivating-problems-2"><i class="fa fa-check"></i><b>1.6.1</b> Motivating Problems</a></li>
 <li class="chapter" data-level="1.6.2" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#formalize-minimization"><i class="fa fa-check"></i><b>1.6.2</b> Formalize Minimization</a></li>
+<li class="chapter" data-level="1.6.3" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#algorithmic-and-theoretical-preview"><i class="fa fa-check"></i><b>1.6.3</b> Algorithmic and Theoretical Preview</a></li>
+<li class="chapter" data-level="1.6.4" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#line-search"><i class="fa fa-check"></i><b>1.6.4</b> Line Search</a></li>
+<li class="chapter" data-level="1.6.5" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#trust-region"><i class="fa fa-check"></i><b>1.6.5</b> Trust Region</a></li>
+<li class="chapter" data-level="1.6.6" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#acceptancerejection-criteria"><i class="fa fa-check"></i><b>1.6.6</b> Acceptance/Rejection Criteria</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -166,6 +170,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2.17" data-path="homework-17.html"><a href="homework-17.html"><i class="fa fa-check"></i><b>2.17</b> Homework 17</a></li>
 <li class="chapter" data-level="2.18" data-path="homework-18.html"><a href="homework-18.html"><i class="fa fa-check"></i><b>2.18</b> Homework 18</a></li>
+<li class="chapter" data-level="2.19" data-path="homework-19.html"><a href="homework-19.html"><i class="fa fa-check"></i><b>2.19</b> Homework 19</a></li>
 </ul></li>
 </ul>
 
@@ -383,7 +388,7 @@ f(y) &amp;\ge f(x) + \nabla f(x)^\prime (x-y) + \frac{1}{2}\sigma {\left \vert \
 <li>implies (3): Fix <span class="math inline">\(x\)</span>. Define <span class="math inline">\(\phi_x(y) = f(y) - y^\prime \nabla f(x)\)</span>. Then <span class="math inline">\(\phi_x\)</span> is convex.</li>
 </ol>
 <ol style="list-style-type: lower-alpha">
-<li><span class="math inline">\(\nabla \phi_x(y) = \nabla f(y) - \nabla f(x)\)</span>, which implies that <span class="math inline">\(\phi_x\)</span> attains its minimum at <span class="math inline">\(x\)</span> (set equal to <span class="math inline">\(0\)</span> and solve for y)$.</li>
+<li><span class="math inline">\(\nabla \phi_x(y) = \nabla f(y) - \nabla f(x)\)</span>, which implies that <span class="math inline">\(\phi_x\)</span> attains its minimum at <span class="math inline">\(x\)</span> (set equal to <span class="math inline">\(0\)</span> and solve for <span class="math inline">\(y\)</span>).</li>
 <li><span class="math inline">\(\phi_x(y) - \phi_x(z) - \nabla \phi_x(z)^\prime (y-z) = ... = f(y) - f(z) - \nabla f(z)^\prime(y-z) \leq \frac{L}{2} {\left \vert \left \vert y-z \right \vert \right \vert}_2^2\)</span>.</li>
 </ol>
 <p>So, <span class="math inline">\(\phi_x(x) \leq \phi_x(y) \leq \phi_x(z) + \nabla \phi_x(z)^\prime (y-z) + \frac{L}{2} {\left \vert \left \vert y-z \right \vert \right \vert}_2^2\)</span>. If we minimize the upper bound, we see that it optains its minimum at <span class="math inline">\(y = z - \frac{1}{L} \nabla \phi_x(z) = z - \frac{1}{L}\left(\nabla f(z) - \nabla f(x)\right)\)</span>. If we plug this back in, we see that <span class="math inline">\(\phi_x(z - \frac{1}{L}\nabla \phi_x(z)) \le \phi_x(z) - \frac{1}{2L}{\left \vert \left \vert \nabla \phi_x(z) \right \vert \right \vert}_2^2\)</span>.</p>
@@ -392,8 +397,10 @@ f(y) &amp;\ge f(x) + \nabla f(x)^\prime (x-y) + \frac{1}{2}\sigma {\left \vert \
 </ol>
 </div>
 
-<div id="algorithmic-and-theoretical-preview" class="section level5">
-<h5><span class="header-section-number">1.6.2.3.1</span> Algorithmic and Theoretical Preview</h5>
+</div>
+</div>
+<div id="algorithmic-and-theoretical-preview" class="section level3">
+<h3><span class="header-section-number">1.6.3</span> Algorithmic and Theoretical Preview</h3>
 
 <div class="lemma">
 <p><span id="lem:unnamed-chunk-91" class="lemma"><strong>Lemma 23  (Zoutendijk’s Theorem)  </strong></span>Let <span class="math inline">\(f: {\mathbb{R}}^r \to {\mathbb{R}}\)</span> be <span class="math inline">\(C^1\)</span> function with Lipschitz gradient, and convex. Assume <span class="math inline">\(f^* = \inf_{x \in {\mathbb{R}}^p} f(x) &gt; -\infty\)</span>.</p>
@@ -458,9 +465,110 @@ f(y) &amp;\ge f(x) + \nabla f(x)^\prime (x-y) + \frac{1}{2}\sigma {\left \vert \
 <li>if <span class="math inline">\(f\)</span> is convex and <span class="math inline">\(C^2\)</span> with Lipschitz continuous gradient, then <span class="math inline">\(L &gt; 0 \Rightarrow \nabla^2 f(x) \le L\)</span>. (See exercise <a href="homework-18.html#exr:q1806">128</a>)</li>
 </ol>
 <p>Let <span class="math inline">\(\kappa = L/\sigma\)</span> is the condition number. <span class="math inline">\({\left \vert \left \vert \theta_{k+1} - \theta^* \right \vert \right \vert}_2^2 \le \left(\frac{\kappa^2 - 1}{\kappa^2}\right){\left \vert \left \vert \theta_k -\theta^* \right \vert \right \vert}_2^2\)</span>.</p>
+<hr />
+<p>We are trying to solve problems of the form <span class="math inline">\(\min_{\theta \in {\mathbb{R}}^p} f(\theta)\)</span>. The way to do that is by evaluate the function <span class="math inline">\(f\)</span> at a point, look around at the Hessian to find new direction, choose a new point in that direction, repeat.</p>
+<div id="initialization" class="section level5">
+<h5><span class="header-section-number">1.6.3.0.1</span> Initialization</h5>
+<ol style="list-style-type: decimal">
+<li>Supply objective and derivative</li>
+<li>Supply stopping criteria</li>
+<li>Supply hyperparameters and modification criteria</li>
+<li>Supply acceptance/rejection criteria</li>
+<li>Supply <span class="math inline">\(\theta_0\)</span></li>
+</ol>
+</div>
+<div id="algorithm" class="section level5">
+<h5><span class="header-section-number">1.6.3.0.2</span> Algorithm</h5>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="va">theta=</span>theta0
+
+<span class="kw">while</span> <span class="kw">(</span><span class="ex">stopping</span> criteria not satisfied<span class="kw">)</span>
+  <span class="ex">generate</span> a local model of the objective funciton (near current iterate)
+  
+  <span class="ex">minimize</span> approximately or exactly the local model to generate proposed iterate
+  
+  <span class="ex">accept</span> of reject the proposed iterate
+  
+  <span class="ex">evaluate</span> modification criteria and change hyper parameters
+<span class="ex">end</span>
+
+<span class="bu">return</span> iterate, objective history, diagnostic history</code></pre></div>
+</div>
+<div id="local-models" class="section level4">
+<h4><span class="header-section-number">1.6.3.1</span> Local Models</h4>
+<ol style="list-style-type: decimal">
+<li>Linear model: <span class="math inline">\(M_k(\theta) = f_k + g_k^\prime (\theta - \theta_k)\)</span> (often the case that <span class="math inline">\(f_k \approx f(\theta_k), g_k \approx \nabla f(\theta_k)\)</span>)</li>
+<li>Quadratic model: <span class="math inline">\(M_k(\theta) = f_k + g_k^\prime (\theta - \theta_k) + \frac{1}{2}(\theta - \theta_k)^\prime B_k (\theta - \theta_k)\)</span> (often the case that <span class="math inline">\(B_k = \nabla^2 f(\theta_k)\)</span>)</li>
+<li>Gauss-Newton Local Model: let <span class="math inline">\(f(\theta) = \frac{1}{2}{\left \vert \left \vert r(\theta) \right \vert \right \vert}_2^2\)</span>, where <span class="math inline">\(r:{\mathbb{R}}^p \to {\mathbb{R}}^N, \nabla r = J\)</span>. So <span class="math inline">\(\nabla f(\theta) = J(\theta)^\prime r(\theta) = \sum_{i=1}^N r_i(\theta) \nabla r_i(\theta)\)</span>, and</li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+  \nabla^2 f(x\theta) &amp;= \sum_{i=1}^N \nabla r_i(\theta) \nabla r_i(\theta)^\prime + r_i(\theta) \nabla^2 r_i(\theta) \\
+                      &amp;= J(\theta)\J(\theta)^\prime + \sum_{i=1}^N r_i(\theta) \nabla^2 r_i(\theta)
+\end{aligned}\]</span></p>
+<p>Gauss-Newton says: ignore the second term. So</p>
+<p><span class="math display">\[\begin{aligned}
+  M_k(\theta) &amp;= \frac{1}{2} {\left \vert \left \vert r_k(\theta_k) \right \vert \right \vert}_2^2 + \left(J(\theta_k)^\prime r(\theta_k)\right)^\prime (\theta - \theta_k) + \frac{1}{2}(\theta - \theta_k)^\prime J(\theta_k)^\prime J(\theta_k) (\theta - \theta_k) \\
+  &amp;= \frac{1}{2} {\left \vert \left \vert r_k(\theta_k) + J(\theta_k)(\theta - \theta_k) \right \vert \right \vert}_2^2
+\end{aligned}\]</span></p>
+<p>This is a least squares problem, which we can solve using a QR decomposition.</p>
+<p>Using one of these models, we need to decide how to propose the next iterate. This can be done in a few different ways</p>
+</div>
+</div>
+<div id="line-search" class="section level3">
+<h3><span class="header-section-number">1.6.4</span> Line Search</h3>
+<p>Let <span class="math inline">\(d_k\)</span> denote the search direction: we get it by minimizing the local model. Ideally, <span class="math inline">\(\theta_{k+1} = \theta_k + d_k\)</span>. Turns out, this is not efficient enough. Instead, we do one of the following:</p>
+<ol style="list-style-type: lower-roman">
+<li>Exact line search: <span class="math inline">\(\min_{\alpha \ge 0} f(\theta_k + \alpha d_k)\)</span></li>
+<li>Bouneded line search: for <span class="math inline">\(\alpha^* &gt; 0\)</span>, find <span class="math inline">\(\min_{\alpha \in [0, \alpha^*]} f(\theta_k + \alpha d_k)\)</span></li>
+<li>Backtracking: for <span class="math inline">\(\alpha^* &gt; 0\)</span>, <span class="math inline">\(\rho \in (0,1)\)</span>, find <span class="math inline">\(\min_{q \in {\mathbb{N}}_0} f(\theta_k + \alpha^* \rho^* d_k)\)</span></li>
+<li>Quadratic interpolation: <span class="math inline">\(g(x) = f(\theta_k + \alpha d_k)\)</span> for <span class="math inline">\(\alpha \ge 0\)</span>. Approximate this with <span class="math inline">\(h(\alpha) = a\alpha^2 + b\alpha + c\)</span>. Need to know three things about <span class="math inline">\(g\)</span> to find <span class="math inline">\(a,b,c\)</span>. Usually:
+<ul>
+<li><span class="math inline">\(g(0), g&#39;(0), g(\alpha^*)\)</span>. Then, <span class="math inline">\(h(0) = c = g(0), h&#39;(0) = b = g&#39;(0)\)</span>, and <span class="math inline">\(h(\alpha^*) = g(\alpha^*) = a (\alpha^*)^2 + g&#39;(0)\alpha^* + g(0)\)</span>.</li>
+<li>minimize <span class="math inline">\(h\)</span> using <span class="math inline">\(a,b,c\)</span> found above, check if solution is good enough. If not, update criteria, and repeat.</li>
+</ul></li>
+<li>Cubic interpolation: <span class="math inline">\(h(\alpha) = a\alpha^3 + b \alpha^2 + c \alpha + d\)</span>. Need to know four things about <span class="math inline">\(g\)</span> to find <span class="math inline">\(a,b,c,d\)</span>. These four things will depend on the problem.</li>
+</ol>
+</div>
+<div id="trust-region" class="section level3">
+<h3><span class="header-section-number">1.6.5</span> Trust Region</h3>
+<p>Seek to minimize <span class="math inline">\(M_k(\theta)\)</span> where <span class="math inline">\({\left \vert \left \vert \theta - \theta_k \right \vert \right \vert}_2 \le \Delta_k\)</span>.</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(M_k\)</span> is linear: <span class="math inline">\(\min_\theta f_k + g_k^\prime (\theta - \theta_k)\)</span> such that <span class="math inline">\({\left \vert \left \vert \theta-\theta_k \right \vert \right \vert}_2 \le \Delta_k\)</span>. I.e. <span class="math inline">\(\theta = \theta_k - g_k^\prime \frac{\Delta_k}{{\left \vert \left \vert g_k \right \vert \right \vert}}\)</span>.</li>
+<li><span class="math inline">\(M_k\)</span> is quadratic: <span class="math inline">\(\min_\theta f_k + g_k^\prime (\theta - \theta_k) + \frac{1}{2}(\theta - \theta_k)^\prime B_k (\theta - \theta_k)\)</span> such that <span class="math inline">\({\left \vert \left \vert \theta-\theta_k \right \vert \right \vert}_2 \le \Delta_k\)</span>. I.e. <span class="math inline">\(\theta = \theta_k - g_k^\prime \frac{\Delta_k}{{\left \vert \left \vert g_k \right \vert \right \vert}}\)</span>. Do this by minimizing</li>
+</ol>
+<span class="math display" id="eq:trustregion">\[\begin{equation} 
+  f_k + g_k^\prime (-\alpha g_k) + \frac{1}{2}(-\alpha g_k)^\prime B_k (-\alpha g_k) \tag{5}
+\end{equation}\]</span>
+<p>over <span class="math inline">\(\alpha \ge 0\)</span> such that <span class="math inline">\({\left \vert \left \vert -\alpha g_k \right \vert \right \vert}_2 \le \Delta_k\)</span>. Then let <span class="math inline">\(\theta_k^{cp} = \theta_k - \alpha_k^{cp} g_k\)</span>.</p>
+<ol start="3" style="list-style-type: lower-roman">
+<li>Dogleg solution (only when <span class="math inline">\(B_k &gt; 0\)</span> and symmetric): <span class="math inline">\(\theta_{k+1}^u = \theta_k - B_k^{-1}g_k\)</span>. find <span class="math inline">\(\min_{\tau \in [0,2]} f_k + g_k^\prime(\theta^{DL}(\tau) - \theta_k) + \frac{1}{2}(\theta^*{DL}(\tau) - \theta_k)^\prime B_k (\theta^{DL}(\tau) - \theta_k)\)</span> such that <span class="math inline">\({\left \vert \left \vert \theta^{DL}(\tau) - \theta_k \right \vert \right \vert}_2 \le \Delta_k\)</span>. Then, let</li>
+</ol>
+<p><span class="math display">\[
+\theta^{DL}(\tau) = \left\{ \begin{array}{rl} \theta_k + \tau(\theta_k^{cp} - \theta_k), &amp; \tau \in [0,1] \\ 
+\theta_k^{cp} + (\tau - 1) (\theta_{k+1}^u - \theta_k^{cp}), &amp; \tau \in [0,1] \end{array}\right .
+\]</span></p>
+<ol start="4" style="list-style-type: lower-roman">
+<li>Exact minimum:</li>
+</ol>
+
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-95" class="theorem"><strong>Theorem 16  </strong></span><span class="math inline">\(\theta_{k+1}\)</span> solves the Trust Region problem if and only if there exists <span class="math inline">\(\nu \ge 0\)</span> such tat</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\((B + \nu I)(\theta_{k+1} - \theta_k) = -g_k\)</span></li>
+<li><span class="math inline">\((B + \nu I) \ge 0\)</span>,</li>
+<li><span class="math inline">\(\nu = 0\)</span> or <span class="math inline">\({\left \vert \left \vert \theta_{k+1} - \theta_k \right \vert \right \vert}_2 = \Delta_k\)</span>.</li>
+</ol>
+</div>
 
 </div>
-</div>
+<div id="acceptancerejection-criteria" class="section level3">
+<h3><span class="header-section-number">1.6.6</span> Acceptance/Rejection Criteria</h3>
+<p>For line search, we use one of the following:</p>
+<ol style="list-style-type: lower-roman">
+<li>Armijo’s condition: satisfied by <span class="math inline">\(\alpha\)</span> if <span class="math inline">\(f(\theta_k + \alpha d_k) \le f(\theta_k) + c \alpha \nabla f(\theta_k)^\prime d_k\)</span> for some <span class="math inline">\(c \in (0,1)\)</span>, i.e. when the value of <span class="math inline">\(f\)</span> is under a given line.</li>
+<li>Wolfe’s condition: satisfied by <span class="math inline">\(\alpha\)</span> if <span class="math inline">\(\alpha\)</span> satisfies Armijo’s condition and the following curvature condition: <span class="math inline">\(\nabla f(\theta_k + \alpha d_k)^\prime d_k \ge f(\theta_k) + c_2 \nabla f(\theta_k)^\prime d_k\)</span> for some <span class="math inline">\(c_2 \in [c, 1)\)</span> (<span class="math inline">\(c\)</span> being the constant from Armijo’s condition). Let <span class="math inline">\(g(x) = f(\theta_k + \alpha d_k)\)</span>. The curvature condition says <span class="math inline">\(g&#39;(x) \ge g(0) + c_2 g^\prime (0)\)</span>.</li>
+<li>Goldstein’s condition: satisfied by <span class="math inline">\(\alpha\)</span> if <span class="math inline">\(f(\theta_k) + \alpha (1-c) \nabla f(\theta_k)^\prime d_k \le f(\theta_k + \alpha d_k) \le f(\theta_k) + \alpha c \nabla f(\theta_k)^\prime d_k\)</span>, for some <span class="math inline">\(c \in (0,1)\)</span>.</li>
+</ol>
+
 </div>
 </div>
 <!-- </div> -->

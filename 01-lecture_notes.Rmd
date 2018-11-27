@@ -2560,7 +2560,7 @@ Suppose that $f \in C^1$ and convex. Then the following are equivalent:
 
 (2) implies (3): Fix $x$. Define $\phi_x(y) = f(y) - y^\prime \nabla f(x)$. Then $\phi_x$ is convex. 
 
-a. $\nabla \phi_x(y) = \nabla f(y) - \nabla f(x)$, which implies that $\phi_x$ attains its minimum at $x$ (set equal to $0$ and solve for y)$.
+a. $\nabla \phi_x(y) = \nabla f(y) - \nabla f(x)$, which implies that $\phi_x$ attains its minimum at $x$ (set equal to $0$ and solve for $y$).
 b. $\phi_x(y) - \phi_x(z) - \nabla \phi_x(z)^\prime (y-z) = ... = f(y) - f(z) - \nabla f(z)^\prime(y-z) \leq \frac{L}{2} \norm{y-z}_2^2$. 
 
 So, $\phi_x(x) \leq \phi_x(y) \leq \phi_x(z) + \nabla \phi_x(z)^\prime (y-z) + \frac{L}{2} \norm{y-z}_2^2$. If we minimize the upper bound, we see that it optains its minimum at $y = z - \frac{1}{L} \nabla \phi_x(z) = z - \frac{1}{L}\left(\nabla f(z) - \nabla f(x)\right)$. If we plug this back in, we see that $\phi_x(z - \frac{1}{L}\nabla \phi_x(z)) \le \phi_x(z) - \frac{1}{2L}\norm{\nabla \phi_x(z)}_2^2$. 
@@ -2570,7 +2570,7 @@ So, $\phi_x(x) \leq \phi_x(y) \leq \phi_x(z) + \nabla \phi_x(z)^\prime (y-z) + \
 ```
 
 
-##### Algorithmic and Theoretical Preview
+### Algorithmic and Theoretical Preview
 
 ```{lemma, name = "Zoutendijk's Theorem"}
 Let $f: \R^r \to \R$ be $C^1$ function with Lipschitz gradient, and convex. Assume $f^* = \inf_{x \in \R^p} f(x) > -\infty$. 
@@ -2646,3 +2646,107 @@ Two implications:
 2. if $f$ is convex and $C^2$ with Lipschitz continuous gradient, then $L > 0 \Rightarrow \nabla^2 f(x) \le L$. (See exercise \@ref(exr:q1806))
 
 Let $\kappa = L/\sigma$ is the condition number. $\norm{\theta_{k+1} - \theta^*}_2^2 \le \left(\frac{\kappa^2 - 1}{\kappa^2}\right)\norm{\theta_k -\theta^*}_2^2$. 
+
+---
+
+We are trying to solve problems of the form $\min_{\theta \in \R^p} f(\theta)$. The way to do that is by evaluate the function $f$ at a point, look around at the Hessian to find new direction, choose a new point in that direction, repeat. 
+
+##### Initialization
+
+1. Supply objective and derivative
+2. Supply stopping criteria
+3. Supply hyperparameters and modification criteria
+4. Supply acceptance/rejection criteria
+5. Supply $\theta_0$
+
+##### Algorithm
+
+```bash
+theta=theta0
+
+while (stopping criteria not satisfied)
+  generate a local model of the objective funciton (near current iterate)
+  
+  minimize approximately or exactly the local model to generate proposed iterate
+  
+  accept of reject the proposed iterate
+  
+  evaluate modification criteria and change hyper parameters
+end
+
+return iterate, objective history, diagnostic history
+```
+
+#### Local Models
+
+1. Linear model: $M_k(\theta) = f_k + g_k^\prime (\theta - \theta_k)$ (often the case that $f_k \approx f(\theta_k), g_k \approx \nabla f(\theta_k)$)
+2. Quadratic model: $M_k(\theta) = f_k + g_k^\prime (\theta - \theta_k) + \frac{1}{2}(\theta - \theta_k)^\prime B_k (\theta - \theta_k)$ (often the case that $B_k = \nabla^2 f(\theta_k)$)
+3. Gauss-Newton Local Model: let $f(\theta) = \frac{1}{2}\norm{r(\theta)}_2^2$, where $r:\R^p \to \R^N, \nabla r = J$. So $\nabla f(\theta) = J(\theta)^\prime r(\theta) = \sum_{i=1}^N r_i(\theta) \nabla r_i(\theta)$, and 
+
+$$\begin{aligned}
+  \nabla^2 f(x\theta) &= \sum_{i=1}^N \nabla r_i(\theta) \nabla r_i(\theta)^\prime + r_i(\theta) \nabla^2 r_i(\theta) \\
+                      &= J(\theta)\J(\theta)^\prime + \sum_{i=1}^N r_i(\theta) \nabla^2 r_i(\theta)
+\end{aligned}$$
+
+Gauss-Newton says: ignore the second term. So 
+
+$$\begin{aligned}
+  M_k(\theta) &= \frac{1}{2} \norm{r_k(\theta_k)}_2^2 + \left(J(\theta_k)^\prime r(\theta_k)\right)^\prime (\theta - \theta_k) + \frac{1}{2}(\theta - \theta_k)^\prime J(\theta_k)^\prime J(\theta_k) (\theta - \theta_k) \\
+  &= \frac{1}{2} \norm{r_k(\theta_k) + J(\theta_k)(\theta - \theta_k)}_2^2
+\end{aligned}$$
+
+This is a least squares problem, which we can solve using a QR decomposition.
+
+Using one of these models, we need to decide how to propose the next iterate. This can be done in a few different ways
+
+### Line Search
+
+Let $d_k$ denote the search direction: we get it by minimizing the local model. Ideally, $\theta_{k+1} = \theta_k + d_k$. Turns out, this is not efficient enough. Instead, we do one of the following:
+
+i. Exact line search: $\min_{\alpha \ge 0} f(\theta_k + \alpha d_k)$
+ii. Bouneded line search: for $\alpha^* > 0$, find $\min_{\alpha \in [0, \alpha^*]} f(\theta_k + \alpha d_k)$
+iii. Backtracking: for $\alpha^* > 0$, $\rho \in (0,1)$, find $\min_{q \in \N_0} f(\theta_k + \alpha^* \rho^* d_k)$
+iv. Quadratic interpolation: $g(x) = f(\theta_k + \alpha d_k)$ for $\alpha \ge 0$. Approximate this with $h(\alpha) = a\alpha^2 + b\alpha + c$. Need to know three things about $g$ to find $a,b,c$. Usually:
+    - $g(0), g'(0), g(\alpha^*)$. Then, $h(0) = c = g(0), h'(0) = b = g'(0)$, and $h(\alpha^*) = g(\alpha^*) = a (\alpha^*)^2 + g'(0)\alpha^* + g(0)$. 
+    - minimize $h$ using $a,b,c$ found above, check if solution is good enough. If not, update criteria, and repeat.
+v. Cubic interpolation: $h(\alpha) = a\alpha^3 + b \alpha^2 + c \alpha + d$. Need to know four things about $g$ to find $a,b,c,d$. These four things will depend on the problem.
+
+### Trust Region 
+
+Seek to minimize $M_k(\theta)$ where $\norm{\theta - \theta_k}_2 \le \Delta_k$. 
+
+i. $M_k$ is linear: $\min_\theta f_k + g_k^\prime (\theta - \theta_k)$ such that $\norm{\theta-\theta_k}_2 \le \Delta_k$. I.e. $\theta = \theta_k - g_k^\prime \frac{\Delta_k}{\norm{g_k}}$. 
+ii. $M_k$ is quadratic: $\min_\theta f_k + g_k^\prime (\theta - \theta_k) + \frac{1}{2}(\theta - \theta_k)^\prime B_k (\theta - \theta_k)$ such that $\norm{\theta-\theta_k}_2 \le \Delta_k$. I.e. $\theta = \theta_k - g_k^\prime \frac{\Delta_k}{\norm{g_k}}$. Do this by minimizing 
+
+\begin{equation} 
+  f_k + g_k^\prime (-\alpha g_k) + \frac{1}{2}(-\alpha g_k)^\prime B_k (-\alpha g_k) (\#eq:trustregion)
+\end{equation}
+
+over $\alpha \ge 0$ such that $\norm{-\alpha g_k}_2 \le \Delta_k$. Then let $\theta_k^{cp} = \theta_k - \alpha_k^{cp} g_k$. 
+
+iii. Dogleg solution (only when $B_k > 0$ and symmetric): $\theta_{k+1}^u = \theta_k - B_k^{-1}g_k$. find $\min_{\tau \in [0,2]} f_k + g_k^\prime(\theta^{DL}(\tau) - \theta_k) + \frac{1}{2}(\theta^*{DL}(\tau) - \theta_k)^\prime B_k (\theta^{DL}(\tau) - \theta_k)$ such that $\norm{\theta^{DL}(\tau) - \theta_k}_2 \le \Delta_k$. Then, let 
+
+$$
+\theta^{DL}(\tau) = \left\{ \begin{array}{rl} \theta_k + \tau(\theta_k^{cp} - \theta_k), & \tau \in [0,1] \\ 
+\theta_k^{cp} + (\tau - 1) (\theta_{k+1}^u - \theta_k^{cp}), & \tau \in [0,1] \end{array}\right .
+$$
+
+iv. Exact minimum: 
+
+```{theorem}
+$\theta_{k+1}$ solves the Trust Region problem if and only if there exists $\nu \ge 0$ such tat 
+
+1. $(B + \nu I)(\theta_{k+1} - \theta_k) = -g_k$
+2. $(B + \nu I) \ge 0$,
+3. $\nu = 0$ or $\norm{\theta_{k+1} - \theta_k}_2 = \Delta_k$.
+
+```
+
+### Acceptance/Rejection Criteria
+
+For line search, we use one of the following:
+
+i. Armijo's condition: satisfied by $\alpha$ if $f(\theta_k + \alpha d_k) \le f(\theta_k) + c \alpha \nabla f(\theta_k)^\prime d_k$ for some $c \in (0,1)$, i.e. when the value of $f$ is under a given line. 
+ii. Wolfe's condition: satisfied by $\alpha$ if $\alpha$ satisfies Armijo's condition and the following curvature condition: $\nabla f(\theta_k + \alpha d_k)^\prime d_k \ge f(\theta_k) + c_2 \nabla f(\theta_k)^\prime d_k$ for some $c_2 \in [c, 1)$ ($c$ being the constant from Armijo's condition). Let $g(x) = f(\theta_k + \alpha d_k)$. The curvature condition says $g'(x) \ge g(0) + c_2 g^\prime (0)$.
+iii. Goldstein's condition: satisfied by $\alpha$ if $f(\theta_k) + \alpha (1-c) \nabla f(\theta_k)^\prime d_k \le f(\theta_k + \alpha d_k) \le f(\theta_k) + \alpha c \nabla f(\theta_k)^\prime d_k$, for some $c \in (0,1)$.
+
