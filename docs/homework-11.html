@@ -244,11 +244,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 
 
-<div class="solution">
- <span class="solution"><em>Solution. </em></span> ???
-</div>
-
-
 <div class="exercise">
 <span id="exr:q1106" class="exercise"><strong>Exercise 71  </strong></span>For strategy 3, what is <span class="math inline">\(\alpha\)</span>?
 </div>
@@ -285,9 +280,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> ???
+ <span class="solution"><em>Solution. </em></span> See the Julia chunk below
 </div>
 
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">using LinearAlgebra
+
+<span class="co"># Single update of the gradient descent method</span>
+
+<span class="kw">function</span> singleGradDescent(A,x,b, alpha)
+    <span class="st">&quot;&quot;&quot;</span>
+    b is constant vector.
+    A is the coefficient matrix.
+    x is current iterate.
+    alpha is step size.
+    <span class="st">&quot;&quot;&quot;</span>
+    x = x + alpha * A&#39;*(b-A*x)
+    <span class="kw">return</span> x
+<span class="kw">end</span></code></pre></div>
 
 <div class="exercise">
 <span id="exr:q1110" class="exercise"><strong>Exercise 75  </strong></span>Now, implement four algorithms one for each of the four strategies of alpha discussed in class.

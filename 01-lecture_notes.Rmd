@@ -2499,7 +2499,7 @@ $$\begin{aligned}
 
 3. Assume $\nabla^2 f(x) > \sigma I$. Then for all $z, v \in \R^p$ and some $t \in (0,1)$: $f(z + v) - f(z) - \nabla f(z)^\prime v = \frac{1}{2} v \nabla^2 f(z+tv)v \ge \frac{1}{2}\sigma \norm{v}_2^2$. 
   
-Now assume $f$ is strongly convex with parameter $\sigma > 0$. Assume for contradiction that there exist $z,v$ such that $v^\prime \nabla^2 f(z) v < \sigma \norm{v}^2$. There exists some neighborhood $\matchal{U}$ around $z$ such that for all $u \in \mathcal{U}$: $v^\prime \nabla^2 v < \frac{\sigma}{1+\epsilon} \norm{v}_2^2$ for some $\epsilon > 0$. Let $\alpha \ge 0$ be sufficiently small such that $z + \alpha v \in \mathcal{U}$. Then
+Now assume $f$ is strongly convex with parameter $\sigma > 0$. Assume for contradiction that there exist $z,v$ such that $v^\prime \nabla^2 f(z) v < \sigma \norm{v}^2$. There exists some neighborhood $\mathcal{U}$ around $z$ such that for all $u \in \mathcal{U}$: $v^\prime \nabla^2 v < \frac{\sigma}{1+\epsilon} \norm{v}_2^2$ for some $\epsilon > 0$. Let $\alpha \ge 0$ be sufficiently small such that $z + \alpha v \in \mathcal{U}$. Then
 
 $$\begin{aligned} 
 \frac{1}{2}\frac{\sigma \beta^2}{1+\epsilon} \norm{v}_2^2 &\ge \frac{1}{2} v^\prime \nabla f(z+\beta v)v \\
