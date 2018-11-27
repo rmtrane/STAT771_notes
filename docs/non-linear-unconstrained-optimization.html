@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>STAT 771: My notes</title>
+  <meta name="description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="STAT 771: My notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="STAT 771: My notes" />
+  
+  <meta name="twitter:description" content="This is my collection of notes for the STAT 771 class taught at UW-Madison." />
+  
+
+<meta name="author" content="Ralph Møller Trane">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="nonlinear-systems-of-equations.html">
+<link rel="next" href="homework-assignments.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Intro</a></li>
+<li class="chapter" data-level="1" data-path="lecture-notes.html"><a href="lecture-notes.html"><i class="fa fa-check"></i><b>1</b> Lecture Notes</a><ul>
+<li class="chapter" data-level="" data-path="lecture-1-96.html"><a href="lecture-1-96.html"><i class="fa fa-check"></i>Lecture 1: 9/6</a></li>
+<li class="chapter" data-level="1.1" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html"><i class="fa fa-check"></i><b>1.1</b> Positional numeral system</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html#floating-point-format"><i class="fa fa-check"></i><b>1.1.1</b> Floating Point Format</a></li>
+<li class="chapter" data-level="1.1.2" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html#ieee-standards"><i class="fa fa-check"></i><b>1.1.2</b> IEEE Standards</a></li>
+<li class="chapter" data-level="1.1.3" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html#errors"><i class="fa fa-check"></i><b>1.1.3</b> Errors</a></li>
+<li class="chapter" data-level="1.1.4" data-path="positional-numeral-system.html"><a href="positional-numeral-system.html#square-linear-systems"><i class="fa fa-check"></i><b>1.1.4</b> Square Linear Systems</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="orthogonalization.html"><a href="orthogonalization.html"><i class="fa fa-check"></i><b>1.2</b> Orthogonalization</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="orthogonalization.html"><a href="orthogonalization.html#motivating-problems"><i class="fa fa-check"></i><b>1.2.1</b> Motivating problems</a></li>
+<li class="chapter" data-level="" data-path="orthogonalization.html"><a href="orthogonalization.html#lecture-4-918"><i class="fa fa-check"></i>Lecture 4: 9/18</a></li>
+<li class="chapter" data-level="1.2.2" data-path="orthogonalization.html"><a href="orthogonalization.html#qr-decomposition"><i class="fa fa-check"></i><b>1.2.2</b> QR Decomposition</a></li>
+<li class="chapter" data-level="1.2.3" data-path="orthogonalization.html"><a href="orthogonalization.html#existence-of-qr-decomposition."><i class="fa fa-check"></i><b>1.2.3</b> Existence of QR-decomposition.</a></li>
+<li class="chapter" data-level="" data-path="orthogonalization.html"><a href="orthogonalization.html#lecture-5-920"><i class="fa fa-check"></i>Lecture 5: 9/20</a></li>
+<li class="chapter" data-level="1.2.4" data-path="orthogonalization.html"><a href="orthogonalization.html#large-data-problem"><i class="fa fa-check"></i><b>1.2.4</b> “Large” Data Problem</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html"><i class="fa fa-check"></i><b>1.3</b> Singular Value Decomposition (SVD)</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#motivating-problems-1"><i class="fa fa-check"></i><b>1.3.1</b> Motivating Problems</a></li>
+<li class="chapter" data-level="1.3.2" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#svd"><i class="fa fa-check"></i><b>1.3.2</b> SVD</a></li>
+<li class="chapter" data-level="1.3.3" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#existence-and-properties"><i class="fa fa-check"></i><b>1.3.3</b> Existence and Properties</a></li>
+<li class="chapter" data-level="1.3.4" data-path="singular-value-decomposition-svd.html"><a href="singular-value-decomposition-svd.html#random-projections"><i class="fa fa-check"></i><b>1.3.4</b> Random Projections</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="iterative-methods.html"><a href="iterative-methods.html"><i class="fa fa-check"></i><b>1.4</b> Iterative Methods</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="iterative-methods.html"><a href="iterative-methods.html#overview"><i class="fa fa-check"></i><b>1.4.1</b> Overview</a></li>
+<li class="chapter" data-level="1.4.2" data-path="iterative-methods.html"><a href="iterative-methods.html#outline"><i class="fa fa-check"></i><b>1.4.2</b> Outline</a></li>
+<li class="chapter" data-level="1.4.3" data-path="iterative-methods.html"><a href="iterative-methods.html#motivation"><i class="fa fa-check"></i><b>1.4.3</b> Motivation</a></li>
+<li class="chapter" data-level="1.4.4" data-path="iterative-methods.html"><a href="iterative-methods.html#splitting-methods"><i class="fa fa-check"></i><b>1.4.4</b> Splitting Methods</a></li>
+<li class="chapter" data-level="1.4.5" data-path="iterative-methods.html"><a href="iterative-methods.html#convergence"><i class="fa fa-check"></i><b>1.4.5</b> Convergence</a></li>
+<li class="chapter" data-level="1.4.6" data-path="iterative-methods.html"><a href="iterative-methods.html#randomized-kaczmarz-method"><i class="fa fa-check"></i><b>1.4.6</b> Randomized Kaczmarz Method</a></li>
+<li class="chapter" data-level="1.4.7" data-path="iterative-methods.html"><a href="iterative-methods.html#gradient-descent"><i class="fa fa-check"></i><b>1.4.7</b> Gradient Descent</a></li>
+<li class="chapter" data-level="1.4.8" data-path="iterative-methods.html"><a href="iterative-methods.html#conjugate-gradient"><i class="fa fa-check"></i><b>1.4.8</b> Conjugate Gradient</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html"><i class="fa fa-check"></i><b>1.5</b> Nonlinear Systems of Equations</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#review-of-jacobians"><i class="fa fa-check"></i><b>1.5.1</b> Review of Jacobians</a></li>
+<li class="chapter" data-level="1.5.2" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#motivating-problem"><i class="fa fa-check"></i><b>1.5.2</b> Motivating Problem</a></li>
+<li class="chapter" data-level="1.5.3" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#non-linear-equations"><i class="fa fa-check"></i><b>1.5.3</b> Non-linear Equations</a></li>
+<li class="chapter" data-level="1.5.4" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#picards-method"><i class="fa fa-check"></i><b>1.5.4</b> Picard’s Method</a></li>
+<li class="chapter" data-level="1.5.5" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#newtons-method"><i class="fa fa-check"></i><b>1.5.5</b> Newton’s Method</a></li>
+<li class="chapter" data-level="1.5.6" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#inexact-newtons-method"><i class="fa fa-check"></i><b>1.5.6</b> Inexact Newton’s Method</a></li>
+<li class="chapter" data-level="1.5.7" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#semi-smooth-newtons-method"><i class="fa fa-check"></i><b>1.5.7</b> Semi-Smooth Newton’s Method</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html"><i class="fa fa-check"></i><b>1.6</b> Non-linear Unconstrained Optimization</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#motivating-problems-2"><i class="fa fa-check"></i><b>1.6.1</b> Motivating Problems</a></li>
+<li class="chapter" data-level="1.6.2" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#formalize-minimization"><i class="fa fa-check"></i><b>1.6.2</b> Formalize Minimization</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
+<li class="chapter" data-level="2.1" data-path="homework-1.html"><a href="homework-1.html"><i class="fa fa-check"></i><b>2.1</b> Homework 1</a></li>
+<li class="chapter" data-level="2.2" data-path="homework-2.html"><a href="homework-2.html"><i class="fa fa-check"></i><b>2.2</b> Homework 2</a></li>
+<li class="chapter" data-level="2.3" data-path="homework-3.html"><a href="homework-3.html"><i class="fa fa-check"></i><b>2.3</b> Homework 3</a></li>
+<li class="chapter" data-level="2.4" data-path="homework-4.html"><a href="homework-4.html"><i class="fa fa-check"></i><b>2.4</b> Homework 4</a></li>
+<li class="chapter" data-level="2.5" data-path="homework-5.html"><a href="homework-5.html"><i class="fa fa-check"></i><b>2.5</b> Homework 5</a></li>
+<li class="chapter" data-level="2.6" data-path="homework-6.html"><a href="homework-6.html"><i class="fa fa-check"></i><b>2.6</b> Homework 6</a></li>
+<li class="chapter" data-level="2.7" data-path="homework-7.html"><a href="homework-7.html"><i class="fa fa-check"></i><b>2.7</b> Homework 7</a></li>
+<li class="chapter" data-level="2.8" data-path="homework-8.html"><a href="homework-8.html"><i class="fa fa-check"></i><b>2.8</b> Homework 8</a></li>
+<li class="chapter" data-level="2.9" data-path="homework-9.html"><a href="homework-9.html"><i class="fa fa-check"></i><b>2.9</b> Homework 9</a></li>
+<li class="chapter" data-level="2.10" data-path="homework-10.html"><a href="homework-10.html"><i class="fa fa-check"></i><b>2.10</b> Homework 10</a></li>
+<li class="chapter" data-level="2.11" data-path="homework-11.html"><a href="homework-11.html"><i class="fa fa-check"></i><b>2.11</b> Homework 11</a></li>
+<li class="chapter" data-level="2.12" data-path="homework-12.html"><a href="homework-12.html"><i class="fa fa-check"></i><b>2.12</b> Homework 12</a></li>
+<li class="chapter" data-level="2.13" data-path="homework-13.html"><a href="homework-13.html"><i class="fa fa-check"></i><b>2.13</b> Homework 13</a></li>
+<li class="chapter" data-level="2.14" data-path="homework-14.html"><a href="homework-14.html"><i class="fa fa-check"></i><b>2.14</b> Homework 14</a></li>
+<li class="chapter" data-level="2.15" data-path="homework-15.html"><a href="homework-15.html"><i class="fa fa-check"></i><b>2.15</b> Homework 15</a></li>
+<li class="chapter" data-level="2.16" data-path="homework-16.html"><a href="homework-16.html"><i class="fa fa-check"></i><b>2.16</b> Homework 16</a><ul>
+<li class="chapter" data-level="2.16.1" data-path="homework-16.html"><a href="homework-16.html#newtons-method-1"><i class="fa fa-check"></i><b>2.16.1</b> Newton’s Method</a></li>
+</ul></li>
+<li class="chapter" data-level="2.17" data-path="homework-17.html"><a href="homework-17.html"><i class="fa fa-check"></i><b>2.17</b> Homework 17</a></li>
+<li class="chapter" data-level="2.18" data-path="homework-18.html"><a href="homework-18.html"><i class="fa fa-check"></i><b>2.18</b> Homework 18</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">STAT 771: My notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="non-linear-unconstrained-optimization" class="section level2">
+<h2><span class="header-section-number">1.6</span> Non-linear Unconstrained Optimization</h2>
+<p><em>Outline</em></p>
+<ol style="list-style-type: decimal">
+<li>Motivating problems</li>
+<li>Formalizing Minimizing and some properties of functions</li>
+<li>Algorithmic Overview</li>
+<li>Line search</li>
+<li>Trust region</li>
+<li>Quasi Newton</li>
+<li>Generalized Gauss-Newton</li>
+</ol>
+<div id="motivating-problems-2" class="section level3">
+<h3><span class="header-section-number">1.6.1</span> Motivating Problems</h3>
+<div id="logistic-regression" class="section level4">
+<h4><span class="header-section-number">1.6.1.1</span> Logistic Regression</h4>
+<p>Observe <span class="math inline">\(\{(Y_1, X_1), \ldots, (Y_n, X_n)\} \subseteq \{0,1\} \times {\mathbb{R}}^p\)</span>. Assume these are i.i.d. and <span class="math inline">\(\mu(X_i, \beta) = P(Y_i = 1 | X_i) = \frac{\exp(X_i^\prime \beta)}{1+\exp(X_i^\prime \beta)}\)</span>, where <span class="math inline">\(\beta \in {\mathbb{R}}^p\)</span> is unknown. We want to determine <span class="math inline">\(\beta\)</span>. This can be done using MLE:</p>
+<p><span class="math display">\[\min_\beta - \sum_{i=1}^\n Y_i \log(\mu(X_i^\prime \beta)) + (1-Y_i)\log(1-\mu(X_i^\prime \beta)).\]</span></p>
+</div>
+<div id="difference-equation-model" class="section level4">
+<h4><span class="header-section-number">1.6.1.2</span> Difference Equation Model</h4>
+<p>Observe <span class="math inline">\(\{(Y_1, X_1), \ldots, (Y_n, X_n)\} \subseteq {\mathbb{R}}\times {\mathbb{R}}^p\)</span>. Consider the model <span class="math inline">\(z_1 = f_0(X, \theta_0), z_{k+1} = f_k(z_k, \theta_k)\)</span>, where <span class="math inline">\(f_i\)</span> are known functions, and <span class="math inline">\(\theta_i\)</span> unknown. <span class="math inline">\(Y = Z_L\)</span>. Want to determine <span class="math inline">\(\theta_0, \ldots, \theta_{L-1}\)</span>. Do that by <span class="math inline">\(\min_{\theta_0, \ldots, \theta_{L-1}} \sum_{i=1}^n (Y_i - z_L(\theta_0, \ldots, \theta_{L-1}, x_i))^2\)</span>.</p>
+</div>
+</div>
+<div id="formalize-minimization" class="section level3">
+<h3><span class="header-section-number">1.6.2</span> Formalize Minimization</h3>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-75" class="definition"><strong>Definition 26  </strong></span>An unconstrained optimization problem has the following form:</p>
+<p><span class="math display">\[\min_{\theta \in {\mathbb{R}}^p} f(\theta), f:{\mathbb{R}}^p \to {\mathbb{R}}.\]</span></p>
+</div>
+
+<div id="minimizers" class="section level4">
+<h4><span class="header-section-number">1.6.2.1</span> Minimizers</h4>
+
+<div class="definition">
+<span id="def:unnamed-chunk-76" class="definition"><strong>Definition 27  (Global Minimizer)  </strong></span>Let <span class="math inline">\(f^* = \inf_{\theta \in {\mathbb{R}}^p} f(\theta)\)</span>. The global minimizer of <span class="math inline">\(f\)</span> is a point <span class="math inline">\(\theta^* \in {\mathbb{R}}^p\)</span> such that <span class="math inline">\(f^* = f(\theta^*)\)</span>.
+</div>
+
+
+<div class="definition">
+<span id="def:unnamed-chunk-77" class="definition"><strong>Definition 28  (Local Minimizer)  </strong></span>A local minimizer of <span class="math inline">\(f\)</span> is a point <span class="math inline">\(\theta^* \in {\mathbb{R}}^p\)</span> and a neighborhood of <span class="math inline">\(\theta^*\)</span>, <span class="math inline">\(\mathcal{N}\)</span>, such that <span class="math inline">\(f(\theta^*) \le f(\theta)\)</span> for all <span class="math inline">\(\theta \in \mathcal{N}\)</span>, and <span class="math inline">\(f^* = f(\theta^*)\)</span> is a local minimum.
+</div>
+
+
+<div class="definition">
+<span id="def:unnamed-chunk-78" class="definition"><strong>Definition 29  (Strict minimizer)  </strong></span>A strict minimizer of <span class="math inline">\(f\)</span>, <span class="math inline">\(\theta^*\)</span>, is a minimizer and a neighborhood <span class="math inline">\(\mathcal{N}\)</span> such that <span class="math inline">\(f(\theta^*) &lt; f(\theta)\)</span> for all <span class="math inline">\(\theta \in \mathcal{N}\setminus \theta^*\)</span>.
+</div>
+
+
+<div class="definition">
+<span id="def:unnamed-chunk-79" class="definition"><strong>Definition 30  (Isolated minimizer)  </strong></span>A minimizer <span class="math inline">\(\theta^*\)</span>, and a neighborhood <span class="math inline">\(\mathcal{N}\)</span> such that <span class="math inline">\(\theta^*\)</span> is the only minimizer in <span class="math inline">\(\mathcal{N}\)</span> is called an Isloated minimizer.
+</div>
+
+</div>
+<div id="differentiability-and-minimizers" class="section level4">
+<h4><span class="header-section-number">1.6.2.2</span> Differentiability and Minimizers</h4>
+
+<div class="lemma">
+<span id="lem:firstordernec" class="lemma"><strong>Lemma 17  (First order necessary conditions)  </strong></span>Suppose <span class="math inline">\(f \in C^1\)</span>. If <span class="math inline">\(\theta^*\)</span> is a local minimizer, then <span class="math inline">\(\nabla f(\theta^*) = 0\)</span>.
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> Assume for contradiction <span class="math inline">\(\nabla f(\theta^*) \neq 0\)</span>.</p>
+<p>Let <span class="math inline">\(g(\alpha) = f(\theta^* - \alpha \nabla f(\theta^*)) - f(\theta^*)\)</span>, <span class="math inline">\(\alpha &gt; 0\)</span>. When <span class="math inline">\(\alpha\)</span> is small enough, <span class="math inline">\(g(\alpha) &gt; 0\)</span> since <span class="math inline">\(\theta^*\)</span> is a local minimizer. So <span class="math inline">\(g(\alpha) - g(0) = g^\prime(\beta)\alpha\)</span>, where <span class="math inline">\(\beta \in (0, \alpha)\)</span>. This implies <span class="math inline">\(f(\theta^* - \alpha \nabla f(\theta^*)) - f(\theta^*) = \nabla f(\theta^*)(\theta^* - \alpha \nabla f(\theta^*))^\prime \nabla f(\theta^*)\alpha\)</span>. Since <span class="math inline">\(\nabla f\)</span> is continuous, <span class="math inline">\(\beta\)</span> can be picked small enough such that <span class="math inline">\(0 &lt; \nabla f(\theta^* - \beta \nabla f(\theta^*))^\prime \nabla f(\theta^*)\)</span>. If <span class="math inline">\(\alpha, \beta\)</span> are both sufficiently small, <span class="math inline">\(0 \leq f(\theta^* - \alpha \nabla f(\theta^*))-f(\theta^*) &lt; 0\)</span>. Contradiction.</p>
+</div>
+
+
+<div class="lemma">
+<p><span id="lem:unnamed-chunk-81" class="lemma"><strong>Lemma 18  (2nd order necessary condition)  </strong></span> Let <span class="math inline">\(f \in C^2\)</span> and <span class="math inline">\(\theta^*\)</span> a local minimizer. Then <span class="math inline">\(\nabla f(\theta^*) = 0, \nabla^2(\theta^*) \ge 0\)</span>.</p>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> We have already proved that <span class="math inline">\(\nabla f(\theta^*) = 0\)</span>. So assume for contradiction that <span class="math inline">\(\nabla^2(\theta^*) &lt; 0\)</span>. In other words, there exists <span class="math inline">\(v \in {\mathbb{R}}^p\)</span> with <span class="math inline">\({\left \vert \left \vert v \right \vert \right \vert} = 1\)</span> such that <span class="math inline">\(v^\prime \nabla^2 f(\theta^*) v &lt; 0\)</span>. So there exists a neighborhood <span class="math inline">\(\mathcal{U}\)</span> of <span class="math inline">\(\theta^*\)</span> such that</p>
+<span class="math display" id="eq:2ndordernec">\[\begin{equation} 
+  v^\prime \nabla^2 f(\theta^*) v &lt; 0 \text{ for all } u \in \mathcal{U}. \tag{4}
+\end{equation}\]</span>
+<p>Since <span class="math inline">\(\theta^*\)</span> is a minimizer, <span class="math inline">\(0 \le f(\theta^* + \alpha v) - f(\theta^*)\)</span> for <span class="math inline">\(\alpha\)</span> small enough. By Taylors theorem:</p>
+<p><span class="math display">\[
+  f(\theta^* + \alpha v) - f(\theta^*) = \nabla f(\theta^*)^\prime \alpha v + \frac{\alpha^2}{2} v^\prime \nabla^2 f(\theta^* + \beta v)v &lt; 0,
+\]</span></p>
+<p>where <span class="math inline">\(\beta \in (0, \alpha)\)</span></p>
+</div>
+
+
+<div class="lemma">
+<p><span id="lem:unnamed-chunk-83" class="lemma"><strong>Lemma 19  </strong></span> Suppose <span class="math inline">\(f \in C^2\)</span>. If there exists <span class="math inline">\(\theta^* \in {\mathbb{R}}^p\)</span> such that</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\nabla f(\theta^*) = 0\)</span>,</li>
+<li><span class="math inline">\(\nabla^2 f(\theta^*) &gt; 0\)</span>,</li>
+</ol>
+<p>then <span class="math inline">\(\theta^*\)</span> is a local minimizer.</p>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span>  Since <span class="math inline">\(\nabla^2 f(\theta^*) &gt; 0\)</span>, there exists a neighborhood <span class="math inline">\(\mathcal{U}\)</span> of <span class="math inline">\(\theta^*\)</span> such that <span class="math inline">\(\nabla^2 f(u) &gt; 0\)</span> for all <span class="math inline">\(u \in \mathcal{U}\)</span>. Let <span class="math inline">\(v = u - \theta^*\)</span>. Then for some <span class="math inline">\(t \in (0,1)\)</span>:</p>
+<p><span class="math display">\[f(\theta^* + v) - f(\theta^*) = \nabla f(\theta^*) v + \frac{1}{2} v^\prime \nabla^2 f(\theta^* + tv) v.\]</span></p>
+<p>By assumptions, <span class="math inline">\(v^\prime \nabla^2 f(\theta^* + tv) v &gt; 0\)</span>. So <span class="math inline">\(f(\theta^* + v) = f(u) &gt; f(\theta^*)\)</span> for all <span class="math inline">\(u \in \mathcal(U)\)</span>. I.e. <span class="math inline">\(\theta^*\)</span> is a local minimizer (actually strict).</p>
+</div>
+
+</div>
+<div id="convexity-differentiability-and-minimizers" class="section level4">
+<h4><span class="header-section-number">1.6.2.3</span> Convexity, Differentiability, and Minimizers</h4>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-85" class="definition"><strong>Definition 31  (Convex Function)  </strong></span> <span class="math inline">\(f\)</span> is convex if for all <span class="math inline">\(x,y \in {\mathbb{R}}^p, \lambda \in [0,1]\)</span>: <span class="math inline">\(f(\lambda x + (1-\lambda) y) \leq \lambda f(x) + (1-\lambda) f(y)\)</span>.</p>
+</div>
+
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-86" class="definition"><strong>Definition 32  (Strongly Convex Function)  </strong></span> <span class="math inline">\(f\)</span> is strongly convex with parameter <span class="math inline">\(\sigma &gt; 0\)</span> if for all <span class="math inline">\(x,y \in {\mathbb{R}}^p, \lambda \in [0,1]\)</span>: <span class="math inline">\(f(\lambda x + (1-\lambda) y) \leq \lambda f(x) + (1-\lambda) f(y) - \frac{1}{2} \sigma \lambda(1-\lambda){\left \vert \left \vert x-y \right \vert \right \vert}_2^2\)</span>.</p>
+</div>
+
+
+<div class="lemma">
+<p><span id="lem:convexdiff" class="lemma"><strong>Lemma 20  (Convexity and Differentiability)  </strong></span> 1. Suppose <span class="math inline">\(f \in C^1\)</span>. <span class="math inline">\(f\)</span> is convex if and only if <span class="math inline">\(f(y) \ge f(x) + \nabla f(x)^\prime (y-x)\)</span> for all <span class="math inline">\(x,y \in {\mathbb{R}}^p\)</span>. 2. Suppose <span class="math inline">\(f \in C^1\)</span>. <span class="math inline">\(f\)</span> is strongly convex with parameter <span class="math inline">\(\sigma &gt; 0\)</span> if and only if <span class="math inline">\(f(y) \ge f(x) + \nabla f(x)^\prime (y-x) + \frac{1}{2}\sigma{\left \vert \left \vert x-y \right \vert \right \vert}_2^2\)</span> for all <span class="math inline">\(x,y \in {\mathbb{R}}^p\)</span>. 3. Suppose <span class="math inline">\(f \in C^2\)</span>. <span class="math inline">\(f\)</span> is strongly convex with parameter <span class="math inline">\(\sigma &gt; 0\)</span> if and only if <span class="math inline">\(\nabla^2 f(x) &gt; \sigma I\)</span> for all <span class="math inline">\(x \in {\mathbb{R}}^p\)</span>.</p>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span>  1. Assume <span class="math inline">\(f\)</span> is convex. <span class="math inline">\(\nabla f(x)^\prime (y-x) = \frac{d}{d\lambda} f(x + \lambda(y-x))\vert_{\lambda=0} = \lim_{\lambda \to 0_+} \frac{f(x + \lambda(y-x)) - f(x)}{\lambda}\)</span>. By convexity, the right hand side is bounded above by <span class="math inline">\(\lim_{\lambda \to \lambda_+} \frac{(1-\lambda) f(x) + \lambda f(y) - f(x)}{\lambda} \le f(y) - f(x)\)</span>.</p>
+<p>Now, assume <span class="math inline">\(f(y) \ge f(x) + \nabla f(x)^\prime (y-x)\)</span> for all <span class="math inline">\(x,y \in {\mathbb{R}}^p\)</span>. For <span class="math inline">\(x,y \in {\mathbb{R}}^p\)</span> and <span class="math inline">\(\lambda \in [0,1]\)</span>, let <span class="math inline">\(z = \lambda x + (1-\lambda)y\)</span>. Then <span class="math inline">\(y-z = y - \lambda x - y + \lambda y = \lambda (y - x)\)</span> and <span class="math inline">\(x-z = (1-\lambda)(x-y)\)</span>. So</p>
+<p><span class="math display">\[(1-\lambda) f(y) \ge (1-\lambda) f(z) + (1-\lambda) \nabla f(z)^\prime \lambda (y-z),\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\lambda f(x) \ge \lambda f(z) + \lambda \nabla f(z)^\prime (1-\lambda)(x-y).\]</span></p>
+<p>Add the two equations.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Assume <span class="math inline">\(f\)</span> is strongly convex. Then</li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+  \nabla f(x)^\prime (y-x) &amp;= \lim_{\lambda \to 0_+} \frac{f(x+ \lambda(y-x)) - f(x)}{\lambda} \\
+  &amp;\le \lim_{\lambda \to 0_+} \frac{(1-\lambda)f(x) + \lambda f(y) - \frac{1}{2}\sigma \lambda (1-\lambda) {\left \vert \left \vert y-x \right \vert \right \vert}_2^2 - f(x)}{\lambda} \\
+  &amp;\le f(y) - f(x) - \frac{1}{2}\sigma \lambda {\left \vert \left \vert x-y \right \vert \right \vert}_2^2.
+\end{aligned}\]</span></p>
+<p>Assume <span class="math inline">\(f(y) \ge f(x) + \nabla f(x)^\prime (y-x) + \frac{1}{2}\sigma{\left \vert \left \vert x-y \right \vert \right \vert}_2^2\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+  f(x) (BLANK) &amp;\ge (BLANK) f(z) + (BLANK) \nabla f(z)^\prime(x-z) + (BLANK)\frac{1}{2}\sigma{\left \vert \left \vert x-z \right \vert \right \vert}_2^2 \\
+  f(y) (BLANK) &amp;\ge (BLANK) f(z) + (BLANK) \nabla f(z)^\prime(y-z) + (BLANK)\frac{1}{2}\sigma{\left \vert \left \vert y-z \right \vert \right \vert}_2^2 \\
+\end{aligned}\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Assume <span class="math inline">\(\nabla^2 f(x) &gt; \sigma I\)</span>. Then for all <span class="math inline">\(z, v \in {\mathbb{R}}^p\)</span> and some <span class="math inline">\(t \in (0,1)\)</span>: <span class="math inline">\(f(z + v) - f(z) - \nabla f(z)^\prime v = \frac{1}{2} v \nabla^2 f(z+tv)v \ge \frac{1}{2}\sigma {\left \vert \left \vert v \right \vert \right \vert}_2^2\)</span>.</li>
+</ol>
+<p>Now assume <span class="math inline">\(f\)</span> is strongly convex with parameter <span class="math inline">\(\sigma &gt; 0\)</span>. Assume for contradiction that there exist <span class="math inline">\(z,v\)</span> such that <span class="math inline">\(v^\prime \nabla^2 f(z) v &lt; \sigma {\left \vert \left \vert v \right \vert \right \vert}^2\)</span>. There exists some neighborhood <span class="math inline">\(\matchal{U}\)</span> around <span class="math inline">\(z\)</span> such that for all <span class="math inline">\(u \in \mathcal{U}\)</span>: <span class="math inline">\(v^\prime \nabla^2 v &lt; \frac{\sigma}{1+\epsilon} {\left \vert \left \vert v \right \vert \right \vert}_2^2\)</span> for some <span class="math inline">\(\epsilon &gt; 0\)</span>. Let <span class="math inline">\(\alpha \ge 0\)</span> be sufficiently small such that <span class="math inline">\(z + \alpha v \in \mathcal{U}\)</span>. Then</p>
+<p><span class="math display">\[\begin{aligned} 
+\frac{1}{2}\frac{\sigma \beta^2}{1+\epsilon} {\left \vert \left \vert v \right \vert \right \vert}_2^2 &amp;\ge \frac{1}{2} v^\prime \nabla f(z+\beta v)v \\
+&amp;= f(z + \alpha v) - f(z) - \nabla f(z)^\prime \alpha v \\
+&amp;\ge \frac{\sigma}{2} \alpha^2 {\left \vert \left \vert v \right \vert \right \vert}_2^2.
+\end{aligned}\]</span></p>
+</div>
+
+
+<div class="lemma">
+<p><span id="lem:unnamed-chunk-88" class="lemma"><strong>Lemma 21  (Optimality)  </strong></span> 1. If <span class="math inline">\(f\)</span> is convex, then any local minimizer is global 2. If <span class="math inline">\(f\)</span> is strongly convex, then the global minimizer is unique 3. If <span class="math inline">\(f\)</span> is convex and continuously differentiable, then <span class="math inline">\(\nabla f(x^*) = 0 \Rightarrow x^*\)</span> is a minimizer</p>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span>  1. Suppose <span class="math inline">\(x^*\)</span> is a local minimizer. Then there exists a neighborhood <span class="math inline">\(\mathcal{U}\)</span> of <span class="math inline">\(x^*\)</span> such that <span class="math inline">\(f(x^*) \le f(x)\)</span> for all <span class="math inline">\(x \in \mathcal{U}\)</span>. Assume for contradiction that there exists <span class="math inline">\(y \in {\mathbb{R}}^p\)</span> such that <span class="math inline">\(f(y) &lt; f(x^*)\)</span>. By convexity of <span class="math inline">\(f\)</span>, <span class="math inline">\(f(y + \lambda(x^* - y)) \le (1- \lambda) f(y) + \lambda f(x^*) &lt; f(x^*)\)</span> for <span class="math inline">\(\lambda \in (0,1)\)</span>. For <span class="math inline">\(\lambda\)</span> close enought to <span class="math inline">\(1\)</span>, <span class="math inline">\(y+\lambda(x^* - y) \mathcal{U}\)</span>. So, <span class="math inline">\(f(x^*) \le f(y+\lambda (x^* - y)) &lt; f(x^*)\)</span>. Contradiction.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Let <span class="math inline">\(x,y \in {\mathbb{R}}^p\)</span> be two global minimizers of <span class="math inline">\(f\)</span>, and assume for contradiction that <span class="math inline">\(x \neq y\)</span>. Let <span class="math inline">\(f^* = f(x) = f(y)\)</span>. Then</li>
+</ol>
+<p><span class="math display">\[f(\lambda x + (1-\lambda)y) + \frac{1}{2}\sigma(1-\lambda) {\left \vert \left \vert x-y \right \vert \right \vert}_2^2 \leq (1-\lambda)f(y) + \lambda f(x) = f^*.\]</span></p>
+<p>This holds for all <span class="math inline">\(\lambda \in (0,1)\)</span>. Now, let <span class="math inline">\(\lambda = 1/2\)</span>. Then <span class="math inline">\(f(\tfrac{x+y}{2}) + \frac{1}{4}\sigma {\left \vert \left \vert x-y \right \vert \right \vert}_2^2\)</span>. Since <span class="math inline">\(x \neq y\)</span>, <span class="math inline">\({\left \vert \left \vert x-y \right \vert \right \vert}_2^2 &gt; 0\)</span>, so <span class="math inline">\(f(\tfrac{x+y}{2}) &lt; f^*\)</span>. Contradiction.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>(Alternative proof of 2.) Since <span class="math inline">\(f\)</span> is strongly convex,</li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+f(y) &amp;\ge f(x) + \nabla f(x)^\prime (x-y) + \frac{1}{2}\sigma {\left \vert \left \vert y-x \right \vert \right \vert}_2^2 \\
+&amp;\ge f(x) - {\left \vert \left \vert \nabla f(x) \right \vert \right \vert}_2 {\left \vert \left \vert y-x \right \vert \right \vert}_2^2 + \frac{1}{2}\sigma {\left \vert \left \vert y-x \right \vert \right \vert}_2^2 \\
+&amp;= f(x) + {\left \vert \left \vert y-x \right \vert \right \vert}_2\left(\frac{1}{2} \sigma {\left \vert \left \vert y-x \right \vert \right \vert}_2 - {\left \vert \left \vert \nabla f(x) \right \vert \right \vert}_2\right) 
+\end{aligned}\]</span></p>
+<p>Now, let <span class="math inline">\(R &gt; 0\)</span> such that <span class="math inline">\(\frac{1}{2}\sigma R - {\left \vert \left \vert \nabla f(x) \right \vert \right \vert}_2 = 0\)</span>. Define <span class="math inline">\(D = \left\{z \in {\mathbb{R}}^p: {\left \vert \left \vert z-x \right \vert \right \vert}_2 \le R \right\}\)</span>. Then <span class="math inline">\(D\)</span> is compact. Since <span class="math inline">\(f\)</span> is continuous, a. there exists <span class="math inline">\(x^* \in D\)</span> such that <span class="math inline">\(f(x^*) \le f(z)\)</span> for all <span class="math inline">\(z \in D\)</span>. b. there exists <span class="math inline">\(z \in D^c\)</span> with <span class="math inline">\({\left \vert \left \vert z-x \right \vert \right \vert}_2 &gt; R\)</span>. I.e. <span class="math inline">\(f(z) \ge f(x)\)</span> (use inequalities above).</p>
+<p>Hence, <span class="math inline">\(f(x^*) \leq f(x) \leq f(z)\)</span> for all <span class="math inline">\(x \in D, z \in D^c\)</span>. I.e. <span class="math inline">\(f(x^*) \le f(z)\)</span> for all <span class="math inline">\(z \in {\mathbb{R}}^p\)</span>.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>We already know that if <span class="math inline">\(x^*\)</span> is a local minimum, <span class="math inline">\(\nabla f(x) = 0\)</span>. Assume <span class="math inline">\(\nabla f(x^*) = 0\)</span>. By convexity, <span class="math inline">\(f(y) \ge f(x^*) + \nabla f(x^*)^\prime(y-x^*)\)</span> for all <span class="math inline">\(y \in {\mathbb{R}}^p\)</span>. So <span class="math inline">\(f(y) \ge f(x^*)\)</span>, hence <span class="math inline">\(x^*\)</span> is a local minimum.</li>
+</ol>
+</div>
+
+
+<div class="lemma">
+<p><span id="lem:convexlipsch" class="lemma"><strong>Lemma 22  (Convexity and Lipschitz Continuity)  </strong></span>Suppose that <span class="math inline">\(f \in C^1\)</span> and convex. Then the following are equivalent:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\nabla f\)</span> if Lipschitz continuous with <span class="math inline">\(L &gt; 0\)</span>,</li>
+<li>for all <span class="math inline">\(x,y \in {\mathbb{R}}^p\)</span>: <span class="math inline">\(0 \le f(y) - f(x) - \nabla f(x)^\prime (y-x) \le \frac{1}{2}{\left \vert \left \vert y-x \right \vert \right \vert}_2^2\)</span>,</li>
+<li>for all <span class="math inline">\(x,y \in {\mathbb{R}}^p\)</span>: <span class="math inline">\(f(y) \ge f(x) + \nabla f(x)^\prime(y-x) + \frac{1}{2L} {\left \vert \left \vert \nabla f(x) - \nabla f(y) \right \vert \right \vert}_2^2\)</span>,</li>
+<li>for all <span class="math inline">\(x,y \in {\mathbb{R}}^p\)</span>: <span class="math inline">\(\left(\nabla f(x) - \nabla f(y)\right)^\prime \ge \frac{1}{L}{\left \vert \left \vert \nabla f(x) - \nabla f(y) \right \vert \right \vert}_2^2\)</span>.</li>
+</ol>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> (1) implies (2): exercise <a href="homework-18.html#exr:q1804">126</a>. (3) implies (4): exercise <a href="homework-18.html#exr:q1805">127</a>.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>implies (3): Fix <span class="math inline">\(x\)</span>. Define <span class="math inline">\(\phi_x(y) = f(y) - y^\prime \nabla f(x)\)</span>. Then <span class="math inline">\(\phi_x\)</span> is convex.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(\nabla \phi_x(y) = \nabla f(y) - \nabla f(x)\)</span>, which implies that <span class="math inline">\(\phi_x\)</span> attains its minimum at <span class="math inline">\(x\)</span> (set equal to <span class="math inline">\(0\)</span> and solve for y)$.</li>
+<li><span class="math inline">\(\phi_x(y) - \phi_x(z) - \nabla \phi_x(z)^\prime (y-z) = ... = f(y) - f(z) - \nabla f(z)^\prime(y-z) \leq \frac{L}{2} {\left \vert \left \vert y-z \right \vert \right \vert}_2^2\)</span>.</li>
+</ol>
+<p>So, <span class="math inline">\(\phi_x(x) \leq \phi_x(y) \leq \phi_x(z) + \nabla \phi_x(z)^\prime (y-z) + \frac{L}{2} {\left \vert \left \vert y-z \right \vert \right \vert}_2^2\)</span>. If we minimize the upper bound, we see that it optains its minimum at <span class="math inline">\(y = z - \frac{1}{L} \nabla \phi_x(z) = z - \frac{1}{L}\left(\nabla f(z) - \nabla f(x)\right)\)</span>. If we plug this back in, we see that <span class="math inline">\(\phi_x(z - \frac{1}{L}\nabla \phi_x(z)) \le \phi_x(z) - \frac{1}{2L}{\left \vert \left \vert \nabla \phi_x(z) \right \vert \right \vert}_2^2\)</span>.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>implies (1): <span class="math inline">\({\left \vert \left \vert \nabla f(x) - \nabla f(y) \right \vert \right \vert}_2^2 \le L(\nabla f(x) - \nabla f(y))^\prime (x-y)\)</span>. If <span class="math inline">\(\nabla f(x) = \nabla f(y)\)</span>, we are done. If not, use Cauchy-Schwarts inequality to bound it by <span class="math inline">\(L{\left \vert \left \vert \nabla f(x) - \nabla f(y) \right \vert \right \vert}_2 {\left \vert \left \vert x-y \right \vert \right \vert}_2\)</span>.</li>
+</ol>
+</div>
+
+<div id="algorithmic-and-theoretical-preview" class="section level5">
+<h5><span class="header-section-number">1.6.2.3.1</span> Algorithmic and Theoretical Preview</h5>
+
+<div class="lemma">
+<p><span id="lem:unnamed-chunk-91" class="lemma"><strong>Lemma 23  (Zoutendijk’s Theorem)  </strong></span>Let <span class="math inline">\(f: {\mathbb{R}}^r \to {\mathbb{R}}\)</span> be <span class="math inline">\(C^1\)</span> function with Lipschitz gradient, and convex. Assume <span class="math inline">\(f^* = \inf_{x \in {\mathbb{R}}^p} f(x) &gt; -\infty\)</span>.</p>
+<p>For a fixed <span class="math inline">\(\alpha \in (0, \tfrac{2}{L})\)</span>, and arbitrary <span class="math inline">\(\theta_0 \in {\mathbb{R}}^p\)</span>, define <span class="math inline">\(\theta_{k+1} = \theta_k - \alpha \nabla f(\theta_k)\)</span>. Then <span class="math inline">\(\nabla f(\theta_k) \to 0\)</span>.</p>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span>  As follows:</p>
+<p><span class="math display">\[\begin{aligned}
+  f(\theta_{k+1}) &amp;\le f(\theta_k) + \nabla f(\theta_k)^\prime(\theta_{k+1} - \theta_k) + \frac{L}{2}{\left \vert \left \vert \theta_{k+1}-\theta_k \right \vert \right \vert}_2^2 \\
+                  &amp;\le f(\theta_k) - \alpha {\left \vert \left \vert \nabla f(\theta_k) \right \vert \right \vert}_2^2 + \frac{L\alpha^2}{2}{\left \vert \left \vert \nabla f(\theta_k) \right \vert \right \vert}_2^2 \\
+                  &amp;\le f(\theta_k) - \left(\alpha - \alpha^2 \frac{L}{2}\right) {\left \vert \left \vert \nabla f(\theta_k) \right \vert \right \vert}_2^2 \\
+  \Rightarrow f(\theta_{k+1}) &amp;\le f(\theta_k) \le \ldots \le f(\theta_0) \\
+  \Rightarrow f(\theta_{k+1}) &amp;\le f(\theta_k) - \epsilon {\left \vert \left \vert \nabla f(\theta_k) \right \vert \right \vert}_2^2 \\
+  \Rightarrow {\left \vert \left \vert \nabla f(\theta_k) \right \vert \right \vert}_2^2 &amp;\le \frac{1}{\epsilon} \left(f(\theta_k) - f(\theta_{k+1})\right) \\
+  \Rightarrow \sum_{k=0}^N {\left \vert \left \vert \nabla f(\theta_k) \right \vert \right \vert}_2^2 &amp;\le \frac{1}{\epsilon}\left(f(\theta_0) - f(\theta_N)\right) \le \frac{1}{\epsilon}\left(f(\theta_0)-f^*\right)
+\end{aligned}\]</span></p>
+</div>
+
+
+<div class="lemma">
+<p><span id="lem:unnamed-chunk-93" class="lemma"><strong>Lemma 24  (Local Convergence Rates)  </strong></span>Let <span class="math inline">\(f:{\mathbb{R}}^p \to {\mathbb{R}}\)</span>. Assume</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(f\)</span> is strongly convex with parameter <span class="math inline">\(\sigma &gt; 0\)</span>,</li>
+<li><span class="math inline">\(f\)</span> is <span class="math inline">\(C^1\)</span> and its gradient is Lipshictz with <span class="math inline">\(L &gt; 0\)</span>.</li>
+</ol>
+<p>For <span class="math inline">\(\alpha \in (0,\tfrac{2\sigma}{L^2})\)</span>, and arbitrary <span class="math inline">\(\theta_0 \in {\mathbb{R}}^p\)</span>, define <span class="math inline">\(\theta_{k+1} = \theta_k - \alpha \nabla f(\theta_k)\)</span>. Then</p>
+<ol style="list-style-type: decimal">
+<li>there exists a global minimum <span class="math inline">\(\theta^*\)</span>,</li>
+<li><span class="math inline">\({\left \vert \left \vert \theta_k - \theta^* \right \vert \right \vert}_2 \to 0\)</span>,</li>
+<li><span class="math inline">\({\left \vert \left \vert \theta_k - \theta^* \right \vert \right \vert}_2^2\)</span> converges Q-linearly.</li>
+</ol>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> Since <span class="math inline">\(\theta^*\)</span> is a global minimum, <span class="math inline">\(\nabla f(\theta^*) = 0\)</span>. So,</p>
+<p><span class="math display">\[
+  \theta_{k+1} - \theta^* = \theta_k - \theta^* - \alpha(\nabla f(\theta_k) - \nabla f(\theta_^*)),
+\]</span></p>
+<p>which implies</p>
+<p><span class="math display">\[
+  {\left \vert \left \vert \theta_{k+1}- \theta^* \right \vert \right \vert}_2^2 = {\left \vert \left \vert \theta_k - \theta^* \right \vert \right \vert}_2^2 - 2\alpha(\nabla f(\theta_k) - \nabla f(\theta^*))^\prime(\theta_k - \theta^*) + \alpha^2 {\left \vert \left \vert \nabla f(\theta_k) - \nabla f(\theta^*) \right \vert \right \vert}_2^2.
+\]</span></p>
+<p>Note that</p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\((\nabla f(\theta_k) - \nabla f(\theta^*))^\prime (\theta_k - \theta^*) \ge \sigma {\left \vert \left \vert \theta_k - \theta^* \right \vert \right \vert}_2^2\)</span></li>
+<li><span class="math inline">\({\left \vert \left \vert \nabla f(\theta_k) - \nabla f(\theta^*) \right \vert \right \vert}_2^2 \le L^2 {\left \vert \left \vert \theta_k - \theta^* \right \vert \right \vert}_2^2\)</span></li>
+</ol>
+<p>Combining (a) and (b) with the inequality above gives us</p>
+<p><span class="math display">\[\begin{aligned}
+{\left \vert \left \vert \theta_{k+1} - \theta^* \right \vert \right \vert}_2^2 &amp;\le (1 - 2\alpha \sigma + \alpha^2 L^2){\left \vert \left \vert \theta_k - \theta^* \right \vert \right \vert}_2^2 \\
+&amp;= \left(L^2\left(\alpha-\frac{\sigma}{L^2}\right)^2 + 1 - \frac{\sigma^2}{L^2}\right){\left \vert \left \vert \theta_k - \theta^* \right \vert \right \vert}_2^2.
+\end{aligned}\]</span></p>
+<p>So the optimal <span class="math inline">\(\alpha\)</span> is <span class="math inline">\(\frac{\sigma}{L^2}\)</span>.</p>
+</div>
+
+<p>Two implications:</p>
+<ol style="list-style-type: decimal">
+<li>if <span class="math inline">\(f\)</span> is strictly convex and <span class="math inline">\(C^2\)</span>, then <span class="math inline">\(\nabla^2 f(x) \ge \sigma\)</span>,</li>
+<li>if <span class="math inline">\(f\)</span> is convex and <span class="math inline">\(C^2\)</span> with Lipschitz continuous gradient, then <span class="math inline">\(L &gt; 0 \Rightarrow \nabla^2 f(x) \le L\)</span>. (See exercise <a href="homework-18.html#exr:q1806">128</a>)</li>
+</ol>
+<p>Let <span class="math inline">\(\kappa = L/\sigma\)</span> is the condition number. <span class="math inline">\({\left \vert \left \vert \theta_{k+1} - \theta^* \right \vert \right \vert}_2^2 \le \left(\frac{\kappa^2 - 1}{\kappa^2}\right){\left \vert \left \vert \theta_k -\theta^* \right \vert \right \vert}_2^2\)</span>.</p>
+
+</div>
+</div>
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="nonlinear-systems-of-equations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="homework-assignments.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["STAT771_notes.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="homework-15.html">
-<link rel="next" href="homework-16-1.html">
+<link rel="next" href="homework-17.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -138,6 +138,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.4" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#picards-method"><i class="fa fa-check"></i><b>1.5.4</b> Picard’s Method</a></li>
 <li class="chapter" data-level="1.5.5" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#newtons-method"><i class="fa fa-check"></i><b>1.5.5</b> Newton’s Method</a></li>
 <li class="chapter" data-level="1.5.6" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#inexact-newtons-method"><i class="fa fa-check"></i><b>1.5.6</b> Inexact Newton’s Method</a></li>
+<li class="chapter" data-level="1.5.7" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#semi-smooth-newtons-method"><i class="fa fa-check"></i><b>1.5.7</b> Semi-Smooth Newton’s Method</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html"><i class="fa fa-check"></i><b>1.6</b> Non-linear Unconstrained Optimization</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#motivating-problems-2"><i class="fa fa-check"></i><b>1.6.1</b> Motivating Problems</a></li>
+<li class="chapter" data-level="1.6.2" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#formalize-minimization"><i class="fa fa-check"></i><b>1.6.2</b> Formalize Minimization</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -159,8 +164,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.16" data-path="homework-16.html"><a href="homework-16.html"><i class="fa fa-check"></i><b>2.16</b> Homework 16</a><ul>
 <li class="chapter" data-level="2.16.1" data-path="homework-16.html"><a href="homework-16.html#newtons-method-1"><i class="fa fa-check"></i><b>2.16.1</b> Newton’s Method</a></li>
 </ul></li>
-<li class="chapter" data-level="2.17" data-path="homework-16-1.html"><a href="homework-16-1.html"><i class="fa fa-check"></i><b>2.17</b> Homework 16</a></li>
-<li class="chapter" data-level="2.18" data-path="homework-17.html"><a href="homework-17.html"><i class="fa fa-check"></i><b>2.18</b> Homework 17</a></li>
+<li class="chapter" data-level="2.17" data-path="homework-17.html"><a href="homework-17.html"><i class="fa fa-check"></i><b>2.17</b> Homework 17</a></li>
+<li class="chapter" data-level="2.18" data-path="homework-18.html"><a href="homework-18.html"><i class="fa fa-check"></i><b>2.18</b> Homework 18</a></li>
 </ul></li>
 </ul>
 
@@ -183,17 +188,49 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">2.16</span> Homework 16</h2>
 
 <div class="exercise">
-<span id="exr:1601" class="exercise"><strong>Exercise 106  </strong></span>Is <span class="math inline">\(f(x) = |x|\)</span> semi-smooth?
+<p><span id="exr:1601" class="exercise"><strong>Exercise 110  </strong></span>Let <span class="math inline">\(F: {\mathbb{R}}^m \to {\mathbb{R}}^n\)</span> be everywhere differentiable such that in any closed ball, the derivative is bounded.</p>
+Show that in any closed ball, <span class="math inline">\(F\)</span> is Lipschitz continuous.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> Use Taylors theorem and let <span class="math inline">\(L = \sup_{\omega \in B}||\nabla F(\omega)||\)</span>:</p>
+<p><span class="math display">\[F(x) = F(y) + \nabla F(y + \gamma(y-x))^T(y-x),\,\, for\,\, some\,\, \gamma \in (0,1)\]</span></p>
+<p><span class="math display">\[\begin{aligned} ||F(x)-F(y)|| &amp;= ||\nabla F(y + \gamma(y-x))^T(y-x)|| \\
+&amp; \leq ||\nabla F(y + \gamma(y-x))||\,||(y-x)|| \\
+&amp; \leq \sup_{\omega \in B}||\nabla F(\omega)||\,||(y-x)|| \\
+&amp; \leq L||(y-x)||
+\end{aligned}\]</span></p>
 </div>
 
 
 <div class="exercise">
-<span id="exr:1602" class="exercise"><strong>Exercise 107  </strong></span>Is <span class="math inline">\(f(x) = \log(1+|x|)\)</span> semi-smooth?
+<span id="exr:1602" class="exercise"><strong>Exercise 111  </strong></span>Is <span class="math inline">\(f(x) = |x|\)</span> semi-smooth?
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Yes. Write-up.
 </div>
 
 
 <div class="exercise">
-<span id="exr:1603" class="exercise"><strong>Exercise 108  </strong></span>Prove that Newtons Method converges Q superlinearly.
+<span id="exr:1603" class="exercise"><strong>Exercise 112  </strong></span>Is <span class="math inline">\(f(x) = \log(1+|x|)\)</span> semi-smooth?
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> No, <span class="math inline">\(f\)</span> is not locally Lipschitz.
+</div>
+
+
+<div class="exercise">
+<span id="exr:1604" class="exercise"><strong>Exercise 113  </strong></span>Prove that Newtons Method converges Q superlinearly.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> ???
 </div>
 
 <div id="newtons-method-1" class="section level3">
@@ -209,12 +246,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>You will need to also do line search. The code I supplied implements Newtons method with a slightly different version of line search. Implement the one I discussed in class as well.</p>
 
 <div class="exercise">
-<span id="exr:1604" class="exercise"><strong>Exercise 109  </strong></span>Compare the performance of the different methods and the different line search methods.
+<span id="exr:1605" class="exercise"><strong>Exercise 114  </strong></span>Compare the performance of the different methods and the different line search methods.
 </div>
 
 
 <div class="exercise">
-<span id="exr:1605" class="exercise"><strong>Exercise 110  </strong></span>Track the step length for each method. What happens to the step length as you get closer to the solution. (Make some plots)
+<span id="exr:1606" class="exercise"><strong>Exercise 115  </strong></span>Track the step length for each method. What happens to the step length as you get closer to the solution. (Make some plots)
 </div>
 
 </div>
@@ -225,7 +262,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="homework-15.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="homework-16-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="homework-17.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

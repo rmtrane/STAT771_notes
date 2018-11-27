@@ -1081,14 +1081,39 @@ Give a detailed comparison of cycle, randomized, and random permutation Kaczmarz
 Show that $\alpha \sum_{i=1}^n a_i (b_i - a_i x^c) = \alpha A^\prime (b - Ax^c)$.
 ```
 
+```{solution}
+Recall that $a_i$ is a column vector, and that $a_i^\prime$ is the row vector of matrix $A$
 
+$A^T(b-Ax^c) = \begin{pmatrix} a_1, \cdots, a_n \end{pmatrix}(b - Ax^c) = \sum_{i=1}^{n}a_i(b_i - a_i^Tx^c)$
+
+```
 
 ```{exercise, q1102}
 Show that if $A^\prime r^c = 0$, then $x^c = x^*$, where $Ax^* = b$. 
 ```
 
+```{solution}
+
+$x^+= x^c + \alpha A^T(b-Ax^c) = x^c + \alpha A^Tr^c = x^c$
+
+```
+
 ```{exercise, q1103}
-Why is it enough to find an upper bound on $\norm{\Sigma^{-1}u}_2^2 \norm{\Sigma u}_2^2$ for any unit vector $w$ in the proof of theorem \@ref(thm:grad-descent)? 
+Why is it enough to find an upper bound on $\norm{\Sigma^{-1}u}_2^2 \norm{\Sigma u}_2^2$ for any unit vector $u$ in the proof of theorem \@ref(thm:grad-descent)? 
+```
+
+```{solution}
+
+Recall that $\norm{A} = \sup_{\norm{v}=1} \norm{Av} = \sup_{\norm{v} \neq 0} \frac{\norm{Av}}{\norm{v}}$. Hence, 
+
+$$\begin{aligned}
+\norm{\Sigma^{-1} u}_2^2 \norm{\Sigma u}_2^2 \le \frac{(\sigma_1^2 + \sigma_n^2)^2}{4\sigma_1^2 \cdot \sigma_n^2} \quad \forall u: \norm{u} = 1 \\
+\Rightarrow \frac{1}{\norm{\Sigma^{-1} u}_2^2 \norm{\Sigma u}_2^2} \le \frac{4\sigma_1^2 \cdot \sigma_n^2}{(\sigma_1^2 + \sigma_n^2)^2} \quad \forall u: \norm{u} = 1 \\ 
+\Rightarrow \frac{\norm{w}}{\norm{\Sigma^{-1} w}_2^2}\frac{\norm{w}}{\norm{\Sigma w}_2^2} \le \frac{4\sigma_1^2 \cdot \sigma_n^2}{(\sigma_1^2 + \sigma_n^2)^2} \quad \forall w: \norm{w} \neq 0.
+\end{aligned}$$
+  
+So, find an upper bound on $\norm{\Sigma^{-1} u}_2^2 \norm{\Sigma u}_2^2$ that holds for all unit vectors $u$, and we have a lower bound on $\frac{\norm{w}}{\norm{\Sigma^{-1} w}_2^2}\frac{\norm{w}}{\norm{\Sigma w}_2^2}$ that holds for all non-zero vectors $w$. 
+
 ```
 
 ```{exercise, q1104, name = "Kontorovich's Inequality"}
@@ -1096,6 +1121,11 @@ Let $0 < u_n \le u_{n-1} \le \cdots \le u_1$. Then
 
 $$\left(\sum_{i=1}^n p_i u_i\right)\left(\sum_{i=1}^n \frac{p_i}{u_i}\right) \leq \frac{(u_1 + u_n)^2}{4u_1u_n}$$
 
+```
+
+```{solution}
+http://mathworld.wolfram.com/KantorovichInequality.html
+http://services.aops.com/download.php?id=YXR0YWNobWVudHMvMS84LzM2YWVhMTg3Yzc0NDA5YTZmNDRhZDVjNmZlNmM4NzllMjRjNmE3LnBkZg==&rn=a2FudG9yb3ZpY2hfcHJvb2YucGRm
 ```
 
 ```{exercise, q1105}
@@ -1106,32 +1136,91 @@ b) With this $\alpha$, will we converge? If so, what is the rate of convergence?
 
 ```
 
+```{solution, include = FALSE}
+
+According to strategy 2, we choose $\alpha$ such that it minimizes $\norm{x_{k+1} - x^*}_2^2$. So, to minimize this, we differentiate with respect to $\alpha$, set to $0$, and solve for $\alpha$:
+
+$$\begin{aligned}
+  \frac{d}{d\alpha}\norm{x_{k+1} - x^*}_2^2 &= \frac{d}{d\alpha}\norm{x_k - \alpha A^\prime () - x^*} \\
+  &= -2(A^\prime r_k)^\prime \left(x_k - x^* - \alpha A^\prime r_k \right) \\
+  &= -2 r_k^\prime A(x_k-x^*) + 2\alpha (A^\prime r_k)^\prime A^\prime r_k \\
+  &= -2 r_k^\prime A(x_k-x^*) + 2\alpha \norm{A^\prime r_k}_2^2 = 0 \\
+  \Rightarrow \alpha &= \frac{r_k^\prime A(x_k - x^*)}{\norm{A^\prime r_k}}
+\end{aligned}$$
+
+```
+
 ```{exercise, q1106}
 For strategy 3, what is $\alpha$?
+```
+
+```{solution}
+???
 ```
 
 ```{exercise, q1107}
 For strategy 4, show the inequality holds.
 ```
 
+```{solution}
+???
+```
+
 ```{exercise, q1108}
 For strategy 4, what is $\alpha$?
+```
+
+```{solution}
+??? 
 ```
 
 ```{exercise, q1109}
 Implement a single update of the gradient descent method for a user supplied alpha, assuming that A is invertible.
 ```
 
+```{solution}
+See the Julia chunk below
+```
+
+```julia
+using LinearAlgebra
+
+# Single update of the gradient descent method
+
+function singleGradDescent(A,x,b, alpha)
+    """
+    b is constant vector.
+    A is the coefficient matrix.
+    x is current iterate.
+    alpha is step size.
+    """
+    x = x + alpha * A'*(b-A*x)
+    return x
+end
+```
+
 ```{exercise, q1110}
 Now, implement four algorithms one for each of the four strategies of alpha discussed in class.
+```
+
+```{solution}
+???
 ```
 
 ```{exercise, q1111}
 Generate several test problems for your four algorithms, and compare their performance.
 ```
 
+```{solution}
+???
+```
+
 ```{exercise, q1112}
 In a narrative, explain which algorithm you would use and when you would use this algorithm.
+```
+
+```{solution}
+???
 ```
 
 **Understanding Gradient Descent's Dependence on the Condition Number**
@@ -1140,25 +1229,52 @@ In a narrative, explain which algorithm you would use and when you would use thi
 Write a function to generate 2 equations with 2 unknowns such that the coefficient matrix is dense and symmetric with user specified nonzero eigenvalues.
 ```
 
+```{soltuion}
+???
+```
+
 ```{exercise, q1114}
 How are the eigenvalues related to the singular values?
+```
+
+```{soltuion}
+???
 ```
 
 ```{exercise, q1115}
 How are the eigenvectors related to the left and right singular vectors?
 ```
 
+```{soltuion}
+???
+```
+
 ```{exercise, q1116}
 Write a function to draw the level sets of an arbitrary residual function $f\left(x\right) = \norm{Ax - b}_2^2$.
 ```
+
+```{soltuion}
+???
+```
+
 
 ```{exercise, q1117}
 Run Gradient Descent using the step size (alpha) from Strategy 2 to solve a sequence of problems where the difference between the singular values of your problem increases in size. Plot the points that Gradient Descent visits (on your level set plot) as it finds its way to the solution.
 ```
 
+```{soltuion}
+???
+```
+
+
 ```{exercise, q1118}
 What do you observe? What is the impact of the singular values on gradient descent? Why does this make sense based on your graphs?
 ```
+
+```{soltuion}
+???
+```
+
 
 ## Homework 12
 
@@ -1166,30 +1282,84 @@ What do you observe? What is the impact of the singular values on gradient desce
 What conditions (if any) on $a_0, ..., a_{d-1}$ guarantee that an $A-$normalized, $A-$conjugated set $\{s_0, ..., s_{d-1}\}$ can be produced by Gram Schmidt?
 ```
 
+```{soltuion}
+Write up
+```
+
+
 ## Homework 13
 
 ```{exercise, q1301}
 Show that the procedure in \@ref(conjugatedgradients) is the same as the one implemented in code provided by Patel.
 ```
 
+```{soltuion}
+Write up
+```
+
+
 ```{exercise, q1302}
 Prove that CG converges in finitely many steps (in exact arithmetic).
 ```
+
+```{soltuion}
+???
+```
+
 
 ```{exercise, q1303}
 Show that the limit in example \@ref(exm:gradient-example) holds. 
 ```
 
+```{soltuion}
+???
+```
+
+
 ```{exercise, q1304}
 Characterize the relationship between the Jacobian and the gradient.
+```
+
+```{soltuion}
+
+$$J(f;x) = \begin{bmatrix}
+             \frac{\partial f_{1}}{\partial x_{1}}   &
+	       \frac{\partial f_{1}}{\partial x_{2}} &
+               \cdots                                &
+               \frac{\partial f_{1}}{\partial x_{n}} \\
+	     \vdots                                  &
+	       \vdots                                &
+               \cdots                                &
+	       \vdots \\
+             \frac{\partial f_{m}}{\partial x_{1}}   &
+	       \frac{\partial f_{m}}{\partial x_{2}} &
+	       \cdots                                &
+	       \frac{\partial f_{m}}{\partial x_{n}}
+	   \end{bmatrix} = \begin{bmatrix} \nabla f_1(x)' \\
+       \vdots \\
+       \nabla f_m(x)'
+       \end{bmatrix}$$
+
+https://calculus.subwiki.org/wiki/Existence_of_partial_derivatives_not_implies_differentiable
+    
 ```
 
 ```{exercise, q1305}
 Using IFT: when will $F(x) = 0$ have an isolated solution? (i.e. a solution where there is an open set containing that solution with no other solutions)
 ```
 
+```{solution}
+When $m = n$, the neighborhood will be one dimensional and be only one point. 
+```
+
 ```{exercise, q1306}
 What happens if $F(z^*) = 0$ and $\text{rank}(J(z^*)) < \min(n,m)$?
+```
+
+```{solution}
+
+If $rank(J(z^*)) < min(m,n)$, then $J_1(z^*)$ is not full rank and thus will be a singular matrix
+
 ```
 
 ## Homework 14
@@ -1198,24 +1368,63 @@ What happens if $F(z^*) = 0$ and $\text{rank}(J(z^*)) < \min(n,m)$?
 Proof theorem \@ref(thm:contracts). Why does $D$ have to be closed? (Hint: need $\lim_{k \to \infty} x_k \in D$)
 ```
 
+```{solution}
+
+1. Assume $x^*$ and $x_0$ satisfy $x^* = G(x^*)$ and $G(x_0) = x_0$. Then there exists an $\alpha \in (0,1)$ such that $\norm{G(x^*) - G(x_0)} \le \alpha\norm{x^* - x_0}$. But $\alpha \norm{x^* - x_0} = \alpha\norm{G(x^*) - G(x_0)}$, so $\norm{G(x^*) - G(x_0)} \le \alpha \norm{G(x^*) - G(x_0)}$. Since $\alpha \in (0,1)$, this can only hold if $\norm{G(x^*) - G(x_0)} = 0$, so $x^* = G(x^*) = G(x_0) = x_0$. 
+
+2. For some $\alpha \in (0,1)$:
+
+$$\begin{aligned}
+  \norm{G(x_{k+1}) - x_{k+1}} &= \norm{G(x_{k+1}) - G(x_k)} \\
+                              &\le \alpha\norm{x_{k+1}-x_k} \\ 
+                              &= \alpha\norm{G(x_k)-G(x_{k-1})} \\
+                              &= \alpha^2\norm{x_k-x_{k-1}} \\ 
+                              &\vdots \\
+                              &= \alpha^k\norm{x_1-x_0}.
+\end{aligned}$$
+  
+Hence, $\norm{G(x_k - x_k)} \to 0$ as $k \to \infty$, so $\lim x_k = \lim G(x_k)$, i.e. $\lim x_k = x^*$. 
+
+```
+
 ```{exercise, q1402}
 Does this hold if we replace $R^m$ with an arbitrary metric space? (Hint: no, need completeness)
+```
+
+```{solution}
+The metric space has to be complete. Otherwise we are not sure that the limit is still in $D$.
 ```
 
 ```{exercise, q1403}
 Solve $x = G(x)$ by hand. What is $G(x)$ doing? 
 ```
 
+```{solution}
+Write up!
+```
+
 ```{exercise, q1404}
 Show that $G(x)$ is a contraction.
+```
+
+```{solution}
+Write up!
 ```
 
 ```{exercise, q1405}
 What is the impact of the singular values of $J(x^*)$ on the "localness" of the results in theorem \@ref(thm:with-assumptions)?
 ```
 
+```{solution}
+Write up!
+```
+
 ```{exercise, q1406}
 Why is the first result from theorem \@ref(thm:with-assumptions) important?
+```
+
+```{solution}
+Write up!
 ```
 
 ```{exercise, q1407}
@@ -1228,9 +1437,16 @@ Let $A,B \in \R^{n \times m}$ and assume $A$ is non-singular. If for some $\epsi
 
 ```
 
+```{solution}
+Write up!
+```
 
 ```{exercise, q1408}
 What happens if I use the mean value theorem instead of Fundamental Theorem of Calculus? (Hint: remember we cannot generalize 1D MVT to multi D).
+```
+
+```{solution}
+Tuo
 ```
 
 ```{exercise, q1409}
@@ -1242,12 +1458,24 @@ $$
 
 ```
 
+```{solution}
+???
+```
+
 ```{exercise, q1410}
 How should we choose $\tau_a, \tau_r$? 
 ```
 
+```{solution}
+???
+```
+
 ```{exercise, q1411}
 Guiding principles?
+```
+
+```{solution}
+???
 ```
 
 ## Homework 15
@@ -1256,30 +1484,114 @@ Guiding principles?
 Prove $|f(y+h) - f(y) - \nabla f(y) | \le \frac{l}{2} \norm{h}^2$, when the gradient of $f$ is Lipschitz continuous.
 ```
 
+```{exercise}
+Tuo
+```
+
 ```{exercise, 1502}
 If $f$ can be calculated at any input with accuracy $l_f u$ ($l_f > 0$), show that the right choice of $\epsilon$ is proportional to $\sqrt{u}$. I.e. this choice of $\epsilon$ give the most accuracy. (See the section [Forward Difference])
+```
+
+```{solution}
+???
 ```
 
 ```{exercise, 1503}
 Choose a simple differentiable function and test a bunch of $\epsilon$ and compare to $\epsilon = \sqrt{u}$. 
 ```
 
+```{solution}
+???
+```
+
 ```{exercise, 1504}
 How is Forward Difference Approximation done for $f: \R^m \to \R^n$? 
+```
+
+```{solution}
+???
+```
+
+```{exercise, 1505}
+Verify equation \@ref(eq:shermanmorrison).
+```
+
+```{solution}
+
+$$\begin{aligned}
+   (A + uv^T)(A^{-1} - \frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}) &= AA^{-1} - \frac{AA^{-1}uv^TA^{-1}}{1+v^TA^{-1}u} + uv^TA^{-1} - \frac{uv^TA^{-1}uv^TA^{-1}}{1+v^TA^{-1}u} \\
+   &= I + uv^TA^{-1} - \frac{uv^TA^{-1}uv^TA^{-1}uv^TA^{-1}}{1+v^TA^{-1}u} \\
+   & = I + uv^TA^{-1} - \frac{u(1+v^TA^{-1}u)v^TA^{-1}}{1+v^TA^{-1}u} \\
+   & = I
+\end{aligned}$$
+
+```
+
+```{exercise, 1506}
+Use equation \@ref(eq:shermanmorrison) to explicitly express $J_c^{-1}$ in terms of $J_{-}^{-1}$.
+```
+
+```{solution}
+
+$$\begin{aligned}
+(J_c)^{-1} &= (J_- + \frac{(y_c - J_-s_c)s_c^T}{s_c^Ts_c})^{-1} \\
+&= J_-^{-1} - \frac{J_-^{-1}(y_c - J_-s_c)\frac{s_c^T}{s_c^Ts_c}J_-^{-1}}{1+\frac{s_c^T}{s_c^Ts_c}J_-^{-1}(y_c - J_-s_c)} \\
+&= J_-^{-1} - \frac{J_-^{-1}y_cs_c^TJ_-^{-1} - s_cs_c^TJ_-^{-1}}{s_c^TJ_-^{-1}y_c}
+\end{aligned}$$
+
+```
+
+```{exercise, 1507}
+Do we ever need to store $J_c$? 
+```
+
+```{solution}
+No
 ```
 
 ## Homework 16
 
 ```{exercise, 1601}
-Is $f(x) = |x|$ semi-smooth?
+Let $F: \R^m \to \R^n$ be everywhere differentiable such that in any closed ball, the derivative is bounded. 
+
+Show that in any closed ball, $F$ is Lipschitz continuous. 
+```
+
+```{solution}
+Use Taylors theorem and let $L = \sup_{\omega \in B}||\nabla F(\omega)||$:
+
+$$F(x) = F(y) + \nabla F(y + \gamma(y-x))^T(y-x),\,\, for\,\, some\,\, \gamma \in (0,1)$$
+
+$$\begin{aligned} ||F(x)-F(y)|| &= ||\nabla F(y + \gamma(y-x))^T(y-x)|| \\
+& \leq ||\nabla F(y + \gamma(y-x))||\,||(y-x)|| \\
+& \leq \sup_{\omega \in B}||\nabla F(\omega)||\,||(y-x)|| \\
+& \leq L||(y-x)||
+\end{aligned}$$
+
 ```
 
 ```{exercise, 1602}
-Is $f(x) = \log(1+|x|)$ semi-smooth?
+Is $f(x) = |x|$ semi-smooth?
+```
+
+```{solution}
+Yes. Write-up.
 ```
 
 ```{exercise, 1603}
+Is $f(x) = \log(1+|x|)$ semi-smooth?
+```
+
+```{solution}
+No, $f$ is not locally Lipschitz.
+```
+
+```{exercise, 1604}
 Prove that Newtons Method converges Q superlinearly. 
+```
+
+```{solution}
+???
 ```
 
 ### Newton's Method
@@ -1299,72 +1611,208 @@ Compare the following methods: Newtons Method, Chord Method, Forward Difference 
 
 You will need to also do line search. The code I supplied implements Newtons method with a slightly different version of line search. Implement the one I discussed in class as well.
 
-```{exercise, 1604}
+```{exercise, 1605}
 Compare the performance of the different methods and the different line search methods.
 ```
 
-```{exercise, 1605}
+```{exercise, 1606}
 Track the step length for each method. What happens to the step length as you get closer to the solution. (Make some plots)
-```
-
-## Homework 16
-
-Proof or find counter example for the following four problems:
-
-```{exercise, q1601}
-If $\theta^*$ is a global minimizer, it is a local minimizer.
-```
-
-```{exercise, q1602}
-If $\theta^*$ is a strict global minimizer, it is the only global minimizer.
-```
-
-```{exercise, q1603}
-If $\theta^*$ is an isolated global minimizer, it is the only global minimizer.
-```
-
-```{exercise, q1604}
-If $\theta^*$ is a strict local minimizer, it is isolated. #there exists a neighborhood around $\theta^*$ such that $\theta^*$ is isolated in said neighborhood.
-```
-
-```{exercise, q1605}
-Is the condition sufficient?
-```
-
-```{exercise, q1606}
-Fill in the blanks!
 ```
 
 ## Homework 17
 
-Proof or find counter examples for each of the following three problems:
+Proof or find counter example for the following four problems:
 
 ```{exercise, q1701}
+If $\theta^*$ is a global minimizer, it is a local minimizer.
+```
+
+```{solution}
+Tuo
+```
+
+```{exercise, q1702}
+If $\theta^*$ is a strict global minimizer, it is the only global minimizer.
+```
+
+```{solution}
+Tuo
+```
+
+```{exercise, q1703}
+If $\theta^*$ is an isolated global minimizer, it is the only global minimizer.
+```
+
+```{solution}
+Tuo
+```
+
+```{exercise, q1704}
+If $\theta^*$ is a strict local minimizer, it is isolated. #there exists a neighborhood around $\theta^*$ such that $\theta^*$ is isolated in said neighborhood.
+```
+
+```{solution}
+Tuo
+```
+
+```{exercise, q1705}
+If $\theta^*$ is an isolated minimizer, then $\theta^*$ is a strict minimizer. 
+```
+
+```{solution}
+Tuo
+```
+
+```{exercise, q1706}
+Is the condition in lemma \@ref(lem:firstordernec) sufficient?
+```
+
+```{solution}
+No. $f(x) = x^3$.
+```
+
+```{exercise, q1707}
+Fill in the blanks of lemma \@ref(lem:convexdiff)!
+```
+
+## Homework 18
+
+Proof or find counter examples for each of the following three problems:
+
+```{exercise, q1801}
 Let $f \in C^1$. 
 
 $f$ is convex if and only if for all $x,y \in \R^p:\ \left(\nabla f(x) - \nabla f(y)\right)(x-y) \ge 0$. 
 ```
 
-```{exercise, q1702}
+```{solution, s1801}
+
+$(\Rightarrow)$
+
+Use this Lemma: Suppose $f \in C^1$, $f$ is convex $\iff$ $f(y) \geq f(x) + \nabla f(x)^T(y-x)$, $\forall x,y \in \mathbb{R}^p$.
+
+We have, 
+
+$$f(y) \geq f(x) + \nabla f(x)^T(y-x)$$
+$$f(x) \geq f(y) + \nabla f(y)^T(x-y)$$
+
+Sum these two inequalities together 
+
+$$ f(y) + f(x) \geq f(x)+f(y)+ (\nabla f(x) - \nabla f(y))^T(y-x)$$
+
+Thus, 
+$$(\nabla f(x)-\nabla f(y))^T(x-y) \geq 0$$
+
+$(\Leftarrow)$
+
+For the converse part, we need to use Taylor Theorem:
+$$f(x+p) = f(x) + \int_{0}^{1}\nabla f(x+\gamma p)^Tp d\gamma$$
+$$f(x+p) = f(x) + \nabla f(x+\gamma p)^Tp, \,\,\, for\,some\, \gamma \in (0,1)$$
+
+If $\forall x, y\in \mathbb{R}^p$, $(\nabla f(x)-\nabla f(y))^T(x-y) \geq 0$, Let $\lambda \in [0,1]$, $z = \lambda x + (1 - \lambda)y$,
+
+$$
+\begin{aligned} f(x) &= f(z) + \int_{0}^{1}\nabla f(z+\gamma (z-x))^T(z-x) d\gamma \\
+&= f(z) + \int_{0}^{1}\nabla f(z+\gamma (z-x))^T (1-\lambda)(x-y) d\gamma 
+\end{aligned}$$
+
+Similarly,
+
+$$\begin{aligned}
+f(y) & = f(z) + \int_{0}^{1}\nabla f(z+\gamma (z-y))^T(z-y) d\gamma \\
+& = f(z) + \int_{0}^{1}\nabla f(z+\gamma (z-y))^T \lambda (y-x) d\gamma
+\end{aligned}$$
+
+Let the first inequality times $\lambda$ and let the second one times $(1-\lambda)$ we will get
+
+$$\begin{aligned}
+\lambda f(x) + (1-\lambda) f(y) &= f(z) - \lambda (1-\lambda) \int_{0}^{1} (f(z+\gamma (z-x)) - f(z+\gamma (z-y)))^T(x-y) d\gamma \\
+& = f(z) - \lambda (1-\lambda) \int_{0}^{1} (f(z+\gamma (z-x)) - f(z+\gamma (z-y)))^T[(z+\gamma (z-y))-(z+\gamma (z-x)))] \frac{1}{\gamma} d\gamma  \\
+& \leq f(z) \\
+& = f(\lambda x + (1 - \lambda)y)
+\end{aligned}$$
+
+```
+
+```{exercise, q1802}
 Let $f \in C^2$. 
 
 $f$ is convex if and only if for all $x \in \R^p:\ \nabla^2 f(x) \ge 0$.
 ```
 
-```{exercise, q1703}
+```{solution}
+We need to use the second other taylor theorem:
+
+$$f(x + p) = f(x) + \nabla f(x)^Tp + \frac{1}{2} p^T\nabla^2 f(x+\gamma p)p,\,\,\, some\,\gamma \in (0,1)$$
+
+and this lemma:
+
+Suppose $f \in C^1$, $f$ is convex $\iff$ $f(y) \geq f(x) + \nabla f(x)^T(y-x)$, $\forall x,y \in \mathbb{R}^p$.
+
+$(\Rightarrow)$
+
+For this part of proof, refer to the book Convex Optimization (Stephen Boyd), Page 71 and Exercise 3.8
+
+I attached a picture in the following cell
+
+$(\Leftarrow)$
+
+From taylor theorem: 
+
+$$\begin{aligned}
+f(y) &= f(x) + \nabla f(x)^T(y-x) + \frac{1}{2} (y-x)^T\nabla^2 f(x+\gamma(y-x))(y-x)\\
+& \geq f(x) + \nabla f(x)^T(y-x)
+\end{aligned}$$
+
+```
+
+```{exercise, q1803}
 Let $f \in C^1$. 
 
 $f$ is strongly convex with $\sigma > 0$ if and only if $\left(\nabla f(x) - \nabla f(y) \right)^\prime(x-y) \ge \sigma \norm{x-y}^2_2$. (Hint: integral form of Taylor's Theorem)
+
 ```
 
-```{exercise, q1704}
-(1) implies (2) of theorem. Application of Taylor's theorem in integral form.
+```{solution}
+Tuo has a reference.
+
+We need to use this lemma:
+
+Suppose $f \in C^1$, $f$ is strongly convex $\iff$ $f(y) \geq f(x) + \nabla f(x)^T(y-x) + \frac{1}{2}\sigma ||x-y||_2^2$, $\forall x,y \in \mathbb{R}^p$.
+ 
+$(\Rightarrow)$
+ 
+Use the Lemma twice and sum them together to get the desired result.
+ 
+$(\Leftarrow)$
+
+Same idea as solution to \@ref(exr:q1801).
+  
 ```
 
-```{exercise, q1705}
-(3) implies (4) of theorem. 
+```{exercise, q1804}
+(1) implies (2) of lemma \@ref(lem:convexlipsch). Application of Taylor's theorem in integral form.
 ```
 
-```{exercise, q1706}
+```{solution}
+Tuo
+```
+
+```{exercise, q1805}
+(3) implies (4) of lemma \@ref(lem:convexlipsch).  
+```
+
+```{solution}
+Tuo
+```
+
+```{exercise, q1806}
+
 Let $f \in C^2$ be a convex function with a Lipschitz continuous gradient. Then $L > 0$ implies $\nabla^2 f(x) \le L$.
+
 ```
+
+```{solution}
+Tuo
+```
+

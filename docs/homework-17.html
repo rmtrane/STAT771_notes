@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="homework-16-1.html">
-
+<link rel="prev" href="homework-16.html">
+<link rel="next" href="homework-18.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -138,6 +138,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.4" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#picards-method"><i class="fa fa-check"></i><b>1.5.4</b> Picard’s Method</a></li>
 <li class="chapter" data-level="1.5.5" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#newtons-method"><i class="fa fa-check"></i><b>1.5.5</b> Newton’s Method</a></li>
 <li class="chapter" data-level="1.5.6" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#inexact-newtons-method"><i class="fa fa-check"></i><b>1.5.6</b> Inexact Newton’s Method</a></li>
+<li class="chapter" data-level="1.5.7" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#semi-smooth-newtons-method"><i class="fa fa-check"></i><b>1.5.7</b> Semi-Smooth Newton’s Method</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html"><i class="fa fa-check"></i><b>1.6</b> Non-linear Unconstrained Optimization</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#motivating-problems-2"><i class="fa fa-check"></i><b>1.6.1</b> Motivating Problems</a></li>
+<li class="chapter" data-level="1.6.2" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#formalize-minimization"><i class="fa fa-check"></i><b>1.6.2</b> Formalize Minimization</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -159,8 +164,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.16" data-path="homework-16.html"><a href="homework-16.html"><i class="fa fa-check"></i><b>2.16</b> Homework 16</a><ul>
 <li class="chapter" data-level="2.16.1" data-path="homework-16.html"><a href="homework-16.html#newtons-method-1"><i class="fa fa-check"></i><b>2.16.1</b> Newton’s Method</a></li>
 </ul></li>
-<li class="chapter" data-level="2.17" data-path="homework-16-1.html"><a href="homework-16-1.html"><i class="fa fa-check"></i><b>2.17</b> Homework 16</a></li>
-<li class="chapter" data-level="2.18" data-path="homework-17.html"><a href="homework-17.html"><i class="fa fa-check"></i><b>2.18</b> Homework 17</a></li>
+<li class="chapter" data-level="2.17" data-path="homework-17.html"><a href="homework-17.html"><i class="fa fa-check"></i><b>2.17</b> Homework 17</a></li>
+<li class="chapter" data-level="2.18" data-path="homework-18.html"><a href="homework-18.html"><i class="fa fa-check"></i><b>2.18</b> Homework 18</a></li>
 </ul></li>
 </ul>
 
@@ -180,57 +185,81 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="homework-17" class="section level2">
-<h2><span class="header-section-number">2.18</span> Homework 17</h2>
-<p>Proof or find counter examples for each of the following three problems:</p>
+<h2><span class="header-section-number">2.17</span> Homework 17</h2>
+<p>Proof or find counter example for the following four problems:</p>
 
 <div class="exercise">
-<p><span id="exr:q1701" class="exercise"><strong>Exercise 117  </strong></span>Let <span class="math inline">\(f \in C^1\)</span>.</p>
-<span class="math inline">\(f\)</span> is convex if and only if for all <span class="math inline">\(x,y \in {\mathbb{R}}^p:\ \left(\nabla f(x) - \nabla f(y)\right)(x-y) \ge 0\)</span>.
+<span id="exr:q1701" class="exercise"><strong>Exercise 116  </strong></span>If <span class="math inline">\(\theta^*\)</span> is a global minimizer, it is a local minimizer.
 </div>
 
 
-<div class="exercise">
-<p><span id="exr:q1702" class="exercise"><strong>Exercise 118  </strong></span>Let <span class="math inline">\(f \in C^2\)</span>.</p>
-<span class="math inline">\(f\)</span> is convex if and only if for all <span class="math inline">\(x \in {\mathbb{R}}^p:\ \nabla^2 f(x) \ge 0\)</span>.
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Tuo
 </div>
 
 
 <div class="exercise">
-<p><span id="exr:q1703" class="exercise"><strong>Exercise 119  </strong></span>Let <span class="math inline">\(f \in C^1\)</span>.</p>
-<span class="math inline">\(f\)</span> is strongly convex with <span class="math inline">\(\sigma &gt; 0\)</span> if and only if <span class="math inline">\(\left(\nabla f(x) - \nabla f(y) \right)^\prime(x-y) \ge \sigma {\left \vert \left \vert x-y \right \vert \right \vert}^2_2\)</span>. (Hint: integral form of Taylor’s Theorem)
+<span id="exr:q1702" class="exercise"><strong>Exercise 117  </strong></span>If <span class="math inline">\(\theta^*\)</span> is a strict global minimizer, it is the only global minimizer.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Tuo
 </div>
 
 
 <div class="exercise">
-<span id="exr:q1704" class="exercise"><strong>Exercise 120  </strong></span>(1) implies (2) of theorem. Application of Taylor’s theorem in integral form.
+<span id="exr:q1703" class="exercise"><strong>Exercise 118  </strong></span>If <span class="math inline">\(\theta^*\)</span> is an isolated global minimizer, it is the only global minimizer.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Tuo
 </div>
 
 
 <div class="exercise">
-<span id="exr:q1705" class="exercise"><strong>Exercise 121  </strong></span>(3) implies (4) of theorem.
+<span id="exr:q1704" class="exercise"><strong>Exercise 119  </strong></span>If <span class="math inline">\(\theta^*\)</span> is a strict local minimizer, it is isolated. #there exists a neighborhood around <span class="math inline">\(\theta^*\)</span> such that <span class="math inline">\(\theta^*\)</span> is isolated in said neighborhood.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Tuo
 </div>
 
 
 <div class="exercise">
-<span id="exr:q1706" class="exercise"><strong>Exercise 122  </strong></span>Let <span class="math inline">\(f \in C^2\)</span> be a convex function with a Lipschitz continuous gradient. Then <span class="math inline">\(L &gt; 0\)</span> implies <span class="math inline">\(\nabla^2 f(x) \le L\)</span>.
+<span id="exr:q1705" class="exercise"><strong>Exercise 120  </strong></span>If <span class="math inline">\(\theta^*\)</span> is an isolated minimizer, then <span class="math inline">\(\theta^*\)</span> is a strict minimizer.
 </div>
 
 
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Tuo
 </div>
-<!-- </div> -->
 
 
+<div class="exercise">
+<span id="exr:q1706" class="exercise"><strong>Exercise 121  </strong></span>Is the condition in lemma <a href="non-linear-unconstrained-optimization.html#lem:firstordernec">17</a> sufficient?
+</div>
 
 
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> No. <span class="math inline">\(f(x) = x^3\)</span>.
+</div>
 
 
+<div class="exercise">
+<span id="exr:q1707" class="exercise"><strong>Exercise 122  </strong></span>Fill in the blanks of lemma <a href="non-linear-unconstrained-optimization.html#lem:convexdiff">20</a>!
+</div>
+
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="homework-16-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="homework-16.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="homework-18.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="iterative-methods.html">
-<link rel="next" href="homework-assignments.html">
+<link rel="next" href="non-linear-unconstrained-optimization.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -138,6 +138,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.4" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#picards-method"><i class="fa fa-check"></i><b>1.5.4</b> Picard’s Method</a></li>
 <li class="chapter" data-level="1.5.5" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#newtons-method"><i class="fa fa-check"></i><b>1.5.5</b> Newton’s Method</a></li>
 <li class="chapter" data-level="1.5.6" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#inexact-newtons-method"><i class="fa fa-check"></i><b>1.5.6</b> Inexact Newton’s Method</a></li>
+<li class="chapter" data-level="1.5.7" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#semi-smooth-newtons-method"><i class="fa fa-check"></i><b>1.5.7</b> Semi-Smooth Newton’s Method</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html"><i class="fa fa-check"></i><b>1.6</b> Non-linear Unconstrained Optimization</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#motivating-problems-2"><i class="fa fa-check"></i><b>1.6.1</b> Motivating Problems</a></li>
+<li class="chapter" data-level="1.6.2" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#formalize-minimization"><i class="fa fa-check"></i><b>1.6.2</b> Formalize Minimization</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -159,8 +164,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.16" data-path="homework-16.html"><a href="homework-16.html"><i class="fa fa-check"></i><b>2.16</b> Homework 16</a><ul>
 <li class="chapter" data-level="2.16.1" data-path="homework-16.html"><a href="homework-16.html#newtons-method-1"><i class="fa fa-check"></i><b>2.16.1</b> Newton’s Method</a></li>
 </ul></li>
-<li class="chapter" data-level="2.17" data-path="homework-16-1.html"><a href="homework-16-1.html"><i class="fa fa-check"></i><b>2.17</b> Homework 16</a></li>
-<li class="chapter" data-level="2.18" data-path="homework-17.html"><a href="homework-17.html"><i class="fa fa-check"></i><b>2.18</b> Homework 17</a></li>
+<li class="chapter" data-level="2.17" data-path="homework-17.html"><a href="homework-17.html"><i class="fa fa-check"></i><b>2.17</b> Homework 17</a></li>
+<li class="chapter" data-level="2.18" data-path="homework-18.html"><a href="homework-18.html"><i class="fa fa-check"></i><b>2.18</b> Homework 18</a></li>
 </ul></li>
 </ul>
 
@@ -352,7 +357,7 @@ Note: this method requires <span class="math inline">\(J\)</span> to be invertib
   {\left \vert \left \vert I - J(x^*)^{-1}J(x_c) \right \vert \right \vert}    &amp;= {\left \vert \left \vert J(x^*)^{-1}(J(x^*) - J(x_c)) \right \vert \right \vert} \\
                                   &amp;\le {\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert}{\left \vert \left \vert J(x^*) - J(x_c) \right \vert \right \vert} \\
 (\text{use Lipschitz continuity}) &amp;\le {\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert} \gamma {\left \vert \left \vert x^* - x_c \right \vert \right \vert} \\
-                                  &amp;\le \frac{{\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert}\gamma}{2\gamma {\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert}} = \frac{1}{2}.
+         (\text{use assumption})  &amp;\le \frac{{\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert}\gamma}{2\gamma {\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert}} = \frac{1}{2}.
 \end{aligned}
 \]</span></p>
 <p>The result shown in exercise <a href="homework-14.html#exr:q1407">97</a> tells us that <span class="math inline">\(J(x_c)\)</span> is invertible, and that <span class="math inline">\({\left \vert \left \vert J(x_c)^{-1} \right \vert \right \vert} \le \frac{1}{1/2}{\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert} = 2{\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert}\)</span>.</p>
@@ -374,7 +379,7 @@ Note: this method requires <span class="math inline">\(J\)</span> to be invertib
              &amp;\le {\left \vert \left \vert J(x_c)^{-1} \right \vert \right \vert}\int_0^1 \gamma (1-t) {\left \vert \left \vert e_c \right \vert \right \vert}^2 dt \\
              &amp;\le {\left \vert \left \vert J(x_c)^{-1} \right \vert \right \vert}\frac{1}{2}\gamma {\left \vert \left \vert e_c \right \vert \right \vert}^2 \\
              &amp;\le \gamma {\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert}{\left \vert \left \vert e_c \right \vert \right \vert}^2 \\
-(\text{\small{a mix of Lipschitz and reverse triangle inequality}})&amp;\le \frac{\gamma{\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert} {\left \vert \left \vert e_c \right \vert \right \vert}}{2\gamma {\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert}} \le \frac{1}{2}{\left \vert \left \vert e_c \right \vert \right \vert}.
+(\text{ a mix of Lipschitz and reverse triangle inequality})&amp;\le \frac{\gamma{\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert} {\left \vert \left \vert e_c \right \vert \right \vert}}{2\gamma {\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert}} \le \frac{1}{2}{\left \vert \left \vert e_c \right \vert \right \vert}.
 \end{aligned}\]</span></p>
 </div>
 
@@ -466,18 +471,170 @@ f=f(x)
 
 <span class="kw">return</span> g</code></pre></div>
 <p>In relation to theorem <a href="nonlinear-systems-of-equations.html#thm:inexact-newton">13</a>, this has <span class="math inline">\(\epsilon_c\)</span>, <span class="math inline">\(\eta_c = c\)</span>, and <span class="math inline">\({\left \vert \left \vert e_+ \right \vert \right \vert} \le \kappa \left({\left \vert \left \vert e_c \right \vert \right \vert}^2 + \epsilon \frac{l \sqrt{m}}{2}{\left \vert \left \vert e_c \right \vert \right \vert}\right)\)</span>. Here, <span class="math inline">\(\epsilon\frac{l \sqrt{m}}{2}\)</span> is a bound of <span class="math inline">\(\Delta_C\)</span>.</p>
+<div id="the-newton-kylov-method" class="section level5">
+<h5><span class="header-section-number">1.5.6.2.1</span> The Newton-Kylov Method</h5>
+<p>This is a “Jacobian free” method. We’re seeking to solve <span class="math inline">\(J_c \cdot s + F(x_c) = 0\)</span>. This will be done iteratively, where we use forward differences for <span class="math inline">\(J_c\)</span>.</p>
+</div>
+</div>
+<div id="quasi-newton-methods-broyden-methods" class="section level4">
+<h4><span class="header-section-number">1.5.6.3</span> Quasi-Newton Methods (Broyden Methods)</h4>
+<p>Here, let <span class="math inline">\(x_+, x_c\)</span>, and <span class="math inline">\(x_-\)</span> denote the next, current, and previous iterates, respectively. Similarly, let <span class="math inline">\(J_c\)</span> and <span class="math inline">\(J_-\)</span> denote the current and previous Jacobian approximations.</p>
+<p>Remember that for <span class="math inline">\(f: {\mathbb{R}}\to {\mathbb{R}}\)</span>, the secant equation ot the derivative is <span class="math inline">\(b_c = \frac{f(x_c) - f(x_-)}{x_c - x_-}\)</span>. Let <span class="math inline">\(y_c = f(x_c) - f(x_-)\)</span> and <span class="math inline">\(s_c = x_c - x_-\)</span>. Then, <span class="math inline">\(b_c = y_c/s_c\)</span>.</p>
+<p>Broyden’s Method utilizes that we can find the current Jacobian from the previous as follows:</p>
+<p><span class="math display">\[
+  J_c = J_- + \frac{(y_c - J_c s_c)s_c^\prime}{s_c^\prime s_c},
+\]</span></p>
+<p>where <span class="math inline">\(s_c\)</span> is found from <span class="math inline">\(J_c s_c = -F(x_c)\)</span>.</p>
+</div>
+<div id="sherman-morrisons" class="section level4">
+<h4><span class="header-section-number">1.5.6.4</span> Sherman-Morrison’s</h4>
+<span class="math display" id="eq:shermanmorrison">\[\begin{equation} 
+  (A + uv^\prime)^{-1} = A^{-1} - \frac{A^{-1} u v^\prime A^{-1}}{1+v^\prime A^{-1}u}, \tag{3}
+\end{equation}\]</span>
+<p>where <span class="math inline">\(u,v\)</span> are vectors.</p>
+<p><strong>Algorithm</strong></p>
+<p>Inputs: <code>F</code> (residual function), <code>x0</code> (initialization), <code>J</code> (actually <span class="math inline">\(J^{-1}\)</span>, inverted initial Jacobian estimate), <code>eps</code> (stopping criteria). Run the algorithm as follows:</p>
+<pre class="shell"><code>r &lt;- F(x)
+
+while |r| &gt; eps
+  s &lt;- -Jr
+  x &lt;- x + s
+  r_ &lt;- r
+  r &lt;- F(x)
+  J &lt;- ... update
+end
+return x</code></pre>
+</div>
+</div>
+<div id="semi-smooth-newtons-method" class="section level3">
+<h3><span class="header-section-number">1.5.7</span> Semi-Smooth Newton’s Method</h3>
+<div id="lipschitz-functions" class="section level4">
+<h4><span class="header-section-number">1.5.7.1</span> Lipschitz Functions</h4>
+
+<div class="theorem">
+<span id="thm:unnamed-chunk-65" class="theorem"><strong>Theorem 14  (Rademacher)  </strong></span>Suppose <span class="math inline">\(F:{\mathbb{R}}^m \to {\mathbb{R}}^n\)</span> is Lipschitz continuous in a ball. Then <span class="math inline">\(F\)</span> is differentiable a.e. Lebesgue in that ball.
+</div>
+
+
+<div class="example">
+<p><span id="exm:unnamed-chunk-66" class="example"><strong>Example 14  </strong></span>Let <span class="math inline">\(F(x) = {\left \vert \left \vert x \right \vert \right \vert}_1\)</span>, <span class="math inline">\(x \in {\mathbb{R}}^m\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+\left | {\left \vert \left \vert x \right \vert \right \vert}_1 - {\left \vert \left \vert y \right \vert \right \vert}_1 \right | &amp;\leq {\left \vert \left \vert x-y \right \vert \right \vert}_1,
+\end{aligned}\]</span></p>
+<p>so <span class="math inline">\(F\)</span> is Lipschitz continuous.</p>
+<p>Let <span class="math inline">\(\text{sign}: {\mathbb{R}}^m \to {\mathbb{R}}^n\)</span> be defined as</p>
+<p><span class="math display">\[
+\text{sign}(x)_i = \left\{\begin{array}{rl} 1, &amp; x_i &gt; 0 \\ -1, &amp; x_i &lt; 0 \\ \text{undef.}, &amp; x_i = 0 \end{array} \right .
+\]</span></p>
+<p>Then the derivative of <span class="math inline">\(F\)</span> is</p>
+<span class="math display">\[f(x) = \left \{\begin{array}{rl} \text{sign}(x), &amp; \text{ if } x_i \neq 0 \text{ for all } i\\ \text{undef.}, &amp; \text{ otherwise} \end{array}\right .\]</span>
+</div>
 
 </div>
+<div id="generalized-derivatives" class="section level4">
+<h4><span class="header-section-number">1.5.7.2</span> Generalized Derivatives</h4>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-67" class="definition"><strong>Definition 24  (Generalized Derivative)  </strong></span>Let <span class="math inline">\(F:{\mathbb{R}}^m \to {\mathbb{R}}^n\)</span> be a function, and let <span class="math inline">\(D_F\)</span> denote the set of points where <span class="math inline">\(F\)</span> is differentiable.</p>
+<p>The generalized derivative at a point <span class="math inline">\(u \in {\mathbb{R}}^m\)</span> is the set of points <span class="math inline">\(\partial F(u)\)</span> constructed in the following way:</p>
+<ol style="list-style-type: decimal">
+<li>Let <span class="math inline">\(s_k = \left \{ \lim_{t \to \infty} J(u_t) | \{u_t\} \subset D_f, \lim_{t \to \infty} u_t = u}\)</span></li>
+<li><span class="math inline">\(\partial F(u) = \text{conv}(s_u)\)</span> (the closure of <span class="math inline">\(s_u\)</span>)</li>
+</ol>
+</div>
+
+
+<div class="example">
+<p><span id="exm:unnamed-chunk-68" class="example"><strong>Example 15  </strong></span>Let <span class="math inline">\(F\)</span> be the function <span class="math inline">\(F(x) = {\left \vert \left \vert x \right \vert \right \vert}_1\)</span>. Then <span class="math inline">\(D_F = \{x | x_i \neq 0 \forall i\}\)</span>.</p>
+<p>Fix <span class="math inline">\(u \in {\mathbb{R}}^m\)</span>. Let <span class="math inline">\(N_u = \{i | u_i \neq 0\}\)</span>. Let <span class="math inline">\(\{u_t\} \subseteq D_F\)</span> be a sequence converging to <span class="math inline">\(u\)</span>. Let <span class="math inline">\(u_{t,i} \to u_i \neq 0\)</span>. We want to Construct <span class="math inline">\(s_u\)</span>. There are three scenarios:</p>
+<ol style="list-style-type: decimal">
+<li>for <span class="math inline">\(t\)</span> large enough, <span class="math inline">\(u_{t,i} &gt; 0\)</span>. Then <span class="math inline">\(\text{sign}(u_{t,i}) = 1\)</span>, which implies <span class="math inline">\(\lim_{t \to \infty} \text{sign}(u_{t,i}) = 1\)</span>.</li>
+<li>for <span class="math inline">\(t\)</span> large enough: <span class="math inline">\(u_{t,i} &lt; 0\)</span>. Then <span class="math inline">\(\text{sign}(u_{t,i}) = -1\)</span>, which implies <span class="math inline">\(\lim_{t \to \infty} \text{sign}(u_{t,i}) = -1\)</span>.</li>
+<li><span class="math inline">\(u_{t,i}\)</span> has alternating signs. Then <span class="math inline">\(\lim_{t \to \infty}(u_{t,i})\)</span> does not exist.</li>
+</ol>
+<p>So the limits in 1. and 2. are in <span class="math inline">\(s_u\)</span>. 3. is not. So <span class="math inline">\(\partial F(u)\)</span> is the closure of <span class="math inline">\(\text{conv}(s_n)\)</span>, which is <span class="math inline">\([-1,1]\)</span>.</p>
+<p>Now consider <span class="math inline">\(u = \begin{bmatrix} 3 \\ -6 \\ 0 \end{bmatrix}\)</span>. Then <span class="math inline">\(\begin{bmatrix} 1 \\ -1 \\ -1 \end{bmatrix}\)</span>, <span class="math inline">\(\begin{bmatrix} 1 \\ -1 \\ 0.5 \end{bmatrix}\)</span>, and <span class="math inline">\(\begin{bmatrix} 1 \\ -1 \\ \tfrac{\pi}{4} \end{bmatrix}\)</span> are all examples of generalized derivatives.</p>
+</div>
+
+
+<div class="lemma">
+<span id="lem:unnamed-chunk-69" class="lemma"><strong>Lemma 16  </strong></span>If a function is locally Lipschitz in a neighborhood of <span class="math inline">\(U\)</span>, then <span class="math inline">\(\partial F(u) \neq \emptyset\)</span>.
+</div>
+
+</div>
+<div id="newtons-method-on-lipschitz-functions" class="section level4">
+<h4><span class="header-section-number">1.5.7.3</span> Newton’s Method on Lipschitz functions:</h4>
+<p>Would be nice to do <span class="math inline">\(x_+ = x_c - V_c^{-1} F(x_c)\)</span>, where <span class="math inline">\(V_c \in \partial F(x_c)\)</span>. However, this does not always work. It works for <span class="math inline">\(C^1\)</span> functions, not generally for for Lipschitz functions. If we consider semi-smooth functions (which is a subset of Lipschitz functions containing <span class="math inline">\(C^1\)</span> functions), Newton’s Method will work.</p>
+</div>
+<div id="semi-smooth-functions" class="section level4">
+<h4><span class="header-section-number">1.5.7.4</span> Semi-Smooth Functions</h4>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-70" class="definition"><strong>Definition 25  (Semi-smooth Functions)  </strong></span><span class="math inline">\(F\)</span> is a semi-smooth function at <span class="math inline">\(x \in {\mathbb{R}}^m\)</span> if</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(F\)</span> is locally Lipschitz continuous at <span class="math inline">\(x\)</span></li>
+<li>for all <span class="math inline">\(\epsilon &gt; 0\)</span> there exists a ball <span class="math inline">\(B(x)\)</span> around <span class="math inline">\(x\)</span> s.t. for all <span class="math inline">\(u \in B(x)\)</span> and for all <span class="math inline">\(v \in \partial F(u)\)</span>:</li>
+</ol>
+<span class="math display">\[
+  {\left \vert \left \vert F(u) - F(x) - v(u-x) \right \vert \right \vert} \le \epsilon {\left \vert \left \vert u - x \right \vert \right \vert}.
+\]</span>
+</div>
+
+<p>Now, let us prove that Newton’s Method works for semi-smooth functions. Assume that <span class="math inline">\(F:{\mathbb{R}}^m \to {\mathbb{R}}^m\)</span>, and that there exists <span class="math inline">\(x^*, \rho^*\)</span> such that</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(F(x^*) = 0\)</span>,</li>
+<li><span class="math inline">\(F\)</span> is semi-smooth in <span class="math inline">\(B(x^*, \rho^*)\)</span>,</li>
+<li><span class="math inline">\(v \in \partial F(x^*)\)</span>, <span class="math inline">\(v\)</span> is invertible.</li>
+</ol>
+
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-71" class="theorem"><strong>Theorem 15  </strong></span> Under the above assumptions, then</p>
+<ol style="list-style-type: decimal">
+<li>there exists <span class="math inline">\(\kappa &gt; 0\)</span> and a neighborhood <span class="math inline">\(N\)</span> of <span class="math inline">\(x^*\)</span> such that for any <span class="math inline">\(x \in N\)</span>, <span class="math inline">\(V \in \partial F(x)\)</span> is invertible, and <span class="math inline">\({\left \vert \left \vert V^{-1} \right \vert \right \vert} \leq \kappa\)</span>.</li>
+<li>if <span class="math inline">\(x_c\)</span> is close enough to <span class="math inline">\(x^*\)</span>, and <span class="math inline">\(x_+ = x_c - V_c^{-1} F(x_c)\)</span> (<span class="math inline">\(V_c \in \partial F(x_c)\)</span>), there exists <span class="math inline">\(\alpha \in (0,1)\)</span> such that <span class="math inline">\({\left \vert \left \vert e_+ \right \vert \right \vert} \le \alpha {\left \vert \left \vert e_c \right \vert \right \vert}\)</span>.</li>
+</ol>
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> (2)</p>
+<p><span class="math display">\[\begin{aligned}
+  x_+ &amp;= x_c - V_c^{-1}F(x_c) \Rightarrow \\
+  e_+ &amp;= e_c - V_c^{-1}F(x_c) \\
+      &amp;= V_c^{-1}\left(V_c e_c - F(x^* + e_c) - F(x^*)\right)
+\end{aligned}\]</span></p>
+<p>Let <span class="math inline">\(\epsilon &gt; 0\)</span>. By semi-smoothness: there exists a ball <span class="math inline">\(B\)</span> around <span class="math inline">\(x^*\)</span> such that if <span class="math inline">\(x_c \in B\)</span>, then</p>
+<p><span class="math display">\[{\left \vert \left \vert F(x^* + e_c) - F(x^*) - V_c e_c \right \vert \right \vert} \le \frac{\epsilon}{\kappa} {\left \vert \left \vert e_c \right \vert \right \vert}.\]</span></p>
+<p>So,</p>
+<p><span class="math display">\[{\left \vert \left \vert e_+ \right \vert \right \vert} \le {\left \vert \left \vert V_c^{-1} \right \vert \right \vert}\frac{\epsilon}{\kappa} {\left \vert \left \vert epsilon_c \right \vert \right \vert} \leq \epsilon {\left \vert \left \vert e_c \right \vert \right \vert}.\]</span></p>
+<p>(Last inequality by (1))</p>
+<p>Since <span class="math inline">\(\epsilon &gt; 0\)</span> was arbitrary, pick <span class="math inline">\(\epsilon \in (0,1)\)</span>. This finishes the proof.</p>
+</div>
+
+
+<div class="corollary">
+<span id="cor:unnamed-chunk-73" class="corollary"><strong>Corollary 6  </strong></span>Newton’s Method converges Q super linearly.
+</div>
+
+
+<div class="proof">
+ <span class="proof"><em>Proof. </em></span> Homework exercise <a href="homework-16.html#exr:1604">113</a>.
+</div>
+
+</div>
+<div id="armijo-backtracking" class="section level4">
+<h4><span class="header-section-number">1.5.7.5</span> Armijo Backtracking</h4>
+<p>We’re in general considering methods of the form <span class="math inline">\(x_+ = x_c + s\)</span>. For Newton’s Method, <span class="math inline">\(s = - J(x_c)^{-1}F(x_c)\)</span>. This only works when we are clsoe to <span class="math inline">\(x^*\)</span>. If not, we can do <span class="math inline">\(x_+ = x_c + \alpha s\)</span>. Pick <span class="math inline">\(\alpha\)</span> such that <span class="math inline">\({\left \vert \left \vert F(x_c + \alpha s) \right \vert \right \vert} &lt; (1 - \xi \alpha) {\left \vert \left \vert F(x_c) \right \vert \right \vert}\)</span>, where often <span class="math inline">\(\xi \approx 10^{-4}\)</span>. Check the condition with <span class="math inline">\(\alpha = 1\)</span>. If fulfilled, great. If not, scale down by <span class="math inline">\(\rho \in [\tfrac{1}{10}, \tfrac{1}{2}]\)</span>, i.e. update <span class="math inline">\(\alpha = \rho \alpha\)</span>.</p>
 </div>
 </div>
-<!-- </div> -->
+</div>
             </section>
 
           </div>
         </div>
       </div>
 <a href="iterative-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="homework-assignments.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="non-linear-unconstrained-optimization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -138,6 +138,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.4" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#picards-method"><i class="fa fa-check"></i><b>1.5.4</b> Picard’s Method</a></li>
 <li class="chapter" data-level="1.5.5" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#newtons-method"><i class="fa fa-check"></i><b>1.5.5</b> Newton’s Method</a></li>
 <li class="chapter" data-level="1.5.6" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#inexact-newtons-method"><i class="fa fa-check"></i><b>1.5.6</b> Inexact Newton’s Method</a></li>
+<li class="chapter" data-level="1.5.7" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#semi-smooth-newtons-method"><i class="fa fa-check"></i><b>1.5.7</b> Semi-Smooth Newton’s Method</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html"><i class="fa fa-check"></i><b>1.6</b> Non-linear Unconstrained Optimization</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#motivating-problems-2"><i class="fa fa-check"></i><b>1.6.1</b> Motivating Problems</a></li>
+<li class="chapter" data-level="1.6.2" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#formalize-minimization"><i class="fa fa-check"></i><b>1.6.2</b> Formalize Minimization</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -159,8 +164,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.16" data-path="homework-16.html"><a href="homework-16.html"><i class="fa fa-check"></i><b>2.16</b> Homework 16</a><ul>
 <li class="chapter" data-level="2.16.1" data-path="homework-16.html"><a href="homework-16.html#newtons-method-1"><i class="fa fa-check"></i><b>2.16.1</b> Newton’s Method</a></li>
 </ul></li>
-<li class="chapter" data-level="2.17" data-path="homework-16-1.html"><a href="homework-16-1.html"><i class="fa fa-check"></i><b>2.17</b> Homework 16</a></li>
-<li class="chapter" data-level="2.18" data-path="homework-17.html"><a href="homework-17.html"><i class="fa fa-check"></i><b>2.18</b> Homework 17</a></li>
+<li class="chapter" data-level="2.17" data-path="homework-17.html"><a href="homework-17.html"><i class="fa fa-check"></i><b>2.17</b> Homework 17</a></li>
+<li class="chapter" data-level="2.18" data-path="homework-18.html"><a href="homework-18.html"><i class="fa fa-check"></i><b>2.18</b> Homework 18</a></li>
 </ul></li>
 </ul>
 
@@ -188,17 +193,76 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="exercise">
-<span id="exr:1502" class="exercise"><strong>Exercise 103  </strong></span>If <span class="math inline">\(f\)</span> can be calculated at any input with accuracy <span class="math inline">\(l_f u\)</span> (<span class="math inline">\(l_f &gt; 0\)</span>), show that the right choice of <span class="math inline">\(\epsilon\)</span> is proportional to <span class="math inline">\(\sqrt{u}\)</span>. I.e. this choice of <span class="math inline">\(\epsilon\)</span> give the most accuracy. (See the section <a href="nonlinear-systems-of-equations.html#forward-difference">Forward Difference</a>)
+<span id="exr:unnamed-chunk-154" class="exercise"><strong>Exercise 103  </strong></span>Tuo
 </div>
 
 
 <div class="exercise">
-<span id="exr:1503" class="exercise"><strong>Exercise 104  </strong></span>Choose a simple differentiable function and test a bunch of <span class="math inline">\(\epsilon\)</span> and compare to <span class="math inline">\(\epsilon = \sqrt{u}\)</span>.
+<span id="exr:1502" class="exercise"><strong>Exercise 104  </strong></span>If <span class="math inline">\(f\)</span> can be calculated at any input with accuracy <span class="math inline">\(l_f u\)</span> (<span class="math inline">\(l_f &gt; 0\)</span>), show that the right choice of <span class="math inline">\(\epsilon\)</span> is proportional to <span class="math inline">\(\sqrt{u}\)</span>. I.e. this choice of <span class="math inline">\(\epsilon\)</span> give the most accuracy. (See the section <a href="nonlinear-systems-of-equations.html#forward-difference">Forward Difference</a>)
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> ???
 </div>
 
 
 <div class="exercise">
-<span id="exr:1504" class="exercise"><strong>Exercise 105  </strong></span>How is Forward Difference Approximation done for <span class="math inline">\(f: {\mathbb{R}}^m \to {\mathbb{R}}^n\)</span>?
+<span id="exr:1503" class="exercise"><strong>Exercise 105  </strong></span>Choose a simple differentiable function and test a bunch of <span class="math inline">\(\epsilon\)</span> and compare to <span class="math inline">\(\epsilon = \sqrt{u}\)</span>.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> ???
+</div>
+
+
+<div class="exercise">
+<span id="exr:1504" class="exercise"><strong>Exercise 106  </strong></span>How is Forward Difference Approximation done for <span class="math inline">\(f: {\mathbb{R}}^m \to {\mathbb{R}}^n\)</span>?
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> ???
+</div>
+
+
+<div class="exercise">
+<span id="exr:1505" class="exercise"><strong>Exercise 107  </strong></span>Verify equation <a href="nonlinear-systems-of-equations.html#eq:shermanmorrison">(3)</a>.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span>  <span class="math display">\[\begin{aligned}
+   (A + uv^T)(A^{-1} - \frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}) &amp;= AA^{-1} - \frac{AA^{-1}uv^TA^{-1}}{1+v^TA^{-1}u} + uv^TA^{-1} - \frac{uv^TA^{-1}uv^TA^{-1}}{1+v^TA^{-1}u} \\
+   &amp;= I + uv^TA^{-1} - \frac{uv^TA^{-1}uv^TA^{-1}uv^TA^{-1}}{1+v^TA^{-1}u} \\
+   &amp; = I + uv^TA^{-1} - \frac{u(1+v^TA^{-1}u)v^TA^{-1}}{1+v^TA^{-1}u} \\
+   &amp; = I
+\end{aligned}\]</span></p>
+</div>
+
+
+<div class="exercise">
+<span id="exr:1506" class="exercise"><strong>Exercise 108  </strong></span>Use equation <a href="nonlinear-systems-of-equations.html#eq:shermanmorrison">(3)</a> to explicitly express <span class="math inline">\(J_c^{-1}\)</span> in terms of <span class="math inline">\(J_{-}^{-1}\)</span>.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span>  <span class="math display">\[\begin{aligned}
+(J_c)^{-1} &amp;= (J_- + \frac{(y_c - J_-s_c)s_c^T}{s_c^Ts_c})^{-1} \\
+&amp;= J_-^{-1} - \frac{J_-^{-1}(y_c - J_-s_c)\frac{s_c^T}{s_c^Ts_c}J_-^{-1}}{1+\frac{s_c^T}{s_c^Ts_c}J_-^{-1}(y_c - J_-s_c)} \\
+&amp;= J_-^{-1} - \frac{J_-^{-1}y_cs_c^TJ_-^{-1} - s_cs_c^TJ_-^{-1}}{s_c^TJ_-^{-1}y_c}
+\end{aligned}\]</span></p>
+</div>
+
+
+<div class="exercise">
+<span id="exr:1507" class="exercise"><strong>Exercise 109  </strong></span>Do we ever need to store <span class="math inline">\(J_c\)</span>?
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> No
 </div>
 
 </div>

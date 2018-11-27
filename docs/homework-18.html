@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="homework-8.html">
-<link rel="next" href="homework-10.html">
+<link rel="prev" href="homework-17.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -184,37 +184,131 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="homework-9" class="section level2">
-<h2><span class="header-section-number">2.9</span> Homework 9</h2>
+<div id="homework-18" class="section level2">
+<h2><span class="header-section-number">2.18</span> Homework 18</h2>
+<p>Proof or find counter examples for each of the following three problems:</p>
 
 <div class="exercise">
-<span id="exr:q901" class="exercise"><strong>Exercise 57  </strong></span>What do we need from <span class="math inline">\(A\)</span> to ensure that the different iterative method schemes are well-defined?
+<p><span id="exr:q1801" class="exercise"><strong>Exercise 123  </strong></span>Let <span class="math inline">\(f \in C^1\)</span>.</p>
+<span class="math inline">\(f\)</span> is convex if and only if for all <span class="math inline">\(x,y \in {\mathbb{R}}^p:\ \left(\nabla f(x) - \nabla f(y)\right)(x-y) \ge 0\)</span>.
 </div>
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> A must be square and diagonal entries must be non-zero.
+<p> <span class="solution"><em>Solution. </em></span>  <span class="math inline">\((\Rightarrow)\)</span></p>
+<p>Use this Lemma: Suppose <span class="math inline">\(f \in C^1\)</span>, <span class="math inline">\(f\)</span> is convex <span class="math inline">\(\iff\)</span> <span class="math inline">\(f(y) \geq f(x) + \nabla f(x)^T(y-x)\)</span>, <span class="math inline">\(\forall x,y \in \mathbb{R}^p\)</span>.</p>
+<p>We have,</p>
+<p><span class="math display">\[f(y) \geq f(x) + \nabla f(x)^T(y-x)\]</span> <span class="math display">\[f(x) \geq f(y) + \nabla f(y)^T(x-y)\]</span></p>
+<p>Sum these two inequalities together</p>
+<p><span class="math display">\[ f(y) + f(x) \geq f(x)+f(y)+ (\nabla f(x) - \nabla f(y))^T(y-x)\]</span></p>
+<p>Thus, <span class="math display">\[(\nabla f(x)-\nabla f(y))^T(x-y) \geq 0\]</span></p>
+<p><span class="math inline">\((\Leftarrow)\)</span></p>
+<p>For the converse part, we need to use Taylor Theorem: <span class="math display">\[f(x+p) = f(x) + \int_{0}^{1}\nabla f(x+\gamma p)^Tp d\gamma\]</span> <span class="math display">\[f(x+p) = f(x) + \nabla f(x+\gamma p)^Tp, \,\,\, for\,some\, \gamma \in (0,1)\]</span></p>
+<p>If <span class="math inline">\(\forall x, y\in \mathbb{R}^p\)</span>, <span class="math inline">\((\nabla f(x)-\nabla f(y))^T(x-y) \geq 0\)</span>, Let <span class="math inline">\(\lambda \in [0,1]\)</span>, <span class="math inline">\(z = \lambda x + (1 - \lambda)y\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned} f(x) &amp;= f(z) + \int_{0}^{1}\nabla f(z+\gamma (z-x))^T(z-x) d\gamma \\
+&amp;= f(z) + \int_{0}^{1}\nabla f(z+\gamma (z-x))^T (1-\lambda)(x-y) d\gamma 
+\end{aligned}\]</span></p>
+<p>Similarly,</p>
+<p><span class="math display">\[\begin{aligned}
+f(y) &amp; = f(z) + \int_{0}^{1}\nabla f(z+\gamma (z-y))^T(z-y) d\gamma \\
+&amp; = f(z) + \int_{0}^{1}\nabla f(z+\gamma (z-y))^T \lambda (y-x) d\gamma
+\end{aligned}\]</span></p>
+<p>Let the first inequality times <span class="math inline">\(\lambda\)</span> and let the second one times <span class="math inline">\((1-\lambda)\)</span> we will get</p>
+<p><span class="math display">\[\begin{aligned}
+\lambda f(x) + (1-\lambda) f(y) &amp;= f(z) - \lambda (1-\lambda) \int_{0}^{1} (f(z+\gamma (z-x)) - f(z+\gamma (z-y)))^T(x-y) d\gamma \\
+&amp; = f(z) - \lambda (1-\lambda) \int_{0}^{1} (f(z+\gamma (z-x)) - f(z+\gamma (z-y)))^T[(z+\gamma (z-y))-(z+\gamma (z-x)))] \frac{1}{\gamma} d\gamma  \\
+&amp; \leq f(z) \\
+&amp; = f(\lambda x + (1 - \lambda)y)
+\end{aligned}\]</span></p>
 </div>
 
 
 <div class="exercise">
-<span id="exr:q902" class="exercise"><strong>Exercise 58  </strong></span>Does lemma <a href="iterative-methods.html#lem:next-current-diff">13</a> hold for the symmetric SOR?
+<p><span id="exr:q1802" class="exercise"><strong>Exercise 124  </strong></span>Let <span class="math inline">\(f \in C^2\)</span>.</p>
+<span class="math inline">\(f\)</span> is convex if and only if for all <span class="math inline">\(x \in {\mathbb{R}}^p:\ \nabla^2 f(x) \ge 0\)</span>.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> We need to use the second other taylor theorem:</p>
+<p><span class="math display">\[f(x + p) = f(x) + \nabla f(x)^Tp + \frac{1}{2} p^T\nabla^2 f(x+\gamma p)p,\,\,\, some\,\gamma \in (0,1)\]</span></p>
+<p>and this lemma:</p>
+<p>Suppose <span class="math inline">\(f \in C^1\)</span>, <span class="math inline">\(f\)</span> is convex <span class="math inline">\(\iff\)</span> <span class="math inline">\(f(y) \geq f(x) + \nabla f(x)^T(y-x)\)</span>, <span class="math inline">\(\forall x,y \in \mathbb{R}^p\)</span>.</p>
+<p><span class="math inline">\((\Rightarrow)\)</span></p>
+<p>For this part of proof, refer to the book Convex Optimization (Stephen Boyd), Page 71 and Exercise 3.8</p>
+<p>I attached a picture in the following cell</p>
+<p><span class="math inline">\((\Leftarrow)\)</span></p>
+<p>From taylor theorem:</p>
+<p><span class="math display">\[\begin{aligned}
+f(y) &amp;= f(x) + \nabla f(x)^T(y-x) + \frac{1}{2} (y-x)^T\nabla^2 f(x+\gamma(y-x))(y-x)\\
+&amp; \geq f(x) + \nabla f(x)^T(y-x)
+\end{aligned}\]</span></p>
 </div>
 
 
 <div class="exercise">
-<p><span id="exr:q903" class="exercise"><strong>Exercise 59  </strong></span>Compute <span class="math inline">\(J^k\)</span> where <span class="math inline">\(J = I\lambda + E\)</span> (the Jordan Canonical Form from definition <a href="iterative-methods.html#def:jordan">15</a>)</p>
-<p>Show that if <span class="math inline">\(G = XJX^{-1}\)</span> and <span class="math inline">\(\rho(G) &lt; 1\)</span>, then <span class="math inline">\(J^k \rightarrow 0\)</span> as <span class="math inline">\(k\rightarrow \infty\)</span>.</p>
+<p><span id="exr:q1803" class="exercise"><strong>Exercise 125  </strong></span>Let <span class="math inline">\(f \in C^1\)</span>.</p>
+<p><span class="math inline">\(f\)</span> is strongly convex with <span class="math inline">\(\sigma &gt; 0\)</span> if and only if <span class="math inline">\(\left(\nabla f(x) - \nabla f(y) \right)^\prime(x-y) \ge \sigma {\left \vert \left \vert x-y \right \vert \right \vert}^2_2\)</span>. (Hint: integral form of Taylor’s Theorem)</p>
 </div>
 
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span> Tuo has a reference.</p>
+<p>We need to use this lemma:</p>
+<p>Suppose <span class="math inline">\(f \in C^1\)</span>, <span class="math inline">\(f\)</span> is strongly convex <span class="math inline">\(\iff\)</span> <span class="math inline">\(f(y) \geq f(x) + \nabla f(x)^T(y-x) + \frac{1}{2}\sigma ||x-y||_2^2\)</span>, <span class="math inline">\(\forall x,y \in \mathbb{R}^p\)</span>.</p>
+<p><span class="math inline">\((\Rightarrow)\)</span></p>
+<p>Use the Lemma twice and sum them together to get the desired result.</p>
+<p><span class="math inline">\((\Leftarrow)\)</span></p>
+Same idea as solution to <a href="homework-18.html#exr:q1801">123</a>.
 </div>
+
+
+<div class="exercise">
+<span id="exr:q1804" class="exercise"><strong>Exercise 126  </strong></span>(1) implies (2) of lemma <a href="non-linear-unconstrained-optimization.html#lem:convexlipsch">22</a>. Application of Taylor’s theorem in integral form.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Tuo
+</div>
+
+
+<div class="exercise">
+<span id="exr:q1805" class="exercise"><strong>Exercise 127  </strong></span>(3) implies (4) of lemma <a href="non-linear-unconstrained-optimization.html#lem:convexlipsch">22</a>.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Tuo
+</div>
+
+
+<div class="exercise">
+<p><span id="exr:q1806" class="exercise"><strong>Exercise 128  </strong></span> Let <span class="math inline">\(f \in C^2\)</span> be a convex function with a Lipschitz continuous gradient. Then <span class="math inline">\(L &gt; 0\)</span> implies <span class="math inline">\(\nabla^2 f(x) \le L\)</span>.</p>
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Tuo
+</div>
+
+
+</div>
+<!-- </div> -->
+
+
+
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="homework-8.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="homework-10.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="homework-17.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

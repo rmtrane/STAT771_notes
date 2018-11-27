@@ -138,6 +138,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5.4" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#picards-method"><i class="fa fa-check"></i><b>1.5.4</b> Picard’s Method</a></li>
 <li class="chapter" data-level="1.5.5" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#newtons-method"><i class="fa fa-check"></i><b>1.5.5</b> Newton’s Method</a></li>
 <li class="chapter" data-level="1.5.6" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#inexact-newtons-method"><i class="fa fa-check"></i><b>1.5.6</b> Inexact Newton’s Method</a></li>
+<li class="chapter" data-level="1.5.7" data-path="nonlinear-systems-of-equations.html"><a href="nonlinear-systems-of-equations.html#semi-smooth-newtons-method"><i class="fa fa-check"></i><b>1.5.7</b> Semi-Smooth Newton’s Method</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html"><i class="fa fa-check"></i><b>1.6</b> Non-linear Unconstrained Optimization</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#motivating-problems-2"><i class="fa fa-check"></i><b>1.6.1</b> Motivating Problems</a></li>
+<li class="chapter" data-level="1.6.2" data-path="non-linear-unconstrained-optimization.html"><a href="non-linear-unconstrained-optimization.html#formalize-minimization"><i class="fa fa-check"></i><b>1.6.2</b> Formalize Minimization</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="homework-assignments.html"><a href="homework-assignments.html"><i class="fa fa-check"></i><b>2</b> Homework Assignments</a><ul>
@@ -159,8 +164,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.16" data-path="homework-16.html"><a href="homework-16.html"><i class="fa fa-check"></i><b>2.16</b> Homework 16</a><ul>
 <li class="chapter" data-level="2.16.1" data-path="homework-16.html"><a href="homework-16.html#newtons-method-1"><i class="fa fa-check"></i><b>2.16.1</b> Newton’s Method</a></li>
 </ul></li>
-<li class="chapter" data-level="2.17" data-path="homework-16-1.html"><a href="homework-16-1.html"><i class="fa fa-check"></i><b>2.17</b> Homework 16</a></li>
-<li class="chapter" data-level="2.18" data-path="homework-17.html"><a href="homework-17.html"><i class="fa fa-check"></i><b>2.18</b> Homework 17</a></li>
+<li class="chapter" data-level="2.17" data-path="homework-17.html"><a href="homework-17.html"><i class="fa fa-check"></i><b>2.17</b> Homework 17</a></li>
+<li class="chapter" data-level="2.18" data-path="homework-18.html"><a href="homework-18.html"><i class="fa fa-check"></i><b>2.18</b> Homework 18</a></li>
 </ul></li>
 </ul>
 
@@ -187,8 +192,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 
 
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span>  1. Assume <span class="math inline">\(x^*\)</span> and <span class="math inline">\(x_0\)</span> satisfy <span class="math inline">\(x^* = G(x^*)\)</span> and <span class="math inline">\(G(x_0) = x_0\)</span>. Then there exists an <span class="math inline">\(\alpha \in (0,1)\)</span> such that <span class="math inline">\({\left \vert \left \vert G(x^*) - G(x_0) \right \vert \right \vert} \le \alpha{\left \vert \left \vert x^* - x_0 \right \vert \right \vert}\)</span>. But <span class="math inline">\(\alpha {\left \vert \left \vert x^* - x_0 \right \vert \right \vert} = \alpha{\left \vert \left \vert G(x^*) - G(x_0) \right \vert \right \vert}\)</span>, so <span class="math inline">\({\left \vert \left \vert G(x^*) - G(x_0) \right \vert \right \vert} \le \alpha {\left \vert \left \vert G(x^*) - G(x_0) \right \vert \right \vert}\)</span>. Since <span class="math inline">\(\alpha \in (0,1)\)</span>, this can only hold if <span class="math inline">\({\left \vert \left \vert G(x^*) - G(x_0) \right \vert \right \vert} = 0\)</span>, so <span class="math inline">\(x^* = G(x^*) = G(x_0) = x_0\)</span>.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>For some <span class="math inline">\(\alpha \in (0,1)\)</span>:</li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+  {\left \vert \left \vert G(x_{k+1}) - x_{k+1} \right \vert \right \vert} &amp;= {\left \vert \left \vert G(x_{k+1}) - G(x_k) \right \vert \right \vert} \\
+                              &amp;\le \alpha{\left \vert \left \vert x_{k+1}-x_k \right \vert \right \vert} \\ 
+                              &amp;= \alpha{\left \vert \left \vert G(x_k)-G(x_{k-1}) \right \vert \right \vert} \\
+                              &amp;= \alpha^2{\left \vert \left \vert x_k-x_{k-1} \right \vert \right \vert} \\ 
+                              &amp;\vdots \\
+                              &amp;= \alpha^k{\left \vert \left \vert x_1-x_0 \right \vert \right \vert}.
+\end{aligned}\]</span></p>
+<p>Hence, <span class="math inline">\({\left \vert \left \vert G(x_k - x_k) \right \vert \right \vert} \to 0\)</span> as <span class="math inline">\(k \to \infty\)</span>, so <span class="math inline">\(\lim x_k = \lim G(x_k)\)</span>, i.e. <span class="math inline">\(\lim x_k = x^*\)</span>.</p>
+</div>
+
+
 <div class="exercise">
 <span id="exr:q1402" class="exercise"><strong>Exercise 92  </strong></span>Does this hold if we replace <span class="math inline">\(R^m\)</span> with an arbitrary metric space? (Hint: no, need completeness)
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> The metric space has to be complete. Otherwise we are not sure that the limit is still in <span class="math inline">\(D\)</span>.
 </div>
 
 
@@ -197,8 +224,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 
 
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Write up!
+</div>
+
+
 <div class="exercise">
 <span id="exr:q1404" class="exercise"><strong>Exercise 94  </strong></span>Show that <span class="math inline">\(G(x)\)</span> is a contraction.
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Write up!
 </div>
 
 
@@ -207,8 +244,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 
 
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Write up!
+</div>
+
+
 <div class="exercise">
 <span id="exr:q1406" class="exercise"><strong>Exercise 96  </strong></span>Why is the first result from theorem <a href="nonlinear-systems-of-equations.html#thm:with-assumptions">12</a> important?
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Write up!
 </div>
 
 
@@ -222,8 +269,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 
 
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Write up!
+</div>
+
+
 <div class="exercise">
 <span id="exr:q1408" class="exercise"><strong>Exercise 98  </strong></span>What happens if I use the mean value theorem instead of Fundamental Theorem of Calculus? (Hint: remember we cannot generalize 1D MVT to multi D).
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Tuo
 </div>
 
 
@@ -235,13 +292,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 
 
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> ???
+</div>
+
+
 <div class="exercise">
 <span id="exr:q1410" class="exercise"><strong>Exercise 100  </strong></span>How should we choose <span class="math inline">\(\tau_a, \tau_r\)</span>?
 </div>
 
 
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> ???
+</div>
+
+
 <div class="exercise">
 <span id="exr:q1411" class="exercise"><strong>Exercise 101  </strong></span>Guiding principles?
+</div>
+
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> ???
 </div>
 
 </div>

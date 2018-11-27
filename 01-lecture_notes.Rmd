@@ -2164,3 +2164,485 @@ return g
 ```
 
 In relation to theorem \@ref(thm:inexact-newton), this has $\epsilon_c$, $\eta_c = c$, and $\norm{e_+} \le \kappa \left(\norm{e_c}^2 + \epsilon \frac{l \sqrt{m}}{2}\norm{e_c}\right)$. Here, $\epsilon\frac{l \sqrt{m}}{2}$ is a bound of $\Delta_C$. 
+
+##### The Newton-Kylov Method
+
+This is a "Jacobian free" method. We're seeking to solve $J_c \cdot s + F(x_c) = 0$. This will be done iteratively, where we use forward differences for $J_c$. 
+
+#### Quasi-Newton Methods (Broyden Methods)
+
+Here, let $x_+, x_c$, and $x_-$ denote the next, current, and previous iterates, respectively. Similarly, let $J_c$ and $J_-$ denote the current and previous Jacobian approximations. 
+
+Remember that for $f: \R \to \R$, the secant equation ot the derivative is $b_c = \frac{f(x_c) - f(x_-)}{x_c - x_-}$. Let $y_c = f(x_c) - f(x_-)$ and $s_c = x_c - x_-$. Then, $b_c = y_c/s_c$. 
+
+Broyden's Method utilizes that we can find the current Jacobian from the previous as follows: 
+
+$$
+  J_c = J_- + \frac{(y_c - J_c s_c)s_c^\prime}{s_c^\prime s_c},
+$$
+
+where $s_c$ is found from $J_c s_c = -F(x_c)$. 
+
+#### Sherman-Morrison's 
+
+\begin{equation} 
+  (A + uv^\prime)^{-1} = A^{-1} - \frac{A^{-1} u v^\prime A^{-1}}{1+v^\prime A^{-1}u}, (\#eq:shermanmorrison)
+\end{equation}
+
+where $u,v$ are vectors. 
+
+**Algorithm**
+
+Inputs: `F` (residual function), `x0` (initialization), `J` (actually $J^{-1}$, inverted initial Jacobian estimate), `eps` (stopping criteria). Run the algorithm as follows:
+
+```shell
+r <- F(x)
+
+while |r| > eps
+  s <- -Jr
+  x <- x + s
+  r_ <- r
+  r <- F(x)
+  J <- ... update
+end
+return x
+```
+
+### Semi-Smooth Newton's Method
+
+#### Lipschitz Functions
+
+```{theorem, name = "Rademacher"}
+Suppose $F:\R^m \to \R^n$ is Lipschitz continuous in a ball. Then $F$ is differentiable a.e. Lebesgue in that ball. 
+```
+
+```{example}
+Let $F(x) = \norm{x}_1$, $x \in \R^m$. 
+
+$$\begin{aligned}
+\left | \norm{x}_1 - \norm{y}_1 \right | &\leq \norm{x-y}_1,
+\end{aligned}$$
+  
+so $F$ is Lipschitz continuous. 
+
+Let $\text{sign}: \R^m \to \R^n$ be defined as 
+
+$$
+\text{sign}(x)_i = \left\{\begin{array}{rl} 1, & x_i > 0 \\ -1, & x_i < 0 \\ \text{undef.}, & x_i = 0 \end{array} \right .
+$$
+
+Then the derivative of $F$ is 
+
+$$f(x) = \left \{\begin{array}{rl} \text{sign}(x), & \text{ if } x_i \neq 0 \text{ for all } i\\ \text{undef.}, & \text{ otherwise} \end{array}\right .$$
+  
+```
+
+#### Generalized Derivatives
+
+```{definition, name = "Generalized Derivative"}
+Let $F:\R^m \to \R^n$ be a function, and let $D_F$ denote the set of points where $F$ is differentiable. 
+
+The generalized derivative at a point $u \in \R^m$ is the set of points $\partial F(u)$ constructed in the following way:
+  
+1. Let $s_k = \left \{ \lim_{t \to \infty} J(u_t) | \{u_t\} \subset D_f, \lim_{t \to \infty} u_t = u}$
+2. $\partial F(u) = \text{conv}(s_u)$ (the closure of $s_u$)
+
+```
+
+```{example}
+Let $F$ be the function $F(x) = \norm{x}_1$. Then $D_F = \{x | x_i \neq 0 \forall i\}$. 
+
+Fix $u \in \R^m$. Let $N_u = \{i | u_i \neq 0\}$. Let $\{u_t\} \subseteq D_F$ be a sequence converging to $u$. Let $u_{t,i} \to u_i \neq 0$. We want to Construct $s_u$. There are three scenarios:
+  
+1. for $t$ large enough, $u_{t,i} > 0$. Then $\text{sign}(u_{t,i}) = 1$, which implies $\lim_{t \to \infty} \text{sign}(u_{t,i}) = 1$.
+2. for $t$ large enough: $u_{t,i} < 0$. Then $\text{sign}(u_{t,i}) = -1$, which implies $\lim_{t \to \infty} \text{sign}(u_{t,i}) = -1$.
+3. $u_{t,i}$ has alternating signs. Then $\lim_{t \to \infty}(u_{t,i})$ does not exist. 
+
+So the limits in 1. and 2. are in $s_u$. 3. is not. So $\partial F(u)$ is the closure of $\text{conv}(s_n)$, which is $[-1,1]$. 
+
+Now consider $u = \begin{bmatrix} 3 \\ -6 \\ 0 \end{bmatrix}$. Then $\begin{bmatrix} 1 \\ -1 \\ -1 \end{bmatrix}$, $\begin{bmatrix} 1 \\ -1 \\ 0.5 \end{bmatrix}$, and $\begin{bmatrix} 1 \\ -1 \\ \tfrac{\pi}{4} \end{bmatrix}$ are all examples of generalized derivatives. 
+
+```
+
+```{lemma}
+If a function is locally Lipschitz in a neighborhood of $U$, then $\partial F(u) \neq \emptyset$. 
+```
+
+#### Newton's Method on Lipschitz functions:
+
+Would be nice to do $x_+ = x_c - V_c^{-1} F(x_c)$, where $V_c \in \partial F(x_c)$. However, this does not always work. It works for $C^1$ functions, not generally for for Lipschitz functions. If we consider semi-smooth functions (which is a subset of Lipschitz functions containing $C^1$ functions), Newton's Method will work.
+
+#### Semi-Smooth Functions
+
+```{definition, name = "Semi-smooth Functions"}
+$F$ is a semi-smooth function at $x \in \R^m$ if 
+
+1. $F$ is locally Lipschitz continuous at $x$
+2. for all $\epsilon > 0$ there exists a ball $B(x)$ around $x$ s.t. for all $u \in B(x)$ and for all $v \in \partial F(u)$: 
+  
+$$
+  \norm{F(u) - F(x) - v(u-x)} \le \epsilon \norm{u - x}.
+$$
+  
+```
+
+Now, let us prove that Newton's Method works for semi-smooth functions. Assume that $F:\R^m \to \R^m$, and that there exists $x^*, \rho^*$ such that 
+
+1. $F(x^*) = 0$,
+2. $F$ is semi-smooth in $B(x^*, \rho^*)$,
+3. $v \in \partial F(x^*)$, $v$ is invertible.
+
+```{theorem}
+
+Under the above assumptions, then
+
+1. there exists $\kappa > 0$ and a neighborhood $N$ of $x^*$ such that for any $x \in N$, $V \in \partial F(x)$ is invertible, and $\norm{V^{-1}} \leq \kappa$. 
+2. if $x_c$ is close enough to $x^*$, and $x_+ = x_c - V_c^{-1} F(x_c)$ ($V_c \in \partial F(x_c)$), there exists $\alpha \in (0,1)$ such that $\norm{e_+} \le \alpha \norm{e_c}$.
+
+```
+
+```{proof}
+(2)
+
+$$\begin{aligned}
+  x_+ &= x_c - V_c^{-1}F(x_c) \Rightarrow \\
+  e_+ &= e_c - V_c^{-1}F(x_c) \\
+      &= V_c^{-1}\left(V_c e_c - F(x^* + e_c) - F(x^*)\right)
+\end{aligned}$$
+    
+Let $\epsilon > 0$. By semi-smoothness: there exists a ball $B$ around $x^*$ such that if $x_c \in B$, then 
+  
+$$\norm{F(x^* + e_c) - F(x^*) - V_c e_c} \le \frac{\epsilon}{\kappa} \norm{e_c}.$$
+    
+So,
+  
+$$\norm{e_+} \le \norm{V_c^{-1}}\frac{\epsilon}{\kappa} \norm{epsilon_c} \leq \epsilon \norm{e_c}.$$
+
+(Last inequality by (1))  
+  
+Since $\epsilon > 0$ was arbitrary, pick $\epsilon \in (0,1)$. This finishes the proof.
+
+```
+
+```{corollary}
+Newton's Method converges Q super linearly.
+```
+
+```{proof}
+Homework exercise \@ref(exr:1604).
+```
+
+#### Armijo Backtracking
+
+We're in general considering methods of the form $x_+ = x_c + s$. For Newton's Method, $s = - J(x_c)^{-1}F(x_c)$. This only works when we are clsoe to $x^*$. If not, we can do $x_+ = x_c + \alpha s$. Pick $\alpha$ such that $\norm{F(x_c + \alpha s)} < (1 - \xi \alpha) \norm{F(x_c)}$, where often $\xi \approx 10^{-4}$. Check the condition with $\alpha = 1$. If fulfilled, great. If not, scale down by $\rho \in [\tfrac{1}{10}, \tfrac{1}{2}]$, i.e. update $\alpha = \rho \alpha$.
+
+
+## Non-linear Unconstrained Optimization
+
+_Outline_
+
+1. Motivating problems
+2. Formalizing Minimizing  and some properties of functions
+3. Algorithmic Overview
+4. Line search
+5. Trust region
+6. Quasi Newton
+7. Generalized Gauss-Newton
+
+### Motivating Problems
+
+#### Logistic Regression
+
+Observe $\{(Y_1, X_1), \ldots, (Y_n, X_n)\} \subseteq \{0,1\} \times \R^p$. Assume these are i.i.d. and $\mu(X_i, \beta) = P(Y_i = 1 | X_i) = \frac{\exp(X_i^\prime \beta)}{1+\exp(X_i^\prime \beta)}$, where $\beta \in \R^p$ is unknown. We want to determine $\beta$. This can be done using MLE: 
+
+$$\min_\beta - \sum_{i=1}^\n Y_i \log(\mu(X_i^\prime \beta)) + (1-Y_i)\log(1-\mu(X_i^\prime \beta)).$$ 
+
+#### Difference Equation Model
+
+Observe $\{(Y_1, X_1), \ldots, (Y_n, X_n)\} \subseteq \R \times \R^p$. Consider the model $z_1 = f_0(X, \theta_0), z_{k+1} = f_k(z_k, \theta_k)$, where $f_i$ are known functions, and $\theta_i$ unknown. $Y = Z_L$. Want to determine $\theta_0, \ldots, \theta_{L-1}$. Do that by $\min_{\theta_0, \ldots, \theta_{L-1}} \sum_{i=1}^n (Y_i - z_L(\theta_0, \ldots, \theta_{L-1}, x_i))^2$. 
+
+### Formalize Minimization 
+
+```{definition}
+An unconstrained optimization problem has the following form: 
+
+$$\min_{\theta \in \R^p} f(\theta), f:\R^p \to \R.$$
+
+```
+
+#### Minimizers
+
+```{definition, name = "Global Minimizer"}
+Let $f^* = \inf_{\theta \in \R^p} f(\theta)$. The global minimizer of $f$ is a point $\theta^* \in \R^p$ such that $f^* = f(\theta^*)$. 
+```
+
+```{definition, name = "Local Minimizer"}
+A local minimizer of $f$ is a point $\theta^* \in \R^p$ and a neighborhood of $\theta^*$, $\mathcal{N}$, such that $f(\theta^*) \le f(\theta)$ for all $\theta \in \mathcal{N}$, and $f^* = f(\theta^*)$ is a local minimum. 
+```
+
+```{definition, name = "Strict minimizer"}
+A strict minimizer of $f$, $\theta^*$, is a minimizer and a neighborhood $\mathcal{N}$ such that $f(\theta^*) < f(\theta)$ for all $\theta \in \mathcal{N}\setminus \theta^*$.
+```
+
+```{definition, name = "Isolated minimizer"}
+A minimizer $\theta^*$, and a neighborhood $\mathcal{N}$ such that $\theta^*$ is the only minimizer in $\mathcal{N}$ is called an Isloated minimizer.
+```
+
+#### Differentiability and Minimizers
+
+```{lemma, name = "First order necessary conditions", label = "firstordernec"}
+Suppose $f \in C^1$. If $\theta^*$ is a local minimizer, then $\nabla f(\theta^*) = 0$. 
+```
+
+```{proof}
+Assume for contradiction $\nabla f(\theta^*) \neq 0$. 
+
+Let $g(\alpha) = f(\theta^* - \alpha \nabla f(\theta^*)) - f(\theta^*)$, $\alpha > 0$. When $\alpha$ is small enough, $g(\alpha) > 0$ since $\theta^*$ is a local minimizer. So $g(\alpha) - g(0) = g^\prime(\beta)\alpha$, where $\beta \in (0, \alpha)$. This implies $f(\theta^* - \alpha \nabla f(\theta^*)) - f(\theta^*) = \nabla f(\theta^*)(\theta^* - \alpha \nabla f(\theta^*))^\prime \nabla f(\theta^*)\alpha$. Since $\nabla f$ is continuous, $\beta$ can be picked small enough such that $0 < \nabla f(\theta^* - \beta \nabla f(\theta^*))^\prime \nabla f(\theta^*)$. If $\alpha, \beta$ are both sufficiently small, $0 \leq f(\theta^* - \alpha \nabla f(\theta^*))-f(\theta^*) < 0$. Contradiction.  
+
+```
+
+```{lemma, name = "2nd order necessary condition"}
+
+Let $f \in C^2$ and $\theta^*$ a local minimizer. Then $\nabla f(\theta^*) = 0, \nabla^2(\theta^*) \ge 0$. 
+
+```
+
+```{proof}
+We have already proved that $\nabla f(\theta^*) = 0$. So assume for contradiction that $\nabla^2(\theta^*) < 0$. In other words, there exists $v \in \R^p$ with $\norm{v} = 1$ such that $v^\prime \nabla^2 f(\theta^*) v < 0$. So there exists a neighborhood $\mathcal{U}$ of $\theta^*$ such that 
+
+\begin{equation} 
+  v^\prime \nabla^2 f(\theta^*) v < 0 \text{ for all } u \in \mathcal{U}. (\#eq:2ndordernec)
+\end{equation}
+
+Since $\theta^*$ is a minimizer, $0 \le f(\theta^* + \alpha v) - f(\theta^*)$ for $\alpha$ small enough. By Taylors theorem:
+  
+$$
+  f(\theta^* + \alpha v) - f(\theta^*) = \nabla f(\theta^*)^\prime \alpha v + \frac{\alpha^2}{2} v^\prime \nabla^2 f(\theta^* + \beta v)v < 0,
+$$
+  
+where $\beta \in (0, \alpha)$
+
+```
+
+```{lemma}
+
+Suppose $f \in C^2$. If there exists $\theta^* \in \R^p$ such that 
+
+1. $\nabla f(\theta^*) = 0$,
+2. $\nabla^2 f(\theta^*) > 0$,
+
+then $\theta^*$ is a local minimizer. 
+
+```
+
+```{proof}
+
+Since $\nabla^2 f(\theta^*) > 0$, there exists a neighborhood $\mathcal{U}$ of $\theta^*$ such that $\nabla^2 f(u) > 0$ for all $u \in \mathcal{U}$. Let $v = u - \theta^*$. Then for some $t \in (0,1)$: 
+  
+$$f(\theta^* + v) - f(\theta^*) = \nabla f(\theta^*) v + \frac{1}{2} v^\prime \nabla^2 f(\theta^* + tv) v.$$
+  
+By assumptions, $v^\prime \nabla^2 f(\theta^* + tv) v > 0$. So $f(\theta^* + v) = f(u) > f(\theta^*)$ for all $u \in \mathcal(U)$. I.e. $\theta^*$ is a local minimizer (actually strict). 
+
+```
+
+#### Convexity, Differentiability, and Minimizers
+
+```{definition, name = "Convex Function"}
+
+$f$ is convex if for all $x,y \in \R^p, \lambda \in [0,1]$: $f(\lambda x + (1-\lambda) y) \leq \lambda f(x) + (1-\lambda) f(y)$. 
+
+```
+
+```{definition, name = "Strongly Convex Function"}
+
+$f$ is strongly convex with parameter $\sigma > 0$ if for all $x,y \in \R^p, \lambda \in [0,1]$: $f(\lambda x + (1-\lambda) y) \leq \lambda f(x) + (1-\lambda) f(y) - \frac{1}{2} \sigma \lambda(1-\lambda)\norm{x-y}_2^2$. 
+
+```
+
+```{lemma, name = "Convexity and Differentiability", label = "convexdiff"}
+
+1. Suppose $f \in C^1$. $f$ is convex if and only if $f(y) \ge f(x) + \nabla f(x)^\prime (y-x)$ for all $x,y \in \R^p$. 
+2. Suppose $f \in C^1$. $f$ is strongly convex with parameter $\sigma > 0$ if and only if $f(y) \ge f(x) + \nabla f(x)^\prime (y-x) + \frac{1}{2}\sigma\norm{x-y}_2^2$ for all $x,y \in \R^p$. 
+3. Suppose $f \in C^2$. $f$ is strongly convex with parameter $\sigma > 0$ if and only if $\nabla^2 f(x) > \sigma I$ for all $x \in \R^p$. 
+
+```
+
+```{proof}
+
+1. Assume $f$ is convex. $\nabla f(x)^\prime (y-x) = \frac{d}{d\lambda} f(x + \lambda(y-x))\vert_{\lambda=0} = \lim_{\lambda \to 0_+} \frac{f(x + \lambda(y-x)) - f(x)}{\lambda}$. By convexity, the right hand side is bounded above by $\lim_{\lambda \to \lambda_+} \frac{(1-\lambda) f(x) + \lambda f(y) - f(x)}{\lambda} \le f(y) - f(x)$. 
+
+Now, assume $f(y) \ge f(x) + \nabla f(x)^\prime (y-x)$ for all $x,y \in \R^p$. For $x,y \in \R^p$ and $\lambda \in [0,1]$, let $z = \lambda x + (1-\lambda)y$. Then $y-z = y - \lambda x - y + \lambda y = \lambda (y - x)$ and $x-z = (1-\lambda)(x-y)$. So 
+
+$$(1-\lambda) f(y) \ge (1-\lambda) f(z) + (1-\lambda) \nabla f(z)^\prime \lambda (y-z),$$
+  
+and 
+
+$$\lambda f(x) \ge \lambda f(z) + \lambda \nabla f(z)^\prime (1-\lambda)(x-y).$$
+
+Add the two equations.
+  
+
+2. Assume $f$ is strongly convex. Then 
+
+$$\begin{aligned}
+  \nabla f(x)^\prime (y-x) &= \lim_{\lambda \to 0_+} \frac{f(x+ \lambda(y-x)) - f(x)}{\lambda} \\
+  &\le \lim_{\lambda \to 0_+} \frac{(1-\lambda)f(x) + \lambda f(y) - \frac{1}{2}\sigma \lambda (1-\lambda) \norm{y-x}_2^2 - f(x)}{\lambda} \\
+  &\le f(y) - f(x) - \frac{1}{2}\sigma \lambda \norm{x-y}_2^2.
+\end{aligned}$$
+  
+Assume $f(y) \ge f(x) + \nabla f(x)^\prime (y-x) + \frac{1}{2}\sigma\norm{x-y}_2^2$. 
+
+$$\begin{aligned}
+  f(x) (BLANK) &\ge (BLANK) f(z) + (BLANK) \nabla f(z)^\prime(x-z) + (BLANK)\frac{1}{2}\sigma\norm{x-z}_2^2 \\
+  f(y) (BLANK) &\ge (BLANK) f(z) + (BLANK) \nabla f(z)^\prime(y-z) + (BLANK)\frac{1}{2}\sigma\norm{y-z}_2^2 \\
+\end{aligned}$$
+
+3. Assume $\nabla^2 f(x) > \sigma I$. Then for all $z, v \in \R^p$ and some $t \in (0,1)$: $f(z + v) - f(z) - \nabla f(z)^\prime v = \frac{1}{2} v \nabla^2 f(z+tv)v \ge \frac{1}{2}\sigma \norm{v}_2^2$. 
+  
+Now assume $f$ is strongly convex with parameter $\sigma > 0$. Assume for contradiction that there exist $z,v$ such that $v^\prime \nabla^2 f(z) v < \sigma \norm{v}^2$. There exists some neighborhood $\matchal{U}$ around $z$ such that for all $u \in \mathcal{U}$: $v^\prime \nabla^2 v < \frac{\sigma}{1+\epsilon} \norm{v}_2^2$ for some $\epsilon > 0$. Let $\alpha \ge 0$ be sufficiently small such that $z + \alpha v \in \mathcal{U}$. Then
+
+$$\begin{aligned} 
+\frac{1}{2}\frac{\sigma \beta^2}{1+\epsilon} \norm{v}_2^2 &\ge \frac{1}{2} v^\prime \nabla f(z+\beta v)v \\
+&= f(z + \alpha v) - f(z) - \nabla f(z)^\prime \alpha v \\
+&\ge \frac{\sigma}{2} \alpha^2 \norm{v}_2^2.
+\end{aligned}$$
+
+```
+
+```{lemma, name = "Optimality"}
+
+1. If $f$ is convex, then any local minimizer is global
+2. If $f$ is strongly convex, then the global minimizer is unique
+3. If $f$ is convex and continuously differentiable, then $\nabla f(x^*) = 0 \Rightarrow x^*$ is a minimizer 
+
+```
+
+```{proof}
+
+1. Suppose $x^*$ is a local minimizer. Then there exists a neighborhood $\mathcal{U}$ of $x^*$ such that $f(x^*) \le f(x)$ for all $x \in \mathcal{U}$. Assume for contradiction that there exists $y \in \R^p$ such that $f(y) < f(x^*)$. By convexity of $f$, $f(y + \lambda(x^* - y)) \le (1- \lambda) f(y) + \lambda f(x^*) < f(x^*)$ for $\lambda \in (0,1)$. For $\lambda$ close enought to $1$, $y+\lambda(x^* - y) \mathcal{U}$. So, $f(x^*) \le f(y+\lambda (x^* - y)) < f(x^*)$. Contradiction.
+
+2. Let $x,y \in \R^p$ be two global minimizers of $f$, and assume for contradiction that $x \neq y$. Let $f^* = f(x) = f(y)$. Then 
+
+$$f(\lambda x + (1-\lambda)y) + \frac{1}{2}\sigma(1-\lambda) \norm{x-y}_2^2 \leq (1-\lambda)f(y) + \lambda f(x) = f^*.$$ 
+  
+This holds for all $\lambda \in (0,1)$. Now, let $\lambda = 1/2$. Then $f(\tfrac{x+y}{2}) + \frac{1}{4}\sigma \norm{x-y}_2^2$. Since $x \neq y$, $\norm{x-y}_2^2 > 0$, so $f(\tfrac{x+y}{2}) < f^*$. Contradiction.
+
+2. (Alternative proof of 2.) Since $f$ is strongly convex, 
+
+$$\begin{aligned}
+f(y) &\ge f(x) + \nabla f(x)^\prime (x-y) + \frac{1}{2}\sigma \norm{y-x}_2^2 \\
+&\ge f(x) - \norm{\nabla f(x)}_2 \norm{y-x}_2^2 + \frac{1}{2}\sigma \norm{y-x}_2^2 \\
+&= f(x) + \norm{y-x}_2\left(\frac{1}{2} \sigma \norm{y-x}_2 - \norm{\nabla f(x)}_2\right) 
+\end{aligned}$$
+
+Now, let $R > 0$ such that $\frac{1}{2}\sigma R - \norm{\nabla f(x)}_2 = 0$. Define $D = \left\{z \in \R^p: \norm{z-x}_2 \le R \right\}$. Then $D$ is compact. Since $f$ is continuous, 
+a. there exists $x^* \in D$ such that $f(x^*) \le f(z)$ for all $z \in D$. 
+b. there exists $z \in D^c$ with $\norm{z-x}_2 > R$. I.e. $f(z) \ge f(x)$ (use inequalities above). 
+
+Hence, $f(x^*) \leq f(x) \leq f(z)$ for all $x \in D, z \in D^c$. I.e. $f(x^*) \le f(z)$ for all $z \in \R^p$.
+
+3. We already know that if $x^*$ is a local minimum, $\nabla f(x) = 0$. Assume $\nabla f(x^*) = 0$. By convexity, $f(y) \ge f(x^*) + \nabla f(x^*)^\prime(y-x^*)$ for all $y \in \R^p$. So $f(y) \ge f(x^*)$, hence $x^*$ is a local minimum.
+
+```
+
+```{lemma, name = "Convexity and Lipschitz Continuity", label = "convexlipsch"}
+Suppose that $f \in C^1$ and convex. Then the following are equivalent:
+  
+1. $\nabla f$ if Lipschitz continuous with $L > 0$,
+2. for all $x,y \in \R^p$: $0 \le f(y) - f(x) - \nabla f(x)^\prime (y-x) \le \frac{1}{2}\norm{y-x}_2^2$,
+3. for all $x,y \in \R^p$: $f(y) \ge f(x) + \nabla f(x)^\prime(y-x) + \frac{1}{2L} \norm{\nabla f(x) - \nabla f(y)}_2^2$,
+4. for all $x,y \in \R^p$: $\left(\nabla f(x) - \nabla f(y)\right)^\prime \ge \frac{1}{L}\norm{\nabla f(x) - \nabla f(y)}_2^2$.
+
+```
+
+```{proof}
+(1) implies (2): exercise \@ref(exr:q1804). (3) implies (4): exercise \@ref(exr:q1805). 
+
+(2) implies (3): Fix $x$. Define $\phi_x(y) = f(y) - y^\prime \nabla f(x)$. Then $\phi_x$ is convex. 
+
+a. $\nabla \phi_x(y) = \nabla f(y) - \nabla f(x)$, which implies that $\phi_x$ attains its minimum at $x$ (set equal to $0$ and solve for y)$.
+b. $\phi_x(y) - \phi_x(z) - \nabla \phi_x(z)^\prime (y-z) = ... = f(y) - f(z) - \nabla f(z)^\prime(y-z) \leq \frac{L}{2} \norm{y-z}_2^2$. 
+
+So, $\phi_x(x) \leq \phi_x(y) \leq \phi_x(z) + \nabla \phi_x(z)^\prime (y-z) + \frac{L}{2} \norm{y-z}_2^2$. If we minimize the upper bound, we see that it optains its minimum at $y = z - \frac{1}{L} \nabla \phi_x(z) = z - \frac{1}{L}\left(\nabla f(z) - \nabla f(x)\right)$. If we plug this back in, we see that $\phi_x(z - \frac{1}{L}\nabla \phi_x(z)) \le \phi_x(z) - \frac{1}{2L}\norm{\nabla \phi_x(z)}_2^2$. 
+
+(4) implies (1): $\norm{\nabla f(x) - \nabla f(y)}_2^2 \le L(\nabla f(x) - \nabla f(y))^\prime (x-y)$. If $\nabla f(x) = \nabla f(y)$, we are done. If not, use Cauchy-Schwarts inequality to bound it by $L\norm{\nabla f(x) - \nabla f(y)}_2 \norm{x-y}_2$. 
+
+```
+
+
+##### Algorithmic and Theoretical Preview
+
+```{lemma, name = "Zoutendijk's Theorem"}
+Let $f: \R^r \to \R$ be $C^1$ function with Lipschitz gradient, and convex. Assume $f^* = \inf_{x \in \R^p} f(x) > -\infty$. 
+
+For a fixed $\alpha \in (0, \tfrac{2}{L})$, and arbitrary $\theta_0 \in \R^p$, define $\theta_{k+1} = \theta_k - \alpha \nabla f(\theta_k)$. Then $\nabla f(\theta_k) \to 0$.
+
+```
+
+```{proof}
+
+As follows:
+  
+$$\begin{aligned}
+  f(\theta_{k+1}) &\le f(\theta_k) + \nabla f(\theta_k)^\prime(\theta_{k+1} - \theta_k) + \frac{L}{2}\norm{\theta_{k+1}-\theta_k}_2^2 \\
+                  &\le f(\theta_k) - \alpha \norm{\nabla f(\theta_k)}_2^2 + \frac{L\alpha^2}{2}\norm{\nabla f(\theta_k)}_2^2 \\
+                  &\le f(\theta_k) - \left(\alpha - \alpha^2 \frac{L}{2}\right) \norm{\nabla f(\theta_k)}_2^2 \\
+  \Rightarrow f(\theta_{k+1}) &\le f(\theta_k) \le \ldots \le f(\theta_0) \\
+  \Rightarrow f(\theta_{k+1}) &\le f(\theta_k) - \epsilon \norm{\nabla f(\theta_k)}_2^2 \\
+  \Rightarrow \norm{\nabla f(\theta_k)}_2^2 &\le \frac{1}{\epsilon} \left(f(\theta_k) - f(\theta_{k+1})\right) \\
+  \Rightarrow \sum_{k=0}^N \norm{\nabla f(\theta_k)}_2^2 &\le \frac{1}{\epsilon}\left(f(\theta_0) - f(\theta_N)\right) \le \frac{1}{\epsilon}\left(f(\theta_0)-f^*\right)
+\end{aligned}$$
+
+```
+
+
+```{lemma, name = "Local Convergence Rates"}
+Let $f:\R^p \to \R$. Assume 
+
+1. $f$ is strongly convex with parameter $\sigma > 0$,
+2. $f$ is $C^1$ and its gradient is Lipshictz with $L > 0$.
+
+For $\alpha \in (0,\tfrac{2\sigma}{L^2})$, and arbitrary $\theta_0 \in \R^p$, define $\theta_{k+1} = \theta_k - \alpha \nabla f(\theta_k)$. Then
+
+1. there exists a global minimum $\theta^*$,
+2. $\norm{\theta_k - \theta^*}_2 \to 0$,
+3. $\norm{\theta_k - \theta^*}_2^2$ converges Q-linearly.
+
+```
+
+```{proof}
+Since $\theta^*$ is a global minimum, $\nabla f(\theta^*) = 0$. So, 
+
+$$
+  \theta_{k+1} - \theta^* = \theta_k - \theta^* - \alpha(\nabla f(\theta_k) - \nabla f(\theta_^*)),
+$$
+
+which implies 
+
+$$
+  \norm{\theta_{k+1}- \theta^*}_2^2 = \norm{\theta_k - \theta^*}_2^2 - 2\alpha(\nabla f(\theta_k) - \nabla f(\theta^*))^\prime(\theta_k - \theta^*) + \alpha^2 \norm{\nabla f(\theta_k) - \nabla f(\theta^*)}_2^2.
+$$ 
+  
+Note that 
+
+a. $(\nabla f(\theta_k) - \nabla f(\theta^*))^\prime (\theta_k - \theta^*) \ge \sigma \norm{\theta_k - \theta^*}_2^2$
+b. $\norm{\nabla f(\theta_k) - \nabla f(\theta^*)}_2^2 \le L^2 \norm{\theta_k - \theta^*}_2^2$
+
+Combining (a) and (b) with the inequality above gives us 
+
+$$\begin{aligned}
+\norm{\theta_{k+1} - \theta^*}_2^2 &\le (1 - 2\alpha \sigma + \alpha^2 L^2)\norm{\theta_k - \theta^*}_2^2 \\
+&= \left(L^2\left(\alpha-\frac{\sigma}{L^2}\right)^2 + 1 - \frac{\sigma^2}{L^2}\right)\norm{\theta_k - \theta^*}_2^2.
+\end{aligned}$$ 
+
+So the optimal $\alpha$ is $\frac{\sigma}{L^2}$. 
+
+```
+
+
+Two implications: 
+
+1. if $f$ is strictly convex and $C^2$, then $\nabla^2 f(x) \ge \sigma$,
+2. if $f$ is convex and $C^2$ with Lipschitz continuous gradient, then $L > 0 \Rightarrow \nabla^2 f(x) \le L$. (See exercise \@ref(exr:q1806))
+
+Let $\kappa = L/\sigma$ is the condition number. $\norm{\theta_{k+1} - \theta^*}_2^2 \le \left(\frac{\kappa^2 - 1}{\kappa^2}\right)\norm{\theta_k -\theta^*}_2^2$. 
