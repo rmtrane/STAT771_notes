@@ -188,29 +188,82 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">2.13</span> Homework 13</h2>
 
 <div class="exercise">
-<span id="exr:q1301" class="exercise"><strong>Exercise 85  </strong></span>Show that the procedure in <a href="iterative-methods.html#conjugatedgradients">1.4.8.3</a> is the same as the one implemented in code provided by Patel.
+<span id="exr:q1301" class="exercise"><strong>Exercise 85  </strong></span>Show that the procedure in <a href="iterative-methods.html#conjugatedgradients">1.4.8.3</a> is the same as the one implemented in the code below.
 </div>
 
-<pre class="soltuion"><code>Write up</code></pre>
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> Code below is annotated with descriptions step by step
+</div>
+
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia"><span class="co">#Gram-Schmidt Conjugation</span>
+<span class="kw">function</span> conjGS(A,V; ϵ = <span class="fl">1e-15</span>)
+    <span class="st">&quot;&quot;&quot;Implements classical Gram-Schmidt</span>
+    A-conjugation over a set of vectors
+    <span class="kw">in</span> the vector V. Returns A-conjugated
+    vectors using set <span class="kw">in</span> V<span class="st">&quot;&quot;&quot;</span>
+    
+    <span class="co">## Define function to get A-norm of vector</span>
+    normA(x) = sqrt(dot(x,A*x))
+    
+    <span class="co">## This will hold conjugated set</span>
+    Q = <span class="dt">Vector</span>(length(V))
+
+    counter = <span class="fl">1</span>
+    <span class="kw">for</span> j = <span class="fl">1</span>:length(V)
+        <span class="kw">if</span> counter == <span class="fl">1</span>
+            <span class="co">#Check if zero vector</span>
+            normA(V[j]) &lt;= ϵ &amp;&amp; <span class="kw">continue</span>
+
+            <span class="co">#Otherwise add to Conjugated Set</span>
+            Q[<span class="fl">1</span>] = V[j]/normA(V[j]) <span class="co"># -- get A-norm of r (here, v) and calculate first conjugated vector</span>
+
+            counter+= <span class="fl">1</span>
+        <span class="kw">else</span>
+            <span class="co">#Project</span>
+            proj = map(λ -&gt; dot(Q[λ],A*V[j])*Q[λ] ,<span class="fl">1</span>:counter-<span class="fl">1</span>) <span class="co"># -- calculate elements that go into sum of s_j</span>
+            a = V[j] - sum(proj) <span class="co"># -- take the difference...</span>
+
+            <span class="co">#Check if zero vector</span>
+            normA(a) &lt;= ϵ &amp;&amp; <span class="kw">continue</span>
+
+            <span class="co">#Otherwise add to Conjugated Set</span>
+            Q[counter] = a/normA(a) <span class="co"># -- ... and normalize</span>
+
+            counter +=<span class="fl">1</span>
+        <span class="kw">end</span>
+    <span class="kw">end</span>
+    <span class="kw">return</span> Q
+<span class="kw">end</span></code></pre></div>
 
 <div class="exercise">
 <span id="exr:q1302" class="exercise"><strong>Exercise 86  </strong></span>Prove that CG converges in finitely many steps (in exact arithmetic).
 </div>
 
-<pre class="soltuion"><code>???</code></pre>
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> ???
+</div>
+
 
 <div class="exercise">
 <span id="exr:q1303" class="exercise"><strong>Exercise 87  </strong></span>Show that the limit in example <a href="nonlinear-systems-of-equations.html#exm:gradient-example">12</a> holds.
 </div>
 
-<pre class="soltuion"><code>???</code></pre>
+
+<div class="solution">
+ <span class="solution"><em>Solution. </em></span> ???
+</div>
+
 
 <div class="exercise">
 <span id="exr:q1304" class="exercise"><strong>Exercise 88  </strong></span>Characterize the relationship between the Jacobian and the gradient.
 </div>
 
-<pre class="soltuion"><code>
-$$J(f;x) = \begin{bmatrix}
+
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span>  If the Jacobian exists, then the gradient exists, and the relationship is as follows:</p>
+<p><span class="math display">\[J(f;x) = \begin{bmatrix}
              \frac{\partial f_{1}}{\partial x_{1}}   &amp;
            \frac{\partial f_{1}}{\partial x_{2}} &amp;
                \cdots                                &amp;
@@ -226,10 +279,11 @@ $$J(f;x) = \begin{bmatrix}
        \end{bmatrix} = \begin{bmatrix} \nabla f_1(x)&#39; \\
        \vdots \\
        \nabla f_m(x)&#39;
-       \end{bmatrix}$$
+       \end{bmatrix}\]</span></p>
+<p>Note that the inverse is not true.</p>
+<a href="https://calculus.subwiki.org/wiki/Existence_of_partial_derivatives_not_implies_differentiable" class="uri">https://calculus.subwiki.org/wiki/Existence_of_partial_derivatives_not_implies_differentiable</a>
+</div>
 
-https://calculus.subwiki.org/wiki/Existence_of_partial_derivatives_not_implies_differentiable
-    </code></pre>
 
 <div class="exercise">
 <span id="exr:q1305" class="exercise"><strong>Exercise 89  </strong></span>Using IFT: when will <span class="math inline">\(F(x) = 0\)</span> have an isolated solution? (i.e. a solution where there is an open set containing that solution with no other solutions)

@@ -1204,7 +1204,13 @@ Now, implement four algorithms one for each of the four strategies of alpha disc
 ```
 
 ```{solution}
-???
+See Julia chunk below
+```
+
+```julia
+function gradientDescentStrat1(A,x,b;epsilon=1e-15, maxIter=1000)
+  
+end
 ```
 
 ```{exercise, q1111}
@@ -1229,7 +1235,7 @@ In a narrative, explain which algorithm you would use and when you would use thi
 Write a function to generate 2 equations with 2 unknowns such that the coefficient matrix is dense and symmetric with user specified nonzero eigenvalues.
 ```
 
-```{soltuion}
+```{solution}
 ???
 ```
 
@@ -1237,7 +1243,7 @@ Write a function to generate 2 equations with 2 unknowns such that the coefficie
 How are the eigenvalues related to the singular values?
 ```
 
-```{soltuion}
+```{solution}
 ???
 ```
 
@@ -1245,7 +1251,7 @@ How are the eigenvalues related to the singular values?
 How are the eigenvectors related to the left and right singular vectors?
 ```
 
-```{soltuion}
+```{solution}
 ???
 ```
 
@@ -1253,7 +1259,7 @@ How are the eigenvectors related to the left and right singular vectors?
 Write a function to draw the level sets of an arbitrary residual function $f\left(x\right) = \norm{Ax - b}_2^2$.
 ```
 
-```{soltuion}
+```{solution}
 ???
 ```
 
@@ -1262,7 +1268,7 @@ Write a function to draw the level sets of an arbitrary residual function $f\lef
 Run Gradient Descent using the step size (alpha) from Strategy 2 to solve a sequence of problems where the difference between the singular values of your problem increases in size. Plot the points that Gradient Descent visits (on your level set plot) as it finds its way to the solution.
 ```
 
-```{soltuion}
+```{solution}
 ???
 ```
 
@@ -1271,7 +1277,7 @@ Run Gradient Descent using the step size (alpha) from Strategy 2 to solve a sequ
 What do you observe? What is the impact of the singular values on gradient descent? Why does this make sense based on your graphs?
 ```
 
-```{soltuion}
+```{solution}
 ???
 ```
 
@@ -1282,19 +1288,62 @@ What do you observe? What is the impact of the singular values on gradient desce
 What conditions (if any) on $a_0, ..., a_{d-1}$ guarantee that an $A-$normalized, $A-$conjugated set $\{s_0, ..., s_{d-1}\}$ can be produced by Gram Schmidt?
 ```
 
-```{soltuion}
-Write up
+```{solution}
+We need the norm of the vectors to be not too small. If they are too small, numerical stability is not guarenteed, which means we might end up with vectors that are not A-conjugated or not A-normalized. 
 ```
 
 
 ## Homework 13
 
 ```{exercise, q1301}
-Show that the procedure in \@ref(conjugatedgradients) is the same as the one implemented in code provided by Patel.
+Show that the procedure in \@ref(conjugatedgradients) is the same as the one implemented in the code below. 
 ```
 
-```{soltuion}
-Write up
+
+```{solution}
+Code below is annotated with descriptions step by step
+```
+
+```julia
+#Gram-Schmidt Conjugation
+function conjGS(A,V; ϵ = 1e-15)
+    """Implements classical Gram-Schmidt
+    A-conjugation over a set of vectors
+    in the vector V. Returns A-conjugated
+    vectors using set in V"""
+    
+    ## Define function to get A-norm of vector
+    normA(x) = sqrt(dot(x,A*x))
+    
+    ## This will hold conjugated set
+    Q = Vector(length(V))
+
+    counter = 1
+    for j = 1:length(V)
+        if counter == 1
+            #Check if zero vector
+            normA(V[j]) <= ϵ && continue
+
+            #Otherwise add to Conjugated Set
+            Q[1] = V[j]/normA(V[j]) # -- get A-norm of r (here, v) and calculate first conjugated vector
+
+            counter+= 1
+        else
+            #Project
+            proj = map(λ -> dot(Q[λ],A*V[j])*Q[λ] ,1:counter-1) # -- calculate elements that go into sum of s_j
+            a = V[j] - sum(proj) # -- take the difference...
+
+            #Check if zero vector
+            normA(a) <= ϵ && continue
+
+            #Otherwise add to Conjugated Set
+            Q[counter] = a/normA(a) # -- ... and normalize
+
+            counter +=1
+        end
+    end
+    return Q
+end
 ```
 
 
@@ -1302,7 +1351,7 @@ Write up
 Prove that CG converges in finitely many steps (in exact arithmetic).
 ```
 
-```{soltuion}
+```{solution}
 ???
 ```
 
@@ -1311,7 +1360,7 @@ Prove that CG converges in finitely many steps (in exact arithmetic).
 Show that the limit in example \@ref(exm:gradient-example) holds. 
 ```
 
-```{soltuion}
+```{solution}
 ???
 ```
 
@@ -1320,7 +1369,9 @@ Show that the limit in example \@ref(exm:gradient-example) holds.
 Characterize the relationship between the Jacobian and the gradient.
 ```
 
-```{soltuion}
+```{solution}
+
+If the Jacobian exists, then the gradient exists, and the relationship is as follows:
 
 $$J(f;x) = \begin{bmatrix}
              \frac{\partial f_{1}}{\partial x_{1}}   &
@@ -1340,6 +1391,8 @@ $$J(f;x) = \begin{bmatrix}
        \nabla f_m(x)'
        \end{bmatrix}$$
 
+Note that the inverse is not true.
+  
 https://calculus.subwiki.org/wiki/Existence_of_partial_derivatives_not_implies_differentiable
     
 ```
@@ -1396,11 +1449,20 @@ The metric space has to be complete. Otherwise we are not sure that the limit is
 ```
 
 ```{exercise, q1403}
-Solve $x = G(x)$ by hand. What is $G(x)$ doing? 
+Let $G(x) = 0.5(x+\frac{4}{x})$. Solve $x = G(x)$ by hand. What is $G(x)$ doing? 
 ```
 
 ```{solution}
-Write up!
+
+$$\begin{aligned}
+  G(x) &= x \Rightarrow \\
+  0.5(x + \frac{4}{x}) &= x \Rightarrow \\
+  -0.5x + \frac{2}{x}) &= 0 \Rightarrow \\
+  -0.5x^2 + 2 &= 0 \Rightarrow \\
+  x^2 &= 4 \Rightarrow \\
+  x = \pm 2
+\end{aligned}$$
+
 ```
 
 ```{exercise, q1404}
@@ -1408,7 +1470,9 @@ Show that $G(x)$ is a contraction.
 ```
 
 ```{solution}
-Write up!
+
+???
+  
 ```
 
 ```{exercise, q1405}
@@ -1416,7 +1480,9 @@ What is the impact of the singular values of $J(x^*)$ on the "localness" of the 
 ```
 
 ```{solution}
-Write up!
+
+As seen in theorem \@ref(thm:with-assumptions), $\norm{x_c - x^*} \le \min\left(\rho^*, \frac{1}{2\gamma \norm{J(x^*)^{-1}}}\right)$. Assuming we are using $\norm{\cdot}_2$, $\norm{J(x^*)^{-1}}_2 = \frac{1}{\sigma_n}$, where $\sigma_n$ is the largest singular value. So, a larger maximum singular value means the result is "more local".
+
 ```
 
 ```{exercise, q1406}
@@ -1424,21 +1490,33 @@ Why is the first result from theorem \@ref(thm:with-assumptions) important?
 ```
 
 ```{solution}
-Write up!
+???
 ```
 
 ```{exercise, q1407}
 Proof and interpret the following:
 
-Let $A,B \in \R^{n \times m}$ and assume $A$ is non-singular. If for some $\epsilon \in (0,1)$, $\norm{AB - I} < I - \epsilon$, then $B$ is invertible and 
+Let $A,B \in \R^{n \times m}$ and assume $A$ is non-singular. If for some $\epsilon \in (0,1)$, $\norm{AB - I} < 1 - \epsilon$, then $B$ is invertible and 
 
-1. $\norm{A - B^{-1}} < (I-\epsilon)\norm{B^{-1}}$,
+1. $\norm{A - B^{-1}} < (1-\epsilon)\norm{B^{-1}}$,
 2. $\norm{B^{-1}} \le \frac{1}{\epsilon} \norm{A}$.
 
 ```
 
 ```{solution}
-Write up!
+
+Note that $\sum_{k=0}^N (AB-I)^k AB = (AB-I)^N AB + AB$. Since $\norm{AB-I} < 1-\epsilon$, $\sum_{k=0}^\infty (AB-I)^k AB = AB$, so $\sum_{k=0}^\infty (AB-I)^k$ is the inverse of $AB$. Let $D$ denote that sum. Then $AB = D^{-1}$, which implies $B=(DA)^{-1}$. So $B^{-1} = DA$. Hence, $B$ is invertible.
+
+Furthermore, $\norm{A-B^{-1}} = \norm{(AB-I)B^{-1}} \le \norm{AB-I}\norm{B^{-1}} < (1-\epsilon)\norm{B^{-1}}$, and
+
+$$\begin{aligned}
+\norm{B^{-1}} &\le \norm{A} \norm{D} \\ 
+&\le \norm{\sum_{k=0}^\infty \norm{AB - I}^k} \\
+&< \norm{A} \sum_{k=0}^{\infty} (1- \epsilon)^k \\
+&= \norm{A}\frac{1}{1-(1-\epsilon)} = \frac{1}{\epsilon}\norm{A},
+\end{aligned}$$
+  
+
 ```
 
 ```{exercise, q1408}
@@ -1546,7 +1624,7 @@ Do we ever need to store $J_c$?
 ```
 
 ```{solution}
-No
+No.
 ```
 
 ## Homework 16

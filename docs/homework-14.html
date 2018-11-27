@@ -220,12 +220,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="exercise">
-<span id="exr:q1403" class="exercise"><strong>Exercise 93  </strong></span>Solve <span class="math inline">\(x = G(x)\)</span> by hand. What is <span class="math inline">\(G(x)\)</span> doing?
+<span id="exr:q1403" class="exercise"><strong>Exercise 93  </strong></span>Let <span class="math inline">\(G(x) = 0.5(x+\frac{4}{x})\)</span>. Solve <span class="math inline">\(x = G(x)\)</span> by hand. What is <span class="math inline">\(G(x)\)</span> doing?
 </div>
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> Write up!
+<p> <span class="solution"><em>Solution. </em></span>  <span class="math display">\[\begin{aligned}
+  G(x) &amp;= x \Rightarrow \\
+  0.5(x + \frac{4}{x}) &amp;= x \Rightarrow \\
+  -0.5x + \frac{2}{x}) &amp;= 0 \Rightarrow \\
+  -0.5x^2 + 2 &amp;= 0 \Rightarrow \\
+  x^2 &amp;= 4 \Rightarrow \\
+  x = \pm 2
+\end{aligned}\]</span></p>
 </div>
 
 
@@ -235,7 +242,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> Write up!
+ <span class="solution"><em>Solution. </em></span>  ???
 </div>
 
 
@@ -245,7 +252,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> Write up!
+<p> <span class="solution"><em>Solution. </em></span>  As seen in theorem <a href="nonlinear-systems-of-equations.html#thm:with-assumptions">12</a>, <span class="math inline">\({\left \vert \left \vert x_c - x^* \right \vert \right \vert} \le \min\left(\rho^*, \frac{1}{2\gamma {\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert}}\right)\)</span>. Assuming we are using <span class="math inline">\({\left \vert \left \vert \cdot \right \vert \right \vert}_2\)</span>, <span class="math inline">\({\left \vert \left \vert J(x^*)^{-1} \right \vert \right \vert}_2 = \frac{1}{\sigma_n}\)</span>, where <span class="math inline">\(\sigma_n\)</span> is the largest singular value. So, a larger maximum singular value means the result is “more local”.</p>
 </div>
 
 
@@ -255,22 +262,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> Write up!
+ <span class="solution"><em>Solution. </em></span> ???
 </div>
 
 
 <div class="exercise">
 <p><span id="exr:q1407" class="exercise"><strong>Exercise 97  </strong></span>Proof and interpret the following:</p>
-<p>Let <span class="math inline">\(A,B \in {\mathbb{R}}^{n \times m}\)</span> and assume <span class="math inline">\(A\)</span> is non-singular. If for some <span class="math inline">\(\epsilon \in (0,1)\)</span>, <span class="math inline">\({\left \vert \left \vert AB - I \right \vert \right \vert} &lt; I - \epsilon\)</span>, then <span class="math inline">\(B\)</span> is invertible and</p>
+<p>Let <span class="math inline">\(A,B \in {\mathbb{R}}^{n \times m}\)</span> and assume <span class="math inline">\(A\)</span> is non-singular. If for some <span class="math inline">\(\epsilon \in (0,1)\)</span>, <span class="math inline">\({\left \vert \left \vert AB - I \right \vert \right \vert} &lt; 1 - \epsilon\)</span>, then <span class="math inline">\(B\)</span> is invertible and</p>
 <ol style="list-style-type: decimal">
-<li><span class="math inline">\({\left \vert \left \vert A - B^{-1} \right \vert \right \vert} &lt; (I-\epsilon){\left \vert \left \vert B^{-1} \right \vert \right \vert}\)</span>,</li>
+<li><span class="math inline">\({\left \vert \left \vert A - B^{-1} \right \vert \right \vert} &lt; (1-\epsilon){\left \vert \left \vert B^{-1} \right \vert \right \vert}\)</span>,</li>
 <li><span class="math inline">\({\left \vert \left \vert B^{-1} \right \vert \right \vert} \le \frac{1}{\epsilon} {\left \vert \left \vert A \right \vert \right \vert}\)</span>.</li>
 </ol>
 </div>
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> Write up!
+<p> <span class="solution"><em>Solution. </em></span>  Note that <span class="math inline">\(\sum_{k=0}^N (AB-I)^k AB = (AB-I)^N AB + AB\)</span>. Since <span class="math inline">\({\left \vert \left \vert AB-I \right \vert \right \vert} &lt; 1-\epsilon\)</span>, <span class="math inline">\(\sum_{k=0}^\infty (AB-I)^k AB = AB\)</span>, so <span class="math inline">\(\sum_{k=0}^\infty (AB-I)^k\)</span> is the inverse of <span class="math inline">\(AB\)</span>. Let <span class="math inline">\(D\)</span> denote that sum. Then <span class="math inline">\(AB = D^{-1}\)</span>, which implies <span class="math inline">\(B=(DA)^{-1}\)</span>. So <span class="math inline">\(B^{-1} = DA\)</span>. Hence, <span class="math inline">\(B\)</span> is invertible.</p>
+<p>Furthermore, <span class="math inline">\({\left \vert \left \vert A-B^{-1} \right \vert \right \vert} = {\left \vert \left \vert (AB-I)B^{-1} \right \vert \right \vert} \le {\left \vert \left \vert AB-I \right \vert \right \vert}{\left \vert \left \vert B^{-1} \right \vert \right \vert} &lt; (1-\epsilon){\left \vert \left \vert B^{-1} \right \vert \right \vert}\)</span>, and</p>
+<p><span class="math display">\[\begin{aligned}
+{\left \vert \left \vert B^{-1} \right \vert \right \vert} &amp;\le {\left \vert \left \vert A \right \vert \right \vert} {\left \vert \left \vert D \right \vert \right \vert} \\ 
+&amp;\le {\left \vert \left \vert \sum_{k=0}^\infty {\left \vert \left \vert AB - I \right \vert \right \vert}^k \right \vert \right \vert} \\
+&amp;&lt; {\left \vert \left \vert A \right \vert \right \vert} \sum_{k=0}^{\infty} (1- \epsilon)^k \\
+&amp;= {\left \vert \left \vert A \right \vert \right \vert}\frac{1}{1-(1-\epsilon)} = \frac{1}{\epsilon}{\left \vert \left \vert A \right \vert \right \vert},
+\end{aligned}\]</span></p>
 </div>
 
 
