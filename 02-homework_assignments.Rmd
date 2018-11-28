@@ -1640,7 +1640,7 @@ $$
 ```
 
 ```{solution}
-???
+Kelley pg 214
 ```
 
 ```{exercise, q1410}
