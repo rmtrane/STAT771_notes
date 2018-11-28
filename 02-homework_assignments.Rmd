@@ -1691,7 +1691,9 @@ How is Forward Difference Approximation done for $f: \R^m \to \R^n$?
 ```
 
 ```{solution}
-???
+Nocedal 8.1 (pp197-198)
+
+(Takeaway - same as above, but iterate over standard basis vectors to generate columns of Jacobian matrix)
 ```
 
 ```{exercise, 1505}
