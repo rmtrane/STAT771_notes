@@ -249,13 +249,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 
 
+<div class="solution">
+<p> <span class="solution"><em>Solution. </em></span>  According to strategy 2, we choose <span class="math inline">\(\alpha\)</span> such that it minimizes <span class="math inline">\({\left \vert \left \vert x_{k+1} - x^* \right \vert \right \vert}_2^2\)</span>. So, to minimize this, we differentiate with respect to <span class="math inline">\(\alpha\)</span>, set to <span class="math inline">\(0\)</span>, and solve for <span class="math inline">\(\alpha\)</span> – the result is <span class="math inline">\(\alpha = \frac{{\left \vert \left \vert x_k - x^* \right \vert \right \vert}_2^2}{{\left \vert \left \vert A^\prime r_k \right \vert \right \vert}_2^2}\)</span>.</p>
+</div>
+
+
 <div class="exercise">
 <span id="exr:q1106" class="exercise"><strong>Exercise 71  </strong></span>For strategy 3, what is <span class="math inline">\(\alpha\)</span>?
 </div>
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> ???
+<p> <span class="solution"><em>Solution. </em></span>  According to strategy 3, we choose <span class="math inline">\(\alpha\)</span> such that it minimizes <span class="math inline">\({\left \vert \left \vert I-\alpha AA^\prime \right \vert \right \vert}_2^2\)</span>. Again, differentiate with respect to <span class="math inline">\(\alpha\)</span>, set to <span class="math inline">\(0\)</span>, and solve for <span class="math inline">\(\alpha\)</span> – the result is <span class="math inline">\(\alpha = \frac{{\left \vert \left \vert A \right \vert \right \vert}_2}{{\left \vert \left \vert AA^\prime \right \vert \right \vert}_2}\)</span>.</p>
 </div>
 
 
@@ -265,7 +270,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> ???
+<p> <span class="solution"><em>Solution. </em></span>  Recall <span class="math inline">\(Ax^* = b\)</span>.</p>
+<p><span class="math display">\[\begin{aligned}
+  {\left \vert \left \vert x_{k+1} - x^* \right \vert \right \vert} &amp;= {\left \vert \left \vert x_k + \alpha A^\prime(b-Ax_k) - x^* \right \vert \right \vert} \\
+                       &amp;= {\left \vert \left \vert x_k - x^* - \alpha A^\prime (Ax^* - Ax_k) \right \vert \right \vert} \\
+                       &amp;= {\left \vert \left \vert (I - \alpha A^\prime A)(x_k - x^*) \right \vert \right \vert} \le {\left \vert \left \vert I-\alpha A^\primeA \right \vert \right \vert}{\left \vert \left \vert x_k - x^* \right \vert \right \vert}
+\end{aligned}\]</span></p>
 </div>
 
 
@@ -275,7 +285,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> ???
+ <span class="solution"><em>Solution. </em></span> Same as for strategy 3.
 </div>
 
 
@@ -312,8 +322,62 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
  <span class="solution"><em>Solution. </em></span> See Julia chunk below
 </div>
 
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia"><span class="kw">function</span> gradientDescentStrat1(A,x,b;epsilon=<span class="fl">1e-15</span>, maxIter=<span class="fl">1000</span>)
-  
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">
+<span class="co">## Gradient descent for Strategy 1: alpha = ||A&#39;r_c||^2/||AA&#39;r_c||^2</span>
+<span class="kw">function</span> gradientDescentStrat1(A,b,x,x0;epsilon=<span class="fl">1e-15</span>, maxIter=<span class="fl">1000</span>)
+    <span class="co"># Get current residual</span>
+    rc = A*x0-b
+    <span class="co"># Get current error</span>
+    ec = norm(x - x0)
+    i = <span class="fl">1</span>
+
+    <span class="kw">while</span> norm(A&#39;*rc) &gt;= epsilon &amp;&amp; i &lt; maxIter
+        alpha = norm(A&#39;*rc)^<span class="fl">2</span>/norm(A*A&#39;*rc)^<span class="fl">2</span>
+        x0 = SingleStepGS(alpha,A,x0,b)
+        rc = A*x0-b
+        ec = vcat(ec, norm(x0 - x))
+        i += <span class="fl">1</span>
+    <span class="kw">end</span>
+
+    <span class="kw">return</span> x0, ec
+<span class="kw">end</span>
+
+<span class="co">## Gradient descent for Strategy 2: alpha = ||A&#39;(x_c - x^*)||^2/||AA&#39;(x_c-x^*)||^2</span>
+<span class="kw">function</span> gradientDescentStrat2(A,b,x,x0;epsilon=<span class="fl">1e-15</span>, maxIter=<span class="fl">10000</span>)
+    <span class="co"># Get current residual</span>
+    rc = A*x0-b
+    <span class="co"># Get current error</span>
+    ec = norm(x0 - x)
+    i = <span class="fl">1</span>
+
+    <span class="kw">while</span> norm(rc) &gt;= epsilon &amp;&amp; i &lt; maxIter
+        alpha = norm(A&#39;*ec[<span class="kw">end</span>])^<span class="fl">2</span>/norm(A*A&#39;*ec[<span class="kw">end</span>])^<span class="fl">2</span>
+        x0 = SingleStepGS(alpha,A,x0,b)
+        rc = A*x0-b
+        ec = vcat(ec, norm(x0 - x))
+        i += <span class="fl">1</span>
+    <span class="kw">end</span>
+
+    <span class="kw">return</span> x0, ec
+<span class="kw">end</span>
+
+<span class="co">## Gradient descent for Strategy 3: alpha = ||A||^2/||AA&#39;||^2</span>
+<span class="kw">function</span> gradientDescentStrat3(A,b,x,x0;epsilon=<span class="fl">1e-15</span>, maxIter=<span class="fl">10000</span>)
+    <span class="co"># Get current residual</span>
+    rc = A*x0-b
+    <span class="co"># Get current error</span>
+    ec = norm(x0 - x)
+    i = <span class="fl">1</span>
+    alpha = norm(A)^<span class="fl">2</span>/norm(A*A&#39;)^<span class="fl">2</span>
+
+    <span class="kw">while</span> norm(rc) &gt;= epsilon &amp;&amp; i &lt; maxIter
+        x0 = SingleStepGS(alpha,A,x0,b)
+        rc = A*x0-b
+        ec = vcat(ec, norm(x0 - x))
+        i += <span class="fl">1</span>
+    <span class="kw">end</span>
+
+    <span class="kw">return</span> x0, ec
 <span class="kw">end</span></code></pre></div>
 
 <div class="exercise">
@@ -341,11 +405,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span id="exr:q1113" class="exercise"><strong>Exercise 78  </strong></span>Write a function to generate 2 equations with 2 unknowns such that the coefficient matrix is dense and symmetric with user specified nonzero eigenvalues.
 </div>
 
-
-<div class="solution">
- <span class="solution"><em>Solution. </em></span> ???
-</div>
-
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia"><span class="kw">function</span> generateProblemEigenvalues(eigenvalues)
+    n = length(eigenvalues)
+    B = rand(n,n)
+    Q = qr(B).Q
+    Lambda = diagm(<span class="fl">0</span> =&gt; eigenvalues)
+    A = Q*Lambda*Q&#39;
+    x = randn(n)
+    b = A*x
+    <span class="kw">return</span> A, x, b
+<span class="kw">end</span></code></pre></div>
 
 <div class="exercise">
 <span id="exr:q1114" class="exercise"><strong>Exercise 79  </strong></span>How are the eigenvalues related to the singular values?
@@ -353,7 +422,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> ???
+<p> <span class="solution"><em>Solution. </em></span>  In general, the eigenvalues of a matrix <span class="math inline">\(A\)</span> is the square root of the symmetric matrix <span class="math inline">\(A^\prime A\)</span>.</p>
+<p>When <span class="math inline">\(A\)</span> is symmetric, they are the same.</p>
 </div>
 
 
@@ -363,7 +433,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> ???
+<p> <span class="solution"><em>Solution. </em></span>  The left singular vectors are the eigen vectors.</p>
 </div>
 
 

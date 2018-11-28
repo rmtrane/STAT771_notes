@@ -405,16 +405,16 @@ A[<span class="fl">4</span>,<span class="fl">3</span>] = <span class="fl">0</spa
 B = invertUpperTri(A);
 B - inv(A)  <span class="co"># should be 0 matrix</span></code></pre></div>
 <pre><code>## 4×4 Array{Float64,2}:
-##  0.0  0.0  -7.10543e-15  0.0
-##  0.0  0.0   0.0          0.0
-##  0.0  0.0   0.0          0.0
-##  0.0  0.0   0.0          0.0</code></pre>
+##  0.0  2.22045e-16  -2.22045e-16  0.0
+##  0.0  0.0           0.0          0.0
+##  0.0  0.0           0.0          0.0
+##  0.0  0.0           0.0          0.0</code></pre>
 <div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">A*B         <span class="co"># should be identity</span></code></pre></div>
 <pre><code>## 4×4 Array{Float64,2}:
-##  1.0  -1.12258e-16  -2.94423e-15  -4.5097e-16 
-##  0.0   1.0          -1.83875e-16  -8.06509e-18
-##  0.0   0.0           1.0           1.08523e-17
-##  0.0   0.0           0.0           1.0</code></pre>
+##  1.0  4.64449e-18  -4.41456e-17  -9.52381e-16
+##  0.0  1.0          -5.24549e-17  -2.66122e-16
+##  0.0  0.0           1.0           1.67716e-16
+##  0.0  0.0           0.0           1.0</code></pre>
 </div>
             </section>
 

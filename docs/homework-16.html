@@ -193,13 +193,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">2.16</span> Homework 16</h2>
 
 <div class="exercise">
-<p><span id="exr:1601" class="exercise"><strong>Exercise 110  </strong></span>Let <span class="math inline">\(F: {\mathbb{R}}^m \to {\mathbb{R}}^n\)</span> be everywhere differentiable such that in any closed ball, the derivative is bounded.</p>
+<p><span id="exr:1601" class="exercise"><strong>Exercise 109  </strong></span>Let <span class="math inline">\(F: {\mathbb{R}}^m \to {\mathbb{R}}^n\)</span> be everywhere differentiable such that in any closed ball, the derivative is bounded.</p>
 Show that in any closed ball, <span class="math inline">\(F\)</span> is Lipschitz continuous.
 </div>
 
 
 <div class="solution">
-<p> <span class="solution"><em>Solution. </em></span> Use Taylors theorem and let <span class="math inline">\(L = \sup_{\omega \in B}||\nabla F(\omega)||\)</span>:</p>
+<p> <span class="solution"><em>Solution. </em></span>  Use Taylors theorem and let <span class="math inline">\(L = \sup_{\omega \in B}||\nabla F(\omega)||\)</span>:</p>
 <p><span class="math display">\[F(x) = F(y) + \nabla F(y + \gamma(y-x))^T(y-x),\,\, for\,\, some\,\, \gamma \in (0,1)\]</span></p>
 <p><span class="math display">\[\begin{aligned} ||F(x)-F(y)|| &amp;= ||\nabla F(y + \gamma(y-x))^T(y-x)|| \\
 &amp; \leq ||\nabla F(y + \gamma(y-x))||\,||(y-x)|| \\
@@ -210,17 +210,20 @@ Show that in any closed ball, <span class="math inline">\(F\)</span> is Lipschit
 
 
 <div class="exercise">
-<span id="exr:1602" class="exercise"><strong>Exercise 111  </strong></span>Is <span class="math inline">\(f(x) = |x|\)</span> semi-smooth?
+<span id="exr:1602" class="exercise"><strong>Exercise 110  </strong></span>Is <span class="math inline">\(f(x) = |x|\)</span> semi-smooth?
 </div>
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> Yes. Write-up.
+<p> <span class="solution"><em>Solution. </em></span> Yes.</p>
+<p><span class="math inline">\(f\)</span> is locally Lipschitz for all <span class="math inline">\(x \in {\mathbb{R}}\)</span>. For all <span class="math inline">\(x \neq 0\)</span>, we can find a ball such that for all <span class="math inline">\(y \in B\)</span>, <span class="math inline">\(\text{sign}(y) = \text{sign}(x)\)</span>. So, if <span class="math inline">\(x &gt; 0, y,z \in B\)</span>, <span class="math inline">\(|f(z) - f(y)| = |z - y|\)</span>. If <span class="math inline">\(x &lt; 0, z,y \in B\)</span>, <span class="math inline">\(|f(z) - f(y)| = |-z + y| = |z-y|\)</span>.</p>
+<p>If <span class="math inline">\(x = 0\)</span>, we can find <span class="math inline">\(z,y \in B\)</span> such that <span class="math inline">\(\text{sign}(z) \neq \text{sign}(y)\)</span>. Assume, without loss of generality, that <span class="math inline">\(z &lt; 0 &lt; y\)</span>. Then, <span class="math inline">\(|f(z) - f(y)| = |-z - y| \le |z - y|\)</span>. So, in any case, <span class="math inline">\(f\)</span> is Lipshitz.</p>
+<p>To verify second condition, let <span class="math inline">\(\epsilon &gt; 0\)</span>. If <span class="math inline">\(x \neq 0\)</span>, pick a ball <span class="math inline">\(B\)</span> around <span class="math inline">\(x\)</span> such that <span class="math inline">\(\text{sign}(y) = 1\)</span> for all <span class="math inline">\(y \in B\)</span>. If <span class="math inline">\(x &gt; 0\)</span>, <span class="math inline">\(\partial f(u) = 1\)</span> for all <span class="math inline">\(u \in B\)</span>. <span class="math inline">\({\left \vert \left \vert f(u) - f(x) - v(u-x) \right \vert \right \vert} = {\left \vert \left \vert u-x-u+x \right \vert \right \vert} = 0\)</span> (<span class="math inline">\(v = 1\)</span>). If <span class="math inline">\(x &lt; 0\)</span>, <span class="math inline">\(\partial f(u) = -1\)</span> for all <span class="math inline">\(u \in B\)</span>. Then <span class="math inline">\({\left \vert \left \vert f(u) - f(x) - v(u-x) \right \vert \right \vert} = {\left \vert \left \vert -u+x+u-x \right \vert \right \vert} = 0\)</span> (<span class="math inline">\(v = -1\)</span>). If <span class="math inline">\(x=0\)</span>, any ball around <span class="math inline">\(x\)</span> will contain both positive and negative values. In either case, <span class="math inline">\({\left \vert \left \vert f(u) - f(x) - v(u-x) \right \vert \right \vert} = 0\)</span> (<span class="math inline">\(v = \text{sign}(u), x=0\)</span>).</p>
 </div>
 
 
 <div class="exercise">
-<span id="exr:1603" class="exercise"><strong>Exercise 112  </strong></span>Is <span class="math inline">\(f(x) = \log(1+|x|)\)</span> semi-smooth?
+<span id="exr:1603" class="exercise"><strong>Exercise 111  </strong></span>Is <span class="math inline">\(f(x) = \log(1+|x|)\)</span> semi-smooth?
 </div>
 
 
@@ -230,7 +233,7 @@ Show that in any closed ball, <span class="math inline">\(F\)</span> is Lipschit
 
 
 <div class="exercise">
-<span id="exr:1604" class="exercise"><strong>Exercise 113  </strong></span>Prove that Newtons Method converges Q superlinearly.
+<p><span id="exr:1604" class="exercise"><strong>Exercise 112  </strong></span> Prove that Newtons Method converges Q superlinearly.</p>
 </div>
 
 
@@ -251,12 +254,12 @@ Show that in any closed ball, <span class="math inline">\(F\)</span> is Lipschit
 <p>You will need to also do line search. The code I supplied implements Newtons method with a slightly different version of line search. Implement the one I discussed in class as well.</p>
 
 <div class="exercise">
-<span id="exr:1605" class="exercise"><strong>Exercise 114  </strong></span>Compare the performance of the different methods and the different line search methods.
+<span id="exr:1605" class="exercise"><strong>Exercise 113  </strong></span>Compare the performance of the different methods and the different line search methods.
 </div>
 
 
 <div class="exercise">
-<span id="exr:1606" class="exercise"><strong>Exercise 115  </strong></span>Track the step length for each method. What happens to the step length as you get closer to the solution. (Make some plots)
+<span id="exr:1606" class="exercise"><strong>Exercise 114  </strong></span>Track the step length for each method. What happens to the step length as you get closer to the solution. (Make some plots)
 </div>
 
 </div>

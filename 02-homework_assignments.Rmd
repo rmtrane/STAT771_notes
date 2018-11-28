@@ -1136,17 +1136,9 @@ b) With this $\alpha$, will we converge? If so, what is the rate of convergence?
 
 ```
 
-```{solution, include = FALSE}
+```{solution}
 
-According to strategy 2, we choose $\alpha$ such that it minimizes $\norm{x_{k+1} - x^*}_2^2$. So, to minimize this, we differentiate with respect to $\alpha$, set to $0$, and solve for $\alpha$:
-
-$$\begin{aligned}
-  \frac{d}{d\alpha}\norm{x_{k+1} - x^*}_2^2 &= \frac{d}{d\alpha}\norm{x_k - \alpha A^\prime () - x^*} \\
-  &= -2(A^\prime r_k)^\prime \left(x_k - x^* - \alpha A^\prime r_k \right) \\
-  &= -2 r_k^\prime A(x_k-x^*) + 2\alpha (A^\prime r_k)^\prime A^\prime r_k \\
-  &= -2 r_k^\prime A(x_k-x^*) + 2\alpha \norm{A^\prime r_k}_2^2 = 0 \\
-  \Rightarrow \alpha &= \frac{r_k^\prime A(x_k - x^*)}{\norm{A^\prime r_k}}
-\end{aligned}$$
+According to strategy 2, we choose $\alpha$ such that it minimizes $\norm{x_{k+1} - x^*}_2^2$. So, to minimize this, we differentiate with respect to $\alpha$, set to $0$, and solve for $\alpha$ -- the result is $\alpha = \frac{\norm{x_k - x^*}_2^2}{\norm{A^\prime r_k}_2^2}$.
 
 ```
 
@@ -1155,7 +1147,9 @@ For strategy 3, what is $\alpha$?
 ```
 
 ```{solution}
-???
+
+According to strategy 3, we choose $\alpha$ such that it minimizes $\norm{I-\alpha AA^\prime}_2^2$. Again, differentiate with respect to $\alpha$, set to $0$, and solve for $\alpha$ -- the result is $\alpha = \frac{\norm{A}_2}{\norm{AA^\prime}_2}$.
+
 ```
 
 ```{exercise, q1107}
@@ -1163,7 +1157,15 @@ For strategy 4, show the inequality holds.
 ```
 
 ```{solution}
-???
+
+Recall $Ax^* = b$. 
+
+$$\begin{aligned}
+  \norm{x_{k+1} - x^*} &= \norm{x_k + \alpha A^\prime(b-Ax_k) - x^*} \\
+                       &= \norm{x_k - x^* - \alpha A^\prime (Ax^* - Ax_k)} \\
+                       &= \norm{(I - \alpha A^\prime A)(x_k - x^*)} \le \norm{I-\alpha A^\primeA}\norm{x_k - x^*}
+\end{aligned}$$
+
 ```
 
 ```{exercise, q1108}
@@ -1171,7 +1173,7 @@ For strategy 4, what is $\alpha$?
 ```
 
 ```{solution}
-??? 
+Same as for strategy 3.
 ```
 
 ```{exercise, q1109}
@@ -1208,9 +1210,64 @@ See Julia chunk below
 ```
 
 ```julia
-function gradientDescentStrat1(A,x,b;epsilon=1e-15, maxIter=1000)
-  
+
+## Gradient descent for Strategy 1: alpha = ||A'r_c||^2/||AA'r_c||^2
+function gradientDescentStrat1(A,b,x,x0;epsilon=1e-15, maxIter=1000)
+    # Get current residual
+    rc = A*x0-b
+    # Get current error
+    ec = norm(x - x0)
+    i = 1
+
+    while norm(A'*rc) >= epsilon && i < maxIter
+        alpha = norm(A'*rc)^2/norm(A*A'*rc)^2
+        x0 = SingleStepGS(alpha,A,x0,b)
+        rc = A*x0-b
+        ec = vcat(ec, norm(x0 - x))
+        i += 1
+    end
+
+    return x0, ec
 end
+
+## Gradient descent for Strategy 2: alpha = ||A'(x_c - x^*)||^2/||AA'(x_c-x^*)||^2
+function gradientDescentStrat2(A,b,x,x0;epsilon=1e-15, maxIter=10000)
+    # Get current residual
+    rc = A*x0-b
+    # Get current error
+    ec = norm(x0 - x)
+    i = 1
+
+    while norm(rc) >= epsilon && i < maxIter
+        alpha = norm(A'*ec[end])^2/norm(A*A'*ec[end])^2
+        x0 = SingleStepGS(alpha,A,x0,b)
+        rc = A*x0-b
+        ec = vcat(ec, norm(x0 - x))
+        i += 1
+    end
+
+    return x0, ec
+end
+
+## Gradient descent for Strategy 3: alpha = ||A||^2/||AA'||^2
+function gradientDescentStrat3(A,b,x,x0;epsilon=1e-15, maxIter=10000)
+    # Get current residual
+    rc = A*x0-b
+    # Get current error
+    ec = norm(x0 - x)
+    i = 1
+    alpha = norm(A)^2/norm(A*A')^2
+
+    while norm(rc) >= epsilon && i < maxIter
+        x0 = SingleStepGS(alpha,A,x0,b)
+        rc = A*x0-b
+        ec = vcat(ec, norm(x0 - x))
+        i += 1
+    end
+
+    return x0, ec
+end
+
 ```
 
 ```{exercise, q1111}
@@ -1235,8 +1292,18 @@ In a narrative, explain which algorithm you would use and when you would use thi
 Write a function to generate 2 equations with 2 unknowns such that the coefficient matrix is dense and symmetric with user specified nonzero eigenvalues.
 ```
 
-```{solution}
-???
+```julia
+function generateProblemEigenvalues(eigenvalues)
+    n = length(eigenvalues)
+    B = rand(n,n)
+    Q = qr(B).Q
+    Lambda = diagm(0 => eigenvalues)
+    A = Q*Lambda*Q'
+    x = randn(n)
+    b = A*x
+    return A, x, b
+end
+
 ```
 
 ```{exercise, q1114}
@@ -1244,7 +1311,11 @@ How are the eigenvalues related to the singular values?
 ```
 
 ```{solution}
-???
+
+In general, the eigenvalues of a matrix $A$ is the square root of the symmetric matrix $A^\prime A$. 
+
+When $A$ is symmetric, they are the same. 
+
 ```
 
 ```{exercise, q1115}
@@ -1252,7 +1323,9 @@ How are the eigenvectors related to the left and right singular vectors?
 ```
 
 ```{solution}
-???
+
+The left singular vectors are the eigen vectors.
+
 ```
 
 ```{exercise, q1116}
@@ -1361,7 +1434,9 @@ Show that the limit in example \@ref(exm:gradient-example) holds.
 ```
 
 ```{solution}
-???
+
+??? 
+
 ```
 
 
@@ -1562,7 +1637,7 @@ Guiding principles?
 Prove $|f(y+h) - f(y) - \nabla f(y) | \le \frac{l}{2} \norm{h}^2$, when the gradient of $f$ is Lipschitz continuous.
 ```
 
-```{exercise}
+```{solution}
 Tuo
 ```
 
@@ -1624,7 +1699,9 @@ Do we ever need to store $J_c$?
 ```
 
 ```{solution}
-No.
+
+No. 
+
 ```
 
 ## Homework 16
@@ -1636,6 +1713,7 @@ Show that in any closed ball, $F$ is Lipschitz continuous.
 ```
 
 ```{solution}
+
 Use Taylors theorem and let $L = \sup_{\omega \in B}||\nabla F(\omega)||$:
 
 $$F(x) = F(y) + \nabla F(y + \gamma(y-x))^T(y-x),\,\, for\,\, some\,\, \gamma \in (0,1)$$
@@ -1653,7 +1731,14 @@ Is $f(x) = |x|$ semi-smooth?
 ```
 
 ```{solution}
-Yes. Write-up.
+Yes. 
+
+$f$ is locally Lipschitz for all $x \in \R$. For all $x \neq 0$, we can find a ball such that for all $y \in B$, $\text{sign}(y) = \text{sign}(x)$. So, if $x > 0, y,z \in B$, $|f(z) - f(y)| = |z - y|$. If $x < 0, z,y \in B$, $|f(z) - f(y)| = |-z + y| = |z-y|$. 
+
+If $x = 0$, we can find $z,y \in B$ such that $\text{sign}(z) \neq \text{sign}(y)$. Assume, without loss of generality, that $z < 0 < y$. Then, $|f(z) - f(y)| = |-z - y| \le |z - y|$. So, in any case, $f$ is Lipshitz. 
+
+To verify second condition, let $\epsilon > 0$. If $x \neq 0$, pick a ball $B$ around $x$ such that $\text{sign}(y) = 1$ for all $y \in B$. If $x > 0$, $\partial f(u) = 1$ for all $u \in B$. $\norm{f(u) - f(x) - v(u-x)} = \norm{u-x-u+x} = 0$ ($v = 1$). If $x < 0$, $\partial f(u) = -1$ for all $u \in B$. Then $\norm{f(u) - f(x) - v(u-x)} = \norm{-u+x+u-x} = 0$ ($v = -1$). If $x=0$, any ball around $x$ will contain both positive and negative values. In either case, $\norm{f(u) - f(x) - v(u-x)} = 0$ ($v = \text{sign}(u), x=0$). 
+
 ```
 
 ```{exercise, 1603}
@@ -1665,7 +1750,9 @@ No, $f$ is not locally Lipschitz.
 ```
 
 ```{exercise, 1604}
+
 Prove that Newtons Method converges Q superlinearly. 
+
 ```
 
 ```{solution}
