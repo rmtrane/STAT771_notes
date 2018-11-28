@@ -1425,7 +1425,7 @@ Prove that CG converges in finitely many steps (in exact arithmetic).
 ```
 
 ```{solution}
-???
+Shewchuk 7.1 (pages 24-25)
 ```
 
 
