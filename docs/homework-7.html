@@ -248,7 +248,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="solution">
 <p> <span class="solution"><em>Solution</em> (3). </span>  Let <span class="math inline">\(b \in \text{span}\{v_{r+1}, \dots, v_{m}\}\)</span>. Then <span class="math inline">\(b = x_{r+1} v_{r+1} + \cdots + x_m v_{r+1}\)</span> for some coefficients <span class="math inline">\(x_j \in {\mathbb{R}}\)</span>. Then</p>
 <p><span class="math display">\[\begin{aligned}
-Ab  &amp;= U \Sigma V^\prime b \\ 
+Ab  &amp;= U \Sigma V^\prime b \\
     &amp;= U \Sigma (x_{r+1} V^\prime v_{r+1} + \cdots + x_{m} V^\prime v_m) \\
     &amp;= U \Sigma \begin{bmatrix} 0 \\ \vdots  \\ 0 \\ x_{r+1} \\ \vdots \\ x_{m} \end{bmatrix},
 \end{aligned}\]</span></p>
@@ -256,7 +256,7 @@ Ab  &amp;= U \Sigma V^\prime b \\
 <p>Since the last <span class="math inline">\(n-r\)</span> rows of <span class="math inline">\(\Sigma\)</span> are all <span class="math inline">\(0\)</span> rows, <span class="math inline">\(\Sigma V^\prime b = 0\)</span>, so <span class="math inline">\(Ab = 0\)</span>, so <span class="math inline">\(b \in \text{null}(A)\)</span>. Hence, <span class="math inline">\(\text{span}\{v_{r+1}, \ldots, v_{m}\} \subset \text{null}(A)\)</span>.</p>
 <p>Now, Assume <span class="math inline">\(b \in\)</span> null(<span class="math inline">\(A\)</span>), then <span class="math inline">\(Ab = 0\)</span>. Because <span class="math inline">\(b \in R^m\)</span> and <span class="math inline">\(v_1, \cdots, v_m\)</span> is a base for <span class="math inline">\(R^m\)</span>, there exists a sequence <span class="math inline">\(\{x_i\}\)</span> s.t. <span class="math inline">\(b = x_1v_1 + \cdots + x_rv_r + x_{r+1}v_{r+1} + \cdots + x_{m}v_m\)</span>.</p>
 <p>Assume for contradiction that <span class="math inline">\(b \notin\)</span> span(<span class="math inline">\(v_{r+1}, \cdots, v_m\)</span>), i.e. that <span class="math inline">\(x_1, \cdots, x_r\)</span> are not all zero. Then</p>
-<p><span class="math display">\[Ab= \sum_{i=1}^{r} \sigma_i u_i v_i^T b = \sum_{i=1}^{r}[ \sigma_i u_i v_i^T (\sum_{j=1}^{m}x_jv_j)]= 
+<p><span class="math display">\[Ab= \sum_{i=1}^{r} \sigma_i u_i v_i^T b = \sum_{i=1}^{r}[ \sigma_i u_i v_i^T (\sum_{j=1}^{m}x_jv_j)]=
 \sum_{i=1}^{r}[ \sigma_i u_i (\sum_{j=1}^{m}x_jv_i^Tv_j)] = \sum_{i=1}^{r} \sigma_i u_i x_i
 \neq 0\]</span></p>
 <p>But this contradicts the assumption that <span class="math inline">\(b \in \text{null}(A)\)</span>. So, <span class="math inline">\(b\)</span> must be in <span class="math inline">\(\text{span}\{v_{r+1}, \cdots, v_m\}\)</span>. Hence, <span class="math inline">\(\text{null}(A) \subset \text{span}\{v_{r+1}, \cdots, v_m\}\)</span>.</p>

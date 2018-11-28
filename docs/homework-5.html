@@ -230,7 +230,7 @@ Create examples to show that the function works (well enough).
 <li>Engler: The Behavior of QR-factorization algorithm with column pivoting (1997)</li>
 </ol>
 <p>Implement modified Gram-Schmidt with column pivoting.</p>
-Find example where the modified Gram-Schmidt fails, but the modified Gram-Schmidt with column pivoting does not.
+<p>Find example where the modified Gram-Schmidt fails, but the modified Gram-Schmidt with column pivoting does not.</p>
 </div>
 
 
@@ -273,28 +273,28 @@ So by definition (<a href="orthogonalization.html#def:orthogonal">5</a>), <span 
 <div class="solution">
 <p> <span class="solution"><em>Solution. </em></span>  Let <span class="math inline">\(G^{(a,b)}\)</span> be a Givens rotation. I.e. the elements <span class="math inline">\(g_{i,j}\)</span> are</p>
 <p><span class="math display">\[
-  g_{i,j} = 
-  \left\{ 
-    \begin{array}{rl} 
+  g_{i,j} =
+  \left\{
+    \begin{array}{rl}
       1, &amp; i = j \notin \{a,b\} \\
       \lambda, &amp; i = j \in \{a,b\} \\
       \sigma, &amp; i = a, j = b \\
       -\sigma, &amp; i = b, j = a \\
       0, &amp; \text{ otherwise}
-    \end{array} 
+    \end{array}
   \right.
 \]</span></p>
 <p>Transposing this matrix gives us a new matrix <span class="math inline">\(K\)</span> where</p>
 <p><span class="math display">\[
-  k_{i,j} = 
-  \left\{ 
-    \begin{array}{rl} 
+  k_{i,j} =
+  \left\{
+    \begin{array}{rl}
       1, &amp; i = j \notin \{a,b\} \\
       \lambda, &amp; i = j \in \{a,b\} \\
       -\sigma, &amp; i = a, j = b \\
       \sigma, &amp; i = b, j = a \\
       0, &amp; \text{ otherwise}
-    \end{array} 
+    \end{array}
   \right.
 \]</span></p>
 <p>Now, let <span class="math inline">\(L = K \cdot G\)</span>. Then the elements of <span class="math inline">\(L\)</span> are <span class="math inline">\(l_{i,j} = \sum_{s=1}^n k_{i,s} g_{s,j}\)</span>.</p>
@@ -309,13 +309,13 @@ So by definition (<a href="orthogonalization.html#def:orthogonal">5</a>), <span 
 </ul>
 <p>So,</p>
 <p><span class="math display">\[
-  l_{i,j} = 
-  \left\{ 
-    \begin{array}{rl} 
+  l_{i,j} =
+  \left\{
+    \begin{array}{rl}
       1, &amp; i = j \notin \{a,b\} \\
       \sigma^2 + \lambda^2, &amp; i = j \in \{a,b\} \\
       0, &amp; \text{ otherwise}
-    \end{array} 
+    \end{array}
   \right.
 \]</span></p>
 <p>Similar calculations can be performed for <span class="math inline">\(G \cdot K\)</span>. So <span class="math inline">\(G^{(a,b)}\)</span> is orthogonal if and only if <span class="math inline">\(\sigma^2 + \lambda^2 = 1\)</span>.</p>

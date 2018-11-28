@@ -267,7 +267,7 @@ Hence, normalized FP numbers are unique.
     e = floor(<span class="dt">Int64</span>,log(base,abs(number)))
     d = zeros(<span class="dt">Int64</span>,prec)
     num = abs(number)/(base^e)
-    
+
     <span class="kw">for</span> j = <span class="fl">1</span>:prec
         d[j] = floor(<span class="dt">Int64</span>,num)
         num = (num - d[j])*base

@@ -204,9 +204,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ol>
 <p><span class="math display">\[\begin{aligned}
   {\left \vert \left \vert G(x_{k+1}) - x_{k+1} \right \vert \right \vert} &amp;= {\left \vert \left \vert G(x_{k+1}) - G(x_k) \right \vert \right \vert} \\
-                              &amp;\le \alpha{\left \vert \left \vert x_{k+1}-x_k \right \vert \right \vert} \\ 
+                              &amp;\le \alpha{\left \vert \left \vert x_{k+1}-x_k \right \vert \right \vert} \\
                               &amp;= \alpha{\left \vert \left \vert G(x_k)-G(x_{k-1}) \right \vert \right \vert} \\
-                              &amp;= \alpha^2{\left \vert \left \vert x_k-x_{k-1} \right \vert \right \vert} \\ 
+                              &amp;= \alpha^2{\left \vert \left \vert x_k-x_{k-1} \right \vert \right \vert} \\
                               &amp;\vdots \\
                               &amp;= \alpha^k{\left \vert \left \vert x_1-x_0 \right \vert \right \vert}.
 \end{aligned}\]</span></p>
@@ -247,7 +247,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="solution">
-<p> <span class="solution"><em>Solution. </em></span>  MATT SOLVED IT!!</p>
+<p> <span class="solution"><em>Solution. </em></span> A function <span class="math inline">\(G: {\mathbb{R}}^n \mapsto {\mathbb{R}}^n\)</span> is a contraction on a closed set <span class="math inline">\(D\)</span> if it satisfies:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(x \in D \implies G(X) \in D\)</span></li>
+<li><span class="math inline">\(\exists \alpha \in (0, 1)\)</span> s.t. <span class="math inline">\(\forall~x,y \in D, {\left \vert \left \vert G(x) - G(y) \right \vert \right \vert} \le \alpha {\left \vert \left \vert x - y \right \vert \right \vert}\)</span></li>
+</ol>
+<p>The function <span class="math inline">\(G(x) = 0.5(x + \frac{4}{x}) = \frac{x}{2} + \frac{2}{x} = \frac{x^2 +4}{2x}\)</span> is a contraction over the closed set <span class="math inline">\(D_1 = [1, \infty)\)</span> and the closed set <span class="math inline">\(D_2 = (-\infty, -1]\)</span>. Proof:</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(G(x) = \frac{x^2 +4}{2x} &gt; 1 ~\forall~x \ge 1\)</span>. Similarly, <span class="math inline">\(G(x) = \frac{x^2 +4}{2x} &lt; -1 ~\forall~x \le -1\)</span>. So <span class="math inline">\(x \in D_1 \implies G(x) \in D_1\)</span> and <span class="math inline">\(x \in D_2 \implies G(x) \in D_2\)</span>.</p></li>
+<li><p>Since <span class="math inline">\(G(x)\)</span> is scalar valued, <span class="math inline">\({\left \vert \left \vert G(x) \right \vert \right \vert} = {\left\vert{G(x)}\right\vert}\)</span>.</p></li>
+</ol>
+<p><span class="math inline">\(\begin{align*}  {\left\vert{G(x) - G(y)}\right\vert} &amp;= {\left\vert{\frac{x}{2} + \frac{2}{x} - \frac{y}{2} - \frac{2}{y}}\right\vert} \\  &amp;= {\left\vert{\frac{1}{2}(x - y) + \frac{2}{x} - \frac{2}{y}}\right\vert}  \end{align*}\)</span></p>
+<p>Within <span class="math inline">\(D_1\)</span>, <span class="math inline">\(x=1\)</span> and <span class="math inline">\(y=1\)</span> maximize this quantity, so</p>
+<p><span class="math inline">\(\begin{align*}  {\left\vert{G(x) - G(y)}\right\vert} &amp;\le {\left\vert{\frac{1}{2}(x - y) + 2 - 2}\right\vert} \\  &amp;= \frac{1}{2}{\left\vert{x - y}\right\vert}.  \end{align*}\)</span></p>
+<p>Similarly, within <span class="math inline">\(D_2\)</span>, <span class="math inline">\(x=-1\)</span> and <span class="math inline">\(y=-1\)</span> maximize this quantity, so</p>
+<p><span class="math inline">\(\begin{align*}  {\left\vert{G(x) - G(y)}\right\vert} &amp;\le {\left\vert{\frac{1}{2}(x - y) - 2 + 2}\right\vert} \\  &amp;= \frac{1}{2}{\left\vert{x - y}\right\vert}.  \end{align*}\)</span></p>
+So on both <span class="math inline">\(D_1\)</span> and <span class="math inline">\(D_2\)</span>, <span class="math inline">\(G\)</span> is a contraction with <span class="math inline">\(\alpha = \frac{1}{2}\)</span>.
 </div>
 
 
@@ -267,7 +282,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> ???
+<p> <span class="solution"><em>Solution. </em></span> </p>
 </div>
 
 
@@ -285,7 +300,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p> <span class="solution"><em>Solution. </em></span>  Note that <span class="math inline">\(\sum_{k=0}^N (AB-I)^k AB = (AB-I)^N AB + AB\)</span>. Since <span class="math inline">\({\left \vert \left \vert AB-I \right \vert \right \vert} &lt; 1-\epsilon\)</span>, <span class="math inline">\(\sum_{k=0}^\infty (AB-I)^k AB = AB\)</span>, so <span class="math inline">\(\sum_{k=0}^\infty (AB-I)^k\)</span> is the inverse of <span class="math inline">\(AB\)</span>. Let <span class="math inline">\(D\)</span> denote that sum. Then <span class="math inline">\(AB = D^{-1}\)</span>, which implies <span class="math inline">\(B=(DA)^{-1}\)</span>. So <span class="math inline">\(B^{-1} = DA\)</span>. Hence, <span class="math inline">\(B\)</span> is invertible.</p>
 <p>Furthermore, <span class="math inline">\({\left \vert \left \vert A-B^{-1} \right \vert \right \vert} = {\left \vert \left \vert (AB-I)B^{-1} \right \vert \right \vert} \le {\left \vert \left \vert AB-I \right \vert \right \vert}{\left \vert \left \vert B^{-1} \right \vert \right \vert} &lt; (1-\epsilon){\left \vert \left \vert B^{-1} \right \vert \right \vert}\)</span>, and</p>
 <p><span class="math display">\[\begin{aligned}
-{\left \vert \left \vert B^{-1} \right \vert \right \vert} &amp;\le {\left \vert \left \vert A \right \vert \right \vert} {\left \vert \left \vert D \right \vert \right \vert} \\ 
+{\left \vert \left \vert B^{-1} \right \vert \right \vert} &amp;\le {\left \vert \left \vert A \right \vert \right \vert} {\left \vert \left \vert D \right \vert \right \vert} \\
 &amp;\le {\left \vert \left \vert \sum_{k=0}^\infty {\left \vert \left \vert AB - I \right \vert \right \vert}^k \right \vert \right \vert} \\
 &amp;&lt; {\left \vert \left \vert A \right \vert \right \vert} \sum_{k=0}^{\infty} (1- \epsilon)^k \\
 &amp;= {\left \vert \left \vert A \right \vert \right \vert}\frac{1}{1-(1-\epsilon)} = \frac{1}{\epsilon}{\left \vert \left \vert A \right \vert \right \vert},
@@ -312,7 +327,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> ???
+ <span class="solution"><em>Solution. </em></span> Kelley pg 214
 </div>
 
 
@@ -322,7 +337,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div class="solution">
- <span class="solution"><em>Solution. </em></span> ???
+<p> <span class="solution"><em>Solution. </em></span> <span class="math inline">\(\tau_a\)</span> = machine epsilon</p>
+<span class="math inline">\(\tau_r\)</span> = right hand side of above inequality
 </div>
 
 
