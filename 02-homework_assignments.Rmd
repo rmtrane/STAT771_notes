@@ -2,12 +2,12 @@
 
 ## Homework 1
 
-```{exercise, q101} 
-Can all nonnegative real numbers be represented in such a manner (i.e. as a fp number) for an arbitrary base $\beta \in \{2,3,...\}$? 
+```{exercise, q101}
+Can all nonnegative real numbers be represented in such a manner (i.e. as a fp number) for an arbitrary base $\beta \in \{2,3,...\}$?
 ```
 
 ```{solution}
-No. For any given $\beta$ and a largest exponent $e_{max}$, any decimal larger than $\beta\cdot\beta^{e_{max}}$ is larger than the largest number possibly representated. 
+No. For any given $\beta$ and a largest exponent $e_{max}$, any decimal larger than $\beta\cdot\beta^{e_{max}}$ is larger than the largest number possibly representated.
 ```
 
 
@@ -16,7 +16,7 @@ Suppose $e = -1$, what are the range of numbers that can be represented for an a
 ```
 
 ```{solution}
-The smallest number that can be represented for an arbitrary base must be $(0+0\cdot \beta^{-1} + ... + 0\cdot\beta^{-(p-1)})\cdot\beta^{-1}$. 
+The smallest number that can be represented for an arbitrary base must be $(0+0\cdot \beta^{-1} + ... + 0\cdot\beta^{-(p-1)})\cdot\beta^{-1}$.
 
 Since $0 \leq d_i < \beta, \forall i$, the largest value must be attained when $d_i = \beta - 1$ for all $i$. I.e. the largest value must be
 
@@ -33,24 +33,24 @@ Characterize the numbers that have a unique representation in a base $\beta \in 
 ```
 
 ```{solution}
-Let 
+Let
 
-$$f = \left(d_1\cdot\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-(p-1)}\right)\cdot\beta^{e},$$ 
+$$f = \left(d_1\cdot\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-(p-1)}\right)\cdot\beta^{e},$$
 
-i.e. $f$ is not normarlized. Then, 
+i.e. $f$ is not normarlized. Then,
 
 $$
 f = \left(d_1+d_2\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-p} + 0\cdot \beta^{-(p-1)}\right)\cdot\beta^{e-1}.
 $$
 
-So, non-normalized fp numbers are NOT unique. 
+So, non-normalized fp numbers are NOT unique.
 
 Now, let $f$ be a normalized fp number. I.e.
 
 $$
 f = \left(d_0 + d_1\cdot\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-(p-1)} \right)\cdot\beta^e,
 $$
-where $d_0 \neq 0$. If we let $e_n < e$, then 
+where $d_0 \neq 0$. If we let $e_n < e$, then
 
 $$
 f > \left(d_0 + d_1\cdot\beta^{-1} + \ldots + d_{p-1}\cdot\beta^{-(p-1)} \right)\cdot\beta^{e_n},
@@ -87,7 +87,7 @@ get_normalized_FP = function(number::Float64, base::Int64, prec::Int64)
     e = floor(Int64,log(base,abs(number)))
     d = zeros(Int64,prec)
     num = abs(number)/(base^e)
-    
+
     for j = 1:prec
         d[j] = floor(Int64,num)
         num = (num - d[j])*base
@@ -98,7 +98,7 @@ end
 ```
 
 ```{exercise, q105}
-List all normalized fp numbers that can be representated given base, precision, $e_{min}$, and $e_{max}$. 
+List all normalized fp numbers that can be representated given base, precision, $e_{min}$, and $e_{max}$.
 ```
 
 ```{julia, eval FALSE}
@@ -135,7 +135,7 @@ Lookup the 64 bit standard to find allowed exponents.
 ```
 
 ```{solution, s201}
-According to [Wikipedia](https://en.wikipedia.org/wiki/Double-precision_floating-point_format), the allowed exponents for the 64 bit standard are $-1022,\ldots, 1023$. 
+According to [Wikipedia](https://en.wikipedia.org/wiki/Double-precision_floating-point_format), the allowed exponents for the 64 bit standard are $-1022,\ldots, 1023$.
 ```
 
 ```{exercise, q202}
@@ -143,7 +143,7 @@ What is the smallest non-normalized positive value for the 64 bit standard?
 ```
 
 ```{solution, s202}
-The smallest non-normalized positive value is 
+The smallest non-normalized positive value is
 
 $$
   \left(0 + 0\cdot 2^{-1} + \ldots + 0\cdot 2^{-51} + 1\cdot 2^{-52} \right )\cdot 2^{-1022} = 2^{-1074} \approx 4.94\cdot 10^{-324}
@@ -155,7 +155,7 @@ What is the smallest normalized positive value?
 ```
 
 ```{solution, s203}
-The smallest normalized positive value is 
+The smallest normalized positive value is
 
 $$
   \left(1 + 0\cdot 2^{-1} + \ldots + 0\cdot 2^{-52} \right )\cdot 2^{-1022} = 2^{-1022} \approx 2.23 \cdot 10^{-308}
@@ -175,11 +175,11 @@ $$
 ```
 
 ```{exercise, q205}
-Is there a general formula for determining the largest positive value for a given base $\beta$, precision $p$, and largest exponent $e_{max}$? 
+Is there a general formula for determining the largest positive value for a given base $\beta$, precision $p$, and largest exponent $e_{max}$?
 ```
 
 ```{solution, s205}
-The largest positive, finite value is 
+The largest positive, finite value is
 
 $$
   \left(\sum_{i=0}^{p-1} (\beta-1)\beta^{-i}\right)\cdot \beta^{e_{max}} = ... = \frac{\beta^p - 1}{\beta^{p-1}}\beta^{e_max}.
@@ -215,12 +215,12 @@ prevfloat(Float64(Inf))
 ```
 
 ```{exercise, q209}
-Proof lemma (\@ref(lem:absolute-error-bound)). 
+Proof lemma (\@ref(lem:absolute-error-bound)).
 ```
 
 ```{solution}
 
-Let $z = (d_0 + d_1 \beta^{-1} + \dots)\beta^e$ be a number. Let $fl(z) = (d_0^\prime + d_1^\prime\beta^{-1} + \dots + d_{p-1}^\prime\beta^{-(p-1)})\beta^e$ be its fp representation with precision $p$. 
+Let $z = (d_0 + d_1 \beta^{-1} + \dots)\beta^e$ be a number. Let $fl(z) = (d_0^\prime + d_1^\prime\beta^{-1} + \dots + d_{p-1}^\prime\beta^{-(p-1)})\beta^e$ be its fp representation with precision $p$.
 
 We know that $(d_0 + d_1 \beta^{-1} + \dots + d_{p-1}\beta^{-(p-1)})\beta^e \le z \le (d_0 + d_1 \beta^{-1} + \dots + (d_{p-1}+1)\beta^{-(p-1)})\beta^e$. We know that $fl(z)$ is equal to the one of these two bounds that is closest to $z$. Hence, $|fl(z) - z|$ must be at most half the distance between these two. Subtract the upper bound from the lower bound, and you get $\beta^{-(p-1)+e}$, i.e.
 
@@ -241,7 +241,7 @@ $$
   \left| fl(z^\prime) - z^\prime \right | = \left | -fl(z) + z \right | = \left | fl(z) - z \right |,
 $$
 
-hence the bounds still hold. 
+hence the bounds still hold.
 ```
 
 ```{exercise, q211}
@@ -249,9 +249,9 @@ Show that $\left|\left| A \right|\right|_1 =$ max of the $l^1$ norms of the colu
 ```
 
 ```{solution, label = 's211'}
-By definition, $\norm{A}_1 = \max_{x\neq 0}\frac{\norm{Ax}_1}{\norm{x}_1} = \max_{\norm{x}_1 = 1} \norm{Ax}_1$. Let $A \in \R^{m\times n}$ and $x \in \R^n$ s.t. $\norm{x}_1 = 1$. 
+By definition, $\norm{A}_1 = \max_{x\neq 0}\frac{\norm{Ax}_1}{\norm{x}_1} = \max_{\norm{x}_1 = 1} \norm{Ax}_1$. Let $A \in \R^{m\times n}$ and $x \in \R^n$ s.t. $\norm{x}_1 = 1$.
 
-Recall that 
+Recall that
 
 $$Ax = \sum_{j=1}^n x_j A_{*,j},$$
 
@@ -268,13 +268,13 @@ $$
 \end{aligned}
 $$
 
-I.e. $\max_{\norm{x}_1 = 1} \norm{Ax}_1 \le \max_{j \in \{1,\ldots, n\}} \norm{A_{*,j}}$. 
-  
-Now, let $1_i = (x_j)_{j=1}^n$ be defined as 
+I.e. $\max_{\norm{x}_1 = 1} \norm{Ax}_1 \le \max_{j \in \{1,\ldots, n\}} \norm{A_{*,j}}$.
+
+Now, let $1_i = (x_j)_{j=1}^n$ be defined as
 
 $$x_j = \left\{ \begin{array}{rl} 1, & \text{ if } j = i \\ 0, & \text{ otherwise}\end{array} \right .$$
 
-Then $\norm{1_i}_1 = 1$. Since $\max_{j \in \{1, \ldots, n\}}\norm{A_{*,j}} = \norm{A\cdot \mathbf{1}_i}$ for $i = \argmax \norm{A_{*,j}}_1$, we have that $\max_{j \in \{1,\ldots,n\}} \norm{A_{*,j}}_1 \le \max_{\norm{x}_1 = 1} \norm{Ax}_1$. 
+Then $\norm{1_i}_1 = 1$. Since $\max_{j \in \{1, \ldots, n\}}\norm{A_{*,j}} = \norm{A\cdot \mathbf{1}_i}$ for $i = \argmax \norm{A_{*,j}}_1$, we have that $\max_{j \in \{1,\ldots,n\}} \norm{A_{*,j}}_1 \le \max_{\norm{x}_1 = 1} \norm{Ax}_1$.
 
 
 ```
@@ -292,29 +292,29 @@ $$\begin{aligned}
                                   &\le |a_{j1}| + \dots + |a_{jm}| \\
                                   &= |a_{j1} \tilde{x}_1 + \dots + a_{jm}\tilde{x}_1|,
 \end{aligned}$$
-  
-I.e. for any $x \in \R^m$ with $\norm{x}_\infty = 1$, 
+
+I.e. for any $x \in \R^m$ with $\norm{x}_\infty = 1$,
 
 $$\begin{aligned}
   |a_{j1} \tilde{x}_1 + \dots + a_{jm}\tilde{x}_1| &\ge \max_{1 \le i \le n}\{|a_{i1} x_1 + \dots + a_{im}x_m|\} \\
-                                                   & = \norm{Ax}_\infty. 
+                                                   & = \norm{Ax}_\infty.
 \end{aligned}$$
-  
-Since $\norm{\tilde{x}}_\infty = 1$, we have that 
+
+Since $\norm{\tilde{x}}_\infty = 1$, we have that
 
 $$\begin{aligned}
   \max_{\norm{x} = 1} \norm{Ax}_\infty &= |a_{j1} \tilde{x}_1 + \dots + a_{jm}\tilde{x}_1| \\
                                        &= |a_{j1}| + \dots + |a_{jm}| \\
                                        &= \max_{1\le j \le n} \sum_{i=1}^n |a_{ji}|,
 \end{aligned}$$
-  
-which is exactly the maximum over the $\mathcal{l}^1$-norms of the rows in $A$. 
+
+which is exactly the maximum over the $\mathcal{l}^1$-norms of the rows in $A$.
 
 ```
 
 ```{exercise, q213}
 Assume the Fundamental Axiom. Show the following:
-  
+
 $$\left|\left| fl(A)-A \right|\right|_p \leq u \left|\left|A\right|\right|_p$$
 ```
 
@@ -329,22 +329,22 @@ $$\left|\left| fl(A)-A \right|\right|_p \leq u \left|\left|A\right|\right|_p$$
 ## Homework 3
 
 ```{exercise, q301}
-Prove lemma \@ref(lem:proofHW). 
+Prove lemma \@ref(lem:proofHW).
 ```
 
 ```{solution}
 Recall that a matrix $A$ is invertible if and only if $Ax = 0$ implies that $x = 0$. So to check that $I-F$ is invertible, we check this:
-  
+
 $$
   (I-F)x = x-Fx = 0 \Rightarrow x = Fx \Rightarrow \norm{x}_p \leq \norm{F}_p \norm{x}_p.
 $$
-  
-Since $\norm{F}_p < 1$ by assumption, the only solution to the inequality above is $x = 0$. So, $I-F$ is invertible. 
+
+Since $\norm{F}_p < 1$ by assumption, the only solution to the inequality above is $x = 0$. So, $I-F$ is invertible.
 
 
 Note that $\sum_{k=0}^N F^k (I - F) = I - F^{N+1}$. Since $\norm{F^k}_p < \norm{F}_p^k < 1$, we know that $F^N \rightarrow 0$ as $N \rightarrow \infty$. So, $\sum_{k=0}^\infty F^k (I-F) = I$, and using that $I-F$ is invertible, we get $(I-F)^{-1} = \sum_{k=0}^\infty F^k$. Finally,
 
-$$\norm{(I-F)^{-1}}_p \leq \sum_{k=1}^\infty \norm{F}_p^k = \frac{1}{1- \norm{F}_p}$$. 
+$$\norm{(I-F)^{-1}}_p \leq \sum_{k=1}^\infty \norm{F}_p^k = \frac{1}{1- \norm{F}_p}$$.
 
 ```
 
@@ -353,7 +353,7 @@ Consider Theorem and Lemmas under "Square Linear Systems" (\@ref(square-linear-s
 ```
 
 ```{solution}
-Since we never use any properties of the infinity norm to prove these theorems and lemmas, we could replace it with the $\mathcal{l}^1$-norm. 
+Since we never use any properties of the infinity norm to prove these theorems and lemmas, we could replace it with the $\mathcal{l}^1$-norm.
 ```
 
 
@@ -411,11 +411,11 @@ For motivating problems 1-5, when is $x$ unique?
 
 - Motivating Problem 1:
     * when $A$ is invertible
-- Motivating Problem 2: Always. 
+- Motivating Problem 2: Always.
     * Since $F(y) = \norm{Ay - b}_2 = (Ay-b)^\prime (Ay-b)$ is convex (twice differentiated is positive definite because $\nabla^2 f = A^\prime A$ and $A$ has full rank).
     * (since objective function is $A^\prime A$, and it is positive definite (because A is full rank), then the function is convex, and you always have a unique solution)
 - Motivating Problem 3: Always.
-- Motivating Problem 4: Always. 
+- Motivating Problem 4: Always.
     * We know how to characterize all $z$ that satisfy objective: $Q\begin{bmatrix} R & S \\ 0 & 0 \end{bmatrix} \Pi^\prime = A$.
 
 - Motivating Problem 5: always
@@ -448,11 +448,11 @@ Suppose $R \in \R^{m\times m}$ is an upper triangular matrix with $R_{ii} \neq 0
 ```
 
 ```{solution}
-Since $R$ is an upper triangular matrix, $\det(R) = \prod_{i=1}^{m} R_{ii} > 0$. Hence, $R$ is invertible. 
+Since $R$ is an upper triangular matrix, $\det(R) = \prod_{i=1}^{m} R_{ii} > 0$. Hence, $R$ is invertible.
 ```
 
 ```{exercise, q309}
-Assume $R$ is an invertible upper triangular matrix. Implement a solution to invert $R$. 
+Assume $R$ is an invertible upper triangular matrix. Implement a solution to invert $R$.
 ```
 
 ```{solution, s310}
@@ -462,9 +462,9 @@ $$\begin{aligned}
   0 &= \sum_{k=1}^n r_{n,k}b_{k,j} \\
     &= r_{n,n}b_{n,j}.
 \end{aligned}$$
-    
-Since $R$ is invertible, $r_{n,n} \neq 0$, hence $b_{n,j} = 0$ for all $j < n$. 
-  
+
+Since $R$ is invertible, $r_{n,n} \neq 0$, hence $b_{n,j} = 0$ for all $j < n$.
+
 
 Now assume that $b_{i,j} = 0$ for all $i=n-0,n-1, \ldots, n-m, j < i$. We then want to show it holds for $i = n - (m+1) = n-m-1$. Let $j < n-(m+1)$. Then
 
@@ -473,10 +473,10 @@ $$\begin{aligned}
     &= \sum_{k=n-(m+1)}^{n} r_{n-(m+1), k} b_{k, j} \\
     &= r_{n-(m+1), n-(m+1)} b_{n-(m+1),j},
 \end{aligned}$$
-    
-where the first equality is due to the fact that $r_{ij} = 0$ for all $i > j$, and the last equality holds since $b_{k,j} = 0$ for all $j < k$ when $k \ge n-m$ (per the induction hypothesis). Since $r_{ii} \neq 0$ for all $i$, $b_{n-(m+1),j} = 0$. 
-  
-So, $b_{ij} = 0$ for all $i > j$. 
+
+where the first equality is due to the fact that $r_{ij} = 0$ for all $i > j$, and the last equality holds since $b_{k,j} = 0$ for all $j < k$ when $k \ge n-m$ (per the induction hypothesis). Since $r_{ii} \neq 0$ for all $i$, $b_{n-(m+1),j} = 0$.
+
+So, $b_{ij} = 0$ for all $i > j$.
 
 Now, lets look at the case where $i=j$, i.e. diagonal elements of the inverse matrix. Then
 
@@ -485,20 +485,20 @@ $$\begin{aligned}
 \end{aligned}$$
 
 The second equality holds since $r_{ik} = 0$ for all $i > k$, the last equality holds because $b_{ki} = 0$ for all $k > i$. We see that $b_{ii} = r_{ii}^{-1}$.
-  
-Finally, consider the case where $i < j$. Then, using that $r_{ik} = 0$ for all $i>k$ and $b_{kj} = 0$ for all $k>j$, we see that 
+
+Finally, consider the case where $i < j$. Then, using that $r_{ik} = 0$ for all $i>k$ and $b_{kj} = 0$ for all $k>j$, we see that
 
 $$
   0 = \sum_{k=1}^n r_{ik}b_{kj} = \sum_{k=i}^j r_{ik} b_{kj},
 $$
-  
+
 which implies
 
 $$
   b_{ij} = \frac{-\sum_{k=i+1}^j r_{ik} b_{kj}}{a_{ii}}.
 $$
-  
-So, in other words, given $i,j$, we can find $b_{ij}$ if we know $b_{kj}$ for all $k>i$ (i.e. all entries in the same column below the entry we are considering). Since we already know all entries below and on the diagonal, this is true for all columns. Hence, we can construct $B$ this way. 
+
+So, in other words, given $i,j$, we can find $b_{ij}$ if we know $b_{kj}$ for all $k>i$ (i.e. all entries in the same column below the entry we are considering). Since we already know all entries below and on the diagonal, this is true for all columns. Hence, we can construct $B$ this way.
 
 See the `Julia` chunk below for an implementation of this.
 
@@ -542,22 +542,22 @@ A*B         # should be identity
 ## Homework 4
 
 ```{exercise, q401}
-In the solution to \@ref(exm:linear-system), why do $0$ rows on the left-hand side of \@ref(eq:sol-linear-system) correspond to $0$ entries of the $c$ vector on the right-hand side. 
+In the solution to \@ref(exm:linear-system), why do $0$ rows on the left-hand side of \@ref(eq:sol-linear-system) correspond to $0$ entries of the $c$ vector on the right-hand side.
 ```
 
 ```{solution, s401}
-By definition of matrix multiplication, if the $i$th row is a zero row of $A$, then $c_{ij} = [AB]_{ij} = \sum{j=1}^n a_{ij} b_{ij} = 0$, no matter what $B$ is. 
+By definition of matrix multiplication, if the $i$th row is a zero row of $A$, then $c_{ij} = [AB]_{ij} = \sum{j=1}^n a_{ij} b_{ij} = 0$, no matter what $B$ is.
 ```
 
 ```{exercise, q402}
-Let $Q$ be an orthogonal matrix. Show that $\norm{Qx}_2 = \norm{x}_2$. 
+Let $Q$ be an orthogonal matrix. Show that $\norm{Qx}_2 = \norm{x}_2$.
 ```
 
 ```{solution, s402}
 
-Since $\norm{x}_2^2 = x^\prime x$ and $Q^\prime Q = 1$ ($Q$ is orthogonal), 
+Since $\norm{x}_2^2 = x^\prime x$ and $Q^\prime Q = 1$ ($Q$ is orthogonal),
 
-$$ 
+$$
   \norm{Qx}^2_2 = (Qx)^\prime Qx = x^\prime Q^\prime Q x = x^\prime x = \norm{x}^2_2.
 $$
 
@@ -573,7 +573,7 @@ Most of the time...?
 
 
 ```{exercise, q404}
-Prove that $P^T P + I$ from solution to example \@ref(exm:und-linear-system) is invertible. 
+Prove that $P^T P + I$ from solution to example \@ref(exm:und-linear-system) is invertible.
 ```
 
 ```{solution, s404}
@@ -583,9 +583,9 @@ For all non-zero $x$,
 $$
   x^\prime(P^TP + I)x = x^\prime P^\prime P x + x^\prime x = \norm{Px}_2 + \norm{x}_2 > 0.
 $$
-  
-This means $P^\prime P + I$ is positive definite, which in turne implies that it is invertible. 
-  
+
+This means $P^\prime P + I$ is positive definite, which in turne implies that it is invertible.
+
 ```
 
 ```{exercise, q405}
@@ -635,12 +635,12 @@ y &= Q \begin{bmatrix} y_1 \\ y_2 \end{bmatrix} \\
 ```
 
 ```{exercise, q406}
-For all motivating problems, implement solutions. 
+For all motivating problems, implement solutions.
 ```
 
 </br>
 
-For the following, assume $A \in \R^{n\times m}$ with $\text{rank}(A) = m$, and $b \in \R^n$. Let $C = \begin{bmatrix} A & b \end{bmatrix}$. 
+For the following, assume $A \in \R^{n\times m}$ with $\text{rank}(A) = m$, and $b \in \R^n$. Let $C = \begin{bmatrix} A & b \end{bmatrix}$.
 
 
 ```{exercise, q407}
@@ -648,7 +648,7 @@ What does the last column of $R$ (from the QR decomposition of $C$) represent?
 ```
 
 ```{solution, s407}
-Generally, $Q^\prime b$, which is the projection of b onto the column space of A. If $b$ is in the column space of $A$, then it is specifically $Rx$ where $x$ is the solution to $Ax = b$. 
+Generally, $Q^\prime b$, which is the projection of b onto the column space of A. If $b$ is in the column space of $A$, then it is specifically $Rx$ where $x$ is the solution to $Ax = b$.
 ```
 
 ```{exercise, q408}
@@ -671,7 +671,7 @@ We can use it for incremental QR for large datasets.
 
 ```{exercise, q501}
 Implement the Gram-Schmidt procedure for matrices $A \in \R^{n \times m}$ assuming $A$ has full column rank.
-  
+
 Create examples to show that the function works (well enough).
 ```
 
@@ -680,7 +680,7 @@ See [here](../Homework/gram_schmidt.jl).
 ```
 
 ```{exercise, q502}
-Find examples where Gram-Schmidt fails, i.e. where either $Q R \neq A$ or $Q^TQ \neq I$. 
+Find examples where Gram-Schmidt fails, i.e. where either $Q R \neq A$ or $Q^TQ \neq I$.
 ```
 
 ```{solution, s502}
@@ -688,7 +688,7 @@ Let $A = \begin{bmatrix} 1 & 1 & 1 \\ 10^{-8} & 0 & 0 \\ 0 & 10^{-8} & 0 \end{bm
 ```
 
 ```{exercise, q503}
-Look up the modified Gram-Schmidt Procedure and implement it (again assuming $A$ has full column rank). 
+Look up the modified Gram-Schmidt Procedure and implement it (again assuming $A$ has full column rank).
 ```
 
 ```{solution, s503}
@@ -698,14 +698,14 @@ See [here](../Homework/modified_gs.jl).
 
 ```{exercise, q504, name = "Pivoting (*OPTIONAL*)"}
 References:
-  
+
   1. Businger, Galub: Linear Least Squares by Householder Transformation (1965)
   2. Engler: The Behavior of QR-factorization algorithm with column pivoting (1997)
-  
-Implement modified Gram-Schmidt with column pivoting. 
+
+Implement modified Gram-Schmidt with column pivoting.
 
 Find example where the modified Gram-Schmidt fails, but the modified Gram-Schmidt with column pivoting does not.
-  
+
 ```
 
 
@@ -714,7 +714,7 @@ Show that Householder reflections are orthogonal matrices.
 ```
 
 ```{solution}
-Show that $H^\prime H = I$. By definition of a Householder matrix (\@ref(def:householder)), $H = I - 2vv^\prime$ for a $v$ with $\norm{v}_2 = 1$. Note that $\norm{v}_2 = \sqrt{v^\prime \cdot v}$. 
+Show that $H^\prime H = I$. By definition of a Householder matrix (\@ref(def:householder)), $H = I - 2vv^\prime$ for a $v$ with $\norm{v}_2 = 1$. Note that $\norm{v}_2 = \sqrt{v^\prime \cdot v}$.
 
 So,
 
@@ -725,8 +725,8 @@ $$\begin{aligned}
              &= I - 2vv^\prime - 2vv^\prime + 4 vv^\prime v v^\prime \\
              &= I - 2vv^\prime - 2vv^\prime + 4 v I v^\prime \\
              &= I.
-\end{aligned}$$  
-    
+\end{aligned}$$
+
 So by definition (\@ref(def:orthogonal)), $H$ is an orthogonal matrix.
 ```
 
@@ -737,83 +737,83 @@ Show that if $H_1, \dots, H_r$ are Householder reflections, then $H_r \cdots H_1
 ```{solution, s506}
 
 $$(H_r \cdots H_1)^\prime (H_r \cdots H_1) = H_1^\prime \cdots H_r^\prime H_r \cdots H_1 = I,$$
-  
-since all $H_i$ are Householder reflections, which implies they are orthogonal, which implies $H_i^\prime H_i = I$. 
+
+since all $H_i$ are Householder reflections, which implies they are orthogonal, which implies $H_i^\prime H_i = I$.
 
 ```
 
 
 ```{exercise, q507}
-Show that a Givens rotation is an orthonormal matrix when $\sigma^2 + \lambda^2 = 1$. 
+Show that a Givens rotation is an orthonormal matrix when $\sigma^2 + \lambda^2 = 1$.
 ```
 
 ```{solution, s507}
 
-Let $G^{(a,b)}$ be a Givens rotation. I.e. the elements $g_{i,j}$ are 
+Let $G^{(a,b)}$ be a Givens rotation. I.e. the elements $g_{i,j}$ are
 
 $$
-  g_{i,j} = 
-  \left\{ 
-    \begin{array}{rl} 
+  g_{i,j} =
+  \left\{
+    \begin{array}{rl}
       1, & i = j \notin \{a,b\} \\
       \lambda, & i = j \in \{a,b\} \\
       \sigma, & i = a, j = b \\
       -\sigma, & i = b, j = a \\
       0, & \text{ otherwise}
-    \end{array} 
+    \end{array}
   \right.
 $$
-        
+
 Transposing this matrix gives us a new matrix $K$ where
-      
+
 $$
-  k_{i,j} = 
-  \left\{ 
-    \begin{array}{rl} 
+  k_{i,j} =
+  \left\{
+    \begin{array}{rl}
       1, & i = j \notin \{a,b\} \\
       \lambda, & i = j \in \{a,b\} \\
       -\sigma, & i = a, j = b \\
       \sigma, & i = b, j = a \\
       0, & \text{ otherwise}
-    \end{array} 
+    \end{array}
   \right.
 $$
 
-Now, let $L = K \cdot G$. Then the elements of $L$ are $l_{i,j} = \sum_{s=1}^n k_{i,s} g_{s,j}$. 
-      
-If $i \neq a,\ j \neq b$, and $i \neq j$, then $l_{i,j} = k_{i,i} g_{i,j} = 0$ (since $g_{i,j} = 0$). 
+Now, let $L = K \cdot G$. Then the elements of $L$ are $l_{i,j} = \sum_{s=1}^n k_{i,s} g_{s,j}$.
+
+If $i \neq a,\ j \neq b$, and $i \neq j$, then $l_{i,j} = k_{i,i} g_{i,j} = 0$ (since $g_{i,j} = 0$).
 
 If $i \notin \{a, b\}$, then $l_{i,i} = k_{i,i} g_{i,i} = 1$ (since $i \notin \{a,b\}$).
 
 If $j \notin \{a,b\}$, then $l_{a,j} = k_{a,b}g_{b,j} + k_{a,a}g_{a,j} = 0$ (since $j \notin \{a,b\}$ implies $g_{b,j} = 0$ and $g_{a,j} = 0$).
 
-Furthermore, 
+Furthermore,
 
 * $l_{a,b} = k_{a,b}g_{b,b} + k_{a,a}g_{a,b} = -\sigma \lambda + \lambda \sigma = 0$,
 * $l_{a,a} = k_{a,b} g_{b,a} + k_{a,a} g_{a,a} = (-\sigma)(-\sigma) + \lambda \lambda = \sigma^2 + \lambda^2$,
 * $l_{b,b} = k_{a,b} g_{b,a} + k_{a,a} g_{a,a} = (-\sigma)(-\sigma) + \lambda \lambda = \sigma^2 + \lambda^2$.
 
 So,
-      
+
 $$
-  l_{i,j} = 
-  \left\{ 
-    \begin{array}{rl} 
+  l_{i,j} =
+  \left\{
+    \begin{array}{rl}
       1, & i = j \notin \{a,b\} \\
       \sigma^2 + \lambda^2, & i = j \in \{a,b\} \\
       0, & \text{ otherwise}
-    \end{array} 
+    \end{array}
   \right.
 $$
-        
-Similar calculations can be performed for $G \cdot K$. So $G^{(a,b)}$ is orthogonal if and only if $\sigma^2 + \lambda^2 = 1$. 
+
+Similar calculations can be performed for $G \cdot K$. So $G^{(a,b)}$ is orthogonal if and only if $\sigma^2 + \lambda^2 = 1$.
 
 ```
 
 ## Homework 6
 
 ```{exercise, q601}
-Determine the computational complexity of the QR decomposition using 
+Determine the computational complexity of the QR decomposition using
 
 a) Gram-Schmidt
 b) Modified Gram-Schmidt
@@ -827,7 +827,7 @@ for any arbitrary, dense $n \times m$ matrix. (dense = don't know how many entri
 ```{solution, s601}
 
 a) Gram-Schmidt requires $O(m^2n)$ computations.
-b) Same as Gram-Schmidt. 
+b) Same as Gram-Schmidt.
 c) $O(m^2n)$.
 d) $O(m^2n)$.
 
@@ -864,24 +864,24 @@ What happens in theorem \@ref(thm:svd) if $m > n$.
 
 ```{solution}
 
-If $m > n$, the diagonal matrix of the SVD of $A$ will be of the form $\begin{bmatrix} \Sigma & 0 \end{bmatrix}$, where $\Sigma = \begin{bmatrix} \sigma_1 & & \\ & \ddots & \\ & & \sigma_n \end{bmatrix}$. 
+If $m > n$, the diagonal matrix of the SVD of $A$ will be of the form $\begin{bmatrix} \Sigma & 0 \end{bmatrix}$, where $\Sigma = \begin{bmatrix} \sigma_1 & & \\ & \ddots & \\ & & \sigma_n \end{bmatrix}$.
 
 ```
 
 ```{exercise, q606}
-If $u,v$ are respectively left and right singular vectors corresponding to the singular value $\sigma$, show that $Av = \sigma u$, and $A'u = \sigma v$. 
+If $u,v$ are respectively left and right singular vectors corresponding to the singular value $\sigma$, show that $Av = \sigma u$, and $A'u = \sigma v$.
 ```
 
 ```{solution, s606}
-Using the SVD of $A$, we see that $AV = U\Sigma$, which implies 
+Using the SVD of $A$, we see that $AV = U\Sigma$, which implies
 
 $$
   A \begin{bmatrix} v_1 & \cdots & v_m \end{bmatrix} = \begin{bmatrix} \sigma_1 u_1 & \cdots & \sigma_m u_m \end{bmatrix}.
 $$
-  
-where $v_1, \dots, v_m$ are the right singular vectors of $A$, and $u_1, \dots, u_m$ are the left singular vectors of $A$. 
 
-So, $Av_i = \sigma_i u_i$ for all $i$. 
+where $v_1, \dots, v_m$ are the right singular vectors of $A$, and $u_1, \dots, u_m$ are the left singular vectors of $A$.
+
+So, $Av_i = \sigma_i u_i$ for all $i$.
 
 Similarly, $A^\prime = V \Sigma U^\prime$ implies $A^\prime U = V \Sigma$. As above, this gives us $A^\prime u_i = \sigma_i v_i$.
 
@@ -891,7 +891,7 @@ Similarly, $A^\prime = V \Sigma U^\prime$ implies $A^\prime U = V \Sigma$. As ab
 ## Homework 7
 
 ```{exercise, q701}
-Show that $\norm{A}_F^2 = \sum_{i=1}^n\sum_{j=1}^n a_{ij}^2$ is orthogonally invariant, i.e. if $Q,P$ are orthogonal matrices, then $\norm{QA}_F^2 = \norm{A}_F^2$ and $\norm{AP}_F^2 = \norm{A}_F^2$. 
+Show that $\norm{A}_F^2 = \sum_{i=1}^n\sum_{j=1}^n a_{ij}^2$ is orthogonally invariant, i.e. if $Q,P$ are orthogonal matrices, then $\norm{QA}_F^2 = \norm{A}_F^2$ and $\norm{AP}_F^2 = \norm{A}_F^2$.
 ```
 
 ```{solution, s701}
@@ -902,7 +902,7 @@ $$
   \norm{QA}_F^2 = \text{trace}(A^\prime Q^\prime Q A) = \text{trace}(A^\prime A) = \norm{A}_F^2,
 $$
 
-and 
+and
 
 $$
   \norm{AP}_F^2 = \text{trace}(P^\prime A^\prime A P) = \text{trace}(A^\prime A P P^\prime) = \text{trace}(A^\prime A) = \norm{A}_F^2.
@@ -915,7 +915,7 @@ Proof corollary \@ref(cor:sigma-min-max).
 ```
 
 ```{solution, s702}
-Recall that $\sigma_{\max} (A) = \norm{A}_2$. Hence, $\sigma_{\max}(A+E) = \norm{A+E}_2 \leq \norm{A}_2 + \norm{E}_2 = \sigma_{\max}(A) + \norm{E}_2$. 
+Recall that $\sigma_{\max} (A) = \norm{A}_2$. Hence, $\sigma_{\max}(A+E) = \norm{A+E}_2 \leq \norm{A}_2 + \norm{E}_2 = \sigma_{\max}(A) + \norm{E}_2$.
 
 For the second inequality, recall that $\sigma_{\min}(A) = \min_{x \neq 0} \frac{\norm{Ax}}{\norm{x}}$. First, consider the case where $\sigma_{\min}(A) = 0$. Then the result holds. Second, consider the case where $\sigma_{\min}(A) > 0$. Then
 
@@ -923,8 +923,8 @@ $$\begin{aligned}
   \sigma_{\min}(A+E) &= \min_{v \neq 0} \frac{\norm{(A+E)v}_2}{\norm{v}_2} \ge \min_{v \ne 0} \frac{\norm{Av}_2}{\norm{v}_2} - \max_{v \ne 0} \frac{\norm{Ev}_2}{\norm{v}_2} \\
   &= \sigma_{\min}(A) - \norm{E}_2,
 \end{aligned}$$
-  
-where we use the inverse triangle equality. 
+
+where we use the inverse triangle equality.
 
 ```
 
@@ -934,33 +934,33 @@ Proof corollary \@ref(cor:for-q703).
 
 ```{solution, name = "1"}
 
-Let $b \in \text{range}(A)$. Then there exists some $z$ such that $Az = b$. Use the SVD of A to get 
+Let $b \in \text{range}(A)$. Then there exists some $z$ such that $Az = b$. Use the SVD of A to get
 
 $$
   b = U\Sigma V^\prime z.
 $$
-  
-Since $\text{rank}(A) = r$, the last $n-r$ rows of $\Sigma$ are all $0$, so $U \Sigma V^\prime = U_r \Sigma_r (V_r)^\prime$, where $U_r$ is the first $r$ columns of $U$, $\Sigma_r$ the first $r$ columns and $r$ rows of $\Sigma$, and $V_r$ the first $r$ columns of $V$. Hence, $\Sigma_r (V_r)^\prime z = y \in \R^r$. So, $b = U_r y$, which means it is in the span of the first $r$ columns of $U$. Hence, $\text{range}(A) \subset \text{span}\{u_1, \dots, u_r\}$. 
+
+Since $\text{rank}(A) = r$, the last $n-r$ rows of $\Sigma$ are all $0$, so $U \Sigma V^\prime = U_r \Sigma_r (V_r)^\prime$, where $U_r$ is the first $r$ columns of $U$, $\Sigma_r$ the first $r$ columns and $r$ rows of $\Sigma$, and $V_r$ the first $r$ columns of $V$. Hence, $\Sigma_r (V_r)^\prime z = y \in \R^r$. So, $b = U_r y$, which means it is in the span of the first $r$ columns of $U$. Hence, $\text{range}(A) \subset \text{span}\{u_1, \dots, u_r\}$.
 
 Now, let $b \in \text{span}\{u_1, \dots, u_r\}$. Then $b = U_r y$ for some $y \in \R^r$. Recall that $U = A V \Sigma^{-1}$, hence $U_r = A V_r \Sigma_r^{-1}$. So, $b = A V \Sigma_r^{-1} y$. Since $V \Sigma_r^{-1} y = z \in \R^m$, $b$ is in the range of $A$. Hence, $\text{span}\{u_1, \dots, u_r\} \subset \text{range}(A)$.
 
 ```
 
 ```{solution, name = "2"}
-Note that the row space of $A$ is the range of $A^\prime$. Solve as above. 
+Note that the row space of $A$ is the range of $A^\prime$. Solve as above.
 ```
 
 ```{solution, name = "3"}
 
-Let $b \in \text{span}\{v_{r+1}, \dots, v_{m}\}$. Then $b = x_{r+1} v_{r+1} + \cdots + x_m v_{r+1}$ for some coefficients $x_j \in \R$. Then 
+Let $b \in \text{span}\{v_{r+1}, \dots, v_{m}\}$. Then $b = x_{r+1} v_{r+1} + \cdots + x_m v_{r+1}$ for some coefficients $x_j \in \R$. Then
 
 $$\begin{aligned}
-Ab  &= U \Sigma V^\prime b \\ 
+Ab  &= U \Sigma V^\prime b \\
     &= U \Sigma (x_{r+1} V^\prime v_{r+1} + \cdots + x_{m} V^\prime v_m) \\
     &= U \Sigma \begin{bmatrix} 0 \\ \vdots  \\ 0 \\ x_{r+1} \\ \vdots \\ x_{m} \end{bmatrix},
 \end{aligned}$$
 
-since all columns of $V$ are orthogonal. 
+since all columns of $V$ are orthogonal.
 
 Since the last $n-r$ rows of $\Sigma$ are all $0$ rows, $\Sigma V^\prime b = 0$, so $Ab = 0$, so $b \in \text{null}(A)$. Hence, $\text{span}\{v_{r+1}, \ldots, v_{m}\} \subset \text{null}(A)$.
 
@@ -968,7 +968,7 @@ Now, Assume $b \in$ null($A$), then $Ab = 0$. Because $b \in R^m$ and $v_1, \cdo
 
 Assume for contradiction that $b \notin$ span($v_{r+1}, \cdots, v_m$), i.e. that $x_1, \cdots, x_r$ are not all zero. Then
 
-$$Ab= \sum_{i=1}^{r} \sigma_i u_i v_i^T b = \sum_{i=1}^{r}[ \sigma_i u_i v_i^T (\sum_{j=1}^{m}x_jv_j)]= 
+$$Ab= \sum_{i=1}^{r} \sigma_i u_i v_i^T b = \sum_{i=1}^{r}[ \sigma_i u_i v_i^T (\sum_{j=1}^{m}x_jv_j)]=
 \sum_{i=1}^{r}[ \sigma_i u_i (\sum_{j=1}^{m}x_jv_i^Tv_j)] = \sum_{i=1}^{r} \sigma_i u_i x_i
 \neq 0$$
 
@@ -987,8 +987,8 @@ What is the solution to $\min_{x} \norm{Ax-b}_2^2$ in terms of the Moore-Penrose
 To find the solution, we differentiate and set equal to $0$. So, differentiate $g(x) = x^\prime A^\prime A x - x^\prime A b - b^\prime A x + b^\prime b$ and set to $0$:
 
 $$\frac{dg}{dx} = x^\prime (A^\prime A + A^\prime A) - b^\prime A - (A^\prime b)^\prime = 2x^\prime (A^\prime A) - 2b^\prime A = 0$$
-  
-which implies $(A A^\prime)x = b A^\prime$. Check that $x = A^+b$ satisfies this. 
+
+which implies $(A A^\prime)x = b A^\prime$. Check that $x = A^+b$ satisfies this.
 
 ```
 
@@ -998,10 +998,10 @@ Let $Q$ be an orthogonal matrix with columns $q_1, \ldots, q_n$. Let $Z \in \R^{
 
 ```{solution, s802}
 
-Since the frobenius norm is invariant to mulitplication by orthogonal matrices: $\norm{Z}_F^2 = \norm{Q^\prime Z Q}_F^2$. Since 
+Since the frobenius norm is invariant to mulitplication by orthogonal matrices: $\norm{Z}_F^2 = \norm{Q^\prime Z Q}_F^2$. Since
 
 $$\begin{aligned}
-   \begin{bmatrix} q_1^\prime & \cdots q_n^\prime \end{bmatrix} Z \begin{bmatrix} q_1 \\ \vdots q_n \end{bmatrix} &= 
+   \begin{bmatrix} q_1^\prime & \cdots q_n^\prime \end{bmatrix} Z \begin{bmatrix} q_1 \\ \vdots q_n \end{bmatrix} &=
           \begin{bmatrix} q_1^\prime & \cdots q_n^\prime \end{bmatrix} \begin{bmatrix} Z q_1 \\ \vdots Z q_n \end{bmatrix} \\
   &= \begin{bmatrix}  q_1^\prime Z q_1 & \cdots & q_1^\prime Z q_n \\
                       \vdots & \ddots & \vdots \\
@@ -1054,7 +1054,7 @@ See [SOR]("../Homework/SOR.jl").
 
 ```{exercise, q1003}
 
-Randomly generate problems and 
+Randomly generate problems and
 
 a) at each iteration, record residual norm and absolute error
 b) compare rate of convergence against spectral radious
@@ -1089,7 +1089,7 @@ $A^T(b-Ax^c) = \begin{pmatrix} a_1, \cdots, a_n \end{pmatrix}(b - Ax^c) = \sum_{
 ```
 
 ```{exercise, q1102}
-Show that if $A^\prime r^c = 0$, then $x^c = x^*$, where $Ax^* = b$. 
+Show that if $A^\prime r^c = 0$, then $x^c = x^*$, where $Ax^* = b$.
 ```
 
 ```{solution}
@@ -1099,20 +1099,20 @@ $x^+= x^c + \alpha A^T(b-Ax^c) = x^c + \alpha A^Tr^c = x^c$
 ```
 
 ```{exercise, q1103}
-Why is it enough to find an upper bound on $\norm{\Sigma^{-1}u}_2^2 \norm{\Sigma u}_2^2$ for any unit vector $u$ in the proof of theorem \@ref(thm:grad-descent)? 
+Why is it enough to find an upper bound on $\norm{\Sigma^{-1}u}_2^2 \norm{\Sigma u}_2^2$ for any unit vector $u$ in the proof of theorem \@ref(thm:grad-descent)?
 ```
 
 ```{solution}
 
-Recall that $\norm{A} = \sup_{\norm{v}=1} \norm{Av} = \sup_{\norm{v} \neq 0} \frac{\norm{Av}}{\norm{v}}$. Hence, 
+Recall that $\norm{A} = \sup_{\norm{v}=1} \norm{Av} = \sup_{\norm{v} \neq 0} \frac{\norm{Av}}{\norm{v}}$. Hence,
 
 $$\begin{aligned}
 \norm{\Sigma^{-1} u}_2^2 \norm{\Sigma u}_2^2 \le \frac{(\sigma_1^2 + \sigma_n^2)^2}{4\sigma_1^2 \cdot \sigma_n^2} \quad \forall u: \norm{u} = 1 \\
-\Rightarrow \frac{1}{\norm{\Sigma^{-1} u}_2^2 \norm{\Sigma u}_2^2} \le \frac{4\sigma_1^2 \cdot \sigma_n^2}{(\sigma_1^2 + \sigma_n^2)^2} \quad \forall u: \norm{u} = 1 \\ 
+\Rightarrow \frac{1}{\norm{\Sigma^{-1} u}_2^2 \norm{\Sigma u}_2^2} \le \frac{4\sigma_1^2 \cdot \sigma_n^2}{(\sigma_1^2 + \sigma_n^2)^2} \quad \forall u: \norm{u} = 1 \\
 \Rightarrow \frac{\norm{w}}{\norm{\Sigma^{-1} w}_2^2}\frac{\norm{w}}{\norm{\Sigma w}_2^2} \le \frac{4\sigma_1^2 \cdot \sigma_n^2}{(\sigma_1^2 + \sigma_n^2)^2} \quad \forall w: \norm{w} \neq 0.
 \end{aligned}$$
-  
-So, find an upper bound on $\norm{\Sigma^{-1} u}_2^2 \norm{\Sigma u}_2^2$ that holds for all unit vectors $u$, and we have a lower bound on $\frac{\norm{w}}{\norm{\Sigma^{-1} w}_2^2}\frac{\norm{w}}{\norm{\Sigma w}_2^2}$ that holds for all non-zero vectors $w$. 
+
+So, find an upper bound on $\norm{\Sigma^{-1} u}_2^2 \norm{\Sigma u}_2^2$ that holds for all unit vectors $u$, and we have a lower bound on $\frac{\norm{w}}{\norm{\Sigma^{-1} w}_2^2}\frac{\norm{w}}{\norm{\Sigma w}_2^2}$ that holds for all non-zero vectors $w$.
 
 ```
 
@@ -1130,7 +1130,7 @@ http://services.aops.com/download.php?id=YXR0YWNobWVudHMvMS84LzM2YWVhMTg3Yzc0NDA
 
 ```{exercise, q1105}
 For strategy 2, answer the following questions:
-  
+
 a) What is $\alpha$? Is it practical?
 b) With this $\alpha$, will we converge? If so, what is the rate of convergence?
 
@@ -1158,7 +1158,7 @@ For strategy 4, show the inequality holds.
 
 ```{solution}
 
-Recall $Ax^* = b$. 
+Recall $Ax^* = b$.
 
 $$\begin{aligned}
   \norm{x_{k+1} - x^*} &= \norm{x_k + \alpha A^\prime(b-Ax_k) - x^*} \\
@@ -1312,9 +1312,9 @@ How are the eigenvalues related to the singular values?
 
 ```{solution}
 
-In general, the eigenvalues of a matrix $A$ is the square root of the symmetric matrix $A^\prime A$. 
+In general, the eigenvalues of a matrix $A$ is the square root of the symmetric matrix $A^\prime A$.
 
-When $A$ is symmetric, they are the same. 
+When $A$ is symmetric, they are the same.
 
 ```
 
@@ -1362,14 +1362,14 @@ What conditions (if any) on $a_0, ..., a_{d-1}$ guarantee that an $A-$normalized
 ```
 
 ```{solution}
-We need the norm of the vectors to be not too small. If they are too small, numerical stability is not guarenteed, which means we might end up with vectors that are not A-conjugated or not A-normalized. 
+We need the norm of the vectors to be not too small. If they are too small, numerical stability is not guarenteed, which means we might end up with vectors that are not A-conjugated or not A-normalized.
 ```
 
 
 ## Homework 13
 
 ```{exercise, q1301}
-Show that the procedure in \@ref(conjugatedgradients) is the same as the one implemented in the code below. 
+Show that the procedure in \@ref(conjugatedgradients) is the same as the one implemented in the code below.
 ```
 
 
@@ -1384,10 +1384,10 @@ function conjGS(A,V; ϵ = 1e-15)
     A-conjugation over a set of vectors
     in the vector V. Returns A-conjugated
     vectors using set in V"""
-    
+
     ## Define function to get A-norm of vector
     normA(x) = sqrt(dot(x,A*x))
-    
+
     ## This will hold conjugated set
     Q = Vector(length(V))
 
@@ -1425,17 +1425,17 @@ Prove that CG converges in finitely many steps (in exact arithmetic).
 ```
 
 ```{solution}
-???
+Shewchuk 7.1 (pages 24-25)
 ```
 
 
 ```{exercise, q1303}
-Show that the limit in example \@ref(exm:gradient-example) holds. 
+Show that the limit in example \@ref(exm:gradient-example) holds.
 ```
 
 ```{solution}
 
-??? 
+???
 
 ```
 
@@ -1467,9 +1467,9 @@ $$J(f;x) = \begin{bmatrix}
        \end{bmatrix}$$
 
 Note that the inverse is not true.
-  
+
 https://calculus.subwiki.org/wiki/Existence_of_partial_derivatives_not_implies_differentiable
-    
+
 ```
 
 ```{exercise, q1305}
@@ -1477,7 +1477,7 @@ Using IFT: when will $F(x) = 0$ have an isolated solution? (i.e. a solution wher
 ```
 
 ```{solution}
-When $m = n$, the neighborhood will be one dimensional and be only one point. 
+When $m = n$, the neighborhood will be one dimensional and be only one point.
 ```
 
 ```{exercise, q1306}
@@ -1498,20 +1498,20 @@ Proof theorem \@ref(thm:contracts). Why does $D$ have to be closed? (Hint: need 
 
 ```{solution}
 
-1. Assume $x^*$ and $x_0$ satisfy $x^* = G(x^*)$ and $G(x_0) = x_0$. Then there exists an $\alpha \in (0,1)$ such that $\norm{G(x^*) - G(x_0)} \le \alpha\norm{x^* - x_0}$. But $\alpha \norm{x^* - x_0} = \alpha\norm{G(x^*) - G(x_0)}$, so $\norm{G(x^*) - G(x_0)} \le \alpha \norm{G(x^*) - G(x_0)}$. Since $\alpha \in (0,1)$, this can only hold if $\norm{G(x^*) - G(x_0)} = 0$, so $x^* = G(x^*) = G(x_0) = x_0$. 
+1. Assume $x^*$ and $x_0$ satisfy $x^* = G(x^*)$ and $G(x_0) = x_0$. Then there exists an $\alpha \in (0,1)$ such that $\norm{G(x^*) - G(x_0)} \le \alpha\norm{x^* - x_0}$. But $\alpha \norm{x^* - x_0} = \alpha\norm{G(x^*) - G(x_0)}$, so $\norm{G(x^*) - G(x_0)} \le \alpha \norm{G(x^*) - G(x_0)}$. Since $\alpha \in (0,1)$, this can only hold if $\norm{G(x^*) - G(x_0)} = 0$, so $x^* = G(x^*) = G(x_0) = x_0$.
 
 2. For some $\alpha \in (0,1)$:
 
 $$\begin{aligned}
   \norm{G(x_{k+1}) - x_{k+1}} &= \norm{G(x_{k+1}) - G(x_k)} \\
-                              &\le \alpha\norm{x_{k+1}-x_k} \\ 
+                              &\le \alpha\norm{x_{k+1}-x_k} \\
                               &= \alpha\norm{G(x_k)-G(x_{k-1})} \\
-                              &= \alpha^2\norm{x_k-x_{k-1}} \\ 
+                              &= \alpha^2\norm{x_k-x_{k-1}} \\
                               &\vdots \\
                               &= \alpha^k\norm{x_1-x_0}.
 \end{aligned}$$
-  
-Hence, $\norm{G(x_k - x_k)} \to 0$ as $k \to \infty$, so $\lim x_k = \lim G(x_k)$, i.e. $\lim x_k = x^*$. 
+
+Hence, $\norm{G(x_k - x_k)} \to 0$ as $k \to \infty$, so $\lim x_k = \lim G(x_k)$, i.e. $\lim x_k = x^*$.
 
 ```
 
@@ -1524,7 +1524,7 @@ The metric space has to be complete. Otherwise we are not sure that the limit is
 ```
 
 ```{exercise, q1403}
-Let $G(x) = 0.5(x+\frac{4}{x})$. Solve $x = G(x)$ by hand. What is $G(x)$ doing? 
+Let $G(x) = 0.5(x+\frac{4}{x})$. Solve $x = G(x)$ by hand. What is $G(x)$ doing?
 ```
 
 ```{solution}
@@ -1545,7 +1545,37 @@ Show that $G(x)$ is a contraction.
 ```
 
 ```{solution}
-???
+A function $G: \R^n \mapsto \R^n$ is a contraction on a closed set $D$ if it satisfies:
+
+1. $x \in D \implies G(X) \in D$
+2. $\exists \alpha \in (0, 1)$ s.t. $\forall~x,y \in D, \norm{G(x) - G(y)} \le \alpha \norm{x - y}$
+
+The function $G(x) = 0.5(x + \frac{4}{x}) = \frac{x}{2} + \frac{2}{x} = \frac{x^2 +4}{2x}$ is a contraction over the closed set $D_1 = [1, \infty)$ and the closed set $D_2 = (-\infty, -1]$. Proof:
+
+1. $G(x) = \frac{x^2 +4}{2x} > 1 ~\forall~x \ge 1$. Similarly, $G(x) = \frac{x^2 +4}{2x} < -1 ~\forall~x \le -1$. So $x \in D_1 \implies G(x) \in D_1$ and $x \in D_2 \implies G(x) \in D_2$.
+
+2. Since $G(x)$ is scalar valued, $\norm{G(x)} = \card{G(x)}$.
+
+  $\begin{align*}
+  \card{G(x) - G(y)} &= \card{\frac{x}{2} + \frac{2}{x} - \frac{y}{2} - \frac{2}{y}} \\
+              &= \card{\frac{1}{2}(x - y) + \frac{2}{x} - \frac{2}{y}}
+  \end{align*}$
+
+  Within $D_1$, $x=1$ and $y=1$ maximize this quantity, so
+
+  $\begin{align*}
+  \card{G(x) - G(y)} &\le \card{\frac{1}{2}(x - y) + 2 - 2} \\
+                     &= \frac{1}{2}\card{x - y}.
+  \end{align*}$
+
+  Similarly, within $D_2$, $x=-1$ and $y=-1$ maximize this quantity, so
+
+  $\begin{align*}
+  \card{G(x) - G(y)} &\le \card{\frac{1}{2}(x - y) - 2 + 2} \\
+                     &= \frac{1}{2}\card{x - y}.
+  \end{align*}$
+
+  So on both $D_1$ and $D_2$, $G$ is a contraction with $\alpha = \frac{1}{2}$.
 ```
 
 ```{exercise, q1405}
@@ -1571,7 +1601,7 @@ Why is the first result from theorem \@ref(thm:with-assumptions) important?
 ```{exercise, q1407}
 Proof and interpret the following:
 
-Let $A,B \in \R^{n \times m}$ and assume $A$ is non-singular. If for some $\epsilon \in (0,1)$, $\norm{AB - I} < 1 - \epsilon$, then $B$ is invertible and 
+Let $A,B \in \R^{n \times m}$ and assume $A$ is non-singular. If for some $\epsilon \in (0,1)$, $\norm{AB - I} < 1 - \epsilon$, then $B$ is invertible and
 
 1. $\norm{A - B^{-1}} < (1-\epsilon)\norm{B^{-1}}$,
 2. $\norm{B^{-1}} \le \frac{1}{\epsilon} \norm{A}$.
@@ -1585,12 +1615,12 @@ Note that $\sum_{k=0}^N (AB-I)^k AB = (AB-I)^N AB + AB$. Since $\norm{AB-I} < 1-
 Furthermore, $\norm{A-B^{-1}} = \norm{(AB-I)B^{-1}} \le \norm{AB-I}\norm{B^{-1}} < (1-\epsilon)\norm{B^{-1}}$, and
 
 $$\begin{aligned}
-\norm{B^{-1}} &\le \norm{A} \norm{D} \\ 
+\norm{B^{-1}} &\le \norm{A} \norm{D} \\
 &\le \norm{\sum_{k=0}^\infty \norm{AB - I}^k} \\
 &< \norm{A} \sum_{k=0}^{\infty} (1- \epsilon)^k \\
 &= \norm{A}\frac{1}{1-(1-\epsilon)} = \frac{1}{\epsilon}\norm{A},
 \end{aligned}$$
-  
+
 
 ```
 
@@ -1612,15 +1642,17 @@ $$
 ```
 
 ```{solution}
-???
+Kelley pg 214
 ```
 
 ```{exercise, q1410}
-How should we choose $\tau_a, \tau_r$? 
+How should we choose $\tau_a, \tau_r$?
 ```
 
 ```{solution}
-???
+$\tau_a$ = machine epsilon
+
+$\tau_r$ = right hand side of above inequality
 ```
 
 ```{exercise, q1411}
@@ -1639,6 +1671,7 @@ Prove $|f(y+h) - f(y) - \nabla f(y) | \le \frac{l}{2} \norm{h}^2$, when the grad
 
 ```{solution}
 Tuo
+(also Nocedal 8.1 (pg195))
 ```
 
 ```{exercise, 1502}
@@ -1646,11 +1679,11 @@ If $f$ can be calculated at any input with accuracy $l_f u$ ($l_f > 0$), show th
 ```
 
 ```{solution}
-???
+Nocedal 8.1 (pp195-196)
 ```
 
 ```{exercise, 1503}
-Choose a simple differentiable function and test a bunch of $\epsilon$ and compare to $\epsilon = \sqrt{u}$. 
+Choose a simple differentiable function and test a bunch of $\epsilon$ and compare to $\epsilon = \sqrt{u}$.
 ```
 
 ```{solution}
@@ -1658,11 +1691,13 @@ Choose a simple differentiable function and test a bunch of $\epsilon$ and compa
 ```
 
 ```{exercise, 1504}
-How is Forward Difference Approximation done for $f: \R^m \to \R^n$? 
+How is Forward Difference Approximation done for $f: \R^m \to \R^n$?
 ```
 
 ```{solution}
-???
+Nocedal 8.1 (pp197-198)
+
+(Takeaway - same as above, but iterate over standard basis vectors to generate columns of Jacobian matrix)
 ```
 
 ```{exercise, 1505}
@@ -1695,21 +1730,21 @@ $$\begin{aligned}
 ```
 
 ```{exercise, 1507}
-Do we ever need to store $J_c$? 
+Do we ever need to store $J_c$?
 ```
 
 ```{solution}
 
-No. 
+No.
 
 ```
 
 ## Homework 16
 
 ```{exercise, 1601}
-Let $F: \R^m \to \R^n$ be everywhere differentiable such that in any closed ball, the derivative is bounded. 
+Let $F: \R^m \to \R^n$ be everywhere differentiable such that in any closed ball, the derivative is bounded.
 
-Show that in any closed ball, $F$ is Lipschitz continuous. 
+Show that in any closed ball, $F$ is Lipschitz continuous.
 ```
 
 ```{solution}
@@ -1731,13 +1766,13 @@ Is $f(x) = |x|$ semi-smooth?
 ```
 
 ```{solution}
-Yes. 
+Yes.
 
-$f$ is locally Lipschitz for all $x \in \R$. For all $x \neq 0$, we can find a ball such that for all $y \in B$, $\text{sign}(y) = \text{sign}(x)$. So, if $x > 0, y,z \in B$, $|f(z) - f(y)| = |z - y|$. If $x < 0, z,y \in B$, $|f(z) - f(y)| = |-z + y| = |z-y|$. 
+$f$ is locally Lipschitz for all $x \in \R$. For all $x \neq 0$, we can find a ball such that for all $y \in B$, $\text{sign}(y) = \text{sign}(x)$. So, if $x > 0, y,z \in B$, $|f(z) - f(y)| = |z - y|$. If $x < 0, z,y \in B$, $|f(z) - f(y)| = |-z + y| = |z-y|$.
 
-If $x = 0$, we can find $z,y \in B$ such that $\text{sign}(z) \neq \text{sign}(y)$. Assume, without loss of generality, that $z < 0 < y$. Then, $|f(z) - f(y)| = |-z - y| \le |z - y|$. So, in any case, $f$ is Lipshitz. 
+If $x = 0$, we can find $z,y \in B$ such that $\text{sign}(z) \neq \text{sign}(y)$. Assume, without loss of generality, that $z < 0 < y$. Then, $|f(z) - f(y)| = |-z - y| \le |z - y|$. So, in any case, $f$ is Lipshitz.
 
-To verify second condition, let $\epsilon > 0$. If $x \neq 0$, pick a ball $B$ around $x$ such that $\text{sign}(y) = 1$ for all $y \in B$. If $x > 0$, $\partial f(u) = 1$ for all $u \in B$. $\norm{f(u) - f(x) - v(u-x)} = \norm{u-x-u+x} = 0$ ($v = 1$). If $x < 0$, $\partial f(u) = -1$ for all $u \in B$. Then $\norm{f(u) - f(x) - v(u-x)} = \norm{-u+x+u-x} = 0$ ($v = -1$). If $x=0$, any ball around $x$ will contain both positive and negative values. In either case, $\norm{f(u) - f(x) - v(u-x)} = 0$ ($v = \text{sign}(u), x=0$). 
+To verify second condition, let $\epsilon > 0$. If $x \neq 0$, pick a ball $B$ around $x$ such that $\text{sign}(y) = 1$ for all $y \in B$. If $x > 0$, $\partial f(u) = 1$ for all $u \in B$. $\norm{f(u) - f(x) - v(u-x)} = \norm{u-x-u+x} = 0$ ($v = 1$). If $x < 0$, $\partial f(u) = -1$ for all $u \in B$. Then $\norm{f(u) - f(x) - v(u-x)} = \norm{-u+x+u-x} = 0$ ($v = -1$). If $x=0$, any ball around $x$ will contain both positive and negative values. In either case, $\norm{f(u) - f(x) - v(u-x)} = 0$ ($v = \text{sign}(u), x=0$).
 
 ```
 
@@ -1751,7 +1786,7 @@ No, $f$ is not locally Lipschitz.
 
 ```{exercise, 1604}
 
-Prove that Newtons Method converges Q superlinearly. 
+Prove that Newtons Method converges Q superlinearly.
 
 ```
 
@@ -1770,10 +1805,10 @@ You will solve for the zeros of $F\left(x,y\right)$ which has components given b
 $$\begin{aligned}
   F_1(x,y) &= (1.5 - x + xy)(y-1) + (2.25 - x + xy^2)(y^2 - 1) + (2.625 - x + xy^3)(y^3-1) \\
   F_2(x,y) &= (1.5 - x + xy)x + (2.25 - x + xy^2)(2xy) + (2.625 - x + xy^3)(3y^2x).
-\end{aligned}$$  
-    
-Stay within $[-4.5, 4.5]^2$. 
-  
+\end{aligned}$$
+
+Stay within $[-4.5, 4.5]^2$.
+
 Compare the following methods: Newtons Method, Chord Method, Forward Difference Method, Broyden Method.
 
 You will need to also do line search. The code I supplied implements Newtons method with a slightly different version of line search. Implement the one I discussed in class as well.
@@ -1783,7 +1818,7 @@ Compare the performance of the different methods and the different line search m
 ```
 
 ```{solution}
-??? 
+???
 ```
 
 ```{exercise, 1606}
@@ -1791,7 +1826,7 @@ Track the step length for each method. What happens to the step length as you ge
 ```
 
 ```{solution}
-??? 
+???
 ```
 
 ## Homework 17
@@ -1831,7 +1866,7 @@ Tuo
 ```
 
 ```{exercise, q1705}
-If $\theta^*$ is an isolated minimizer, then $\theta^*$ is a strict minimizer. 
+If $\theta^*$ is an isolated minimizer, then $\theta^*$ is a strict minimizer.
 ```
 
 ```{solution}
@@ -1855,9 +1890,9 @@ Fill in the blanks of lemma \@ref(lem:convexdiff)!
 Proof or find counter examples for each of the following three problems:
 
 ```{exercise, q1801}
-Let $f \in C^1$. 
+Let $f \in C^1$.
 
-$f$ is convex if and only if for all $x,y \in \R^p:\ \left(\nabla f(x) - \nabla f(y)\right)(x-y) \ge 0$. 
+$f$ is convex if and only if for all $x,y \in \R^p:\ \left(\nabla f(x) - \nabla f(y)\right)(x-y) \ge 0$.
 ```
 
 ```{solution, s1801}
@@ -1866,16 +1901,16 @@ $(\Rightarrow)$
 
 Use this Lemma: Suppose $f \in C^1$, $f$ is convex $\iff$ $f(y) \geq f(x) + \nabla f(x)^T(y-x)$, $\forall x,y \in \mathbb{R}^p$.
 
-We have, 
+We have,
 
 $$f(y) \geq f(x) + \nabla f(x)^T(y-x)$$
 $$f(x) \geq f(y) + \nabla f(y)^T(x-y)$$
 
-Sum these two inequalities together 
+Sum these two inequalities together
 
 $$ f(y) + f(x) \geq f(x)+f(y)+ (\nabla f(x) - \nabla f(y))^T(y-x)$$
 
-Thus, 
+Thus,
 $$(\nabla f(x)-\nabla f(y))^T(x-y) \geq 0$$
 
 $(\Leftarrow)$
@@ -1888,7 +1923,7 @@ If $\forall x, y\in \mathbb{R}^p$, $(\nabla f(x)-\nabla f(y))^T(x-y) \geq 0$, Le
 
 $$
 \begin{aligned} f(x) &= f(z) + \int_{0}^{1}\nabla f(z+\gamma (z-x))^T(z-x) d\gamma \\
-&= f(z) + \int_{0}^{1}\nabla f(z+\gamma (z-x))^T (1-\lambda)(x-y) d\gamma 
+&= f(z) + \int_{0}^{1}\nabla f(z+\gamma (z-x))^T (1-\lambda)(x-y) d\gamma
 \end{aligned}$$
 
 Similarly,
@@ -1910,7 +1945,7 @@ $$\begin{aligned}
 ```
 
 ```{exercise, q1802}
-Let $f \in C^2$. 
+Let $f \in C^2$.
 
 $f$ is convex if and only if for all $x \in \R^p:\ \nabla^2 f(x) \ge 0$.
 ```
@@ -1932,7 +1967,7 @@ I attached a picture in the following cell
 
 $(\Leftarrow)$
 
-From taylor theorem: 
+From taylor theorem:
 
 $$\begin{aligned}
 f(y) &= f(x) + \nabla f(x)^T(y-x) + \frac{1}{2} (y-x)^T\nabla^2 f(x+\gamma(y-x))(y-x)\\
@@ -1943,7 +1978,7 @@ f(y) &= f(x) + \nabla f(x)^T(y-x) + \frac{1}{2} (y-x)^T\nabla^2 f(x+\gamma(y-x))
 
 ```{exercise, q1803}
 
-Let $f \in C^1$. 
+Let $f \in C^1$.
 
 $f$ is strongly convex with $\sigma > 0$ if and only if $\left(\nabla f(x) - \nabla f(y) \right)^\prime(x-y) \ge \sigma \norm{x-y}^2_2$. (Hint: integral form of Taylor's Theorem)
 
@@ -1955,15 +1990,15 @@ Tuo has a reference.
 We need to use this lemma:
 
 Suppose $f \in C^1$, $f$ is strongly convex $\iff$ $f(y) \geq f(x) + \nabla f(x)^T(y-x) + \frac{1}{2}\sigma ||x-y||_2^2$, $\forall x,y \in \mathbb{R}^p$.
- 
+
 $(\Rightarrow)$
- 
+
 Use the Lemma twice and sum them together to get the desired result.
- 
+
 $(\Leftarrow)$
 
 Same idea as solution to \@ref(exr:q1801).
-  
+
 ```
 
 ```{exercise, q1804}
@@ -1975,7 +2010,7 @@ Tuo
 ```
 
 ```{exercise, q1805}
-(3) implies (4) of lemma \@ref(lem:convexlipsch).  
+(3) implies (4) of lemma \@ref(lem:convexlipsch).
 ```
 
 ```{solution}
@@ -1997,18 +2032,16 @@ Tuo
 
 ```{exercise, q1901}
 
-Shows that 
+Shows that
 
 $$
   \alpha_k^{cp} = \left \{ \begin{array}{rl} \min\left(\frac{\norm{g_k}_2^2}{g_k^\prime B_k g_k}, \frac{\Delta_k}{\norm{g_k}_2^2}\right) & \text{ if } g_k^\prime B_k g_k > 0 \\ \frac{\Delta_k}{\norm{g_k}}_2  & \text{ otherwise} \end{array}\right .
 $$
-      
+
 minimizes equation \@ref(eq:trustregion)
 
 ```
 
 ```{solution}
-
-???
-
+see email
 ```

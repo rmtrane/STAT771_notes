@@ -1,4 +1,4 @@
---- 
+---
 title: "STAT 771: My notes"
 author: "Ralph Møller Trane"
 date: "Fall 2018 (compiled `r Sys.Date()`)"
@@ -14,6 +14,7 @@ description: "This is my collection of notes for the STAT 771 class taught at UW
 \newcommand{\N}{\mathbb{N}}
 
 \newcommand{\norm}[1]{\left \vert \left \vert #1 \right \vert \right \vert}
+\newcommand{\card}[1]{\left\vert{#1}\right\vert}
 
 \newcommand{\argmin}{\text{argmin}}
 \newcommand{\argmax}{\text{argmax}}
