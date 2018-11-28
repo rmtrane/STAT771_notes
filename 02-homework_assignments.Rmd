@@ -1545,9 +1545,37 @@ Show that $G(x)$ is a contraction.
 ```
 
 ```{solution}
-
-???
+A function $G: \R^n \mapsto \R^n$ is a contraction on a closed set $D$ if it satisfies:
   
+1. $x \in D \implies G(X) \in D$
+2. $\exists \alpha \in (0, 1)$ s.t. $\forall~x,y \in D, \norm{G(x) - G(y)} \le \alpha \norm{x - y}$
+
+The function $G(x) = 0.5(x + \frac{4}{x}) = \frac{x}{2} + \frac{2}{x} = \frac{x^2 +4}{2x}$ is a contraction over the closed set $D_1 = [1, \infty)$ and the closed set $D_2 = (-\infty, -1]$. Proof:
+
+1. $G(x) = \frac{x^2 +4}{2x} > 1 ~\forall~x \ge 1$. Similarly, $G(x) = \frac{x^2 +4}{2x} < -1 ~\forall~x \le -1$. So $x \in D_1 \implies G(x) \in D_1$ and $x \in D_2 \implies G(x) \in D_2$.
+
+2. Since $G(x)$ is scalar valued, $\norm{G(x)} = \card{G(x)}$. 
+
+  $\begin{align*}
+  \card{G(x) - G(y)} &= \card{\frac{x}{2} + \frac{2}{x} - \frac{y}{2} - \frac{2}{y}} \\
+              &= \card{\frac{1}{2}(x - y) + \frac{2}{x} - \frac{2}{y}}
+  \end{align*}$
+  
+  Within $D_1$, $x=1$ and $y=1$ maximize this quantity, so
+
+  $\begin{align*}
+  \card{G(x) - G(y)} &\le \card{\frac{1}{2}(x - y) + 2 - 2} \\
+                     &= \frac{1}{2}\card{x - y}.
+  \end{align*}$
+  
+  Similarly, within $D_2$, $x=-1$ and $y=-1$ maximize this quantity, so
+
+  $\begin{align*}
+  \card{G(x) - G(y)} &\le \card{\frac{1}{2}(x - y) - 2 + 2} \\
+                     &= \frac{1}{2}\card{x - y}.
+  \end{align*}$
+  
+  So on both $D_1$ and $D_2$, $G$ is a contraction with $\alpha = \frac{1}{2}$.
 ```
 
 ```{exercise, q1405}
