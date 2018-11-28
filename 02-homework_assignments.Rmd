@@ -1461,9 +1461,9 @@ $$J(f;x) = \begin{bmatrix}
 	       \frac{\partial f_{m}}{\partial x_{2}} &
 	       \cdots                                &
 	       \frac{\partial f_{m}}{\partial x_{n}}
-	   \end{bmatrix} = \begin{bmatrix} \nabla f_1(x)' \\
+	   \end{bmatrix} = \begin{bmatrix} \nabla f_1(x)^\prime \\
        \vdots \\
-       \nabla f_m(x)'
+       \nabla f_m(x)^\prime
        \end{bmatrix}$$
 
 Note that the inverse is not true.
@@ -1545,9 +1545,7 @@ Show that $G(x)$ is a contraction.
 ```
 
 ```{solution}
-
 ???
-  
 ```
 
 ```{exercise, q1405}
@@ -1565,7 +1563,9 @@ Why is the first result from theorem \@ref(thm:with-assumptions) important?
 ```
 
 ```{solution}
-???
+
+
+
 ```
 
 ```{exercise, q1407}
@@ -1756,7 +1756,9 @@ Prove that Newtons Method converges Q superlinearly.
 ```
 
 ```{solution}
+
 ???
+
 ```
 
 ### Newton's Method
@@ -1780,8 +1782,16 @@ You will need to also do line search. The code I supplied implements Newtons met
 Compare the performance of the different methods and the different line search methods.
 ```
 
+```{solution}
+??? 
+```
+
 ```{exercise, 1606}
 Track the step length for each method. What happens to the step length as you get closer to the solution. (Make some plots)
+```
+
+```{solution}
+??? 
 ```
 
 ## Homework 17
@@ -1932,6 +1942,7 @@ f(y) &= f(x) + \nabla f(x)^T(y-x) + \frac{1}{2} (y-x)^T\nabla^2 f(x+\gamma(y-x))
 ```
 
 ```{exercise, q1803}
+
 Let $f \in C^1$. 
 
 $f$ is strongly convex with $\sigma > 0$ if and only if $\left(\nabla f(x) - \nabla f(y) \right)^\prime(x-y) \ge \sigma \norm{x-y}^2_2$. (Hint: integral form of Taylor's Theorem)
@@ -1983,14 +1994,21 @@ Tuo
 
 ## Homework 19
 
+
 ```{exercise, q1901}
 
 Shows that 
 
 $$
-  \alpha_k^{cp} = \left \{ \begin{array}{rl} \min\left(\frac{\norm{g_k}_2^2}{g_k^\prime B_k g_k}, \frac{\Delta_k}{\norm{g_k}_2^2}) & \text{ if } g_k^\prime B_k g_k > 0 \\ \frac{\Delta_k}{\norm{g_k}}_2  & \text{ otherwise} \end{array}\right .
+  \alpha_k^{cp} = \left \{ \begin{array}{rl} \min\left(\frac{\norm{g_k}_2^2}{g_k^\prime B_k g_k}, \frac{\Delta_k}{\norm{g_k}_2^2}\right) & \text{ if } g_k^\prime B_k g_k > 0 \\ \frac{\Delta_k}{\norm{g_k}}_2  & \text{ otherwise} \end{array}\right .
 $$
       
 minimizes equation \@ref(eq:trustregion)
+
+```
+
+```{solution}
+
+???
 
 ```

@@ -2244,7 +2244,7 @@ Let $F:\R^m \to \R^n$ be a function, and let $D_F$ denote the set of points wher
 
 The generalized derivative at a point $u \in \R^m$ is the set of points $\partial F(u)$ constructed in the following way:
   
-1. Let $s_k = \left \{ \lim_{t \to \infty} J(u_t) | \{u_t\} \subset D_f, \lim_{t \to \infty} u_t = u}$
+1. Let $s_k = \left \{ \lim_{t \to \infty} J(u_t) | \{u_t\} \subset D_f, \lim_{t \to \infty} u_t = u \right \}$
 2. $\partial F(u) = \text{conv}(s_u)$ (the closure of $s_u$)
 
 ```
