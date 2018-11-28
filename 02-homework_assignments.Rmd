@@ -1648,7 +1648,9 @@ How should we choose $\tau_a, \tau_r$?
 ```
 
 ```{solution}
-???
+$\tau_a$ = machine epsilon
+
+$\tau_r$ = right hand side of above inequality
 ```
 
 ```{exercise, q1411}
