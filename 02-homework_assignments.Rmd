@@ -1666,7 +1666,8 @@ Prove $|f(y+h) - f(y) - \nabla f(y) | \le \frac{l}{2} \norm{h}^2$, when the grad
 ```
 
 ```{solution}
-Tuo
+Tuo 
+(also Nocedal 8.1 (pg195))
 ```
 
 ```{exercise, 1502}
@@ -1674,7 +1675,7 @@ If $f$ can be calculated at any input with accuracy $l_f u$ ($l_f > 0$), show th
 ```
 
 ```{solution}
-???
+Nocedal 8.1 (pp195-196)
 ```
 
 ```{exercise, 1503}
