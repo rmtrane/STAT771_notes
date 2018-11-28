@@ -2025,3 +2025,7 @@ $$
 minimizes equation \@ref(eq:trustregion)
 
 ```
+
+```{solution}
+see email
+```
